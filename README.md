@@ -7,15 +7,15 @@
 | React [**Javascript**]   | FastAPI [**Python**], Javascipt, C  | Redis, PostgreSQL |
 
 ## 2. How it works
-### Front-end
-//ali explains here
+### Front-end (You are here)
+...
 
 
-### Back-end (You are here)
+### Back-end
 
 <details>
 <summary>Chat</summary>
-Messages are transfered in realtime using [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) . <br>
+Messages are transfered in realtime using WebSockets. <br>
 
 ![](https://pbs.twimg.com/media/FVGkQfOWUAA0zpE?format=png&name=large)
 
