@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 
+import Picker from "emoji-picker-react";
+
 import { motion } from "framer-motion";
 
 import { IoIosSend } from "react-icons/io";
 import { VscSmiley } from "react-icons/vsc";
 
 const Conversation = () => {
+  const [showEmoji, setShowEmoji] = useState(false);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const latestMsg = useRef("");
@@ -16,6 +19,10 @@ const Conversation = () => {
     setMessages((messages) => [...messages, message]);
     console.log(latestMsg.current.textContent);
     console.log(messages);
+  };
+
+  const onEmojiClick = (_, emojiObject) => {
+    setMessage(message + emojiObject.emoji);
   };
 
   useEffect(() => {
@@ -49,8 +56,20 @@ const Conversation = () => {
             </motion.div>
           ))}
         </main>
-        <div className="bg-white rounded-xl w-full h-16 p-2 pl-4 flex items-center">
-          <button>
+        <div className="bg-white rounded-xl w-full h-16 p-2 pl-4 flex items-center relative">
+          {showEmoji && (
+            <motion.div
+              className="absolute top-0 left-0 -translate-y-full"
+              animate={{ opacity: 1, y: "-100%" }}
+              initial={{ opacity: 0 }}
+            >
+              <Picker
+                disableSkinTonePicker={true}
+                onEmojiClick={onEmojiClick}
+              />
+            </motion.div>
+          )}
+          <button onClick={() => setShowEmoji(!showEmoji)}>
             <VscSmiley className="text-2xl" />
           </button>
           <form
