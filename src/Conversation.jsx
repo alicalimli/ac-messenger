@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 
 import Picker from "emoji-picker-react";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { IoIosSend } from "react-icons/io";
 import { VscSmiley } from "react-icons/vsc";
@@ -10,7 +10,7 @@ import { AiOutlineArrowDown } from "react-icons/ai";
 
 const Conversation = () => {
   const [showEmoji, setShowEmoji] = useState(false);
-  const [showArrowDown, setShowArrowDown] = useState(true)
+  const [showArrowDown, setShowArrowDown] = useState(false);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const conversationContainer = useRef("");
@@ -28,19 +28,20 @@ const Conversation = () => {
     setMessage(message + emojiObject.emoji);
   };
 
-  // if (conversationContainer.current) {
-  //   conversationContainer.current.addEventListener("scroll", (event) => {
-  // const target = event.target;
-  //     if (target.scrollHeight - target.scrollTop !== target.clientHeight ) {
-  //       console.log(target.scrollTop,target.scrollHeight,target.clientHeight)
-  //     }
-
-  //   });
-  // }
+  if (conversationContainer.current) {
+    conversationContainer.current.addEventListener("scroll", (event) => {
+      const target = event.target;
+      if (target.scrollHeight - target.scrollTop !== target.clientHeight) {
+        setShowArrowDown(true);
+      } else {
+        setShowArrowDown(false);
+      }
+    });
+  }
 
   const scrollDown = () => {
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
-  }
+  };
 
   useEffect(() => {
     if (!latestMsg.current) return;
@@ -61,11 +62,16 @@ const Conversation = () => {
           ref={conversationContainer}
           className="relative flex flex-col gap-2 overflow-scroll scrollbar-hide"
         >
-                 {showArrowDown && (
+          {showArrowDown && (
             <motion.div
-            animate={{opacity: 1,y:0, x:"-50%"}}
-            initial={{opacity: 0, y:50,x:"-50%"}}className="fixed bottom-[12%] left-1/2 -translate-x-1/2">
-              <button onClick={scrollDown} className="cursor-pointer bg-blue-500 rounded-xl p-2">
+              animate={{ opacity: 1, y: 0, x: "-50%" }}
+              initial={{ opacity: 0, y: 50, x: "-50%" }}
+              className="fixed bottom-[12%] left-1/2 -translate-x-1/2"
+            >
+              <button
+                onClick={scrollDown}
+                className="cursor-pointer bg-blue-500 rounded-xl p-2"
+              >
                 <AiOutlineArrowDown className="text-xl text-white " />
               </button>
             </motion.div>
@@ -86,18 +92,23 @@ const Conversation = () => {
           ))}
         </main>
         <div className="bg-white rounded-xl w-full h-16 p-2 pl-4 flex items-center relative gap-1">
-          {showEmoji && (
-            <motion.div
-              className="absolute top-0 left-0 -translate-y-full"
-              animate={{ opacity: 1, y: "-100%" }}
-              initial={{ opacity: 0 }}
-            >
-              <Picker
-                disableSkinTonePicker={true}
-                onEmojiClick={onEmojiClick}
-              />
-            </motion.div>
-          )}
+          <AnimatePresence>
+            {showEmoji && (
+              <motion.div
+                key="arrowDown"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, y: "-100%" }}
+                exit={{ opacity: 0 }}
+                className="absolute top-0 left-0 -translate-y-full"
+              >
+                <Picker
+                  disableSkinTonePicker={true}
+                  onEmojiClick={onEmojiClick}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <button onClick={() => setShowEmoji(!showEmoji)}>
             <VscSmiley className="text-2xl" />
           </button>
