@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 
 import { IoIosSend } from "react-icons/io";
+import { VscSmiley } from "react-icons/vsc";
 
 const Conversation = () => {
   const [messages, setMessages] = useState([]);
@@ -48,7 +49,10 @@ const Conversation = () => {
             </motion.div>
           ))}
         </main>
-        <div className="bg-white rounded-xl w-full h-16 p-2 flex items-center">
+        <div className="bg-white rounded-xl w-full h-16 p-2 pl-4 flex items-center">
+          <button>
+            <VscSmiley className="text-2xl" />
+          </button>
           <form
             onSubmit={sendMessage}
             className="w-full flex items-center gap-1"
