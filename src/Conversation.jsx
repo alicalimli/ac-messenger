@@ -6,30 +6,38 @@ import { motion } from "framer-motion";
 
 import { IoIosSend } from "react-icons/io";
 import { VscSmiley } from "react-icons/vsc";
+import { AiOutlineArrowDown } from "react-icons/ai";
 
 const Conversation = () => {
   const [showEmoji, setShowEmoji] = useState(false);
+  const [showArrowDown, setShowArrowDown] = useState(true)
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const conversationContainer = useRef("");
   const latestMsg = useRef("");
 
   const sendMessage = (event) => {
     event.preventDefault();
     setMessage("");
     setMessages((messages) => [...messages, message]);
-    console.log(latestMsg.current.textContent);
-    console.log(messages);
+    // console.log(latestMsg.current.textContent);
+    // console.log(messages);
   };
 
   const onEmojiClick = (_, emojiObject) => {
     setMessage(message + emojiObject.emoji);
   };
 
+
+  const scrollDown = () => {
+    latestMsg.current.scrollIntoView({ behavior: "smooth" });
+  }
+
   useEffect(() => {
     if (!latestMsg.current) return;
 
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, message]);
 
   return (
     <div className="h-screen w-screen p-4 flex justify-center">
@@ -40,7 +48,17 @@ const Conversation = () => {
             <h2 className="text-2xl text-black">Elvis</h2>
           </div>
         </div>
-        <main className="flex flex-col gap-2 overflow-scroll scrollbar-hide">
+        <main
+          ref={conversationContainer}
+          className="relative flex flex-col gap-2 overflow-scroll scrollbar-hide"
+        >
+                 {showArrowDown && (
+            <motion.div animate={{y:0, x:-50%}} initial={{y:-100,x:-50%}}className="fixed bottom-[12%] left-1/2 -translate-x-1/2">
+              <button onClick={scrollDown} className="cursor-pointer bg-blue-500 rounded-xl p-2">
+                <AiOutlineArrowDown className="text-xl text-white " />
+              </button>
+            </motion.div>
+          )}
           {/* <div className="flex bg-white text-black mr-auto p-2 px-4 w-fit rounded-xl">
             <p className="text-lg">This is a text</p>
           </div> */}
@@ -56,7 +74,7 @@ const Conversation = () => {
             </motion.div>
           ))}
         </main>
-        <div className="bg-white rounded-xl w-full h-16 p-2 pl-4 flex items-center relative">
+        <div className="bg-white rounded-xl w-full h-16 p-2 pl-4 flex items-center relative gap-1">
           {showEmoji && (
             <motion.div
               className="absolute top-0 left-0 -translate-y-full"
