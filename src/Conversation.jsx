@@ -28,6 +28,15 @@ const Conversation = () => {
     setMessage(message + emojiObject.emoji);
   };
 
+  // if (conversationContainer.current) {
+  //   conversationContainer.current.addEventListener("scroll", (event) => {
+  // const target = event.target;
+  //     if (target.scrollHeight - target.scrollTop !== target.clientHeight ) {
+  //       console.log(target.scrollTop,target.scrollHeight,target.clientHeight)
+  //     }
+
+  //   });
+  // }
 
   const scrollDown = () => {
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
@@ -53,7 +62,9 @@ const Conversation = () => {
           className="relative flex flex-col gap-2 overflow-scroll scrollbar-hide"
         >
                  {showArrowDown && (
-            <motion.div animate={{y:0, x:-50%}} initial={{y:-100,x:-50%}}className="fixed bottom-[12%] left-1/2 -translate-x-1/2">
+            <motion.div
+            animate={{opacity: 1,y:0, x:"-50%"}}
+            initial={{opacity: 0, y:50,x:"-50%"}}className="fixed bottom-[12%] left-1/2 -translate-x-1/2">
               <button onClick={scrollDown} className="cursor-pointer bg-blue-500 rounded-xl p-2">
                 <AiOutlineArrowDown className="text-xl text-white " />
               </button>
