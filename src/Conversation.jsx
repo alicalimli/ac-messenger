@@ -25,25 +25,12 @@ const Conversation = () => {
 
   return (
     <div className="h-screen w-screen p-4 flex justify-center">
-      <div className="w-1/2 flex flex-col-reverse gap-4">
-        <div className="bg-white rounded-xl w-full h-16 p-2 flex items-center">
-          <form
-            onSubmit={sendMessage}
-            className="w-full flex items-center gap-1"
-          >
-            <input
-              required
-              type="text"
-              value={message}
-              placeholder="Message here"
-              className="p-2 px-4 w-full"
-              onChange={(e) => setMessage(e.target.value)}
-              onBlur={(e) => setMessage(e.target.value)}
-            />
-            <button className="rounded-xl ml-auto w-12 h-12 bg-blue-500 flex items-center justify-center">
-              <IoIosSend className="text-white text-2xl" />
-            </button>
-          </form>
+      <div className="w-full md:w-1/2 flex flex-col gap-4">
+        <div className="bg-white rounded-xl w-full h-20 p-2 px-4 flex items-center mb-auto">
+          <div className="flex items-center gap-4">
+            <div className="bg-blue-500 h-12 w-12 rounded-full"></div>
+            <h2 className="text-2xl text-black">Elvis</h2>
+          </div>
         </div>
         <main className="flex flex-col gap-2 overflow-scroll scrollbar-hide">
           {/* <div className="flex bg-white text-black mr-auto p-2 px-4 w-fit rounded-xl">
@@ -61,11 +48,24 @@ const Conversation = () => {
             </motion.div>
           ))}
         </main>
-        <div className="bg-white rounded-xl w-full h-20 p-2 px-4 flex items-center mb-auto">
-          <div className="flex items-center gap-4">
-            <div className="bg-blue-500 h-12 w-12 rounded-full"></div>
-            <h2 className="text-2xl text-black">Elvis</h2>
-          </div>
+        <div className="bg-white rounded-xl w-full h-16 p-2 flex items-center">
+          <form
+            onSubmit={sendMessage}
+            className="w-full flex items-center gap-1"
+          >
+            <input
+              required
+              type="text"
+              value={message}
+              placeholder="Message here"
+              className="p-2 px-4 w-full"
+              onChange={(e) => setMessage(e.target.value)}
+              onBlur={(e) => setMessage(e.target.value)}
+            />
+            <button className="rounded-xl ml-auto p-2 bg-blue-500 flex items-center justify-center active:scale-90 duration-300 hover:bg-blue-400">
+              <IoIosSend className="text-white text-2xl" />
+            </button>
+          </form>
         </div>
       </div>
     </div>
