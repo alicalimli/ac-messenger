@@ -49,13 +49,16 @@ const Conversation = () => {
           {/* <div className="flex bg-white text-black mr-auto p-2 px-4 w-fit rounded-xl">
             <p className="text-lg">This is a text</p>
           </div> */}
-          {messages.map((currentMsg) => (
-            <div
+          {messages.map((currentMsg, i) => (
+            <motion.div
+              key={currentMsg + i}
+              animate={{ scale: 1, opacity: 1 }}
+              initial={{ scale: 0, opacity: 0 }}
               ref={latestMsg}
               className="flex bg-blue-500 text-white ml-auto p-2 px-4 w-fit rounded-xl"
             >
               <p className="text-lg">{currentMsg}</p>
-            </div>
+            </motion.div>
           ))}
         </main>
         <div className="bg-white rounded-xl w-full h-20 p-2 px-4 flex items-center mb-auto">
