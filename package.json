@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.16.7",
-    "autoprefixer": "^10.4.2",
+    "autoprefixer": "^10.4.7",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
@@ -19,8 +19,10 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "parcel": "^2.6.0",
+    "postcss": "^8.4.14",
     "prettier": "^2.6.2",
-    "process": "^0.11.10"
+    "process": "^0.11.10",
+    "tailwindcss": "^3.1.4"
   },
   "dependencies": {
     "react": "^17.0.2",
