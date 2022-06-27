@@ -11,7 +11,7 @@ const Conversation = () => {
           </div>
         </header>
 
-        <footer className="mt-auto bg-red rounded-xl w-full h-16 p-2 flex items-center">
+        <footer className="mt-auto bg-white rounded-xl w-full h-16 p-2 flex items-center">
           <form action="#" className="w-full flex items-center">
             <input
               required
