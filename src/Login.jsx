@@ -25,6 +25,7 @@ const Login = () => {
         <button className="bg-blue-500 rounded-xl p-2 px-4 text-white">
           Login
         </button>
+        <p className="text-slate-600 text-sm">Don't have an account? <a href="#" className="text-blue-500 font-semibold">Sign up</a></p>
       </form>
     </div>
   );
