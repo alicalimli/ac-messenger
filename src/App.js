@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import Login from "./Login.jsx"
 import SignUp from "./SignUp.jsx"
-import Conversation from "./Conversation.jsx";
+import ChatBox from "./ChatBox.jsx";
 
 const App = () => {
   return (
@@ -15,7 +15,7 @@ const App = () => {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/conversation" element={<Conversation />} />
+          <Route path="/chatbox" element={<ChatBox />} />
         </Routes>
       </BrowserRouter>
     </StrictMode>

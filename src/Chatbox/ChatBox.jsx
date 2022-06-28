@@ -8,7 +8,7 @@ import { BiMicrophone } from "react-icons/bi";
 import { RiImageAddLine } from "react-icons/ri";
 import { AiOutlineArrowDown } from "react-icons/ai";
 
-const Conversation = () => {
+const ChatBox = () => {
   const [showArrowDown, setShowArrowDown] = useState(false);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
@@ -134,4 +134,4 @@ const Conversation = () => {
   );
 };
 
-export default Conversation;
+export default ChatBox;
