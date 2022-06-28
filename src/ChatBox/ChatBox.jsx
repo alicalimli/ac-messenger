@@ -22,10 +22,6 @@ const ChatBox = () => {
     setMessages((messages) => [...messages, { user: user, message: message }]);
   };
 
-  const onEmojiClick = (_, emojiObject) => {
-    setMessage(message + emojiObject.emoji);
-  };
-
   return (
     <div className="h-screen w-screen p-4 flex justify-center">
       <div className="w-full md:w-1/2 flex flex-col gap-4">
@@ -45,7 +41,7 @@ const ChatBox = () => {
           </div>
         </div>
 
-        <Messages messages={messages}/>
+        <Messages messages={messages} />
 
         <div className="w-full h-16 p-2 pl-4 flex items-center relative gap-2  border-t border-3 border-slate-400">
           <button className="bg-slate-300 text-slate-700 p-2 rounded-xl">

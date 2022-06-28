@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";	
+import { useRef, useState, useEffect } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -9,7 +9,7 @@ const Messages = ({ messages }) => {
   const conversationContainer = useRef("");
   const latestMsg = useRef("");
 
-	const scrollDown = () => {
+  const scrollDown = () => {
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -24,7 +24,7 @@ const Messages = ({ messages }) => {
     });
   }
 
-    useEffect(() => {
+  useEffect(() => {
     if (!latestMsg.current) return;
 
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
