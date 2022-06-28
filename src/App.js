@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import Login from "./Login.jsx"
 import SignUp from "./SignUp.jsx"
-import ChatBox from "./ChatBox.jsx";
+import ChatBox from "./ChatBox/ChatBox.jsx";
 
 const App = () => {
   return (

@@ -19,8 +19,7 @@ const ChatBox = () => {
     event.preventDefault();
     setMessage("");
     setMessages((messages) => [...messages, message]);
-    // console.log(latestMsg.current.textContent);
-    // console.log(messages);
+    // console.log(latestMsg.current.textContent) // console.log(messages);
   };
 
   const onEmojiClick = (_, emojiObject) => {
@@ -61,23 +60,23 @@ const ChatBox = () => {
           ref={conversationContainer}
           className="relative flex flex-col gap-2 overflow-scroll scrollbar-hide"
         >
-        <AnimatePresence>
-           {showArrowDown && (
-            <motion.div
-              animate={{ opacity: 1,scale:1 ,y: "0%" ,  x: "-50%" }}
-              initial={{ opacity: 0,scale:0 ,y: "50%",   x: "-50%" }}
-              exit={{ opacity: 0,scale:0,y: "50%",  x: "-50%" }}
-              className="fixed bottom-[12%] left-1/2 -translate-x-1/2"
-            >
-              <button
-                onClick={scrollDown}
-                className="cursor-pointer bg-blue-500 rounded-xl p-2"
+          <AnimatePresence>
+            {showArrowDown && (
+              <motion.div
+                animate={{ opacity: 1, scale: 1, y: "0%", x: "-50%" }}
+                initial={{ opacity: 0, scale: 0, y: "50%", x: "-50%" }}
+                exit={{ opacity: 0, scale: 0, y: "50%", x: "-50%" }}
+                className="fixed bottom-[12%] left-1/2 -translate-x-1/2"
               >
-                <AiOutlineArrowDown className="text-xl text-white " />
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                <button
+                  onClick={scrollDown}
+                  className="cursor-pointer bg-blue-500 rounded-xl p-2"
+                >
+                  <AiOutlineArrowDown className="text-xl text-white " />
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* <div className="flex bg-white text-black mr-auto p-2 px-4 w-fit rounded-xl">
             <p className="text-lg">This is a text</p>
@@ -85,8 +84,8 @@ const ChatBox = () => {
           {messages.map((currentMsg, i) => (
             <motion.div
               key={currentMsg + i}
-              animate={{ scale: 1,x: "0%", opacity: 1 }}
-              initial={{ scale: 0,x: "100%", opacity: 0 }}
+              animate={{ scale: 1, x: "0%", opacity: 1 }}
+              initial={{ scale: 0, x: "100%", opacity: 0 }}
               ref={latestMsg}
               className="flex bg-blue-500 text-white ml-auto p-2 px-4 w-fit rounded-xl"
             >
@@ -95,19 +94,13 @@ const ChatBox = () => {
           ))}
         </main>
         <div className="w-full h-16 p-2 pl-4 flex items-center relative gap-1  border-t border-3 border-slate-400">
-          <button
-            className="bg-slate-300 text-slate-700 p-2 rounded-xl"
-          >
+          <button className="bg-slate-300 text-slate-700 p-2 rounded-xl">
             <VscSmiley className="text-2xl" />
           </button>
-          <button
-            className="bg-slate-300 text-slate-700 p-2 rounded-xl"
-          >
+          <button className="bg-slate-300 text-slate-700 p-2 rounded-xl">
             <BiMicrophone className="text-2xl" />
           </button>
-          <button
-            className="bg-slate-300 text-slate-700 p-2 rounded-xl"
-          >
+          <button className="bg-slate-300 text-slate-700 p-2 rounded-xl">
             <RiImageAddLine className="text-2xl" />
           </button>
 
