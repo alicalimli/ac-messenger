@@ -4,8 +4,10 @@ import Picker from "emoji-picker-react";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-import { IoIosSend } from "react-icons/io";
+import { MdSend } from "react-icons/md";
 import { VscSmiley } from "react-icons/vsc";
+import { BiMicrophone } from "react-icons/bi";
+import { RiImageAddLine } from "react-icons/ri";
 import { AiOutlineArrowDown } from "react-icons/ai";
 
 const Conversation = () => {
@@ -91,7 +93,7 @@ const Conversation = () => {
             </motion.div>
           ))}
         </main>
-        <div className="bg-white rounded-xl w-full h-16 p-2 pl-4 flex items-center relative gap-1">
+        <div className="w-full h-16 p-2 pl-4 flex items-center relative gap-1  border-t border-3 border-slate-400">
           <AnimatePresence>
             {showEmoji && (
               <motion.div
@@ -108,25 +110,40 @@ const Conversation = () => {
               </motion.div>
             )}
           </AnimatePresence>
-
-          <button onClick={() => setShowEmoji(!showEmoji)}>
+          <button
+            onClick={() => setShowEmoji(!showEmoji)}
+            className="bg-slate-300 text-slate-700 p-2 rounded-xl"
+          >
             <VscSmiley className="text-2xl" />
           </button>
+          <button
+            onClick={() => setShowEmoji(!showEmoji)}
+            className="bg-slate-300 text-slate-700 p-2 rounded-xl"
+          >
+            <BiMicrophone className="text-2xl" />
+          </button>
+          <button
+            onClick={() => setShowEmoji(!showEmoji)}
+            className="bg-slate-300 text-slate-700 p-2 rounded-xl"
+          >
+            <RiImageAddLine className="text-2xl" />
+          </button>
+
           <form
             onSubmit={sendMessage}
-            className="w-full flex items-center gap-1"
+            className="w-full flex items-center gap-1 "
           >
             <input
               required
               type="text"
               value={message}
               placeholder="Message here"
-              className="p-2 px-4 w-full"
+              className="p-2 px-4 w-full bg-transparent"
               onChange={(e) => setMessage(e.target.value)}
               onBlur={(e) => setMessage(e.target.value)}
             />
             <button className="rounded-xl ml-auto p-2 bg-blue-500 flex items-center justify-center active:scale-90 duration-300 hover:bg-blue-400">
-              <IoIosSend className="text-white text-2xl" />
+              <MdSend className="text-white text-2xl" />
             </button>
           </form>
         </div>
