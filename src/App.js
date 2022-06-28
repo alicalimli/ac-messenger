@@ -4,13 +4,17 @@ import React from "react";
 import { StrictMode, useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
-import Conversation from "./Conversation";
+import Conversation from "./Conversation.jsx";
+import Login from "./Login.jsx"
 
 const App = () => {
   return (
     <StrictMode>
       <BrowserRouter>
-        <Conversation />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/conversation" element={<Conversation />} />
+        </Routes>
       </BrowserRouter>
     </StrictMode>
   );

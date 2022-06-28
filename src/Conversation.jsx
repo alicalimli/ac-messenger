@@ -31,7 +31,7 @@ const Conversation = () => {
   if (conversationContainer.current) {
     conversationContainer.current.addEventListener("scroll", (event) => {
       const target = event.target;
-      if (target.scrollHeight - target.scrollTop !== target.clientHeight) {
+      if (target.scrollHeight - target.scrollTop > target.clientHeight + 300) {
         setShowArrowDown(true);
       } else {
         setShowArrowDown(false);
