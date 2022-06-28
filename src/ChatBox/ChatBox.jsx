@@ -7,19 +7,21 @@ import { VscSmiley } from "react-icons/vsc";
 import { BiMicrophone } from "react-icons/bi";
 import { RiImageAddLine } from "react-icons/ri";
 import { AiOutlineArrowDown } from "react-icons/ai";
+import { BiUser } from "react-icons/bi";
 
 const ChatBox = () => {
   const [showArrowDown, setShowArrowDown] = useState(false);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const [user, setUser] = useState(true);
   const conversationContainer = useRef("");
   const latestMsg = useRef("");
 
+  const [active, setActive] = useState(false);
   const sendMessage = (event) => {
     event.preventDefault();
     setMessage("");
-    setMessages((messages) => [...messages, message]);
-    // console.log(latestMsg.current.textContent) // console.log(messages);
+    setMessages((messages) => [...messages, { user: user, message: message }]);
   };
 
   const onEmojiClick = (_, emojiObject) => {
@@ -53,12 +55,15 @@ const ChatBox = () => {
         <div className="bg-white rounded-xl w-full h-20 p-2 px-4 flex items-center mb-auto">
           <div className="flex items-center gap-4">
             <div className="relative bg-transparent h-16 w-16">
-            <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
-              <img src="https://randomuser.me/api/portraits/men/32.jpg" className="w-full rounded-full"/>
+              <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
+              <img
+                src="https://randomuser.me/api/portraits/men/32.jpg"
+                className="w-full rounded-full"
+              />
             </div>
             <div className="flex flex-col gap-0">
-            <h2 className="text-xl text-black">Elvis</h2>
-            <p className="text-sm text-slate-500">online</p>
+              <h2 className="text-xl text-black">Elvis</h2>
+              <p className="text-sm text-slate-500">online</p>
             </div>
           </div>
         </div>
@@ -84,18 +89,19 @@ const ChatBox = () => {
             )}
           </AnimatePresence>
 
-          {/* <div className="flex bg-white text-black mr-auto p-2 px-4 w-fit rounded-xl">
-            <p className="text-lg">This is a text</p>
-          </div> */}
           {messages.map((currentMsg, i) => (
             <motion.div
               key={currentMsg + i}
               animate={{ scale: 1, x: "0%", opacity: 1 }}
               initial={{ scale: 0, x: "100%", opacity: 0 }}
               ref={latestMsg}
-              className="flex bg-blue-500 text-white ml-auto p-2 px-4 w-fit rounded-xl"
+              className={
+                currentMsg.user
+                  ? "flex bg-blue-500 text-white ml-auto p-2 px-4 w-fit rounded-xl"
+                  : "flex bg-white text-black mr-auto p-2 px-4 w-fit rounded-xl"
+              }
             >
-              <p className="text-lg">{currentMsg}</p>
+              <p className="text-lg">{currentMsg.message}</p>
             </motion.div>
           ))}
         </main>
@@ -108,6 +114,27 @@ const ChatBox = () => {
           </button>
           <button className="bg-slate-300 text-slate-700 p-2 rounded-xl">
             <RiImageAddLine className="text-2xl" />
+          </button>
+          <button
+            onClick={(e) => {
+              const btn = e.target.closest("button");
+
+              console.log(active);
+              if (active) {
+                setActive(false);
+                btn.style.background = "gray";
+                console.log("not active");
+              } else if (!active) {
+                setActive(true);
+                console.log("active");
+                btn.style.background = "blue";
+              }
+
+              setUser(!user);
+            }}
+            className="bg-slate-300 text-slate-700 p-2 rounded-xl"
+          >
+            <BiUser className="text-2xl" />
           </button>
 
           <form
