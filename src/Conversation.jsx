@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import Picker from "emoji-picker-react";
-
 import { motion, AnimatePresence } from "framer-motion";
 
 import { MdSend } from "react-icons/md";
@@ -11,7 +9,6 @@ import { RiImageAddLine } from "react-icons/ri";
 import { AiOutlineArrowDown } from "react-icons/ai";
 
 const Conversation = () => {
-  const [showEmoji, setShowEmoji] = useState(false);
   const [showArrowDown, setShowArrowDown] = useState(false);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
@@ -94,36 +91,17 @@ const Conversation = () => {
           ))}
         </main>
         <div className="w-full h-16 p-2 pl-4 flex items-center relative gap-1  border-t border-3 border-slate-400">
-          <AnimatePresence>
-            {showEmoji && (
-              <motion.div
-                key="arrowDown"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1, y: "-100%" }}
-                exit={{ opacity: 0 }}
-                className="absolute top-0 left-0 -translate-y-full"
-              >
-                <Picker
-                  disableSkinTonePicker={true}
-                  onEmojiClick={onEmojiClick}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
           <button
-            onClick={() => setShowEmoji(!showEmoji)}
             className="bg-slate-300 text-slate-700 p-2 rounded-xl"
           >
             <VscSmiley className="text-2xl" />
           </button>
           <button
-            onClick={() => setShowEmoji(!showEmoji)}
             className="bg-slate-300 text-slate-700 p-2 rounded-xl"
           >
             <BiMicrophone className="text-2xl" />
           </button>
           <button
-            onClick={() => setShowEmoji(!showEmoji)}
             className="bg-slate-300 text-slate-700 p-2 rounded-xl"
           >
             <RiImageAddLine className="text-2xl" />
