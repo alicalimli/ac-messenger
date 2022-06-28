@@ -30,7 +30,7 @@ const ChatBox = () => {
             <div className="relative bg-transparent h-16 w-16">
               <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
               <img
-                src="https://randomuser.me/api/portraits/men/32.jpg"
+                src="https://pbs.twimg.com/profile_images/1541771952825802752/Wu0zCEQB_400x400.jpg"
                 className="w-full rounded-full"
               />
             </div>
