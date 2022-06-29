@@ -9,6 +9,7 @@ const SignUp = () => {
       >
         <label className="text-2xl text-left">Sign Up</label>
         <label htmlFor="email" className="flex flex-col gap-2 ">
+
           Email
           <input
             type="text"
