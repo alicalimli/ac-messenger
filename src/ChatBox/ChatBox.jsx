@@ -48,8 +48,8 @@ const ChatBox = () => {
           <button className="bg-slate-300 text-slate-700 p-2 rounded-xl">
             <VscSmiley className="text-2xl" />
           </button>
-          <button className="bg-slate-300 text-slate-700 p-2 rounded-xl">
             <BiMicrophone className="text-2xl" />
+          <button className="bg-slate-300 text-slate-700 p-2 rounded-xl">
           </button>
           <button className="bg-slate-300 text-slate-700 p-2 rounded-xl">
             <RiImageAddLine className="text-2xl" />
