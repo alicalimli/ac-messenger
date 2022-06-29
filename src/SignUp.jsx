@@ -15,7 +15,7 @@ const SignUp = () => {
             placeholder="e.g example@email.com"
             required
             id="email"
-            className="p-2 px-4 rounded-xl border shadow"
+            className="p-2 px-4 rounded-xl border"
           />
         </label>
         <label htmlFor="username" className="flex flex-col gap-2 ">
@@ -25,7 +25,7 @@ const SignUp = () => {
             placeholder="e.g example123"
             required
             id="username"
-            className="p-2 px-4 rounded-xl border shadow"
+            className="p-2 px-4 rounded-xl border"
           />
         </label>
         <label htmlFor="password" className="flex flex-col gap-2 ">
@@ -35,7 +35,7 @@ const SignUp = () => {
             placeholder="************"
             required
             id="username"
-            className="p-2 px-4 rounded-xl border shadow"
+            className="p-2 px-4 rounded-xl border"
           />
         </label>
         <button className="bg-blue-500 hover:bg-blue-400 duration-300 rounded-xl p-2 px-4 text-white">
