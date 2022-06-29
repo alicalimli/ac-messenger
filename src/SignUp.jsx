@@ -12,6 +12,7 @@ const SignUp = () => {
           Email
           <input
             type="text"
+            placeholder="e.g example@email.com"
             required
             id="email"
             className="p-2 px-4 rounded-xl border shadow"
@@ -21,6 +22,7 @@ const SignUp = () => {
           Username
           <input
             type="text"
+            placeholder="e.g example123"
             required
             id="username"
             className="p-2 px-4 rounded-xl border shadow"
@@ -30,6 +32,7 @@ const SignUp = () => {
           Password
           <input
             type="password"
+            placeholder="************"
             required
             id="username"
             className="p-2 px-4 rounded-xl border shadow"
