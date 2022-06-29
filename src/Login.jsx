@@ -5,7 +5,7 @@ const Login = () => {
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
       <form
         action="#"
-        className="w-full md:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
+        className="w-full sm:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
       >
         <label className="text-2xl text-left">Login</label>
         <label htmlFor="username" className="flex flex-col gap-2 ">
