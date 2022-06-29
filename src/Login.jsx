@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center">
+    <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
       <form
         action="#"
-        className="flex flex-col gap-4 p-20 rounded-xl bg-white shadow-lg "
+        className="w-full md:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
       >
         <label className="text-2xl text-left">Login</label>
         <label htmlFor="username" className="flex flex-col gap-2 ">
