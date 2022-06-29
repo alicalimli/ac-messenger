@@ -28,12 +28,12 @@ const Login = () => {
             className="p-2 px-4 rounded-xl border shadow"
           />
         </label>
-        <button className="bg-blue-500 rounded-xl p-2 px-4 text-white">
+        <button className="bg-blue-500 hover:bg-blue-400 duration-300 rounded-xl p-2 px-4 text-white">
           Login
         </button>
         <p className="text-slate-600 text-sm">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-blue-500 font-semibold">
+          <Link to="/signup" className="text-blue-500 hover:text-blue-400 duration-300 font-semibold">
             Sign up
           </Link>
         </p>
