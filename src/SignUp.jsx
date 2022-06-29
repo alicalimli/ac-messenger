@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import InputForm from './InputForm.jsx'
+import InputForm from "./InputForm.jsx";
 
 const SignUp = () => {
   return (
@@ -11,7 +11,7 @@ const SignUp = () => {
       >
         <label className="text-2xl text-left">Sign Up</label>
 
-                <InputForm
+        <InputForm
           label="Email"
           type="email"
           placeHolder="e.g example@email.com"
@@ -24,7 +24,10 @@ const SignUp = () => {
         </button>
         <p className="text-slate-600 text-sm">
           Already have an account?{" "}
-          <Link to="/" className="text-blue-500 hover:text-blue-400 duration-300 font-semibold">
+          <Link
+            to="/"
+            className="text-blue-500 hover:text-blue-400 duration-300 font-semibold"
+          >
             Login
           </Link>
         </p>
