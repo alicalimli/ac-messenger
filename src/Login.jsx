@@ -12,6 +12,7 @@ const Login = () => {
           Username
           <input
             type="text"
+            placeholder="e.g example@email.com"
             required
             id="username"
             className="p-2 px-4 rounded-xl border shadow"
@@ -21,6 +22,7 @@ const Login = () => {
           Password
           <input
             type="password"
+            placeholder="************"
             required
             id="username"
             className="p-2 px-4 rounded-xl border shadow"
