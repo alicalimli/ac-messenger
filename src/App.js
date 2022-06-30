@@ -13,7 +13,7 @@ const App = () => {
     <StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/chatbox" element={<ChatBox />} />
         </Routes>
