@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import InputForm from "./InputForm.jsx";
 
@@ -8,6 +8,8 @@ const SignUp = () => {
   const userEmailRef = useRef(null);
   const userNameRef = useRef(null);
   const userPassRef = useRef(null);
+
+  const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -40,6 +42,8 @@ const SignUp = () => {
       body: JSON.stringify(formData) });
 
     const res = await createUser.text();
+
+    navigate('/chatbox')
   };
 
   return (
