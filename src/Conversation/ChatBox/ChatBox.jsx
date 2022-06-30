@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
 
+import elvis from '../Assets/elvis.jpg'
+
 import { MdSend } from "react-icons/md";
 import { VscSmiley } from "react-icons/vsc";
 import { BiMicrophone } from "react-icons/bi";
@@ -9,7 +11,7 @@ import { RiImageAddLine } from "react-icons/ri";
 import { BiUser } from "react-icons/bi";
 
 
-import Messages from "../Conversation/Messages/Messages.jsx";
+import Messages from "../Messages/Messages.jsx";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
@@ -31,7 +33,7 @@ const ChatBox = () => {
             <div className="relative bg-transparent h-16 w-16">
               <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
               <img
-                src="https://pbs.twimg.com/profile_images/1541771952825802752/Wu0zCEQB_400x400.jpg"
+                src={elvis}
                 className="w-full rounded-full"
               />
             </div>

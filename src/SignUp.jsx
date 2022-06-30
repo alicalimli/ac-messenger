@@ -19,11 +19,22 @@ const SignUp = () => {
 
     console.log("creatingUser")
 
+    const date  = new Date();
+    const timestamp = date.getTime();
+
     const formData = {
+      "id": Math.floor(Math.random() * 100000),
       "username": userNameRef.current.value,
-      "password": userPassRef.current.value,
       "email": userEmailRef.current.value,
+      "password": userPassRef.current.value,
+      "status": true,
+      "created_at": date.toUTCString(),
+      "is_active": true,
+      "profile": 'default',
+      "websocket_id": timestamp,
     }
+
+    console.log(formData,date)
 
     const createUser = await fetch("http://127.0.0.1:8000/api/v1/users/", { method: "POST", body: formData });
 
