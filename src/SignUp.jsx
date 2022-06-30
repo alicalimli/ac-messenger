@@ -36,7 +36,7 @@ const SignUp = () => {
       status: true,
       // created_at: "2022-06-30T14:26:36.671Z",
       is_active: true,
-      profile: "default",
+      profile: "default.png",
       websocket_id: timestamp.toString(),
     };
 
