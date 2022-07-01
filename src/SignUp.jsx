@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import InputForm from "./InputForm.jsx";
 
-import {UserContext} from "./UserContextProvider/UserContextProvider.jsx";
+import { UserContext } from "./UserContextProvider/UserContextProvider.jsx";
 
 const SignUp = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -17,16 +17,6 @@ const SignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-
-    if (
-      !userEmail &&
-      !userPass &&
-      !userName
-    ) {
-      console.log("Input your password and username");
-    console.log(userEmail.value,userPass.value,userName)
-      return;
-    }
 
     console.log("creatingUser");
 
@@ -60,20 +50,16 @@ const SignUp = () => {
 
     if (!res) return;
 
-    setUser(Object.assign(user, {
-      userName: userName,
-      userEmail: userEmail,
-      userPassword: userPass
-    }))
+    setUser(
+      Object.assign(user, {
+        userName: userName,
+        userEmail: userEmail,
+        userPassword: userPass,
+      })
+    );
 
-    console.log(user)
-
-    navigate("/chatbox");
+    navigate("/home");
   };
-
-  useEffect(() => {
-    console.log("asd");
-  }, [userEmail, userName]);
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">

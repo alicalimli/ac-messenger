@@ -10,7 +10,7 @@ import { BiMicrophone } from "react-icons/bi";
 import { RiImageAddLine } from "react-icons/ri";
 import { BiUser } from "react-icons/bi";
 
-import Messages from "../Messages/Messages.jsx";
+import Messages from "./Messages/Messages";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);

@@ -6,8 +6,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import Login from "./Login.jsx";
 import SignUp from "./SignUp.jsx";
-import ChatBox from "./ChatBox/ChatBox.jsx";
-import Sidebar from "./Sidebar/Sidebar.jsx";
+import Home from "./Home/Home.jsx";
 
 import {UserContextProvider} from './UserContextProvider/UserContextProvider.jsx'
 
@@ -16,11 +15,10 @@ const App = () => {
     <StrictMode>
       <UserContextProvider >
         <BrowserRouter>
-          <Sidebar />
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/chatbox" element={<ChatBox />} />
+            <Route path="/home" element={<Home />} />
           </Routes>
         </BrowserRouter>
       </UserContextProvider>
