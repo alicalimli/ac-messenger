@@ -7,11 +7,12 @@ import InputForm from "./InputForm.jsx";
 const SignUp = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
+  const [userPass, setUserPass] = useState("");
 
-  const userEmailRef = useRef();
-  const userNameRef = useRef();
-
+  const userEmailRef = useRef(null);
+  const userNameRef = useRef(null);
   const userPassRef = useRef(null);
+
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -86,7 +87,7 @@ const SignUp = () => {
           type="text"
           placeHolder="e.g example123"
           minLength="6"
-          invalidLabel="Please provide a Username with minimum of 6 characters."
+          invalidLabel="Please provide a username with minimum of 6 characters."
           isControlled="true"
           inputRef={userNameRef}
           state={userName}
@@ -96,7 +97,11 @@ const SignUp = () => {
           label="Password"
           type="password"
           placeHolder="*********"
+          minLength="8"
+          invalidLabel="Please provide a password with minimum of 8 characters."
           inputRef={userPassRef}
+          state={userPass}
+          setState={setUserPass}
         />
 
         <button className="bg-blue-500 hover:bg-blue-400 duration-300 rounded-xl p-2 px-4 text-white">
