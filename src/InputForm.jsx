@@ -33,7 +33,9 @@ const InputForm = ({
 					id={label}
 				/>
 			)}
-			<p className="hidden peer-invalid:block text-red-600 text-sm">{invalidLabel}</p>
+			<p className="hidden peer-invalid:block text-red-600 text-sm">
+				{invalidLabel}
+			</p>
 		</label>
 	);
 };
