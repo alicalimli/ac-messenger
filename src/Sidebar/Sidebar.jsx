@@ -14,6 +14,7 @@ const Sidebar = () => {
           <p className="text-sm text-slate-500">{user[0].userEmail}</p>
         </div>
       </div>
+        <button className="p-2 px-4 bg-blue-600 text-white rounded">Logout</button>
     </nav>
   );
 };
