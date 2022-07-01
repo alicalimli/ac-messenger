@@ -19,6 +19,13 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    if (userData) {
+      setUser(userData);
+      navigate("/home");
+    }
+  }, []);
+
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
       <form

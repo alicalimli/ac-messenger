@@ -6,7 +6,7 @@ import InputForm from "./InputForm.jsx";
 
 import { UserContext } from "./UserContextProvider/UserContextProvider.jsx";
 
-import useLocalStorage from './Hooks/useLocalStorage'
+import useLocalStorage from "./Hooks/useLocalStorage";
 
 const SignUp = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -15,7 +15,7 @@ const SignUp = () => {
 
   const [user, setUser] = useContext(UserContext);
 
-  const [userData, setUserData] = useLocalStorage("userCredentials", null)
+  const [userData, setUserData] = useLocalStorage("userCredentials", null);
 
   const navigate = useNavigate();
 
@@ -65,6 +65,13 @@ const SignUp = () => {
     setUserData(user);
     navigate("/home");
   };
+
+  useEffect(() => {
+    if (userData) {
+      setUser(userData);
+      navigate("/home");
+    }
+  }, []);
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
