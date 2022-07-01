@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import InputForm from "./InputForm.jsx";
 
 const SignUp = () => {
-  const [userEmail, setUserEmail] = useState("")
-  const [userName, setUserName] = useState("")
+  const [userEmail, setUserEmail] = useState("");
+  const [userName, setUserName] = useState("");
 
   const userEmailRef = useRef();
   const userNameRef = useRef();
@@ -58,10 +58,9 @@ const SignUp = () => {
     const res = await createUser.text();
   };
 
-  useEffect(()=>{
-    console.log('change', userName,  userNameRef)
-
-  },[userEmail, userName])
+  useEffect(() => {
+    console.log('asd')
+  }, [userEmail, userName]);
 
 
   return (
@@ -77,7 +76,8 @@ const SignUp = () => {
           type="email"
           placeHolder="e.g example@email.com"
           isControlled="true"
-          inputRef = {userEmailRef}
+          invalidLabel="Please provide a valid Email Address"
+          inputRef={userEmailRef}
           state={userEmail}
           setState={setUserEmail}
         />
@@ -85,8 +85,10 @@ const SignUp = () => {
           label="Username"
           type="text"
           placeHolder="e.g example123"
-          inputRef={userNameRef}
+          minLength="6"
+          invalidLabel="Please provide a Username with minimum of 6 characters."
           isControlled="true"
+          inputRef={userNameRef}
           state={userName}
           setState={setUserName}
         />
