@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import InputForm from "./InputForm.jsx";
 
 const SignUp = () => {
-  const [userEmail, setUserEmail] = useState(null)
+  const [userEmail, setUserEmail] = useState("")
   const userNameRef = useRef(null);
   const userPassRef = useRef(null);
 
@@ -54,6 +54,10 @@ const SignUp = () => {
     const res = await createUser.text();
   };
 
+  useEffect(()=>{
+    console.log('change')
+  },[userEmail])
+
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
       <form
@@ -66,6 +70,7 @@ const SignUp = () => {
           label="Email"
           type="email"
           placeHolder="e.g example@email.com"
+          isControlled="true"
           state={userEmail}
           setState={setUserEmail}
         />
