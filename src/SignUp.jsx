@@ -99,6 +99,7 @@ const SignUp = () => {
           placeHolder="*********"
           minLength="8"
           invalidLabel="Please provide a password with minimum of 8 characters."
+          isControlled="true"
           inputRef={userPassRef}
           state={userPass}
           setState={setUserPass}
