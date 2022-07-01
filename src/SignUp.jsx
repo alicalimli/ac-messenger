@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import InputForm from "./InputForm.jsx";
 
 const SignUp = () => {
-  const userEmailRef = useRef(null);
+  const [userEmail, setUserEmail] = useState(null)
   const userNameRef = useRef(null);
   const userPassRef = useRef(null);
 
@@ -13,7 +13,7 @@ const SignUp = () => {
     e.preventDefault();
 
     if (
-      !userNameRef.current.value &&
+      !userEmail.value &&
       !userPassRef.current.value &&
       !userEmailRef.current.value
     ) {
@@ -66,7 +66,8 @@ const SignUp = () => {
           label="Email"
           type="email"
           placeHolder="e.g example@email.com"
-          inputRef={userEmailRef}
+          state={userEmail}
+          setState={setUserEmail}
         />
         <InputForm
           label="Username"
