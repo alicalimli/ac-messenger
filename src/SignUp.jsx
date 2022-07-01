@@ -87,7 +87,7 @@ const SignUp = () => {
           type="text"
           placeHolder="e.g example123"
           minLength="6"
-          invalidLabel="Please provide a username with minimum of 6 characters."
+          invalidLabel="Please use at least 6 characters for the username."
           isControlled="true"
           inputRef={userNameRef}
           state={userName}
@@ -98,7 +98,7 @@ const SignUp = () => {
           type="password"
           placeHolder="*********"
           minLength="8"
-          invalidLabel="Please provide a password with minimum of 8 characters."
+          invalidLabel="Please use at least 8 characters for the password."
           isControlled="true"
           inputRef={userPassRef}
           state={userPass}
