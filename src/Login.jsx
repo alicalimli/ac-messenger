@@ -1,12 +1,20 @@
-import { useRef } from "react";
+import { useRef, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import InputForm from "./InputForm.jsx";
+
+import { UserContext } from "./UserContextProvider/UserContextProvider.jsx";
+
+import useLocalStorage from "./Hooks/useLocalStorage";
 
 const Login = () => {
   const navigate = useNavigate();
   const userNameRef = useRef();
   const userPassRef = useRef();
+
+  const [user, setUser] = useContext(UserContext);
+
+  const [userData, setUserData] = useLocalStorage("userCredentials", null);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -20,6 +28,7 @@ const Login = () => {
   };
 
   useEffect(() => {
+    console.log(userData)
     if (userData) {
       setUser(userData);
       navigate("/home");

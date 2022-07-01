@@ -4,13 +4,18 @@ import { useNavigate } from "react-router-dom";
 
 import { UserContext } from "../UserContextProvider/UserContextProvider";
 
+import useLocalStorage from '../Hooks/useLocalStorage'
+
 const Sidebar = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useContext(UserContext);
 
+  const [userData,setUserData] = useLocalStorage('userCredentials', null)
+
   const handleLogOut = () => {
-    setUser({});
+    setUser(null);
+    setUserData(null)
     navigate("/login");
     console.log(user);
   };
