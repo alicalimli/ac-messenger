@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import InputForm from "./InputForm.jsx";
 
@@ -12,6 +12,8 @@ const SignUp = () => {
   const userEmailRef = useRef(null);
   const userNameRef = useRef(null);
   const userPassRef = useRef(null);
+
+  const navigate = useNavigate();
 
 
   const handleSignUp = async (e) => {
@@ -45,8 +47,6 @@ const SignUp = () => {
       websocket_id: timestamp.toString(),
     };
 
-    console.log(JSON.stringify(formData), date);
-
     const createUser = await fetch("http://127.0.0.1:8000/api/v1/users/", {
       method: "POST",
       headers: {
@@ -57,6 +57,10 @@ const SignUp = () => {
     });
 
     const res = await createUser.text();
+
+    if(!res) return;
+
+    navigate('/chatbox')
   };
 
   useEffect(() => {
