@@ -52,7 +52,7 @@ const SignUp = () => {
 
     const res = await createUser.text();
 
-    console.log(res)
+    console.log(res);
 
     if (!res) return;
 
