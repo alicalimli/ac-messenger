@@ -1,13 +1,17 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
 import InputForm from "./InputForm.jsx";
 
+import UserContext from './App.js'
+
 const SignUp = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [userPass, setUserPass] = useState("");
+
+  const [user,setUser] = useContext(UserContext)
 
   const userEmailRef = useRef(null);
   const userNameRef = useRef(null);
