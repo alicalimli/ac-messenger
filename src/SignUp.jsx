@@ -6,12 +6,16 @@ import InputForm from "./InputForm.jsx";
 
 import { UserContext } from "./UserContextProvider/UserContextProvider.jsx";
 
+import useLocalStorage from './Hooks/useLocalStorage'
+
 const SignUp = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [userPass, setUserPass] = useState("");
 
   const [user, setUser] = useContext(UserContext);
+
+  const [userData, setUserData] = useLocalStorage("userCredentials", null)
 
   const navigate = useNavigate();
 
@@ -58,6 +62,7 @@ const SignUp = () => {
       })
     );
 
+    setUserData(user);
     navigate("/home");
   };
 
