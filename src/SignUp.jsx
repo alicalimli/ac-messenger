@@ -15,7 +15,7 @@ const SignUp = () => {
 
   const [user, setUser] = useContext(UserContext);
 
-  const [userData, setUserData] = useLocalStorage("userCredentials", null);
+  const [userData, setUserData] = useLocalStorage("userCredentials", {});
 
   const navigate = useNavigate();
 
@@ -52,6 +52,8 @@ const SignUp = () => {
 
     const res = await createUser.text();
 
+    console.log(res)
+
     if (!res) return;
 
     setUser(
@@ -67,7 +69,7 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (userData) {
+    if (Object.entries(userData).length) {
       setUser(userData);
       navigate("/home");
     }

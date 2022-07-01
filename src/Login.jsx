@@ -14,7 +14,7 @@ const Login = () => {
 
   const [user, setUser] = useContext(UserContext);
 
-  const [userData, setUserData] = useLocalStorage("userCredentials", null);
+  const [userData, setUserData] = useLocalStorage("userCredentials", {});
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -28,8 +28,8 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log(userData)
-    if (userData) {
+    console.log()
+    if (Object.entries(userData).length) {
       setUser(userData);
       navigate("/home");
     }
