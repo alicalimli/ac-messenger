@@ -14,6 +14,7 @@ const InputForm = ({
 				<input
 					type={type}
 					value={state}
+					ref={inputRef || null}
 					onChange={(e) => setState(e.target.value)}
 					onBlur={(e) => setState(e.target.value)}
 					placeholder={placeHolder}

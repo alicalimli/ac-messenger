@@ -6,7 +6,11 @@ import InputForm from "./InputForm.jsx";
 
 const SignUp = () => {
   const [userEmail, setUserEmail] = useState("")
-  const userNameRef = useRef(null);
+  const [userName, setUserName] = useState("")
+
+  const userEmailRef = useRef();
+  const userNameRef = useRef();
+
   const userPassRef = useRef(null);
 
   const handleSignUp = async (e) => {
@@ -55,8 +59,10 @@ const SignUp = () => {
   };
 
   useEffect(()=>{
-    console.log('change')
-  },[userEmail])
+    console.log('change', userName,  userNameRef)
+
+  },[userEmail, userName])
+
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
@@ -71,6 +77,7 @@ const SignUp = () => {
           type="email"
           placeHolder="e.g example@email.com"
           isControlled="true"
+          inputRef = {userEmailRef}
           state={userEmail}
           setState={setUserEmail}
         />
@@ -79,6 +86,9 @@ const SignUp = () => {
           type="text"
           placeHolder="e.g example123"
           inputRef={userNameRef}
+          isControlled="true"
+          state={userName}
+          setState={setUserName}
         />
         <InputForm
           label="Password"
