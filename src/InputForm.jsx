@@ -8,7 +8,7 @@ const InputForm = ({
 	setState,
 }) => {
 	return (
-		<label htmlFor={`${label}-input`} className="flex flex-col gap-2">
+		<label htmlFor={`${label}-input`} className="flex flex-col gap-2 relative">
 			{label}
 			{isControlled ? (
 				<input
@@ -18,7 +18,7 @@ const InputForm = ({
 					onBlur={(e) => setState(e.target.value)}
 					placeholder={placeHolder}
 					id={label}
-					className="p-2 px-4 rounded-xl border  peer"
+					className="p-2 px-4 rounded-xl border peer invalid:border-red-600"
 				/>
 			) : (
 				<input
@@ -29,7 +29,7 @@ const InputForm = ({
 					className="p-2 px-4 rounded-xl border  peer"
 				/>
 			)}
-			<p className="hidden peer-invalid:block">wrong</p>
+			<p className="hidden peer-invalid:block text-red-600 text-sm">Please provide a valid {label}</p>
 		</label>
 	);
 };
