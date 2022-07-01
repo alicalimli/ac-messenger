@@ -13,10 +13,6 @@ const SignUp = () => {
 
   const [user, setUser] = useContext(UserContext);
 
-  const userEmailRef = useRef(null);
-  const userNameRef = useRef(null);
-  const userPassRef = useRef(null);
-
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
@@ -84,7 +80,6 @@ const SignUp = () => {
           placeHolder="e.g example@email.com"
           isControlled="true"
           invalidLabel="Please provide a valid Email Address"
-          inputRef={userEmailRef}
           state={userEmail}
           setState={setUserEmail}
         />
@@ -95,7 +90,6 @@ const SignUp = () => {
           minLength="6"
           invalidLabel="Please use at least 6 characters for the username."
           isControlled="true"
-          inputRef={userNameRef}
           state={userName}
           setState={setUserName}
         />
@@ -106,7 +100,6 @@ const SignUp = () => {
           minLength="8"
           invalidLabel="Please use at least 8 characters for the password."
           isControlled="true"
-          inputRef={userPassRef}
           state={userPass}
           setState={setUserPass}
         />
