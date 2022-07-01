@@ -1,26 +1,20 @@
 import ReactDOM from "react-dom";
 import React from "react";
 
-import { StrictMode, useState, createContext } from "react";
+import { StrictMode, useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import Login from "./Login.jsx";
 import SignUp from "./SignUp.jsx";
 import ChatBox from "./ChatBox/ChatBox.jsx";
-import Sidebar from './Sidebar/Sidebar.jsx'
+import Sidebar from "./Sidebar/Sidebar.jsx";
 
-export const UserContext = createContext()
+import {UserContextProvider} from './UserContextProvider/UserContextProvider.jsx'
 
 const App = () => {
-  const [user,setUser] = useState({
-    'userName': "",
-    'userPass': "",
-    'userEmail': "",
-  })
-
   return (
     <StrictMode>
-      <UserContext.Provider value={[user,setUser]}>
+      <UserContextProvider >
         <BrowserRouter>
           <Sidebar />
           <Routes>
@@ -29,7 +23,7 @@ const App = () => {
             <Route path="/chatbox" element={<ChatBox />} />
           </Routes>
         </BrowserRouter>
-      </UserContext.Provider>
+      </UserContextProvider>
     </StrictMode>
   );
 };

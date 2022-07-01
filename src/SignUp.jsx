@@ -4,21 +4,20 @@ import { Link, useNavigate } from "react-router-dom";
 
 import InputForm from "./InputForm.jsx";
 
-import UserContext from './App.js'
+import {UserContext} from "./UserContextProvider/UserContextProvider.jsx";
 
 const SignUp = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [userPass, setUserPass] = useState("");
 
-  const [user,setUser] = useContext(UserContext)
+  const [user, setUser] = useContext(UserContext);
 
   const userEmailRef = useRef(null);
   const userNameRef = useRef(null);
   const userPassRef = useRef(null);
 
   const navigate = useNavigate();
-
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -62,15 +61,14 @@ const SignUp = () => {
 
     const res = await createUser.text();
 
-    if(!res) return;
+    if (!res) return;
 
-    navigate('/chatbox')
+    navigate("/chatbox");
   };
 
   useEffect(() => {
-    console.log('asd')
+    console.log("asd");
   }, [userEmail, userName]);
-
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
