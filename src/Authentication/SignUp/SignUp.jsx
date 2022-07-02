@@ -15,7 +15,7 @@ const SignUp = () => {
 
   const [user, setUser] = useContext(UserContext);
 
-  const [userData, setUserData] = useLocalStorage("userCredentials", {});
+  const [userToken, setUserToken] = useLocalStorage("userToken", {});
 
   const navigate = useNavigate();
 
@@ -49,7 +49,11 @@ const SignUp = () => {
 
     if (!res) return;
 
+<<<<<<< HEAD
     let loginFormData = new FormData();
+=======
+   let loginFormData = new FormData();
+>>>>>>> f1e3117cb74a0f7d0ae04c0ae05bdeda9e7cb829
     loginFormData.append("username", userEmail);
     loginFormData.append("password", userPass);
 
@@ -58,27 +62,20 @@ const SignUp = () => {
       body: loginFormData,
     });
 
-    const loginRes = await loginUser.json();
+    const loginResults = await loginUser.json();
 
-    console.log(loginRes);
+    console.log(loginResults)
 
     setUser(
       Object.assign(user, {
         userName: userName,
         userEmail: userEmail,
-        userPassword: userPass,
       })
     );
 
-    setUserData(user);
+    setUserToken(loginResults);
+    navigate('/home')
   };
-
-  useEffect(() => {
-    if (Object.entries(userData).length) {
-      setUser(userData);
-      navigate("/home");
-    }
-  }, []);
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">

@@ -14,8 +14,6 @@ const Login = () => {
 
   const [user, setUser] = useContext(UserContext);
 
-  const [userData, setUserData] = useLocalStorage("userCredentials", {});
-
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -26,14 +24,6 @@ const Login = () => {
       navigate("/chatbox");
     }
   };
-
-  useEffect(() => {
-    console.log();
-    if (Object.entries(userData).length) {
-      setUser(userData);
-      navigate("/home");
-    }
-  }, []);
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">

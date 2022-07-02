@@ -9,19 +9,19 @@ const Sidebar = () => {
 
   const [user, setUser] = useContext(UserContext);
 
-  const [userData, setUserData] = useLocalStorage("userCredentials", {});
+  const [userToken, setUserToken] = useLocalStorage("userToken", {});
 
   const handleLogOut = () => {
     setUser({});
-    setUserData({});
+    setUserToken({});
     navigate("/login");
     console.log(user);
   };
 
   return (
-    <nav className="p-4 w-72 bg-gray-300">
-      <div className="flex gap-2">
-        <div className="p-4 w-12 bg-red-600 rounded-full"></div>
+    <nav className="p-4 w-72 bg-gray-300 flex flex-col gap-4">
+      <div className="flex gap-2 mt-auto">
+        <div className="p-4 w-12 bg-blue-600 rounded-full"></div>
         <div className="flex flex-col">
           <p className="text-lg text-black font-semibold">{user.userName}</p>
           <p className="text-sm text-slate-500">{user.userEmail}</p>
