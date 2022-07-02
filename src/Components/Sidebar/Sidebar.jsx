@@ -2,20 +2,20 @@ import { useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { UserContext } from "../UserContextProvider/UserContextProvider";
+import { UserContext } from "../../UserContextProvider/UserContextProvider";
 
-import useLocalStorage from '../Hooks/useLocalStorage'
+import useLocalStorage from "../../Hooks/useLocalStorage";
 
 const Sidebar = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useContext(UserContext);
 
-  const [userData,setUserData] = useLocalStorage('userCredentials', {})
+  const [userData, setUserData] = useLocalStorage("userCredentials", {});
 
   const handleLogOut = () => {
     setUser({});
-    setUserData({})
+    setUserData({});
     navigate("/login");
     console.log(user);
   };
