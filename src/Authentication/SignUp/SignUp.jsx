@@ -41,7 +41,6 @@ const SignUp = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify(formData),
     });
@@ -50,13 +49,13 @@ const SignUp = () => {
 
     if (!res) return;
 
+    let loginFormData = new FormData();
+    loginFormData.append("username", userEmail);
+    loginFormData.append("password", userPass);
+
     const loginUser = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: JSON.stringify({"username": userName, "password": userPass}),
+      body: loginFormData,
     });
 
     const loginRes = await loginUser.json();
