@@ -49,11 +49,7 @@ const SignUp = () => {
 
     if (!res) return;
 
-<<<<<<< HEAD
     let loginFormData = new FormData();
-=======
-   let loginFormData = new FormData();
->>>>>>> f1e3117cb74a0f7d0ae04c0ae05bdeda9e7cb829
     loginFormData.append("username", userEmail);
     loginFormData.append("password", userPass);
 
@@ -64,7 +60,7 @@ const SignUp = () => {
 
     const loginResults = await loginUser.json();
 
-    console.log(loginResults)
+    console.log(loginResults);
 
     setUser(
       Object.assign(user, {
@@ -74,7 +70,7 @@ const SignUp = () => {
     );
 
     setUserToken(loginResults);
-    navigate('/home')
+    navigate("/home");
   };
 
   return (
