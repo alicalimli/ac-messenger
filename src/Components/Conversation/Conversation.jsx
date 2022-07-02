@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 
-import elvis from "../Assets/elvis.jpg";
-
 import { MdSend } from "react-icons/md";
 import { VscSmiley } from "react-icons/vsc";
 import { BiMicrophone } from "react-icons/bi";
 import { RiImageAddLine } from "react-icons/ri";
 import { BiUser } from "react-icons/bi";
 
+import elvis from "../Assets/elvis.jpg";
+
 import Messages from "./Messages/Messages";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-  const [user, setUser] = useState(true);
 
   const [active, setActive] = useState(false);
+  const [user, setUser] = useState(true);
+
   const sendMessage = (event) => {
     event.preventDefault();
     setMessage("");

@@ -26,7 +26,6 @@ const Messages = ({ messages }) => {
 
   useEffect(() => {
     if (!latestMsg.current) return;
-    console.log("sdsd");
     latestMsg.current.scrollIntoView();
   }, [messages, latestMsg.current]);
 

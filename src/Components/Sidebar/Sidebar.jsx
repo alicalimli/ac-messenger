@@ -1,7 +1,5 @@
 import { useContext } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import { UserContext } from "../../Contexts";
 
 import useLocalStorage from "../../Hooks/";
@@ -19,8 +17,6 @@ const Sidebar = () => {
     navigate("/login");
     console.log(user);
   };
-
-  console.log(user);
 
   return (
     <nav className="p-4 w-72 bg-gray-300">
