@@ -9,11 +9,11 @@ const Sidebar = () => {
 
   const [user, setUser] = useContext(UserContext);
 
-  const [userData, setUserData] = useLocalStorage("userCredentials", {});
+  const [userData, setUserData] = useLocalStorage("userToken", {});
 
   const handleLogOut = () => {
     setUser({});
-    setUserData({});
+    setUserToken({});
     navigate("/login");
     console.log(user);
   };
