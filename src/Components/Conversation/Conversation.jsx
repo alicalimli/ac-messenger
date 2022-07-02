@@ -1,6 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
-
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState } from "react";
 
 import elvis from "../Assets/elvis.jpg";
 

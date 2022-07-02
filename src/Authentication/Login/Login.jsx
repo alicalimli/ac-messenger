@@ -1,11 +1,11 @@
 import { useRef, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import InputForm from "../../Components/InputForm/InputForm.jsx";
+import InputForm from "../../Components";
 
-import { UserContext } from "../../UserContextProvider/UserContextProvider.jsx";
+import { UserContext } from "../../Contexts";
 
-import useLocalStorage from "../../Hooks/useLocalStorage";
+import useLocalStorage from "../../Hooks";
 
 const Login = () => {
   const navigate = useNavigate();

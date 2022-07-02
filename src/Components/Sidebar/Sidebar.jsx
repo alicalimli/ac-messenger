@@ -2,9 +2,9 @@ import { useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { UserContext } from "../../UserContextProvider/UserContextProvider";
+import { UserContext } from "../../Contexts";
 
-import useLocalStorage from "../../Hooks/useLocalStorage";
+import useLocalStorage from "../../Hooks/";
 
 const Sidebar = () => {
   const navigate = useNavigate();

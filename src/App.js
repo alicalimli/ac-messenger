@@ -1,19 +1,19 @@
 import ReactDOM from "react-dom";
 import React from "react";
 
-import { StrictMode, useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { StrictMode } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Login from "./Login.jsx";
-import SignUp from "./SignUp.jsx";
-import Home from "./Home/Home.jsx";
+import { Login, SignUp } from "./Authentication";
 
-import {UserContextProvider} from './UserContextProvider/UserContextProvider.jsx'
+import Home from "./Containers";
+
+import { UserContextProvider } from "./Contexts";
 
 const App = () => {
   return (
     <StrictMode>
-      <UserContextProvider >
+      <UserContextProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
