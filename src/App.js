@@ -1,11 +1,8 @@
 import ReactDOM from "react-dom";
-import React from "react";
-
-import { StrictMode } from "react";
+import React, {StrictMode} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Login, SignUp } from "./Authentication";
-
 import { Home } from "./Containers";
 
 import { UserContextProvider } from "./Contexts";
