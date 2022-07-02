@@ -9,7 +9,7 @@ const Sidebar = () => {
 
   const [user, setUser] = useContext(UserContext);
 
-  const [userData, setUserData] = useLocalStorage("userToken", {});
+  const [userToken, setUserToken] = useLocalStorage("userToken", {});
 
   const handleLogOut = () => {
     setUser({});
