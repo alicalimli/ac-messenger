@@ -1,7 +1,6 @@
 import React from "react";
 
-import Sidebar from "../../Components";
-import Conversation from "../../Components";
+import { Sidebar, Conversation } from "../../Components";
 
 const Home = () => {
   return (

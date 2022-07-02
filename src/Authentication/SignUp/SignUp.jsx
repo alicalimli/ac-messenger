@@ -2,11 +2,11 @@ import { useState, useEffect, useContext } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
-import InputForm from "../../Components";
+import { InputForm } from "../../Components";
 
 import { UserContext } from "../../Contexts";
 
-import useLocalStorage from "../../Hooks";
+import { useLocalStorage } from "../../Hooks";
 
 const SignUp = () => {
   const [userEmail, setUserEmail] = useState("");

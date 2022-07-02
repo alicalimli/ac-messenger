@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Login, SignUp } from "./Authentication";
 
-import Home from "./Containers";
+import { Home } from "./Containers";
 
 import { UserContextProvider } from "./Contexts";
 
