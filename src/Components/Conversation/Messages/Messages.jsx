@@ -55,8 +55,8 @@ const Messages = ({ messages }) => {
       {messages.map((currentMsg, i) => (
         <motion.div
           key={currentMsg + i}
-          animate={{ scale: 1, x: "0%", opacity: 1 }}
-          initial={{ scale: 0, x: "100%", opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          initial={{ scale: 0.5, opacity: 0 }}
           ref={latestMsg}
           className={
             currentMsg.user
