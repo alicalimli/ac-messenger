@@ -12,16 +12,51 @@ const Login = () => {
   const userEmailRef = useRef();
   const userPassRef = useRef();
 
+  const [userToken, setUserToken] = useLocalStorage("userToken", {});
+
   const [user, setUser] = useContext(UserContext);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    let loginFormData = new FormData();
+    loginFormData.append("username", userEmailRef.current.value);
+    loginFormData.append("password", userPassRef.current.value);
+
+    const loginUser = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
+      method: "POST",
+      body: loginFormData,
+    });
+
+    const loginResults = await loginUser.json();
+
+    if (!loginResults) return;
+
+    console.log(loginResults)
+
+    setUser(
+      Object.assign(user, {
+        userName: userEmailRef.current.value,
+      })
+    );
+
+    setUserToken(loginResults);
+    navigate("/home");
+  };
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
       <form
+        onSubmit={handleLogin}
         className="w-full sm:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
       >
         <div className="flex flex-col gap-1">
-           <label className="text-2xl font-semibold text-left text-center">Sign in</label>
-           <label className="text-sm text-slate-500 text-center mb-4 ">Enter your credentials</label>
+          <label className="text-2xl font-semibold text-left text-center">
+            Sign in
+          </label>
+          <label className="text-sm text-slate-500 text-center mb-4 ">
+            Enter your credentials
+          </label>
         </div>
 
         <InputForm
@@ -38,10 +73,7 @@ const Login = () => {
         />
         <div className="flex flex-wrap gap-2 items-center">
           <input className="w-4" type="checkbox" />
-          <label
-            htmlFor="check-remember"
-            className=" text-slate-500"
-          >
+          <label htmlFor="check-remember" className=" text-slate-500">
             Remember me
           </label>
           <a href="#" className="ml-0 md:ml-auto text-blue-500 ">
