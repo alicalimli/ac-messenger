@@ -32,7 +32,7 @@ const Login = () => {
         className="w-full sm:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
       >
         <div className="flex flex-col gap-1">
-           <label className="text-2xl text-left text-center">Sign in</label>
+           <label className="text-2xl font-semibold text-left text-center">Sign in</label>
            <label className="text-sm text-slate-500 text-center mb-4 ">Enter your credentials</label>
         </div>
 
