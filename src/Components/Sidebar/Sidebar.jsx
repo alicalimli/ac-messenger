@@ -20,19 +20,21 @@ const Sidebar = () => {
 
   return (
     <nav className="p-4 w-72 bg-gray-300 flex flex-col gap-4">
-      <div className="flex gap-2 mt-auto">
-        <div className="p-4 w-12 bg-blue-600 rounded-full"></div>
-        <div className="flex flex-col">
-          <p className="text-lg text-black font-semibold">{user.userName}</p>
-          <p className="text-sm text-slate-500">{user.userEmail}</p>
+ {/*     <div>
+        <div className="flex gap-2 mt-auto">
+          <div className="p-4 w-12 bg-blue-600 rounded-full"></div>
+          <div className="flex flex-col">
+            <p className="text-lg text-black font-semibold">{user.userName}</p>
+            <p className="text-sm text-slate-500">{user.userEmail}</p>
+          </div>
         </div>
-      </div>
-      <button
-        onClick={handleLogOut}
-        className="p-2 px-4 bg-blue-600 text-white rounded"
-      >
-        Logout
-      </button>
+        <button
+          onClick={handleLogOut}
+          className="p-2 px-4 bg-blue-600 text-white rounded"
+        >
+          Logout
+        </button>
+      </div>*/}
     </nav>
   );
 };
