@@ -20,6 +20,19 @@ const Sidebar = () => {
     console.log(user);
   };
 
+  const userInfo = await fetch("http://127.0.0.1:8000/api/v1/users/me", {
+        method: "POST",
+        headers: {
+          'Authorization' : "Bearer " + userToken,
+        }
+      });
+
+
+const userInfoRes = await userInfo.json();
+console.log(userInfoRes);
+
+
+
   return (
     <nav className="hidden p-4 w-fit bg-gray-300 sm:flex sm:flex-col gap-4">
       <div className="mt-auto flex flex-col gap-4 items-center">

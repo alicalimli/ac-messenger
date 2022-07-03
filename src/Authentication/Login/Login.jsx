@@ -40,13 +40,13 @@ const Login = () => {
 
       // GET USERS INFO HERE
 
-      setUserToken(loginResults);
+      setUserToken(loginResults.access_token);
       navigate("/home");
     } catch (error) {
-      setErrorMsg(error.message)
+      setErrorMsg(error.message);
       console.error(error);
 
-      const errorTimeout = setTimeout(()=> setErrorMsg(null), 5000)
+      const errorTimeout = setTimeout(() => setErrorMsg(null), 5000);
     }
   };
 
