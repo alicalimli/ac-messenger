@@ -53,19 +53,21 @@ const Messages = ({ messages }) => {
       </AnimatePresence>
 
       {messages.map((currentMsg, i) => (
-        <motion.div
-          key={currentMsg + i}
-          animate={{ scale: 1, opacity: 1 }}
-          initial={{ scale: 0.5, opacity: 0 }}
-          ref={latestMsg}
-          className={
-            currentMsg.user
-              ? "flex bg-blue-500 text-white ml-auto p-2 px-4 w-fit rounded-xl"
-              : "flex bg-white text-black mr-auto p-2 px-4 w-fit rounded-xl"
-          }
-        >
-          <p className="text-lg">{currentMsg.message}</p>
-        </motion.div>
+        <div>
+          <motion.div
+            key={currentMsg + i}
+            animate={{ scale: 1, opacity: 1 }}
+            initial={{ scale: 0.5, opacity: 0 }}
+            ref={latestMsg}
+            className={
+              currentMsg.user
+                ? "flex bg-blue-500 text-white ml-auto p-1.5 px-3 w-fit rounded-xl"
+                : "flex bg-white text-black mr-auto p-1.5 px-3 w-fit rounded-xl"
+            }
+          >
+            <p className="text-md">{currentMsg.message}</p>
+          </motion.div>
+        </div>
       ))}
     </main>
   );
