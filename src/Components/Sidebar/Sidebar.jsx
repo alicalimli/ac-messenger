@@ -21,7 +21,7 @@ const Sidebar = () => {
   };
 
   return (
-    <nav className="p-4 w-fit bg-gray-300 flex flex-col gap-4">
+    <nav className="hidden p-4 w-fit bg-gray-300 sm:flex sm:flex-col gap-4">
       <div className="mt-auto flex flex-col gap-4 items-center">
         <div className="p-6 bg-blue-600 rounded-full"></div>
         <button
