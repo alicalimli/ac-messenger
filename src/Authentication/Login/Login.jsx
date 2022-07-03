@@ -33,18 +33,12 @@ const Login = () => {
 
       const loginResults = await loginUser.json();
 
-      if (!loginResults) return;
-
       console.log(loginResults);
 
       if (!loginResults.access_token)
         throw new Error("Incorrect email or password");
 
-      setUser(
-        Object.assign(user, {
-          userName: userEmailRef.current.value,
-        })
-      );
+      // GET USERS INFO HERE
 
       setUserToken(loginResults);
       navigate("/home");
