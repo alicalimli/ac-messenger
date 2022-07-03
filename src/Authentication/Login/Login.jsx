@@ -31,7 +31,10 @@ const Login = () => {
         onClick={handleLogin}
         className="w-full sm:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
       >
-        <label className="text-2xl text-left text-center">Sign in</label>
+        <div className="flex flex-col gap-1">
+           <label className="text-2xl text-left text-center">Sign in</label>
+           <label className="text-sm text-slate-500 text-center mb-4 ">Enter your credentials</label>
+        </div>
 
         <InputForm
           label="Username"
@@ -47,7 +50,10 @@ const Login = () => {
         />
         <div className="flex flex-wrap gap-2 items-center">
           <input className="w-4" type="checkbox" />
-          <label htmlFor="check-remember" className=" text-slate-500">
+          <label
+            htmlFor="check-remember"
+            className=" text-slate-500"
+          >
             Remember me
           </label>
           <a href="#" className="ml-0 md:ml-auto text-blue-500 ">
