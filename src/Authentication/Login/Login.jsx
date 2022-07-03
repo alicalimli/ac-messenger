@@ -31,7 +31,7 @@ const Login = () => {
         onClick={handleLogin}
         className="w-full sm:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
       >
-        <label className="text-2xl text-left">Login to your account</label>
+        <label className="text-2xl text-left mb-4">Login to your account</label>
 
         <InputForm
           label="Username"
