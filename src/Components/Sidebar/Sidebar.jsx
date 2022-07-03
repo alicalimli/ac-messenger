@@ -4,6 +4,8 @@ import { UserContext } from "../../Contexts";
 
 import { useLocalStorage } from "../../Hooks/";
 
+import { BiLogOut } from "react-icons/bi";
+
 const Sidebar = () => {
   const navigate = useNavigate();
 
@@ -19,8 +21,18 @@ const Sidebar = () => {
   };
 
   return (
-    <nav className="p-4 w-72 bg-gray-300 flex flex-col gap-4">
- {/*     <div>
+    <nav className="p-4 w-fit bg-gray-300 flex flex-col gap-4">
+      <div className="mt-auto flex flex-col gap-4 items-center">
+        <div className="p-6 bg-blue-600 rounded-full"></div>
+        <button
+          onClick={handleLogOut}
+          className="p-2 w-fit bg-blue-600 text-white rounded"
+        >
+          <BiLogOut />
+        </button>
+      </div>
+
+      {/*     <div>
         <div className="flex gap-2 mt-auto">
           <div className="p-4 w-12 bg-blue-600 rounded-full"></div>
           <div className="flex flex-col">
