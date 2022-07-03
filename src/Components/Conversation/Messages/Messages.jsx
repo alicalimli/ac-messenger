@@ -32,7 +32,7 @@ const Messages = ({ messages }) => {
   return (
     <main
       ref={conversationContainer}
-      className="relative flex flex-col gap-2 overflow-scroll scrollbar-hide"
+      className="relative flex flex-col overflow-scroll scrollbar-hide"
     >
       <AnimatePresence>
         {showArrowDown && (
@@ -53,20 +53,23 @@ const Messages = ({ messages }) => {
       </AnimatePresence>
 
       {messages.map((currentMsg, i) => (
-        <div>
-          <motion.div
+        <div className={`group flex flex-col ${currentMsg.user ? "items-end" : "items-start"} py-1`}>
+          <motion.button
             key={currentMsg + i}
             animate={{ scale: 1, opacity: 1 }}
             initial={{ scale: 0.5, opacity: 0 }}
             ref={latestMsg}
             className={
               currentMsg.user
-                ? "flex bg-blue-500 text-white ml-auto p-1.5 px-3 w-fit rounded-xl"
-                : "flex bg-white text-black mr-auto p-1.5 px-3 w-fit rounded-xl"
+                ? "peer focus:bg-blue-400 flex bg-blue-500 text-white p-1.5 px-3 w-fit rounded-xl"
+                : "peer flex bg-white text-black p-1.5 px-3 w-fit rounded-xl"
             }
           >
             <p className="text-md">{currentMsg.message}</p>
-          </motion.div>
+          </motion.button>
+          <div className="hidden peer-focus:block group-hover:block">
+            <time className="ml-auto text-sm text-slate-500">10:54am</time>
+          </div>
         </div>
       ))}
     </main>
