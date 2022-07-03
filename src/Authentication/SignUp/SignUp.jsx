@@ -49,6 +49,13 @@ const SignUp = () => {
 
     if (!res) return;
 
+    setUser(
+      Object.assign(user, {
+        userName: userName,
+        userEmail: userEmail,
+      })
+    );
+
     let loginFormData = new FormData();
     loginFormData.append("username", userEmail);
     loginFormData.append("password", userPass);
@@ -61,13 +68,6 @@ const SignUp = () => {
     const loginResults = await loginUser.json();
 
     console.log(loginResults);
-
-    setUser(
-      Object.assign(user, {
-        userName: userName,
-        userEmail: userEmail,
-      })
-    );
 
     setUserToken(loginResults);
     navigate("/home");

@@ -9,26 +9,14 @@ import { useLocalStorage } from "../../Hooks";
 
 const Login = () => {
   const navigate = useNavigate();
-  const userNameRef = useRef();
+  const userEmailRef = useRef();
   const userPassRef = useRef();
 
   const [user, setUser] = useContext(UserContext);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-
-    if (
-      userNameRef.current.value === "admin" &&
-      userPassRef.current.value === "admin"
-    ) {
-      navigate("/chatbox");
-    }
-  };
-
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
       <form
-        onClick={handleLogin}
         className="w-full sm:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
       >
         <div className="flex flex-col gap-1">
@@ -37,10 +25,10 @@ const Login = () => {
         </div>
 
         <InputForm
-          label="Username"
-          type="text"
-          placeHolder="e.g example123"
-          inputRef={userNameRef}
+          label="Email"
+          type="email"
+          placeHolder="e.g example123@example.com"
+          inputRef={userEmailRef}
         />
         <InputForm
           label="Password"
