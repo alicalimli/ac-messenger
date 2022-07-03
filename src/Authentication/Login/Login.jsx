@@ -1,4 +1,4 @@
-import { useRef, useEffect, useContext } from "react";
+import { useRef, useEffect, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { InputForm } from "../../Components";
@@ -11,6 +11,8 @@ const Login = () => {
   const navigate = useNavigate();
   const userEmailRef = useRef();
   const userPassRef = useRef();
+
+  const [errorMsg, setErrorMsg] = useState("");
 
   const [userToken, setUserToken] = useLocalStorage("userToken", {});
 
@@ -47,7 +49,10 @@ const Login = () => {
       setUserToken(loginResults);
       navigate("/home");
     } catch (error) {
+      setErrorMsg(error.message)
       console.error(error);
+
+      const errorTimeout = setTimeout(()=> setErrorMsg(null), 5000)
     }
   };
 
@@ -65,6 +70,12 @@ const Login = () => {
             Enter your credentials
           </label>
         </div>
+
+        {errorMsg && (
+          <p className="bg-red-600/10 rounded-xl p-4 border border-red-500 text-red-600">
+            {errorMsg}
+          </p>
+        )}
 
         <InputForm
           label="Email"
