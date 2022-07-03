@@ -31,7 +31,7 @@ const Login = () => {
         onClick={handleLogin}
         className="w-full sm:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
       >
-        <label className="text-2xl text-left">Login</label>
+        <label className="text-2xl text-left">Login to your account</label>
 
         <InputForm
           label="Username"
@@ -45,6 +45,18 @@ const Login = () => {
           placeHolder="*********"
           inputRef={userPassRef}
         />
+        <div className="flex flex-wrap gap-2 items-center">
+          <input className="w-4" type="checkbox" />
+          <label
+            htmlFor="check-remember"
+            className=" text-slate-500"
+          >
+            Remember me
+          </label>
+          <a href="#" className="ml-0 md:ml-auto text-blue-500 ">
+            Forgot password?
+          </a>
+        </div>
 
         <button className="bg-blue-500 hover:bg-blue-400 duration-300 rounded-xl p-2 px-4 text-white">
           Login
