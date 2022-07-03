@@ -53,9 +53,12 @@ const Messages = ({ messages }) => {
       </AnimatePresence>
 
       {messages.map((currentMsg, i) => (
-        <div className={`group flex flex-col ${currentMsg.user ? "items-end" : "items-start"} py-1`}>
+        <div
+          className={`group flex flex-col ${
+            currentMsg.user ? "items-end" : "items-start"
+          } py-1`}
+        >
           <motion.button
-            key={currentMsg + i}
             animate={{ scale: 1, opacity: 1 }}
             initial={{ scale: 0.5, opacity: 0 }}
             ref={latestMsg}
@@ -68,7 +71,7 @@ const Messages = ({ messages }) => {
             <p className="text-md">{currentMsg.message}</p>
           </motion.button>
           <div className="hidden peer-focus:block group-hover:block">
-            <time className="ml-auto text-sm text-slate-500">10:54am</time>
+            <time className="ml-auto text-sm text-slate-500">{currentMsg.time}</time>
           </div>
         </div>
       ))}
