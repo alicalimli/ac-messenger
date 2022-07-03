@@ -17,31 +17,38 @@ const Login = () => {
   const [user, setUser] = useContext(UserContext);
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    let loginFormData = new FormData();
-    loginFormData.append("username", userEmailRef.current.value);
-    loginFormData.append("password", userPassRef.current.value);
+      let loginFormData = new FormData();
+      loginFormData.append("username", userEmailRef.current.value);
+      loginFormData.append("password", userPassRef.current.value);
 
-    const loginUser = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
-      method: "POST",
-      body: loginFormData,
-    });
+      const loginUser = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
+        method: "POST",
+        body: loginFormData,
+      });
 
-    const loginResults = await loginUser.json();
+      const loginResults = await loginUser.json();
 
-    if (!loginResults) return;
+      if (!loginResults) return;
 
-    console.log(loginResults)
+      console.log(loginResults);
 
-    setUser(
-      Object.assign(user, {
-        userName: userEmailRef.current.value,
-      })
-    );
+      if (!loginResults.access_token)
+        throw new Error("Incorrect email or password");
 
-    setUserToken(loginResults);
-    navigate("/home");
+      setUser(
+        Object.assign(user, {
+          userName: userEmailRef.current.value,
+        })
+      );
+
+      setUserToken(loginResults);
+      navigate("/home");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
