@@ -8,7 +8,7 @@ import { useLocalStorage } from "../../Hooks";
 const Auth = ({ email, password, setIsAuthenticating, setErrorMsg}) => {
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
   const [userInfo, setUserInfo] = useLocalStorage("userInfo", {});
-  const [user, setUser] = useContext  (UserContext);
+  const [user, setUser] = useContext (UserContext);
 
   const navigate = useNavigate();
 
@@ -18,6 +18,7 @@ const Auth = ({ email, password, setIsAuthenticating, setErrorMsg}) => {
       loginFormData.append("username", email);
       loginFormData.append("password", password);
 
+      // Request login from the API
       const loginUser = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
         method: "POST",
         body: loginFormData,
@@ -29,7 +30,6 @@ const Auth = ({ email, password, setIsAuthenticating, setErrorMsg}) => {
         throw new Error("Incorrect email or password");
 
       // GETTING USER'S INFO FROM THE API
-
       const getUserInfo = await fetch("http://127.0.0.1:8000/api/v1/users/me", {
         method: "GET",
         headers: {
@@ -40,7 +40,11 @@ const Auth = ({ email, password, setIsAuthenticating, setErrorMsg}) => {
       const getUserInfoRes = await getUserInfo.json();
 
       setUser(Object.assign(user, getUserInfoRes.user));
+
+      // Saves data's to local storage
+      setUserInfo(Object.assign(userInfo, getUserInfoRes.user))
       setUserToken(loginResults.access_token);
+
       navigate("/home");
     } catch (error) {
       setIsAuthenticating(false);
