@@ -14,10 +14,6 @@ const Login = () => {
 
   const [errorMsg, setErrorMsg] = useState("");
 
-  const [userToken, setUserToken] = useLocalStorage("userToken", {});
-
-  const [user, setUser] = useContext(UserContext);
-
   const handleLogin = async (e) => {
     try {
       e.preventDefault();
