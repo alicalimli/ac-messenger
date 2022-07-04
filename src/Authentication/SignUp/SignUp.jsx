@@ -27,7 +27,7 @@ const SignUp = () => {
     const date = new Date();
     const timestamp = date.getTime();
 
-    const formData = {
+    const userSignUpData = {
       username: userName,
       email: userEmail,
       password: userPass,
@@ -42,7 +42,7 @@ const SignUp = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(userSignUpData),
     });
 
     if (!res) return;
