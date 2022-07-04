@@ -54,7 +54,9 @@ const Messages = ({ messages }) => {
 
       {messages.map((currentMsg, i) => (
         <div
-          className={`group gap-2 py-1 flex ${currentMsg.user ? "flex-row-reverse" : ""}`}
+          className={`group gap-2 py-1 flex ${
+            currentMsg.user ? "flex-row-reverse" : ""
+          }`}
         >
           <motion.button
             animate={{ scale: 1, opacity: 1 }}
@@ -69,7 +71,9 @@ const Messages = ({ messages }) => {
             <p className="text-md">{currentMsg.message}</p>
           </motion.button>
           <div className="opacity-0 peer-focus:opacity-100 group-hover:opacity-100 duration-300">
-            <time className="ml-auto text-sm text-slate-500">{currentMsg.time}</time>
+            <time className="ml-auto text-sm text-slate-500">
+              {currentMsg.time}
+            </time>
           </div>
         </div>
       ))}

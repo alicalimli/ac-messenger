@@ -69,8 +69,8 @@ const SignUp = () => {
       <form
         onSubmit={handleSignUp}
         className="w-full sm:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
-      >
-        <label className="text-2xl text-left">Sign Up</label>
+
+>        <label className="text-2xl text-left">Sign Up</label>
 
         <InputForm
           label="Email"

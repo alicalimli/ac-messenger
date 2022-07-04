@@ -13,7 +13,7 @@ const Sidebar = () => {
 
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
-  console.log(user)
+  console.log(user);
 
   const handleLogOut = () => {
     setUser({});

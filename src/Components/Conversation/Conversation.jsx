@@ -28,7 +28,10 @@ const ChatBox = () => {
     const time = Intl.DateTimeFormat("en-us", timeOptions).format(new Date());
 
     setMessage("");
-    setMessages((messages) => [...messages, { user: user, message: message, time: time}]);
+    setMessages((messages) => [
+      ...messages,
+      { user: user, message: message, time: time },
+    ]);
   };
 
   return (
