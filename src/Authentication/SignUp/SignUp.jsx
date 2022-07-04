@@ -18,11 +18,11 @@ const SignUp = () => {
   const [userName, setUserName] = useState("");
   const [userPass, setUserPass] = useState("");
 
-  const [user, setUser] = useContext(UserContext);
-
-  const [userToken, setUserToken] = useLocalStorage("userToken", {});
+  const [userInfo] = useLocalStorage('userInfo', {});
 
   const navigate = useNavigate();
+
+  console.log(userInfo.email, userInfo.password)
 
   const handleSignUp = async (e) => {
     try {
@@ -63,12 +63,18 @@ const SignUp = () => {
     }
   };
 
+  useEffect(()=> {
+    if(Object.entries(userInfo).length){
+      setIsAuthenticating(true);
+    }
+  }, [])
+
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
       {isAuthenticating ? (
         <Auth
-          email={userEmail}
-          password={userPass}
+          email={userEmail || userInfo.email}
+          password={userPass || userInfo.password}
           setIsAuthenticating={setIsAuthenticating}
           setErrorMsg={setErrorMsg}
         />

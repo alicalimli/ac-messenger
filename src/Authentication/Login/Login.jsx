@@ -16,19 +16,43 @@ const Login = () => {
   const userEmailRef = useRef();
   const userPassRef = useRef();
 
+  const [userToken, setUserToken] = useLocalStorage("userToken", "");
+
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    let loginFormData = new FormData();
+    loginFormData.append("username", userEmailRef.current.value);
+    loginFormData.append("password", userPassRef.current.value);
+
+    // Request login from the API
+    const loginUser = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
+      method: "POST",
+      body: loginFormData,
+    });
+
+    const loginResults = await loginUser.json();
+
+    setUserToken(loginResults.access_token);
+
+    if (!loginResults.access_token)
+      throw new Error("Incorrect email or password");
+
     setIsAuthenticating(true);
   };
+
+  useEffect(() => {
+    if (userToken) {
+      setIsAuthenticating(true);
+    }
+  }, []);
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
       {isAuthenticating ? (
         <Auth
-          email={userEmailRef.current.value}
-          password={userPassRef.current.value}
           setIsAuthenticating={setIsAuthenticating}
           setErrorMsg={setErrorMsg}
         />
