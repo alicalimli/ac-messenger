@@ -14,28 +14,22 @@ const Login = () => {
   const userEmailRef = useRef();
   const userPassRef = useRef();
 
-  console.log(userEmailRef)
+  console.log(userEmailRef);
 
   const [errorMsg, setErrorMsg] = useState("");
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const handleLogin = async (e) => {
-    try {
-      e.preventDefault();
+    e.preventDefault();
 
-      console.log(userEmailRef)
+    console.log(userEmailRef);
 
-      setIsAuthenticating(true);
-    } catch (error) {
-      setErrorMsg(error.message);
-      console.error(error);
-
-      const errorTimeout = setTimeout(() => setErrorMsg(null), 5000);
-    }
+    setIsAuthenticating(true);
   };
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
+    {console.log(isAuthenticating)}
       {isAuthenticating ? (
         <Auth
           email={userEmailRef.current.value}

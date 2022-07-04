@@ -5,10 +5,10 @@ import { UserContext } from "../../Contexts";
 
 import { useLocalStorage } from "../../Hooks";
 
-const Auth = ({ email, password, setIsAuthenticating}) => {
+const Auth = ({ email, password, setIsAuthenticating, setErrorMsg}) => {
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
   const [userInfo, setUserInfo] = useLocalStorage("userInfo", {});
-  const [user, setUser] = useContext(UserContext);
+  const [user, setUser] = useContext  (UserContext);
 
   const navigate = useNavigate();
 
@@ -43,11 +43,11 @@ const Auth = ({ email, password, setIsAuthenticating}) => {
       setUserToken(loginResults.access_token);
       navigate("/home");
     } catch (error) {
-      navigate("/login");
-      setErrorMsg(error.message)
       setIsAuthenticating(false);
+      setErrorMsg(error.message)
+
       console.error(error);
-      throw error;
+      const errorTimeout = setTimeout(() => setErrorMsg(null), 5000);
     }
   };
 
