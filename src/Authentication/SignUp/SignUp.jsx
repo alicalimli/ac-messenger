@@ -25,36 +25,42 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    console.log("creatingUser");
+      console.log("creatingUser");
 
-    const date = new Date();
-    const timestamp = date.getTime();
+      const date = new Date();
+      const timestamp = date.getTime();
 
-    const userSignUpData = {
-      username: userName,
-      email: userEmail,
-      password: userPass,
-      status: true,
-      is_active: true,
-      profile: "default.png",
-      websocket_id: timestamp.toString(),
-    };
+      const userSignUpData = {
+        username: userName,
+        email: userEmail,
+        password: userPass,
+        status: true,
+        is_active: true,
+        profile: "default.png",
+        websocket_id: timestamp.toString(),
+      };
 
-    const createUser = await fetch("http://127.0.0.1:8000/api/v1/users/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userSignUpData),
-    });
+      const createUser = await fetch("http://127.0.0.1:8000/api/v1/users/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userSignUpData),
+      });
 
-    const createUserRes = await createUser.json();
+      const createUserRes = await createUser.json();
+      if (!createUserRes.id) throw new Error(createUserRes.detail[0].msg);
 
-    if (!createUserRes) return;
+      setIsAuthenticating(true);
+    } catch (error) {
+      setErrorMsg(error.message);
 
-    setIsAuthenticating(true);
+      console.error(error);
+      const errorTimeout = setTimeout(() => setErrorMsg(null), 5000);
+    }
   };
 
   return (
@@ -73,6 +79,11 @@ const SignUp = () => {
         >
           {" "}
           <label className="text-2xl text-left">Sign Up</label>
+          {errorMsg && (
+            <p className="bg-red-600/10 rounded-xl p-4 border border-red-500 text-red-600">
+              {errorMsg}
+            </p>
+          )}
           <InputForm
             label="Email"
             type="email"
