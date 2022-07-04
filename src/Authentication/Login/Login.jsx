@@ -5,14 +5,14 @@ import { InputForm } from "../../Components";
 
 import { UserContext } from "../../Contexts";
 
-import { useLocalStorage } from "../../Hooks";
-
-import { authenticate } from "../../Helpers";
+import { useLocalStorage, useAuth } from "../../Hooks";
 
 const Login = () => {
   const navigate = useNavigate();
   const userEmailRef = useRef();
   const userPassRef = useRef();
+
+  const authenticate = useAuth();
 
   const [errorMsg, setErrorMsg] = useState("");
 
