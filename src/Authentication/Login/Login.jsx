@@ -10,26 +10,21 @@ import { UserContext } from "../../Contexts";
 import { useLocalStorage } from "../../Hooks";
 
 const Login = () => {
-  const navigate = useNavigate();
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
   const userEmailRef = useRef();
   const userPassRef = useRef();
 
-  console.log(userEmailRef);
-
-  const [errorMsg, setErrorMsg] = useState("");
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    console.log(userEmailRef);
-
     setIsAuthenticating(true);
   };
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
-    {console.log(isAuthenticating)}
       {isAuthenticating ? (
         <Auth
           email={userEmailRef.current.value}
