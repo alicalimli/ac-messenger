@@ -1,11 +1,11 @@
 import { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { UserContext } from "../../Contexts";
+import { UserContext } from "../Contexts";
 
-import { useLocalStorage } from "../../Hooks";
+import { useLocalStorage } from "../Hooks";
 
-const authenticate = async () => {
+const authenticate = async (email, password) => {
 	try {
 		const [userToken, setUserToken] = useLocalStorage("userToken", "");
 		const [userInfo, setUserInfo] = useLocalStorage("userInfo", {})
@@ -14,8 +14,8 @@ const authenticate = async () => {
  		const navigate = useNavigate();
 
 		let loginFormData = new FormData();
-		loginFormData.append("username", userEmailRef.current.value);
-		loginFormData.append("password", userPassRef.current.value);
+		loginFormData.append("username", email);
+		loginFormData.append("password", password);
 
 		const loginUser = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
 			method: "POST",
@@ -29,16 +29,16 @@ const authenticate = async () => {
 
 		// GETTING USER'S INFO FROM THE API
 
-		const userInfo = await fetch("http://127.0.0.1:8000/api/v1/users/me", {
+		const getUserInfo = await fetch("http://127.0.0.1:8000/api/v1/users/me", {
 			method: "GET",
 			headers: {
 				Authorization: "Bearer " + loginResults.access_token,
 			},
 		});
 
-		const userInfoRes = await userInfo.json();
+		const getUserInfoRes = await getUserInfo.json();
 
-		setUser(Object.assign(user, userInfoRes.user));
+		setUser(Object.assign(user, getUserInfoRes.user));
 		setUserToken(loginResults.access_token);
 		navigate("/home");
 	} catch (error) {

@@ -7,8 +7,7 @@ import { UserContext } from "../../Contexts";
 
 import { useLocalStorage } from "../../Hooks";
 
-import { authenticate } from '../../Helpers'
-
+import { authenticate } from "../../Helpers";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,7 +20,7 @@ const Login = () => {
     try {
       e.preventDefault();
 
-      authenticate();
+      authenticate(userEmailRef.current.value, userPassRef.current.value);
     } catch (error) {
       setErrorMsg(error.message);
       console.error(error);
