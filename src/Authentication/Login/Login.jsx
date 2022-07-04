@@ -33,28 +33,21 @@ const Login = () => {
 
       const loginResults = await loginUser.json();
 
-      setUserToken(loginResults.access_token)
-
       if (!loginResults.access_token)
         throw new Error("Incorrect email or password");
 
-      // GETTING USER INFO
-
-      console.log(userToken)
+      // GETTING USER INFO FROM THE API
 
       const userInfo = await fetch("http://127.0.0.1:8000/api/v1/users/me", {
         method: "GET",
         headers: {
-          Authorization: "Bearer " + userToken,
+          Authorization: "Bearer " + loginResults.access_token,
         },
       });
 
       const userInfoRes = await userInfo.json();
 
-      console.log(userInfoRes);
-
-      //
-
+      setUser(Object.assign(user, userInfoRes.user))
       setUserToken(loginResults.access_token);
       navigate("/home");
     } catch (error) {

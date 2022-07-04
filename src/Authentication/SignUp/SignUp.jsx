@@ -45,16 +45,7 @@ const SignUp = () => {
       body: JSON.stringify(formData),
     });
 
-    const res = await createUser.text();
-
     if (!res) return;
-
-    setUser(
-      Object.assign(user, {
-        userName: userName,
-        userEmail: userEmail,
-      })
-    );
 
     let loginFormData = new FormData();
     loginFormData.append("username", userEmail);
