@@ -18,11 +18,12 @@ const SignUp = () => {
   const [userName, setUserName] = useState("");
   const [userPass, setUserPass] = useState("");
 
-  const [userInfo] = useLocalStorage('userInfo', {});
+  const [userInfo] = useLocalStorage("userInfo", {});
+  const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
   const navigate = useNavigate();
 
-  console.log(userInfo.email, userInfo.password)
+  console.log(userInfo.email, userInfo.password);
 
   const handleSignUp = async (e) => {
     try {
@@ -54,6 +55,24 @@ const SignUp = () => {
       const createUserRes = await createUser.json();
       if (!createUserRes.id) throw new Error(createUserRes.detail[0].msg);
 
+      // Requests for login
+      let loginFormData = new FormData();
+      loginFormData.append("username", userEmail);
+      loginFormData.append("password", userPass);
+
+      // Request login from the API
+      const loginUser = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
+        method: "POST",
+        body: loginFormData,
+      });
+
+      const loginResults = await loginUser.json();
+
+      setUserToken(loginResults.access_token);
+
+      if (!loginResults.access_token)
+        throw new Error("Incorrect email or password");
+
       setIsAuthenticating(true);
     } catch (error) {
       setErrorMsg(error.message);
@@ -63,18 +82,16 @@ const SignUp = () => {
     }
   };
 
-  useEffect(()=> {
-    if(Object.entries(userInfo).length){
+  useEffect(() => {
+    if (userToken) {
       setIsAuthenticating(true);
     }
-  }, [])
+  }, []);
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
       {isAuthenticating ? (
         <Auth
-          email={userEmail || userInfo.email}
-          password={userPass || userInfo.password}
           setIsAuthenticating={setIsAuthenticating}
           setErrorMsg={setErrorMsg}
         />
