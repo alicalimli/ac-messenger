@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 import { Sidebar, Conversation } from "../../Components";
 
-import { useLocalStorage, useAuth } from '../../Hooks'
+import { useLocalStorage, useAuth } from "../../Hooks";
 
 const Home = () => {
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
@@ -13,10 +13,8 @@ const Home = () => {
   const authenticate = useAuth();
 
   useEffect(() => {
-    if (userToken) {
-      authenticate();
-    }
-  },[]);
+    authenticate();
+  }, []);
 
   return (
     <>

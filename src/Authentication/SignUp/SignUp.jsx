@@ -4,14 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { InputForm } from "../../Components";
 
-import { Auth } from "../../Authentication";
-
 import { UserContext } from "../../Contexts";
 
-import { useLocalStorage } from "../../Hooks";
+import { useLocalStorage, useAuth } from "../../Hooks";
 
 const SignUp = () => {
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
@@ -22,6 +19,7 @@ const SignUp = () => {
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
   const navigate = useNavigate();
+  const authenticate = useAuth();
 
   console.log(userInfo.email, userInfo.password);
 
@@ -73,7 +71,7 @@ const SignUp = () => {
       if (!loginResults.access_token)
         throw new Error("Incorrect email or password");
 
-      setIsAuthenticating(true);
+      authenticate();
     } catch (error) {
       setErrorMsg(error.message);
 
@@ -83,73 +81,64 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (userToken) {
-      setIsAuthenticating(true);
-    }
+    authenticate();
   }, []);
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
-      {isAuthenticating ? (
-        <Auth
-          setIsAuthenticating={setIsAuthenticating}
-          setErrorMsg={setErrorMsg}
-        />
-      ) : (
-        <form
-          onSubmit={handleSignUp}
-          className="w-full sm:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
-        >
-          {" "}
-          <label className="text-2xl text-left">Sign Up</label>
-          {errorMsg && (
-            <p className="bg-red-600/10 rounded-xl p-4 border border-red-500 text-red-600">
-              {errorMsg}
-            </p>
-          )}
-          <InputForm
-            label="Email"
-            type="email"
-            placeHolder="e.g example@email.com"
-            isControlled="true"
-            invalidLabel="Please provide a valid Email Address"
-            state={userEmail}
-            setState={setUserEmail}
-          />
-          <InputForm
-            label="Username"
-            type="text"
-            placeHolder="e.g example123"
-            minLength="6"
-            invalidLabel="Please use at least 6 characters for the username."
-            isControlled="true"
-            state={userName}
-            setState={setUserName}
-          />
-          <InputForm
-            label="Password"
-            type="password"
-            placeHolder="*********"
-            minLength="8"
-            invalidLabel="Please use at least 8 characters for the password."
-            isControlled="true"
-            state={userPass}
-            setState={setUserPass}
-          />
-          <button className="bg-blue-500 hover:bg-blue-400 duration-300 rounded-xl p-2 px-4 text-white">
-            Sign Up
-          </button>
-          <p className="text-slate-600 text-sm">
-            Already have an account?{" "}
-            <Link
-              to="/"
-              className="text-blue-500 hover:text-blue-400 duration-300 font-semibold"
-            >
-              Login
-            </Link>
+      <form
+        onSubmit={handleSignUp}
+        className="w-full sm:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
+      >
+        {" "}
+        <label className="text-2xl text-left">Sign Up</label>
+        {errorMsg && (
+          <p className="bg-red-600/10 rounded-xl p-4 border border-red-500 text-red-600">
+            {errorMsg}
           </p>
-        </form>
-      )}
+        )}
+        <InputForm
+          label="Email"
+          type="email"
+          placeHolder="e.g example@email.com"
+          isControlled="true"
+          invalidLabel="Please provide a valid Email Address"
+          state={userEmail}
+          setState={setUserEmail}
+        />
+        <InputForm
+          label="Username"
+          type="text"
+          placeHolder="e.g example123"
+          minLength="6"
+          invalidLabel="Please use at least 6 characters for the username."
+          isControlled="true"
+          state={userName}
+          setState={setUserName}
+        />
+        <InputForm
+          label="Password"
+          type="password"
+          placeHolder="*********"
+          minLength="8"
+          invalidLabel="Please use at least 8 characters for the password."
+          isControlled="true"
+          state={userPass}
+          setState={setUserPass}
+        />
+        <button className="bg-blue-500 hover:bg-blue-400 duration-300 rounded-xl p-2 px-4 text-white">
+          Sign Up
+        </button>
+        <p className="text-slate-600 text-sm">
+          Already have an account?{" "}
+          <Link
+            to="/"
+            className="text-blue-500 hover:text-blue-400 duration-300 font-semibold"
+          >
+            Login
+          </Link>
+        </p>
+      </form>
     </div>
   );
 };
