@@ -39,6 +39,8 @@ const Login = () => {
       if (!loginResults.access_token)
         throw new Error("Incorrect email or password");
 
+      console.log(authenticate);
+
       authenticate();
     } catch (error) {
       setErrorMsg(error.message);
@@ -48,6 +50,9 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    authenticate();
+  }, []);
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">

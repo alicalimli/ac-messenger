@@ -21,8 +21,6 @@ const SignUp = () => {
   const navigate = useNavigate();
   const authenticate = useAuth();
 
-  console.log(userInfo.email, userInfo.password);
-
   const handleSignUp = async (e) => {
     try {
       e.preventDefault();

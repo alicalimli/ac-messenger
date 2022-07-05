@@ -5,10 +5,12 @@ import { UserContext } from "../../Contexts";
 
 import { useLocalStorage } from "../../Hooks";
 
-const Auth = () => {
+const useAuth = () => {
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
   if (!userToken) return;
+
+  console.log('Authenticating')
 
   const [userInfo, setUserInfo] = useLocalStorage("userInfo", {});
   const [user, setUser] = useContext(UserContext);
@@ -38,10 +40,11 @@ const Auth = () => {
         navigate("/home");
       } catch (error) {
         console.error(error);
+        throw error;
       }
   });
 
   return authenticate;
 };
 
-export default Auth;
+export default useAuth;
