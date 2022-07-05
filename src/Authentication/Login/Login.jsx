@@ -35,7 +35,7 @@ const Login = () => {
       const loginResults = await loginUser.json();
 
       setUserToken(loginResults.access_token);
-      console.log(userToken)
+      console.log(userToken);
 
       if (!loginResults.access_token)
         throw new Error("Incorrect email or password");

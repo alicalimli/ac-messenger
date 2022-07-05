@@ -16,7 +16,7 @@ const useAuth = () => {
 
   const authenticate = useCallback(async () => {
     try {
-      if (!userToken) throw new Error("Token doesn't exist");
+      if (!userToken) navigate('/login');
 
       // GETTING USER'S INFO FROM THE API
       const getUserInfo = await fetch("http://127.0.0.1:8000/api/v1/users/me", {
