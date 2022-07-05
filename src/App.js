@@ -1,8 +1,8 @@
 import ReactDOM from "react-dom";
-import React, { StrictMode, useState } from "react";
+import React, { StrictMode } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { Login, SignUp, Auth } from "./Authentication";
+import { Login, SignUp } from "./Authentication";
 import { Home } from "./Containers";
 
 import { UserContextProvider } from "./Contexts";
@@ -15,7 +15,6 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/auth" element={<Auth />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/home" element={<Home />} />
           </Routes>

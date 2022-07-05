@@ -5,7 +5,7 @@ import { InputForm } from "../../Components";
 
 import { UserContext } from "../../Contexts";
 
-import { useLocalStorage } from "../../Hooks";
+import { useLocalStorage, useAuth } from "../../Hooks";
 
 const Login = () => {
   const [errorMsg, setErrorMsg] = useState("");
@@ -16,6 +16,7 @@ const Login = () => {
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
   const navigate = useNavigate();
+  const authenticate = useAuth();
 
   const handleLogin = async (e) => {
     try {
@@ -38,7 +39,7 @@ const Login = () => {
       if (!loginResults.access_token)
         throw new Error("Incorrect email or password");
 
-      navigate("/home");
+      authenticate();
     } catch (error) {
       setErrorMsg(error.message);
 
@@ -47,11 +48,6 @@ const Login = () => {
     }
   };
 
-  useEffect(()=>{
-    if(userToken){
-      navigate('/auth')
-    }
-  },[])
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
