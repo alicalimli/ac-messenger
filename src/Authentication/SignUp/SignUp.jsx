@@ -78,10 +78,6 @@ const SignUp = () => {
     }
   };
 
-  useEffect(() => {
-    authenticate();
-  }, []);
-
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
       <form

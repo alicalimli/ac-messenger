@@ -20,7 +20,7 @@ const Sidebar = () => {
 
   return (
     <nav className="hidden p-4 w-fit bg-gray-300 sm:flex sm:flex-col gap-4">
-      <div className="mt-auto flex flex-col gap-4 items-center">
+    {/*  <div className="mt-auto flex flex-col gap-4 items-center">
         <div className="p-6 bg-blue-600 rounded-full"></div>
         <button
           onClick={handleLogOut}
@@ -28,9 +28,9 @@ const Sidebar = () => {
         >
           <BiLogOut />
         </button>
-      </div>
+      </div>*/}
 
-      {/*     <div>
+           <div>
         <div className="flex gap-2 mt-auto">
           <div className="p-4 w-12 bg-blue-600 rounded-full"></div>
           <div className="flex flex-col">
@@ -44,7 +44,7 @@ const Sidebar = () => {
         >
           Logout
         </button>
-      </div>*/}
+      </div>
     </nav>
   );
 };
