@@ -30,6 +30,8 @@ const useAuth = () => {
 
       setUser(Object.assign(user, getUserInfoRes.user));
 
+      console.log('fetching data', userToken)
+
       // Saves data's to local storage
       setUserInfo(Object.assign(userInfo, getUserInfoRes.user));
 
@@ -38,8 +40,6 @@ const useAuth = () => {
       console.error(error);
     }
   });
-
-  console.log(authenticate);
 
   return authenticate;
 };

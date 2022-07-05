@@ -12,14 +12,10 @@ const Sidebar = () => {
   const [user, setUser] = useContext(UserContext);
 
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
-
-  console.log(user);
-
   const handleLogOut = () => {
     setUser({});
     setUserToken("");
     navigate("/login");
-    console.log(user);
   };
 
   return (

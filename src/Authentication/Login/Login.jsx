@@ -18,8 +18,6 @@ const Login = () => {
   const navigate = useNavigate();
   const authenticate = useAuth();
 
-  console.log(authenticate)
-
   const handleLogin = async (e) => {
     try {
       e.preventDefault();
@@ -41,8 +39,6 @@ const Login = () => {
 
       if (!loginResults.access_token)
         throw new Error("Incorrect email or password");
-
-      console.log(authenticate);
 
       authenticate();
     } catch (error) {
@@ -84,7 +80,6 @@ const Login = () => {
           placeHolder="e.g example123@example.com"
           inputRef={userEmailRef}
         />
-        {console.log(userEmailRef)}
         <InputForm
           label="Password"
           type="password"
