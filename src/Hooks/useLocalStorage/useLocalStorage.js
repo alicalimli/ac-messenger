@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const useLocalStorage = (key, initialValue) => {
   const [storedData, setStoredData] = useState(() => {
-    const data = JSON.parse(window.localStorage.getItem(key));
+    const data = window.localStorage.getItem(key);
 
     return data || initialValue;
   });
@@ -10,7 +10,7 @@ const useLocalStorage = (key, initialValue) => {
   const setValue = (value) => {
     setStoredData(value);
 
-    window.localStorage.setItem(key, JSON.stringify(value));
+    window.localStorage.setItem(key, value);
   };
 
   return [storedData, setValue];
