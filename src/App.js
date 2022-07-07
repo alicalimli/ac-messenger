@@ -7,12 +7,16 @@ import { Home } from "./Containers";
 
 import { UserContextProvider } from "./Contexts";
 
+import {useLocalStorage} from './Hooks'
+
 const App = () => {
+  const [userInfo, setUserInfo] = useLocalStorage("userInfo", {});
+  console.log(userInfo)
   return (
     <StrictMode>
       <UserContextProvider>
         <BrowserRouter>
-          <Authentication />
+          {userInfo ? <Home /> : <Authentication />}
         </BrowserRouter>
       </UserContextProvider>
     </StrictMode>
