@@ -15,7 +15,6 @@ const App = () => {
   return (
     <StrictMode>
       <UserContextProvider>
-      {console.log("asds")}
         <BrowserRouter>
           {userInfo ? <Home userInfo={userInfo} setUserInfo={setUserInfo} /> : <Authentication userInfo={userInfo} setUserInfo={setUserInfo} />}
         </BrowserRouter>

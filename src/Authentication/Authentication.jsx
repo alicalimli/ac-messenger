@@ -26,7 +26,6 @@ const Authentication = ({userInfo, setUserInfo}) => {
 
 			// Saves data's to local storage
 			setUserInfo(getUserInfoRes.user);
-			console.log(userInfo)
 		} catch (error) {
 			console.error(error);
 		}
