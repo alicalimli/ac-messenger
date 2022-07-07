@@ -4,7 +4,7 @@ const useGenerateToken = () => {
   const generateToken = useCallback(
     async (setToken, email, pass, setErrorMsg, setPendingMsg) => {
       try {
-        setPendingMsg('Generating Token')
+        setPendingMsg("Generating Token");
 
         let formData = new FormData();
         formData.append("username", email);
@@ -28,8 +28,6 @@ const useGenerateToken = () => {
       } catch (error) {
         console.error(error);
         setErrorMsg(error.message);
-
-        errorTimeout = setTimeout(() => setErrorMsg(null), 5000);
       }
     }
   );

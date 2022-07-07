@@ -19,7 +19,7 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
     try {
       e.preventDefault();
 
-      setPendingMsg("Creating User")
+      setPendingMsg("Creating User");
 
       const date = new Date();
       const timestamp = date.getTime();
@@ -46,12 +46,16 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
       if (!createUserRes.id) throw new Error(createUserRes.detail[0].msg);
 
       // Login user
-      generateToken(setUserToken, userEmail, userPass, setErrorMsg, setPendingMsg);
+      generateToken(
+        setUserToken,
+        userEmail,
+        userPass,
+        setErrorMsg,
+        setPendingMsg
+      );
     } catch (error) {
       setErrorMsg(error.message);
-
       console.error(error);
-      const errorTimeout = setTimeout(() => setErrorMsg(null), 5000);
     }
   };
 
