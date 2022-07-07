@@ -1,22 +1,18 @@
 import { useRef, useEffect, useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
 
 import { InputForm } from "../../Components";
 
 import { UserContext } from "../../Contexts";
 
-import { useLocalStorage, useAuth } from "../../Hooks";
+import { useLocalStorage } from "../../Hooks";
 
-const Login = () => {
+const Login = ({setIsSigningIn}) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const userEmailRef = useRef();
   const userPassRef = useRef();
 
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
-
-  const navigate = useNavigate();
-  const authenticate = useAuth();
 
   const handleLogin = async (e) => {
     try {
@@ -97,12 +93,12 @@ const Login = () => {
         </button>
         <p className="text-slate-600 text-sm">
           Don't have an account?{" "}
-          <Link
-            to="/signup"
+          <button
+            onClick={()=> setIsSigningIn(false)}
             className="text-blue-500 hover:text-blue-400 duration-300 font-semibold"
           >
             Sign up
-          </Link>
+          </button>
         </p>
       </form>
     </div>
