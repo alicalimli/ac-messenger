@@ -1,8 +1,8 @@
 import ReactDOM from "react-dom";
 import React, { StrictMode } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
-import { Login, SignUp } from "./Authentication";
+import { Authentication } from "./Authentication";
 import { Home } from "./Containers";
 
 import { UserContextProvider } from "./Contexts";
@@ -12,12 +12,7 @@ const App = () => {
     <StrictMode>
       <UserContextProvider>
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
+          <Authentication />
         </BrowserRouter>
       </UserContextProvider>
     </StrictMode>

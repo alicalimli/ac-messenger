@@ -4,8 +4,15 @@ import { Login, SignUp } from "./";
 
 const Authentication = () => {
 	const [isSigningIn, setIsSigningIn] = useState(true);
+
 	return (
-		{isSigningIn ? <Login setIsSigningIn={setIsSigningIn}/> : <SignUp setIsSigningIn={setIsSigningIn} />}
+		<div>
+			{isSigningIn ? (
+				<Login setIsSigningIn={setIsSigningIn} />
+			) : (
+				<SignUp setIsSigningIn={setIsSigningIn} />
+			)}
+		</div>
 	);
 };
 
