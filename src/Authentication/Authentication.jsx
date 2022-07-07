@@ -47,7 +47,7 @@ const Authentication = ({ userInfo, setUserInfo }) => {
     <div className="m-auto mt-8 w-full sm:w-96 p-12 rounded-xl bg-white shadow-lg">
       {pendingMsg && <h1>{pendingMsg}...</h1>}
       <AnimatePresence>
-        {isSigningIn ? (
+        {isSigningIn && (
           <motion.div
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.25 }}
@@ -61,7 +61,11 @@ const Authentication = ({ userInfo, setUserInfo }) => {
               setUserToken={setUserToken}
             />
           </motion.div>
-        ) : (
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {!isSigningIn && (
           <motion.div
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.25 }}
