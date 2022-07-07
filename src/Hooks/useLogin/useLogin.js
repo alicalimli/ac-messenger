@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react';
+import React, { useCallback } from 'react';
 
 const useLogin = () => {
-  const makeLogin = async (setToken, email, pass) => {
+  const makeLogin = useCallback( async (setToken, email, pass) => {
     try{
         let formData = new FormData();
         formData.append("username", email);
@@ -24,7 +24,7 @@ const useLogin = () => {
       console.error(error);
       throw error;
     }
-  }
+  })
 
   return makeLogin;
 };
