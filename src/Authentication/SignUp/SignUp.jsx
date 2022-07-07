@@ -6,7 +6,7 @@ import { UserContext } from "../../Contexts";
 
 import { useLocalStorage, useGenerateToken } from "../../Hooks";
 
-const SignUp = ({ setIsSigningIn, setUserToken }) => {
+const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
@@ -19,7 +19,7 @@ const SignUp = ({ setIsSigningIn, setUserToken }) => {
     try {
       e.preventDefault();
 
-      console.log("creatingUser");
+      setPendingMsg("Creating User")
 
       const date = new Date();
       const timestamp = date.getTime();
@@ -46,7 +46,7 @@ const SignUp = ({ setIsSigningIn, setUserToken }) => {
       if (!createUserRes.id) throw new Error(createUserRes.detail[0].msg);
 
       // Login user
-      generateToken(setUserToken, userEmail, userPass, setErrorMsg);
+      generateToken(setUserToken, userEmail, userPass, setErrorMsg, setPendingMsg);
     } catch (error) {
       setErrorMsg(error.message);
 
