@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 
+import { motion } from "framer-motion";
+
 import { InputForm } from "../../Components";
 
 import { UserContext } from "../../Contexts";
@@ -55,13 +57,18 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
       );
     } catch (error) {
       setErrorMsg(error.message);
-      setPendingMsg('');
+      setPendingMsg("");
       console.error(error);
     }
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center p-4">
+    <motion.div
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.25 }}
+      initial={{ opacity: 0, x: 100 }}
+      className="h-screen w-screen flex flex-col justify-center items-center p-4"
+    >
       <form
         onSubmit={handleSignUp}
         className="w-full sm:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
@@ -120,7 +127,7 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
           </button>
         </p>
       </form>
-    </div>
+    </motion.div>
   );
 };
 
