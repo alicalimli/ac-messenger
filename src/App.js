@@ -17,7 +17,7 @@ const App = () => {
       <UserContextProvider>
       {console.log("asds")}
         <BrowserRouter>
-          {userInfo ? <Home /> : <Authentication userInfo={userInfo} setUserInfo={setUserInfo} />}
+          {userInfo ? <Home userInfo={userInfo} setUserInfo={setUserInfo} /> : <Authentication userInfo={userInfo} setUserInfo={setUserInfo} />}
         </BrowserRouter>
       </UserContextProvider>
     </StrictMode>

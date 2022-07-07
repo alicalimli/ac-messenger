@@ -6,10 +6,10 @@ import { Sidebar, Conversation } from "../../Components";
 
 import { useLocalStorage } from "../../Hooks";
 
-const Home = () => {
+const Home = ({userInfo, setUserInfo}) => {
   return (
     <>
-      <Sidebar />
+      <Sidebar setUserInfo={setUserInfo}/>
       <Conversation />
     </>
   );
