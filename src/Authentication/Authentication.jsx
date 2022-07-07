@@ -10,8 +10,6 @@ const Authentication = ({userInfo, setUserInfo}) => {
 	const [isSigningIn, setIsSigningIn] = useState(true);
 	const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
-	const [user, setUser] = useContext(UserContext)
-
 	const authenticate = useCallback(async () => {
 		try {
 			if (!userToken) return;
@@ -25,8 +23,6 @@ const Authentication = ({userInfo, setUserInfo}) => {
 			});
 
 			const getUserInfoRes = await getUserInfo.json();
-
-			console.log("fetching data", userToken);
 
 			// Saves data's to local storage
 			setUserInfo(getUserInfoRes.user);
