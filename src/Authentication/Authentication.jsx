@@ -49,10 +49,10 @@ const Authentication = ({ userInfo, setUserInfo }) => {
       <AnimatePresence>
         {isSigningIn && (
           <motion.div
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.25 }}
-            exit={{ opacity: 0, x: 100 }}
-            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0}}
+            initial={{ opacity: 0 }}
           >
             {" "}
             <SignIn
@@ -67,10 +67,10 @@ const Authentication = ({ userInfo, setUserInfo }) => {
       <AnimatePresence>
         {!isSigningIn && (
           <motion.div
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.25 }}
-            exit={{ opacity: 0, x: 100 }}
-            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0}}
+            initial={{ opacity: 0 }}
           >
             <SignUp
               setIsSigningIn={setIsSigningIn}
