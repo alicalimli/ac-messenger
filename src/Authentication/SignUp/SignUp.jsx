@@ -113,12 +113,12 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
       </button>
       <p className="text-slate-600 text-sm">
         Already have an account?{" "}
-        <button
+        <a
           onClick={() => setIsSigningIn(true)}
-          className="text-blue-500 hover:text-blue-400 duration-300 font-semibold"
+          className="text-blue-500 cursor-pointer hover:text-blue-400 duration-300 font-semibold"
         >
           Login
-        </button>
+        </a>
       </p>
     </form>
   );

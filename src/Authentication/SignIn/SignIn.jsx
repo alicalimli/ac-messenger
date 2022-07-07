@@ -71,14 +71,14 @@ const SignIn = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
       <button className="bg-blue-500 hover:bg-blue-400 duration-300 rounded-xl p-2 px-4 text-white">
         Sign in
       </button>
-      <p className="text-slate-600 text-sm">
+            <p className="text-slate-600 text-sm">
         Don't have an account?{" "}
-        <button
+        <a
           onClick={() => setIsSigningIn(false)}
-          className="text-blue-500 hover:text-blue-400 duration-300 font-semibold"
+          className="text-blue-500 cursor-pointer hover:text-blue-400 duration-300 font-semibold"
         >
           Sign up
-        </button>
+        </a>
       </p>
     </form>
   );
