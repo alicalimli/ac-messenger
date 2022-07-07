@@ -42,7 +42,7 @@ const SignIn = ({ setIsSigningIn, setUserToken, setPendingMsg}) => {
         </div>
 
         {errorMsg && (
-          <p className="bg-red-600/10 rounded-xl p-4 border border-red-500 text-red-600">
+          <p className="text-red-600 text-md text-center">
             {errorMsg}
           </p>
         )}

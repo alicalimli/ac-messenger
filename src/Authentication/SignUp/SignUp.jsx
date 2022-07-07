@@ -67,11 +67,13 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
       >
         {" "}
         <label className="text-2xl text-left">Sign Up</label>
+
         {errorMsg && (
-          <p className="bg-red-600/10 rounded-xl p-4 border border-red-500 text-red-600">
+          <p className="text-red-600 text-md text-center">
             {errorMsg}
           </p>
         )}
+
         <InputForm
           label="Email"
           type="email"
