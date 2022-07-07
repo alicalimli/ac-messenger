@@ -66,14 +66,17 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
         className="w-full sm:w-96 flex flex-col gap-4 p-12 rounded-xl bg-white shadow-lg "
       >
         {" "}
-        <label className="text-2xl text-left">Sign Up</label>
-
+        <div className="flex flex-col gap-1">
+          <label className="text-2xl font-semibold text-left text-center">
+            Sign up
+          </label>
+          <label className="text-sm text-slate-500 text-center mb-4 ">
+            Fill in the form
+          </label>
+        </div>
         {errorMsg && (
-          <p className="text-red-600 text-md text-center">
-            {errorMsg}
-          </p>
+          <p className="text-red-600 text-md text-center">{errorMsg}</p>
         )}
-
         <InputForm
           label="Email"
           type="email"
