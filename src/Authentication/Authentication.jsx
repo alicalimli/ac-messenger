@@ -2,7 +2,7 @@ import { useRef, useState, useContext, useEffect, useCallback } from "react";
 
 import { useLocalStorage } from "../Hooks";
 
-import { Login, SignUp } from "./";
+import { SignIn, SignUp } from "./";
 
 import { UserContext } from "../Contexts";
 
@@ -38,7 +38,7 @@ const Authentication = ({ userInfo, setUserInfo }) => {
   return (
     <div>
       {isSigningIn ? (
-        <Login setIsSigningIn={setIsSigningIn} setUserToken={setUserToken} />
+        <SignIn setIsSigningIn={setIsSigningIn} setUserToken={setUserToken} />
       ) : (
         <SignUp setIsSigningIn={setIsSigningIn} setUserToken={setUserToken} />
       )}

@@ -6,7 +6,7 @@ import { UserContext } from "../../Contexts";
 
 import { useLocalStorage, useLogin } from "../../Hooks";
 
-const Login = ({ setIsSigningIn, setUserToken }) => {
+const SignIn = ({ setIsSigningIn, setUserToken }) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const userEmailRef = useRef();
@@ -85,4 +85,4 @@ const Login = ({ setIsSigningIn, setUserToken }) => {
   );
 };
 
-export default Login;
+export default SignIn;
