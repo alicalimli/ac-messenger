@@ -6,7 +6,7 @@ import { useLocalStorage } from "../../Hooks/";
 
 import { BiLogOut } from "react-icons/bi";
 
-const Sidebar = ({setUserInfo}) => {
+const Sidebar = ({userInfo, setUserInfo}) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useContext(UserContext);
@@ -33,8 +33,8 @@ const Sidebar = ({setUserInfo}) => {
         <div className="flex gap-2 mt-auto">
           <div className="p-4 w-12 bg-blue-600 rounded-full"></div>
           <div className="flex flex-col">
-            <p className="text-lg text-black font-semibold">{user.userName}</p>
-            <p className="text-sm text-slate-500">{user.userEmail}</p>
+            <p className="text-lg text-black font-semibold">{userInfo.username}</p>
+            <p className="text-sm text-slate-500">{userInfo.email}</p>
           </div>
         </div>
         <button

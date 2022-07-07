@@ -9,7 +9,7 @@ import { useLocalStorage } from "../../Hooks";
 const Home = ({userInfo, setUserInfo}) => {
   return (
     <>
-      <Sidebar setUserInfo={setUserInfo}/>
+      <Sidebar userInfo={userInfo} setUserInfo={setUserInfo}/>
       <Conversation />
     </>
   );
