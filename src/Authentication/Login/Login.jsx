@@ -36,7 +36,6 @@ const Login = ({setIsSigningIn}) => {
       if (!loginResults.access_token)
         throw new Error("Incorrect email or password");
 
-      authenticate();
     } catch (error) {
       setErrorMsg(error.message);
 

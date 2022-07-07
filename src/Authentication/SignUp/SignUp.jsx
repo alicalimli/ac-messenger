@@ -1,7 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
-
 import { InputForm } from "../../Components";
 
 import { UserContext } from "../../Contexts";
@@ -17,9 +15,6 @@ const SignUp = ({setIsSigningIn}) => {
 
   const [userInfo] = useLocalStorage("userInfo", {});
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
-
-  const navigate = useNavigate();
-  const authenticate = useAuth();
 
   const handleSignUp = async (e) => {
     try {
@@ -69,7 +64,6 @@ const SignUp = ({setIsSigningIn}) => {
       if (!loginResults.access_token)
         throw new Error("Incorrect email or password");
 
-      authenticate();
     } catch (error) {
       setErrorMsg(error.message);
 
