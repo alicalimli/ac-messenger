@@ -28,6 +28,7 @@ const useGenerateToken = () => {
       } catch (error) {
         console.error(error);
         setErrorMsg(error.message);
+        setPendingMsg('');
       }
     }
   );

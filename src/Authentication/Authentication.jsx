@@ -33,6 +33,7 @@ const Authentication = ({ userInfo, setUserInfo }) => {
       setPendingMsg("");
     } catch (error) {
       console.error(error);
+      setPendingMsg('')
     }
   });
 

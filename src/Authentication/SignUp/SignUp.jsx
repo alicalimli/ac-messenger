@@ -55,6 +55,7 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
       );
     } catch (error) {
       setErrorMsg(error.message);
+      setPendingMsg('');
       console.error(error);
     }
   };
