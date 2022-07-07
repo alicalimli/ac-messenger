@@ -40,7 +40,7 @@ const Authentication = ({userInfo, setUserInfo}) => {
 			{isSigningIn ? (
 				<Login setIsSigningIn={setIsSigningIn} setUserToken={setUserToken}/>
 			) : (
-				<SignUp setIsSigningIn={setIsSigningIn} />
+				<SignUp setIsSigningIn={setIsSigningIn} setUserToken={setUserToken} />
 			)}
 		</div>
 	);

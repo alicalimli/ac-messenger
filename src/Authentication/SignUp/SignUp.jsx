@@ -6,15 +6,12 @@ import { UserContext } from "../../Contexts";
 
 import { useLocalStorage, useAuth } from "../../Hooks";
 
-const SignUp = ({setIsSigningIn}) => {
+const SignUp = ({setIsSigningIn, setUserToken}) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [userPass, setUserPass] = useState("");
-
-  const [userInfo] = useLocalStorage("userInfo", {});
-  const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
   const handleSignUp = async (e) => {
     try {
