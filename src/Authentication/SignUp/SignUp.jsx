@@ -63,11 +63,8 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
   };
 
   return (
-    <motion.form
+    <form
       onSubmit={handleSignUp}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.25 }}
-      initial={{ opacity: 0, x: 100 }}
       className="flex flex-col gap-4"
     >
       {" "}
@@ -123,7 +120,7 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
           Login
         </button>
       </p>
-    </motion.form>
+    </form>
   );
 };
 

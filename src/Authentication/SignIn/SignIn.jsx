@@ -1,5 +1,7 @@
 import { useRef, useEffect, useState, useContext } from "react";
 
+import { motion } from "framer-motion";
+
 import { InputForm } from "../../Components";
 
 import { UserContext } from "../../Contexts";
@@ -27,7 +29,10 @@ const SignIn = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
   };
 
   return (
-    <form onSubmit={handleLogin} className="flex flex-col gap-4 ">
+    <form
+      onSubmit={handleLogin}
+      className="flex flex-col gap-4 "
+    >
       <div className="flex flex-col gap-1">
         <label className="text-2xl font-semibold text-left text-center">
           Sign in

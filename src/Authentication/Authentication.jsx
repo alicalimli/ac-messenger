@@ -1,5 +1,7 @@
 import { useRef, useState, useContext, useEffect, useCallback } from "react";
 
+import { AnimatePresence, motion } from "framer-motion";
+
 import { useLocalStorage } from "../Hooks";
 
 import { SignIn, SignUp } from "./";
@@ -44,19 +46,36 @@ const Authentication = ({ userInfo, setUserInfo }) => {
   return (
     <div className="m-auto mt-8 w-full sm:w-96 p-12 rounded-xl bg-white shadow-lg">
       {pendingMsg && <h1>{pendingMsg}...</h1>}
-      {isSigningIn ? (
-        <SignIn
-          setIsSigningIn={setIsSigningIn}
-          setPendingMsg={setPendingMsg}
-          setUserToken={setUserToken}
-        />
-      ) : (
-        <SignUp
-          setIsSigningIn={setIsSigningIn}
-          setPendingMsg={setPendingMsg}
-          setUserToken={setUserToken}
-        />
-      )}
+      <AnimatePresence>
+        {isSigningIn ? (
+          <motion.div
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.25 }}
+            exit={{ opacity: 0, x: 100 }}
+            initial={{ opacity: 0, x: 100 }}
+          >
+            {" "}
+            <SignIn
+              setIsSigningIn={setIsSigningIn}
+              setPendingMsg={setPendingMsg}
+              setUserToken={setUserToken}
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.25 }}
+            exit={{ opacity: 0, x: 100 }}
+            initial={{ opacity: 0, x: 100 }}
+          >
+            <SignUp
+              setIsSigningIn={setIsSigningIn}
+              setPendingMsg={setPendingMsg}
+              setUserToken={setUserToken}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
