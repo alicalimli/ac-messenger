@@ -4,10 +4,13 @@ import { useLocalStorage } from "../Hooks";
 
 import { Login, SignUp } from "./";
 
-const Authentication = () => {
+import {UserContext} from '../Contexts'
+
+const Authentication = ({userInfo, setUserInfo}) => {
 	const [isSigningIn, setIsSigningIn] = useState(true);
 	const [userToken, setUserToken] = useLocalStorage("userToken", "");
-	const [userInfo, setUserInfo] = useLocalStorage("userInfo", {});
+
+	const [user, setUser] = useContext(UserContext)
 
 	const authenticate = useCallback(async () => {
 		try {
@@ -23,12 +26,11 @@ const Authentication = () => {
 
 			const getUserInfoRes = await getUserInfo.json();
 
-			setUser(Object.assign(user, getUserInfoRes.user));
-
 			console.log("fetching data", userToken);
 
 			// Saves data's to local storage
-			setUserInfo(Object.assign(userInfo, getUserInfoRes.user));
+			setUserInfo(getUserInfoRes.user);
+			console.log(userInfo)
 		} catch (error) {
 			console.error(error);
 		}
@@ -36,12 +38,12 @@ const Authentication = () => {
 
 	useEffect(()=>{
 		authenticate();
-	}, [userToken])
+	}, [userToken,setUserToken])
 
 	return (
 		<div>
 			{isSigningIn ? (
-				<Login setIsSigningIn={setIsSigningIn} />
+				<Login setIsSigningIn={setIsSigningIn} setUserToken={setUserToken}/>
 			) : (
 				<SignUp setIsSigningIn={setIsSigningIn} />
 			)}

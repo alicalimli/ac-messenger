@@ -6,13 +6,11 @@ import { UserContext } from "../../Contexts";
 
 import { useLocalStorage } from "../../Hooks";
 
-const Login = ({setIsSigningIn}) => {
+const Login = ({setIsSigningIn, setUserToken}) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const userEmailRef = useRef();
   const userPassRef = useRef();
-
-  const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
   const handleLogin = async (e) => {
     try {
@@ -31,7 +29,6 @@ const Login = ({setIsSigningIn}) => {
       const loginResults = await loginUser.json();
 
       setUserToken(loginResults.access_token);
-      console.log(userToken)
 
       if (!loginResults.access_token)
         throw new Error("Incorrect email or password");

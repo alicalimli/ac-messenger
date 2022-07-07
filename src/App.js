@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import React, { StrictMode } from "react";
+import React, { StrictMode, useEffect, useState} from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import { Authentication } from "./Authentication";
@@ -10,13 +10,14 @@ import { UserContextProvider } from "./Contexts";
 import {useLocalStorage} from './Hooks'
 
 const App = () => {
-  const [userInfo, setUserInfo] = useLocalStorage("userInfo", {});
-  console.log(userInfo)
+  const [userInfo, setUserInfo] = useLocalStorage('userInfo', null);
+
   return (
     <StrictMode>
       <UserContextProvider>
+      {console.log("asds")}
         <BrowserRouter>
-          {Object.entries(userInfo).length ? <Home /> : <Authentication />}
+          {userInfo ? <Home /> : <Authentication userInfo={userInfo} setUserInfo={setUserInfo} />}
         </BrowserRouter>
       </UserContextProvider>
     </StrictMode>
