@@ -16,7 +16,7 @@ const App = () => {
     <StrictMode>
       <UserContextProvider>
         <BrowserRouter>
-          {userInfo ? <Home /> : <Authentication />}
+          {Object.entries(userInfo).length ? <Home /> : <Authentication />}
         </BrowserRouter>
       </UserContextProvider>
     </StrictMode>
