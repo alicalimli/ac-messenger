@@ -6,7 +6,7 @@ import { UserContext } from "../../Contexts";
 
 import { useLocalStorage, useGenerateToken } from "../../Hooks";
 
-const SignIn = ({ setIsSigningIn, setUserToken }) => {
+const SignIn = ({ setIsSigningIn, setUserToken, setPendingMsg}) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const userEmailRef = useRef();
@@ -21,7 +21,8 @@ const SignIn = ({ setIsSigningIn, setUserToken }) => {
       setUserToken,
       userEmailRef.current.value,
       userPassRef.current.value,
-      setErrorMsg
+      setErrorMsg,
+      setPendingMsg,
     );
   };
 

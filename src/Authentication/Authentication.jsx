@@ -8,11 +8,14 @@ import { UserContext } from "../Contexts";
 
 const Authentication = ({ userInfo, setUserInfo }) => {
   const [isSigningIn, setIsSigningIn] = useState(true);
+  const [pendingMsg, setPendingMsg] = useState("")
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
   const authenticate = useCallback(async () => {
     try {
       if (!userToken) return;
+
+      setPendingMsg("Authenticating")
 
       // GETTING USER'S INFO FROM THE API
       const getUserInfo = await fetch("http://127.0.0.1:8000/api/v1/users/me", {
@@ -26,6 +29,8 @@ const Authentication = ({ userInfo, setUserInfo }) => {
 
       // Saves data's to local storage
       setUserInfo(getUserInfoRes.user);
+
+      setPendingMsg("");
     } catch (error) {
       console.error(error);
     }
@@ -37,8 +42,13 @@ const Authentication = ({ userInfo, setUserInfo }) => {
 
   return (
     <div>
+      {pendingMsg && <h1>{pendingMsg}...</h1>}
       {isSigningIn ? (
-        <SignIn setIsSigningIn={setIsSigningIn} setUserToken={setUserToken} />
+        <SignIn
+          setIsSigningIn={setIsSigningIn}
+          setPendingMsg={setPendingMsg}
+          setUserToken={setUserToken}
+        />
       ) : (
         <SignUp setIsSigningIn={setIsSigningIn} setUserToken={setUserToken} />
       )}

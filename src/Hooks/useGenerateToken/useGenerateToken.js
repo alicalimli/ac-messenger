@@ -2,8 +2,10 @@ import React, { useCallback } from "react";
 
 const useGenerateToken = () => {
   const generateToken = useCallback(
-    async (setToken, email, pass, setErrorMsg) => {
+    async (setToken, email, pass, setErrorMsg, setPendingMsg) => {
       try {
+        setPendingMsg('Generating Token')
+
         let formData = new FormData();
         formData.append("username", email);
         formData.append("password", pass);
