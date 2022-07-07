@@ -4,7 +4,7 @@ import { InputForm } from "../../Components";
 
 import { UserContext } from "../../Contexts";
 
-import { useLocalStorage } from "../../Hooks";
+import { useLocalStorage, useLogin } from "../../Hooks";
 
 const Login = ({setIsSigningIn, setUserToken}) => {
   const [errorMsg, setErrorMsg] = useState("");
@@ -12,27 +12,13 @@ const Login = ({setIsSigningIn, setUserToken}) => {
   const userEmailRef = useRef();
   const userPassRef = useRef();
 
+  const makeLogin = useLogin();
+
   const handleLogin = async (e) => {
     try {
       e.preventDefault();
 
-      let loginFormData = new FormData();
-      loginFormData.append("username", userEmailRef.current.value);
-      loginFormData.append("password", userPassRef.current.value);
-
-      // Request login from the API
-      const loginUser = await fetch("http://127.0.0.1:8000/api/v1/auth/login", {
-        method: "POST",
-        body: loginFormData,
-      });
-
-      const loginResults = await loginUser.json();
-
-      setUserToken(loginResults.access_token);
-
-      if (!loginResults.access_token)
-        throw new Error("Incorrect email or password");
-
+      makeLogin(setUserToken, userEmailRef.current.value, userPassRef.current.value);
     } catch (error) {
       setErrorMsg(error.message);
 

@@ -1,5 +1,5 @@
 import useLocalStorage from "./useLocalStorage/useLocalStorage";
-import useAuth from "./useAuth/useAuth";
+import useLogin from "./useLogin/useLogin";
 
 
-export { useLocalStorage, useAuth };
+export { useLocalStorage, useLogin };
