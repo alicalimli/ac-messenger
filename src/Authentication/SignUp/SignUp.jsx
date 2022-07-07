@@ -6,7 +6,7 @@ import { UserContext } from "../../Contexts";
 
 import { useLocalStorage, useAuth } from "../../Hooks";
 
-const SignUp = ({setIsSigningIn, setUserToken}) => {
+const SignUp = ({ setIsSigningIn, setUserToken }) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
@@ -60,7 +60,6 @@ const SignUp = ({setIsSigningIn, setUserToken}) => {
 
       if (!loginResults.access_token)
         throw new Error("Incorrect email or password");
-
     } catch (error) {
       setErrorMsg(error.message);
 
@@ -117,7 +116,7 @@ const SignUp = ({setIsSigningIn, setUserToken}) => {
         <p className="text-slate-600 text-sm">
           Already have an account?{" "}
           <button
-            onClick={()=> setIsSigningIn(true)}
+            onClick={() => setIsSigningIn(true)}
             className="text-blue-500 hover:text-blue-400 duration-300 font-semibold"
           >
             Login

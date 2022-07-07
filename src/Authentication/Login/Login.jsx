@@ -6,7 +6,7 @@ import { UserContext } from "../../Contexts";
 
 import { useLocalStorage, useLogin } from "../../Hooks";
 
-const Login = ({setIsSigningIn, setUserToken}) => {
+const Login = ({ setIsSigningIn, setUserToken }) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const userEmailRef = useRef();
@@ -18,7 +18,11 @@ const Login = ({setIsSigningIn, setUserToken}) => {
     try {
       e.preventDefault();
 
-      makeLogin(setUserToken, userEmailRef.current.value, userPassRef.current.value);
+      makeLogin(
+        setUserToken,
+        userEmailRef.current.value,
+        userPassRef.current.value
+      );
     } catch (error) {
       setErrorMsg(error.message);
 
@@ -76,7 +80,7 @@ const Login = ({setIsSigningIn, setUserToken}) => {
         <p className="text-slate-600 text-sm">
           Don't have an account?{" "}
           <button
-            onClick={()=> setIsSigningIn(false)}
+            onClick={() => setIsSigningIn(false)}
             className="text-blue-500 hover:text-blue-400 duration-300 font-semibold"
           >
             Sign up
