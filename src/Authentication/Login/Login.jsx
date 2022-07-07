@@ -15,20 +15,14 @@ const Login = ({ setIsSigningIn, setUserToken }) => {
   const makeLogin = useLogin();
 
   const handleLogin = async (e) => {
-    try {
-      e.preventDefault();
+    e.preventDefault();
 
-      makeLogin(
-        setUserToken,
-        userEmailRef.current.value,
-        userPassRef.current.value
-      );
-    } catch (error) {
-      setErrorMsg(error.message);
-
-      console.error(error);
-      const errorTimeout = setTimeout(() => setErrorMsg(null), 5000);
-    }
+    makeLogin(
+      setUserToken,
+      userEmailRef.current.value,
+      userPassRef.current.value,
+      setErrorMsg
+    );
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 
 const useLogin = () => {
-  const makeLogin = useCallback(async (setToken, email, pass) => {
+  const makeLogin = useCallback(async (setToken, email, pass, setErrorMsg) => {
     try {
       let formData = new FormData();
       formData.append("username", email);
@@ -15,13 +15,14 @@ const useLogin = () => {
 
       const loginResults = await loginUser.json();
 
-      setToken(loginResults.access_token);
+      if (!loginResults.access_token) throw new Error(loginResults.detail);
 
-      if (!loginResults.access_token)
-        throw new Error("Incorrect email or password");
+      setToken(loginResults.access_token);
     } catch (error) {
-      console.error(error);
-      throw error;
+      console.error(error.message);
+      setErrorMsg(error.message)
+
+      errorTimeout = setTimeout(() => setErrorMsg(null), 5000);
     }
   });
 
