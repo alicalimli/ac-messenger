@@ -13,13 +13,13 @@ const useGenerateToken = () => {
         body: formData,
       });
 
-      const fetchTokenResults = await createToken.json();
+      const fetchTokenResults = await fetchToken.json();
 
       if (!fetchTokenResults.access_token) throw new Error(fetchTokenResults.detail);
 
       setToken(fetchTokenResults.access_token);
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
       setErrorMsg(error.message)
 
       errorTimeout = setTimeout(() => setErrorMsg(null), 5000);

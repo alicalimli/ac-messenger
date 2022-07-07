@@ -4,7 +4,7 @@ import { InputForm } from "../../Components";
 
 import { UserContext } from "../../Contexts";
 
-import { useLocalStorage, useLogin } from "../../Hooks";
+import { useLocalStorage, useGenerateToken } from "../../Hooks";
 
 const SignUp = ({ setIsSigningIn, setUserToken }) => {
   const [errorMsg, setErrorMsg] = useState("");
@@ -13,7 +13,7 @@ const SignUp = ({ setIsSigningIn, setUserToken }) => {
   const [userName, setUserName] = useState("");
   const [userPass, setUserPass] = useState("");
 
-  const makeLogin = useLogin();
+  const generateToken = useGenerateToken();
 
   const handleSignUp = async (e) => {
     try {
@@ -46,7 +46,7 @@ const SignUp = ({ setIsSigningIn, setUserToken }) => {
       if (!createUserRes.id) throw new Error(createUserRes.detail[0].msg);
 
       // Login user
-      makeLogin(setUserToken, userEmail, userPass, setErrorMsg);
+      generateToken(setUserToken, userEmail, userPass, setErrorMsg);
     } catch (error) {
       setErrorMsg(error.message);
 

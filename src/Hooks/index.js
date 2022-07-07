@@ -1,4 +1,4 @@
 import useLocalStorage from "./useLocalStorage/useLocalStorage";
-import useLogin from "./useLogin/useLogin";
+import useGenerateToken from "./useGenerateToken/useGenerateToken";
 
-export { useLocalStorage, useLogin };
+export { useLocalStorage, useGenerateToken };

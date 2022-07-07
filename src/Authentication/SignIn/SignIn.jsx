@@ -4,7 +4,7 @@ import { InputForm } from "../../Components";
 
 import { UserContext } from "../../Contexts";
 
-import { useLocalStorage, useLogin } from "../../Hooks";
+import { useLocalStorage, useGenerateToken } from "../../Hooks";
 
 const SignIn = ({ setIsSigningIn, setUserToken }) => {
   const [errorMsg, setErrorMsg] = useState("");
@@ -12,12 +12,12 @@ const SignIn = ({ setIsSigningIn, setUserToken }) => {
   const userEmailRef = useRef();
   const userPassRef = useRef();
 
-  const makeLogin = useLogin();
+  const generateToken = useGenerateToken();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    makeLogin(
+    generateToken(
       setUserToken,
       userEmailRef.current.value,
       userPassRef.current.value,
