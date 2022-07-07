@@ -10,6 +10,7 @@ import { useLocalStorage, useGenerateToken } from "../../Hooks";
 
 const SignIn = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
   const [errorMsg, setErrorMsg] = useState("");
+  const [isRemembering, setIsRemembering] = useState(false);
 
   const userEmailRef = useRef();
   const userPassRef = useRef();
@@ -58,15 +59,10 @@ const SignIn = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
         placeHolder="*********"
         inputRef={userPassRef}
       />
-      <div className="flex flex-wrap gap-2 items-center">
-        <input className="w-4" type="checkbox" />
-        <label htmlFor="check-remember" className=" text-slate-500">
+      <a onClick={()=>setIsRemembering(!isRemembering)} className="flex flex-wrap gap-2 items-center hover:cursor-pointer hover:bg-slate-500/10 p-2 px-4 rounded-xl text-slate-500 duration-200">
+        <input className="w-4" type="checkbox" checked={isRemembering} disabled/>
           Remember me
-        </label>
-        <a href="#" className="ml-0 md:ml-auto text-blue-500 ">
-          Forgot password?
-        </a>
-      </div>
+      </a>
 
       <button className="bg-blue-500 hover:bg-blue-400 duration-300 rounded-xl p-2 px-4 text-white">
         Sign in

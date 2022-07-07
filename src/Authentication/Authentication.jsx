@@ -51,7 +51,6 @@ const Authentication = ({ userInfo, setUserInfo }) => {
           <motion.div
             animate={{ opacity: 1 }}
             transition={{ duration: 0.2 }}
-            exit={{ opacity: 0}}
             initial={{ opacity: 0 }}
           >
             {" "}
@@ -69,7 +68,6 @@ const Authentication = ({ userInfo, setUserInfo }) => {
           <motion.div
             animate={{ opacity: 1 }}
             transition={{ duration: 0.2 }}
-            exit={{ opacity: 0}}
             initial={{ opacity: 0 }}
           >
             <SignUp
