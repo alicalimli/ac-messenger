@@ -8,7 +8,7 @@ import { UserContext } from "../../Contexts";
 
 import { useLocalStorage, useAuth } from "../../Hooks";
 
-const SignUp = () => {
+const SignUp = ({setIsSigningIn}) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
@@ -125,12 +125,12 @@ const SignUp = () => {
         </button>
         <p className="text-slate-600 text-sm">
           Already have an account?{" "}
-          <Link
-            to="/"
+          <button
+            onClick={()=> setIsSigningIn(true)}
             className="text-blue-500 hover:text-blue-400 duration-300 font-semibold"
           >
             Login
-          </Link>
+          </button>
         </p>
       </form>
     </div>
