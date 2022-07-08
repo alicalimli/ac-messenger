@@ -14,7 +14,7 @@ const InputForm = ({
       {label}
       {isControlled ? (
         <input
-          className="p-2 px-4 rounded-xl border peer invalid:border-red-600 outline outline-2 outline-blue-600/0 duration-200 outline-blue-600 hover:outline-blue-600"
+          className="p-2 px-4 rounded-xl border peer outline outline-2 invalid:outline-red-500 outline-blue-500/0 duration-200 outline-blue-500 hover:outline-blue-500"
           type={type}
           value={state}
           ref={inputRef || null}
@@ -26,7 +26,7 @@ const InputForm = ({
         />
       ) : (
         <input
-          className="p-2 px-4 rounded-xl border peer outline outline-2 outline-blue-600/0 duration-200 outline-blue-600 hover:outline-blue-600"
+          className="p-2 px-4 rounded-xl border peer outline outline-2 outline-blue-500/0 duration-200 outline-blue-500 hover:outline-blue-500"
           type={type}
           ref={inputRef}
           minLength={minLength}
