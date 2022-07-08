@@ -44,7 +44,7 @@ const Authentication = ({ userInfo, setUserInfo }) => {
   }, [userToken, setUserToken]);
 
   return (
-    <div className="m-auto mt-8 w-full sm:w-96 p-12 rounded-xl bg-white shadow-lg">
+    <div className="m-auto mt-8 w-[90%] sm:w-96 p-12 rounded-xl bg-white shadow-lg">
       {pendingMsg && <h1>{pendingMsg}...</h1>}
       <AnimatePresence>
         {isSigningIn && (
