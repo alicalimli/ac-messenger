@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 
 const Toast = ({ children }) => {
   return createPortal(
-    <div className="toast-container"> {children} </div>,
+    <div className="bg-white fixed top-0 left-1/2 -translate-x-1/2 flex items-center justify-center z-10 shadow-md"> {children} </div>,
     document.getElementById("toast")
   );
 };
