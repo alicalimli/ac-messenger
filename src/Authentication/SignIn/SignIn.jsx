@@ -60,7 +60,7 @@ const SignIn = ({ setIsSigningIn, setUserToken, setPendingMsg, setKeepSignedIn, 
       />
       <a onClick={()=>setKeepSignedIn(!keepSignedIn)} className="flex flex-wrap gap-2 items-center hover:cursor-pointer hover:bg-slate-500/10 p-2 px-4 rounded-xl text-slate-500 duration-200">
         <input className="w-4" type="checkbox" checked={keepSignedIn} disabled/>
-          Remember me
+          Keep me signed in
       </a>
 
       <button className="bg-blue-500 hover:bg-blue-400 duration-300 rounded-xl p-2 px-4 text-white">
