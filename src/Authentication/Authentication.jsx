@@ -4,6 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { useLocalStorage } from "../Hooks";
 
+import {Toast} from '../Components'
+
 import { SignIn, SignUp } from "./";
 
 import { UserContext } from "../Contexts";
@@ -50,7 +52,7 @@ const Authentication = ({
 
   return (
     <div className="m-auto mt-8 w-[90%] sm:w-96 p-12 rounded-xl bg-white shadow-lg">
-      {pendingMsg && <h1>{pendingMsg}...</h1>}
+      {pendingMsg && (<Toast><h1>{pendingMsg}...</h1></Toast>)}
       <AnimatePresence>
         {isSigningIn && (
           <motion.div
