@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 
 import { motion } from "framer-motion";
 
@@ -14,12 +14,21 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [userPass, setUserPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+
+  const confirmPassRef = useRef();
 
   const generateToken = useGenerateToken();
 
   const handleSignUp = async (e) => {
     try {
       e.preventDefault();
+
+      const confirmPass = confirmPassRef.current;
+
+      if (confirmPass.value !== userPass) {
+        throw new Error("Passwords doesn't match.")
+      }
 
       setPendingMsg("Creating User");
 
@@ -63,10 +72,7 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSignUp}
-      className="flex flex-col gap-4"
-    >
+    <form onSubmit={handleSignUp} className="flex flex-col gap-4">
       {" "}
       <div className="flex flex-col gap-1">
         <label className="text-2xl font-semibold text-left text-center">
@@ -107,6 +113,14 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
         isControlled="true"
         state={userPass}
         setState={setUserPass}
+      />
+      <InputForm
+        label="Confirm Password"
+        type="password"
+        placeHolder="*********"
+        inputRef={confirmPassRef}
+        minLength="8"
+        invalidLabel=""
       />
       <button className="bg-blue-500 hover:bg-blue-400 duration-300 rounded-xl p-2 px-4 text-white">
         Sign Up

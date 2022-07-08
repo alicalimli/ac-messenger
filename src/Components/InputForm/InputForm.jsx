@@ -29,6 +29,7 @@ const InputForm = ({
           className="p-2 px-4 rounded-xl border  peer"
           type={type}
           ref={inputRef}
+          minLength={minLength}
           placeholder={placeHolder}
           id={label}
         />
