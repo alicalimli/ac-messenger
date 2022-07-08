@@ -8,7 +8,7 @@ import { SignIn, SignUp } from "./";
 
 import { UserContext } from "../Contexts";
 
-const Authentication = ({ userInfo, setUserInfo }) => {
+const Authentication = ({ userInfo, setUserInfo, setKeepSignedIn, keepSignedIn }) => {
   const [isSigningIn, setIsSigningIn] = useState(true);
   const [pendingMsg, setPendingMsg] = useState("");
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
@@ -58,6 +58,8 @@ const Authentication = ({ userInfo, setUserInfo }) => {
               setIsSigningIn={setIsSigningIn}
               setPendingMsg={setPendingMsg}
               setUserToken={setUserToken}
+              setKeepSignedIn={setKeepSignedIn}
+              keepSignedIn={keepSignedIn}
             />
           </motion.div>
         )}

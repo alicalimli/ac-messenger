@@ -8,9 +8,8 @@ import { UserContext } from "../../Contexts";
 
 import { useLocalStorage, useGenerateToken } from "../../Hooks";
 
-const SignIn = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
+const SignIn = ({ setIsSigningIn, setUserToken, setPendingMsg, setKeepSignedIn, keepSignedIn }) => {
   const [errorMsg, setErrorMsg] = useState("");
-  const [isRemembering, setIsRemembering] = useState(false);
 
   const userEmailRef = useRef();
   const userPassRef = useRef();
@@ -59,8 +58,8 @@ const SignIn = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
         placeHolder="*********"
         inputRef={userPassRef}
       />
-      <a onClick={()=>setIsRemembering(!isRemembering)} className="flex flex-wrap gap-2 items-center hover:cursor-pointer hover:bg-slate-500/10 p-2 px-4 rounded-xl text-slate-500 duration-200">
-        <input className="w-4" type="checkbox" checked={isRemembering} disabled/>
+      <a onClick={()=>setKeepSignedIn(!keepSignedIn)} className="flex flex-wrap gap-2 items-center hover:cursor-pointer hover:bg-slate-500/10 p-2 px-4 rounded-xl text-slate-500 duration-200">
+        <input className="w-4" type="checkbox" checked={keepSignedIn} disabled/>
           Remember me
       </a>
 

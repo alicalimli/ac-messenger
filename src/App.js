@@ -10,7 +10,18 @@ import { UserContextProvider } from "./Contexts";
 import { useLocalStorage } from "./Hooks";
 
 const App = () => {
+  const [keepSignedIn, setKeepSignedIn] = useState(false)
+
   const [userInfo, setUserInfo] = useLocalStorage("userInfo", null);
+  const [userToken,setUserToken] = useLocalStorage('userToken', '');
+
+  // Clear user data in local storage if keep signed in is false
+  window.onbeforeunload = () => {
+    if(!keepSignedIn){
+      setUserInfo(null)
+      setUserToken('')
+    }
+  }
 
   return (
     <StrictMode>
@@ -19,7 +30,7 @@ const App = () => {
           {userInfo ? (
             <Home userInfo={userInfo} setUserInfo={setUserInfo} />
           ) : (
-            <Authentication userInfo={userInfo} setUserInfo={setUserInfo} />
+            <Authentication keepSignedIn={keepSignedIn} setKeepSignedIn={setKeepSignedIn} userInfo={userInfo} setUserInfo={setUserInfo} />
           )}
         </BrowserRouter>
       </UserContextProvider>
