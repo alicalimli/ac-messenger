@@ -27,7 +27,7 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
       const confirmPass = confirmPassRef.current;
 
       if (confirmPass.value !== userPass) {
-        throw new Error("Passwords doesn't match.")
+        throw new Error("Passwords doesn't match.");
       }
 
       setPendingMsg("Creating User");
