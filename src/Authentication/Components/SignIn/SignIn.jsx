@@ -20,7 +20,7 @@ const SignIn = ({
   const userEmailRef = useRef();
   const userPassRef = useRef();
 
-  const { makeLogin, pendingMsg } = useAuth();
+  const { makeLogin } = useAuth(setPendingMsg);
 
   const handleLogin = async (e) => {
     e.preventDefault();

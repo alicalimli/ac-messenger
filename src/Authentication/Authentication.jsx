@@ -4,8 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { useLocalStorage, useAuth } from "../Hooks";
 
-import { Toast } from "../Components";
-
 import { SignIn, SignUp } from "./Components";
 
 import { UserContext } from "../Contexts";
@@ -13,24 +11,19 @@ import { UserContext } from "../Contexts";
 const Authentication = ({
   setKeepSignedIn,
   keepSignedIn,
+  setPendingMsg
 }) => {
   const [isSigningIn, setIsSigningIn] = useState(true);
-  const [pendingMsg, setPendingMsg] = useState("");
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
-  const { authenticate } = useAuth();
+  const { authenticate } = useAuth(setPendingMsg);
 
   useEffect(() => {
-    console.log(userToken)
     authenticate(userToken);
   }, []);
 
   return (
     <div className="m-auto mt-8 w-[90%] sm:w-96 p-12 rounded-xl bg-white shadow-lg">
-      <Toast message={pendingMsg}>
-        <h1>{pendingMsg}...</h1>
-      </Toast>
-
       <AnimatePresence>
         {isSigningIn && (
           <motion.div
@@ -41,8 +34,8 @@ const Authentication = ({
             {" "}
             <SignIn
               setIsSigningIn={setIsSigningIn}
-              setPendingMsg={setPendingMsg}
               setKeepSignedIn={setKeepSignedIn}
+              setPendingMsg={setPendingMsg}
               keepSignedIn={keepSignedIn}
             />
           </motion.div>

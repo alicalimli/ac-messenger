@@ -5,46 +5,58 @@ import { BrowserRouter } from "react-router-dom";
 import { Authentication } from "./Authentication";
 import { Home } from "./Containers";
 
+import { Toast } from "./Components";
+
 import { UserContextProvider, UserContext, UserTokenContext } from "./Contexts";
 
 import { useLocalStorage } from "./Hooks";
 
 const App = () => {
-  const [keepSignedIn, setKeepSignedIn] = useLocalStorage('keepSignedIn', false);
+  const [pendingMsg, setPendingMsg] = useState("");
+
+  const [keepSignedIn, setKeepSignedIn] = useLocalStorage(
+    "keepSignedIn",
+    false
+  );
 
   const [userInfo, setUserInfo] = useContext(UserContext);
-  const [userToken,setUserToken] = useContext(UserTokenContext)
+  const [userToken, setUserToken] = useContext(UserTokenContext);
 
-  const [savedUserInfo, setSavedUserInfo] = useLocalStorage('userInfo', null)
+  const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
   const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");
 
   // Saves and clears userData when user leaves the site.
   window.onbeforeunload = () => {
     if (keepSignedIn) {
       setSavedUserToken(userToken);
-      setSavedUserInfo(userInfo)
+      setSavedUserInfo(userInfo);
     } else {
       setSavedUserToken("");
-      setSavedUserInfo(null)
+      setSavedUserInfo(null);
     }
   };
 
-  useEffect(()=>{
-    if(keepSignedIn){
+  useEffect(() => {
+    if (keepSignedIn) {
       setUserToken(savedUserToken);
       setUserInfo(savedUserInfo);
     }
-  }, [])
+  }, []);
 
   return (
     <StrictMode>
       <BrowserRouter>
+        <Toast message={pendingMsg}>
+          <h1>{pendingMsg}...</h1>
+        </Toast>
+
         {userInfo ? (
           <Home />
         ) : (
           <Authentication
             keepSignedIn={keepSignedIn}
             setKeepSignedIn={setKeepSignedIn}
+            setPendingMsg={setPendingMsg}
           />
         )}
       </BrowserRouter>

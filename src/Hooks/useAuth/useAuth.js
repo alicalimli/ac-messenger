@@ -4,9 +4,7 @@ import {useGenerateToken, useLocalStorage} from '../'
 
 import {UserContext,UserTokenContext} from '../../Contexts'
 
-const useAuth = () => {
-  const [pendingMsg, setPendingMsg] = useState("");
-
+const useAuth = (setPendingMsg) => {
   const [userInfo, setUserInfo] = useContext(UserContext)
 
   const [userToken,setUserToken] = useContext(UserTokenContext)
@@ -72,16 +70,20 @@ const useAuth = () => {
         body: JSON.stringify(userSignUpData),
       });
 
+      setPendingMsg("User Created")
+
       const createUserRes = await createUser.json();
 
       if (!createUserRes.id) throw new Error(createUserRes.detail[0].msg);
+
+      setPendingMsg('Signing In')
 
       const userToken = await makeLogin(email,password);
 
       return userToken;
   }
 
-  return { makeLogin, createUser, pendingMsg, authenticate };
+  return { makeLogin, createUser, authenticate };
 };
 
 export default useAuth;
