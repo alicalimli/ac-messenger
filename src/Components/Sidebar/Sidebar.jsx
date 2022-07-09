@@ -14,12 +14,16 @@ const Sidebar = () => {
 
   const [savedUserInfo, setSavedUserInfo] = useLocalStorage('userInfo', null);
   const [savedUserToken, setSavedUserToken] = useLocalStorage('userToken', '');
+  const [keepSignedIn, setKeepSignedIn] = useLocalStorage('keepSignedIn', false);
 
   const handleLogOut = () => {
     setUserInfo(null);
     setSavedUserInfo(null);
+
     setUserToken("");
     setSavedUserToken('');
+
+    setKeepSignedIn(false);
   }
 
 
