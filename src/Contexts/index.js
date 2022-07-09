@@ -1,6 +1,7 @@
 import {
   UserContextProvider,
+  UserTokenContext,
   UserContext,
 } from "./UserContextProvider/UserContextProvider";
 
-export { UserContextProvider, UserContext };
+export { UserContextProvider, UserContext, UserTokenContext};

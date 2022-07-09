@@ -5,28 +5,36 @@ import { BrowserRouter } from "react-router-dom";
 import { Authentication } from "./Authentication";
 import { Home } from "./Containers";
 
-import { UserContextProvider, UserContext } from "./Contexts";
+import { UserContextProvider, UserContext, UserTokenContext } from "./Contexts";
 
 import { useLocalStorage } from "./Hooks";
 
 const App = () => {
-  const [keepSignedIn, setKeepSignedIn] = useState(false);
+  const [keepSignedIn, setKeepSignedIn] = useLocalStorage('keepSignedIn', false);
 
   const [userInfo, setUserInfo] = useContext(UserContext);
-  const [savedUserInfo, setSavedUserInfo] = useLocalStorage('userInfo', null)
+  const [userToken,setUserToken] = useContext(UserTokenContext)
 
-  const [userToken, setUserToken] = useLocalStorage("userToken", "");
+  const [savedUserInfo, setSavedUserInfo] = useLocalStorage('userInfo', null)
+  const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");
 
   // Saves and clears userData when user leaves the site.
   window.onbeforeunload = () => {
     if (keepSignedIn) {
-      setUserToken(userToken);
+      setSavedUserToken(userToken);
       setSavedUserInfo(userInfo)
     } else {
-      setUserToken("");
+      setSavedUserToken("");
       setSavedUserInfo(null)
     }
   };
+
+  useEffect(()=>{
+    if(keepSignedIn){
+      setUserToken(savedUserToken);
+      setUserInfo(savedUserInfo);
+    }
+  }, [])
 
   return (
     <StrictMode>

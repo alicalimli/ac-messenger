@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../Contexts";
+import { UserContext, UserTokenContext } from "../../Contexts";
 
 import { useLocalStorage } from "../../Hooks/";
 
@@ -10,13 +10,18 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useContext(UserContext);
+  const [userToken, setUserToken] = useContext(UserTokenContext);
 
-  const [userToken, setUserToken] = useLocalStorage("userToken", "");
+  const [savedUserInfo, setSavedUserInfo] = useLocalStorage('userInfo', null);
+  const [savedUserToken, setSavedUserToken] = useLocalStorage('userToken', '');
 
   const handleLogOut = () => {
     setUserInfo(null);
+    setSavedUserInfo(null);
     setUserToken("");
-  };
+    setSavedUserToken('');
+  }
+
 
   return (
     <nav className="hidden p-4 w-fit bg-gray-300 sm:flex sm:flex-col gap-4">

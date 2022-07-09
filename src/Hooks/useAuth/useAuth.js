@@ -2,14 +2,14 @@ import { useRef, useEffect, useState, useContext} from "react";
 
 import {useGenerateToken, useLocalStorage} from '../'
 
-import {UserContext} from '../../Contexts'
+import {UserContext,UserTokenContext} from '../../Contexts'
 
 const useAuth = () => {
   const [pendingMsg, setPendingMsg] = useState("");
 
   const [userInfo, setUserInfo] = useContext(UserContext)
 
-  const [userToken,setUserToken] = useLocalStorage('userToken', '')
+  const [userToken,setUserToken] = useContext(UserTokenContext)
 
   const generateToken = useGenerateToken();
 
