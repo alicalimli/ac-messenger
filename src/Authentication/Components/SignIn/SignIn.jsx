@@ -6,7 +6,7 @@ import { InputForm } from "../";
 
 import { UserContext } from "../../../Contexts";
 
-import { useLocalStorage, useGenerateToken } from "../../../Hooks";
+import { useLocalStorage, useAuth } from "../../../Hooks";
 
 const SignIn = ({
   setIsSigningIn,
@@ -20,18 +20,14 @@ const SignIn = ({
   const userEmailRef = useRef();
   const userPassRef = useRef();
 
-  const generateToken = useGenerateToken();
+  const { makeLogin, pendingMsg } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    generateToken(
-      setUserToken,
-      userEmailRef.current.value,
-      userPassRef.current.value,
-      setErrorMsg,
-      setPendingMsg
-    );
+    const token = await makeLogin(userEmailRef.current.value, userPassRef.current.value);
+
+    setUserToken(token)
   };
 
   return (
