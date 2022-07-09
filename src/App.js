@@ -18,13 +18,22 @@ const App = () => {
 
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
-  // Clear user data in local storage if keep signed in is false
+  // Saves and clears userData when user leaves the site.
   window.onbeforeunload = () => {
-    if (!keepSignedIn) {
-      setUserInfo(null);
+    if (keepSignedIn) {
+      setSavedUserInfo(userInfo);
+      setUserToken(userToken);
+    } else {
+      setSavedUserInfo(null);
       setUserToken("");
     }
   };
+
+  useEffect(() => {
+    if (savedUserInfo) {
+      setUserInfo(savedUserInfo);
+    }
+  }, []);
 
   return (
     <StrictMode>
