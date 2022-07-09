@@ -2,6 +2,8 @@ import ReactDOM from "react-dom";
 import React, { StrictMode, useEffect, useState, useContext } from "react";
 import { BrowserRouter } from "react-router-dom";
 
+import {AiOutlineLoading3Quarters} from 'react-icons/ai'
+
 import { Authentication } from "./Authentication";
 import { Home } from "./Containers";
 
@@ -47,7 +49,7 @@ const App = () => {
     <StrictMode>
       <BrowserRouter>
         <Toast message={pendingMsg}>
-          <h1>{pendingMsg}...</h1>
+          <h1 className="flex items-center gap-4">{pendingMsg}... <AiOutlineLoading3Quarters className="animate-spin" /></h1>
         </Toast>
 
         {userInfo ? (
