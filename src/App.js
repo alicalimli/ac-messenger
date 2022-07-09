@@ -13,6 +13,7 @@ const App = () => {
   const [keepSignedIn, setKeepSignedIn] = useState(false);
 
   const [userInfo, setUserInfo] = useContext(UserContext);
+  const [savedUserInfo, setSavedUserInfo] = useLocalStorage('userInfo', null)
 
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
@@ -20,28 +21,22 @@ const App = () => {
   window.onbeforeunload = () => {
     if (keepSignedIn) {
       setUserToken(userToken);
+      setSavedUserInfo(userInfo)
     } else {
       setUserToken("");
+      setSavedUserInfo(null)
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      setUserInfo(savedUserInfo);
-    }
-  }, []);
 
   return (
     <StrictMode>
       <BrowserRouter>
         {userInfo ? (
-          <Home userInfo={userInfo} setUserInfo={setUserInfo} />
+          <Home />
         ) : (
           <Authentication
             keepSignedIn={keepSignedIn}
             setKeepSignedIn={setKeepSignedIn}
-            userInfo={userInfo}
-            setUserInfo={setUserInfo}
           />
         )}
       </BrowserRouter>

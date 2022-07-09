@@ -11,8 +11,6 @@ import { SignIn, SignUp } from "./Components";
 import { UserContext } from "../Contexts";
 
 const Authentication = ({
-  userInfo,
-  setUserInfo,
   setKeepSignedIn,
   keepSignedIn,
 }) => {
