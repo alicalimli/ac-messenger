@@ -19,13 +19,13 @@ const SignIn = ({
   const userEmailRef = useRef();
   const userPassRef = useRef();
 
-  const { makeLogin } = useAuth(setPendingMsg, setErrorMsg);
+  const { signInUser } = useAuth(setPendingMsg, setErrorMsg);
 
   const handleLogin = (e) => {
     try{
       e.preventDefault();
 
-      makeLogin(userEmailRef.current.value, userPassRef.current.value);
+      signInUser(userEmailRef.current.value, userPassRef.current.value);
     }catch(error){
       console.log('lalala')
       setErrorMsg(error.message);

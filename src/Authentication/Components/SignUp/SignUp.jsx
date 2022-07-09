@@ -17,7 +17,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn }) => {
 
   const confirmPassRef = useRef();
 
-  const { createUser } = useAuth(setPendingMsg, setErrorMsg);
+  const { signUpUser } = useAuth(setPendingMsg, setErrorMsg);
 
   const handleSignUp = async (e) => {
     try {
@@ -29,7 +29,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn }) => {
         throw new Error("Passwords doesn't match.");
       }
 
-      createUser(userEmail, userName, userPass);
+      signUpUser(userEmail, userName, userPass);
     } catch (error) {
       setErrorMsg(error.message);
       setPendingMsg("");

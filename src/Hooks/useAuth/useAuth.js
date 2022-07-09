@@ -37,7 +37,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
     }
   };
 
-  const makeLogin = async (email, pass) => {
+  const signInUser = async (email, pass) => {
     try {
       setErrorMsg('');
       setPendingMsg("generating token");
@@ -54,7 +54,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
     }
   };
 
-  const createUser = async (email, username, password) => {
+  const signUpUser = async (email, username, password) => {
     try {
       setErrorMsg('');
       setPendingMsg("Creating User");
@@ -88,14 +88,14 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
 
       setPendingMsg("Signing In");
 
-      makeLogin(email, password);
+      signInUser(email, password);
     } catch (error) {
       setErrorMsg(error.message)
       setPendingMsg('');
     }
   };
 
-  return { makeLogin, createUser, authenticate };
+  return { signInUser, signUpUser, authenticate };
 };
 
 export default useAuth;
