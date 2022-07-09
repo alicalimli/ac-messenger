@@ -14,23 +14,19 @@ const App = () => {
 
   const [userInfo, setUserInfo] = useContext(UserContext);
 
-  const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
-
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
   // Saves and clears userData when user leaves the site.
   window.onbeforeunload = () => {
     if (keepSignedIn) {
-      setSavedUserInfo(userInfo);
       setUserToken(userToken);
     } else {
-      setSavedUserInfo(null);
       setUserToken("");
     }
   };
 
   useEffect(() => {
-    if (savedUserInfo) {
+    if (user) {
       setUserInfo(savedUserInfo);
     }
   }, []);

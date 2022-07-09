@@ -6,12 +6,13 @@ import { useLocalStorage } from "../../Hooks/";
 
 import { BiLogOut } from "react-icons/bi";
 
-const Sidebar = ({ userInfo, setUserInfo }) => {
+const Sidebar = () => {
   const navigate = useNavigate();
 
-  const [user, setUser] = useContext(UserContext);
+  const [userInfo, setUserInfo] = useContext(UserContext);
 
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
+
   const handleLogOut = () => {
     setUserInfo(null);
     setUserToken("");
