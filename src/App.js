@@ -1,17 +1,18 @@
+import React from 'react'
 import ReactDOM from "react-dom";
-import React, { StrictMode, useEffect, useState, useContext } from "react";
+
+import { StrictMode, useEffect, useState, useContext } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import { Authentication } from "./Authentication";
+import { useLocalStorage } from "./Hooks";
 import { Home } from "./Containers";
-
 import { Toast } from "./Components";
 
 import { UserContextProvider, UserContext, UserTokenContext } from "./Contexts";
 
-import { useLocalStorage } from "./Hooks";
 
 const App = () => {
   const [pendingMsg, setPendingMsg] = useState("");
