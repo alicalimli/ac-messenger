@@ -2,11 +2,11 @@ import { useRef, useEffect, useState, useContext } from "react";
 
 import { motion } from "framer-motion";
 
-import { InputForm } from "../../Components";
+import { InputForm } from "./";
 
-import { UserContext } from "../../Contexts";
+import { UserContext } from "../../../Contexts";
 
-import { useLocalStorage, useGenerateToken } from "../../Hooks";
+import { useLocalStorage, useGenerateToken } from "../../../Hooks";
 
 const SignIn = ({
   setIsSigningIn,
