@@ -1,32 +1,27 @@
-import React from 'react'
-import ReactDOM from "react-dom";
-
 import { StrictMode, useEffect, useState, useContext } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { UserContextProvider, UserContext, UserTokenContext } from "./Contexts";
 
 import { Authentication } from "./Authentication";
 import { useLocalStorage } from "./Hooks";
 import { Home } from "./Containers";
 import { Toast } from "./Components";
 
-import { UserContextProvider, UserContext, UserTokenContext } from "./Contexts";
 
-
-const App = () => {
+const Main = () => {
   const [pendingMsg, setPendingMsg] = useState("");
-
-  const [keepSignedIn, setKeepSignedIn] = useLocalStorage(
-    "keepSignedIn",
-    false
-  );
 
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
 
   const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
   const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");
+  const [keepSignedIn, setKeepSignedIn] = useLocalStorage(
+    "keepSignedIn",
+    false
+  );
 
   // Saves and clears userData when user leaves the site.
   window.onbeforeunload = () => {
@@ -70,12 +65,12 @@ const App = () => {
   );
 };
 
-const Main = () => {
+const App = () => {
   return (
     <UserContextProvider>
-      <App />
+      <Main />
     </UserContextProvider>
   );
 };
 
-ReactDOM.render(React.createElement(Main), document.getElementById("root"));
+export default App;
