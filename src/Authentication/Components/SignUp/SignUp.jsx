@@ -6,7 +6,7 @@ import { InputForm } from "../";
 
 import { UserContext } from "../../../Contexts";
 
-import { useLocalStorage, useGenerateToken } from "../../../Hooks";
+import { useLocalStorage, useAuth} from "../../../Hooks";
 
 const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
   const [errorMsg, setErrorMsg] = useState("");
@@ -18,7 +18,7 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
 
   const confirmPassRef = useRef();
 
-  const generateToken = useGenerateToken();
+  const {createUser, pendingMsg} = useAuth();
 
   const handleSignUp = async (e) => {
     try {
@@ -30,40 +30,10 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
         throw new Error("Passwords doesn't match.");
       }
 
-      setPendingMsg("Creating User");
+      const userToken = await createUser(userEmail, userName, userPass)
 
-      const date = new Date();
-      const timestamp = date.getTime();
+      setUserToken(userToken)
 
-      const userSignUpData = {
-        username: userName,
-        email: userEmail,
-        password: userPass,
-        status: true,
-        is_active: true,
-        profile: "default.png",
-        websocket_id: timestamp.toString(),
-      };
-
-      const createUser = await fetch("http://127.0.0.1:8000/api/v1/users/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userSignUpData),
-      });
-
-      const createUserRes = await createUser.json();
-      if (!createUserRes.id) throw new Error(createUserRes.detail[0].msg);
-
-      // Login user
-      generateToken(
-        setUserToken,
-        userEmail,
-        userPass,
-        setErrorMsg,
-        setPendingMsg
-      );
     } catch (error) {
       setErrorMsg(error.message);
       setPendingMsg("");
