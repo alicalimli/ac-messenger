@@ -9,15 +9,6 @@ import { SignIn, SignUp } from "./Components";
 import { UserContext } from "../Contexts";
 
 const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg }) => {
-  const [isSigningIn, setIsSigningIn] = useState(true);
-  const [userToken, setUserToken] = useLocalStorage("userToken", "");
-
-  const { authenticate } = useAuth(setPendingMsg);
-
-  useEffect(() => {
-    authenticate(userToken);
-  }, []);
-
   return (
     <div className="m-auto mt-8 w-[90%] sm:w-96 p-12 rounded-xl bg-white shadow-lg">
       <AnimatePresence>
