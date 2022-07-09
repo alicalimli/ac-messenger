@@ -1,12 +1,11 @@
 import { useRef, useEffect, useState, useContext } from "react";
 
-import { useGenerateToken, useLocalStorage } from "../";
+import { useGenerateToken, useLocalStorage } from "../../Hooks";
 
 import { UserContext, UserTokenContext } from "../../Contexts";
 
 const useAuth = (setPendingMsg, setErrorMsg) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
-
   const [userToken, setUserToken] = useContext(UserTokenContext);
 
   const generateToken = useGenerateToken();
@@ -31,8 +30,6 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
 
       // Saves data's to local storage
       setUserInfo(getUserInfoRes.user);
-      console.log(getUserInfoRes.user);
-
       setPendingMsg("");
     } catch (error) {
       setErrorMsg(error.message)
@@ -43,16 +40,13 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
   const makeLogin = async (email, pass) => {
     try {
       setErrorMsg('');
-
-      console.log("generateToken");
       setPendingMsg("generating token");
 
       const userToken = await generateToken(email, pass);
 
-      console.log(userToken);
       setPendingMsg("done");
-
       setUserToken(userToken);
+
       authenticate(userToken);
     } catch (error) {
       setErrorMsg(error.message)
@@ -63,7 +57,6 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
   const createUser = async (email, username, password) => {
     try {
       setErrorMsg('');
-
       setPendingMsg("Creating User");
 
       const date = new Date();
@@ -95,7 +88,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
 
       setPendingMsg("Signing In");
 
-      const userToken = await makeLogin(email, password);
+      makeLogin(email, password);
     } catch (error) {
       setErrorMsg(error.message)
       setPendingMsg('');
