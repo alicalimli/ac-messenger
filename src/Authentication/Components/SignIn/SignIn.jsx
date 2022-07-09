@@ -25,12 +25,10 @@ const SignIn = ({
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const token = await makeLogin(
+    makeLogin(
       userEmailRef.current.value,
       userPassRef.current.value
     );
-
-    setUserToken(token);
   };
 
   return (
