@@ -6,7 +6,7 @@ import { InputForm } from "../";
 
 import { UserContext } from "../../../Contexts";
 
-import { useLocalStorage, useAuth} from "../../../Hooks";
+import { useLocalStorage, useAuth } from "../../../Hooks";
 
 const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
   const [errorMsg, setErrorMsg] = useState("");
@@ -18,7 +18,7 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
 
   const confirmPassRef = useRef();
 
-  const {createUser} = useAuth(setPendingMsg);
+  const { createUser } = useAuth(setPendingMsg);
 
   const handleSignUp = async (e) => {
     try {
@@ -30,10 +30,9 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
         throw new Error("Passwords doesn't match.");
       }
 
-      const userToken = await createUser(userEmail, userName, userPass)
+      const userToken = await createUser(userEmail, userName, userPass);
 
-      setUserToken(userToken)
-
+      setUserToken(userToken);
     } catch (error) {
       setErrorMsg(error.message);
       setPendingMsg("");

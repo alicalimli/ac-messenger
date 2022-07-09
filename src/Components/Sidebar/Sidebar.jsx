@@ -12,20 +12,22 @@ const Sidebar = () => {
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
 
-  const [savedUserInfo, setSavedUserInfo] = useLocalStorage('userInfo', null);
-  const [savedUserToken, setSavedUserToken] = useLocalStorage('userToken', '');
-  const [keepSignedIn, setKeepSignedIn] = useLocalStorage('keepSignedIn', false);
+  const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
+  const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");
+  const [keepSignedIn, setKeepSignedIn] = useLocalStorage(
+    "keepSignedIn",
+    false
+  );
 
   const handleLogOut = () => {
     setUserInfo(null);
     setSavedUserInfo(null);
 
     setUserToken("");
-    setSavedUserToken('');
+    setSavedUserToken("");
 
     setKeepSignedIn(false);
-  }
-
+  };
 
   return (
     <nav className="hidden p-4 w-fit bg-gray-300 sm:flex sm:flex-col gap-4">

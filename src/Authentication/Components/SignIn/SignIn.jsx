@@ -25,10 +25,7 @@ const SignIn = ({
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    makeLogin(
-      userEmailRef.current.value,
-      userPassRef.current.value
-    );
+    makeLogin(userEmailRef.current.value, userPassRef.current.value);
   };
 
   return (

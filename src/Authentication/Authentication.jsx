@@ -8,11 +8,7 @@ import { SignIn, SignUp } from "./Components";
 
 import { UserContext } from "../Contexts";
 
-const Authentication = ({
-  setKeepSignedIn,
-  keepSignedIn,
-  setPendingMsg
-}) => {
+const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg }) => {
   const [isSigningIn, setIsSigningIn] = useState(true);
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
