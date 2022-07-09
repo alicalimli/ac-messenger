@@ -96,8 +96,6 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
       setPendingMsg("Signing In");
 
       const userToken = await makeLogin(email, password);
-
-      return userToken;
     } catch (error) {
       setErrorMsg(error.message)
       setPendingMsg('');

@@ -8,7 +8,7 @@ import { UserContext } from "../../../Contexts";
 
 import { useLocalStorage, useAuth } from "../../../Hooks";
 
-const SignUp = ({ setPendingMsg }) => {
+const SignUp = ({ setPendingMsg, setIsSigningIn }) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
@@ -29,9 +29,7 @@ const SignUp = ({ setPendingMsg }) => {
         throw new Error("Passwords doesn't match.");
       }
 
-      const userToken = await createUser(userEmail, userName, userPass);
-
-      setUserToken(userToken);
+      createUser(userEmail, userName, userPass);
     } catch (error) {
       setErrorMsg(error.message);
       setPendingMsg("");

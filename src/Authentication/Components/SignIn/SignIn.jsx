@@ -10,6 +10,7 @@ import { useLocalStorage, useAuth } from "../../../Hooks";
 
 const SignIn = ({
   setPendingMsg,
+  setIsSigningIn,
   setKeepSignedIn,
   keepSignedIn,
 }) => {
