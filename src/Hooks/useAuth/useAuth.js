@@ -9,6 +9,8 @@ const useAuth = () => {
 
   const [userInfo, setUserInfo] = useContext(UserContext)
 
+  const [userToken,setUserToken] = useLocalStorage('userToken', '')
+
   const generateToken = useGenerateToken();
 
   const authenticate = async (userToken) => {
@@ -42,6 +44,7 @@ const useAuth = () => {
     console.log(userToken)
     setPendingMsg("done");
 
+    setUserToken(userToken);
     authenticate(userToken);
   };
 
