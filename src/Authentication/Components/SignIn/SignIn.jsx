@@ -20,12 +20,17 @@ const SignIn = ({
   const userEmailRef = useRef();
   const userPassRef = useRef();
 
-  const { makeLogin } = useAuth(setPendingMsg);
+  const { makeLogin } = useAuth(setPendingMsg, setErrorMsg);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const handleLogin = (e) => {
+    try{
+      e.preventDefault();
 
-    makeLogin(userEmailRef.current.value, userPassRef.current.value);
+      makeLogin(userEmailRef.current.value, userPassRef.current.value);
+    }catch(error){
+      console.log('lalala')
+      setErrorMsg(error.message);
+    }
   };
 
   return (

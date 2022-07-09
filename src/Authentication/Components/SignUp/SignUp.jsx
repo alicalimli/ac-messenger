@@ -18,7 +18,7 @@ const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
 
   const confirmPassRef = useRef();
 
-  const { createUser } = useAuth(setPendingMsg);
+  const { createUser } = useAuth(setPendingMsg, setErrorMsg);
 
   const handleSignUp = async (e) => {
     try {

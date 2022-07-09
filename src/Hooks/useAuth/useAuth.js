@@ -4,7 +4,7 @@ import { useGenerateToken, useLocalStorage } from "../";
 
 import { UserContext, UserTokenContext } from "../../Contexts";
 
-const useAuth = (setPendingMsg) => {
+const useAuth = (setPendingMsg, setErrorMsg) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
 
   const [userToken, setUserToken] = useContext(UserTokenContext);
@@ -13,6 +13,8 @@ const useAuth = (setPendingMsg) => {
 
   const authenticate = async (userToken) => {
     try {
+      setErrorMsg('');
+
       if (!userToken) return;
 
       setPendingMsg("Authenticating");
@@ -33,13 +35,15 @@ const useAuth = (setPendingMsg) => {
 
       setPendingMsg("");
     } catch (error) {
-      console.error(error);
-      throw error;
+      setErrorMsg(error.message)
+      setPendingMsg('');
     }
   };
 
   const makeLogin = async (email, pass) => {
     try {
+      setErrorMsg('');
+
       console.log("generateToken");
       setPendingMsg("generating token");
 
@@ -51,13 +55,15 @@ const useAuth = (setPendingMsg) => {
       setUserToken(userToken);
       authenticate(userToken);
     } catch (error) {
-      console.error(error);
-      throw error;
+      setErrorMsg(error.message)
+      setPendingMsg('');
     }
   };
 
   const createUser = async (email, username, password) => {
     try {
+      setErrorMsg('');
+
       setPendingMsg("Creating User");
 
       const date = new Date();
@@ -93,8 +99,8 @@ const useAuth = (setPendingMsg) => {
 
       return userToken;
     } catch (error) {
-      console.error(error);
-      throw error;
+      setErrorMsg(error.message)
+      setPendingMsg('');
     }
   };
 
