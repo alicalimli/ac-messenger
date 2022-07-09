@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 const Toast = ({ children, message }) => {
   return createPortal(
     <AnimatePresence>
-    {console.log(message)}
+      {console.log(message)}
       {message && (
         <motion.div
           animate={{ y: 0, x: "-50%" }}
