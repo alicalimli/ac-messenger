@@ -6,7 +6,7 @@ import { useLocalStorage } from "../Hooks";
 
 import { Toast } from "../Components";
 
-import { SignIn, SignUp } from "./";
+import { SignIn, SignUp } from "./Components";
 
 import { UserContext } from "../Contexts";
 

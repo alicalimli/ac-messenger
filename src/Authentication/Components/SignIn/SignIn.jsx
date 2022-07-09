@@ -2,7 +2,7 @@ import { useRef, useEffect, useState, useContext } from "react";
 
 import { motion } from "framer-motion";
 
-import { InputForm } from "./";
+import { InputForm } from "../";
 
 import { UserContext } from "../../../Contexts";
 

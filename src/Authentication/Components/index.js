@@ -1,5 +1,5 @@
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
-import inputForm from "./inputForm/inputForm";
+import InputForm from "./InputForm/InputForm";
 
-export { SignIn, SignUp, inputForm};
+export { SignIn, SignUp, InputForm};
