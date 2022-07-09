@@ -81,7 +81,7 @@ const useAuth = () => {
       return userToken;
   }
 
-  return { makeLogin, createUser, pendingMsg };
+  return { makeLogin, createUser, pendingMsg, authenticate };
 };
 
 export default useAuth;

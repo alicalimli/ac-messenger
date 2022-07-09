@@ -2,7 +2,7 @@ import { useRef, useState, useContext, useEffect, useCallback } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { useLocalStorage } from "../Hooks";
+import { useLocalStorage, useAuth } from "../Hooks";
 
 import { Toast } from "../Components";
 
@@ -18,35 +18,12 @@ const Authentication = ({
   const [pendingMsg, setPendingMsg] = useState("");
   const [userToken, setUserToken] = useLocalStorage("userToken", "");
 
-  const authenticate = useCallback(async () => {
-    try {
-      if (!userToken) return;
-
-      setPendingMsg("Authenticating");
-
-      // GETTING USER'S INFO FROM THE API
-      const getUserInfo = await fetch("http://127.0.0.1:8000/api/v1/users/me", {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + userToken,
-        },
-      });
-
-      const getUserInfoRes = await getUserInfo.json();
-
-      // Saves data's to local storage
-      setUserInfo(getUserInfoRes.user);
-
-      setPendingMsg("");
-    } catch (error) {
-      console.error(error);
-      setPendingMsg("");
-    }
-  });
+  const { authenticate } = useAuth();
 
   useEffect(() => {
-    authenticate();
-  }, [userToken, setUserToken]);
+    console.log(userToken)
+    authenticate(userToken);
+  }, []);
 
   return (
     <div className="m-auto mt-8 w-[90%] sm:w-96 p-12 rounded-xl bg-white shadow-lg">
@@ -65,7 +42,6 @@ const Authentication = ({
             <SignIn
               setIsSigningIn={setIsSigningIn}
               setPendingMsg={setPendingMsg}
-              setUserToken={setUserToken}
               setKeepSignedIn={setKeepSignedIn}
               keepSignedIn={keepSignedIn}
             />
