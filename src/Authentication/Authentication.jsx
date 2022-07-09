@@ -29,7 +29,6 @@ const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg }) => {
           >
             {" "}
             <SignIn
-              setIsSigningIn={setIsSigningIn}
               setKeepSignedIn={setKeepSignedIn}
               setPendingMsg={setPendingMsg}
               keepSignedIn={keepSignedIn}
@@ -46,7 +45,6 @@ const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg }) => {
             initial={{ opacity: 0 }}
           >
             <SignUp
-              setIsSigningIn={setIsSigningIn}
               setPendingMsg={setPendingMsg}
               setUserToken={setUserToken}
             />

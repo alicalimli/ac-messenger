@@ -9,8 +9,6 @@ import { UserContext } from "../../../Contexts";
 import { useLocalStorage, useAuth } from "../../../Hooks";
 
 const SignIn = ({
-  setIsSigningIn,
-  setUserToken,
   setPendingMsg,
   setKeepSignedIn,
   keepSignedIn,

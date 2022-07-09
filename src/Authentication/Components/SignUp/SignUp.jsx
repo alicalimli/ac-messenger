@@ -8,13 +8,12 @@ import { UserContext } from "../../../Contexts";
 
 import { useLocalStorage, useAuth } from "../../../Hooks";
 
-const SignUp = ({ setIsSigningIn, setUserToken, setPendingMsg }) => {
+const SignUp = ({ setPendingMsg }) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [userPass, setUserPass] = useState("");
-  const [confirmPass, setConfirmPass] = useState("");
 
   const confirmPassRef = useRef();
 
