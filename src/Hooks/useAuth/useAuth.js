@@ -1,11 +1,13 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useContext} from "react";
 
 import {useGenerateToken, useLocalStorage} from '../'
+
+import {UserContext} from '../../Contexts'
 
 const useAuth = () => {
   const [pendingMsg, setPendingMsg] = useState("");
 
-  const [userInfo, setUserInfo] = useLocalStorage("userInfo", null);
+  const [userInfo, setUserInfo] = useContext(UserContext)
 
   const generateToken = useGenerateToken();
 
@@ -13,7 +15,7 @@ const useAuth = () => {
   	  if (!userToken) return;
 
       setPendingMsg("Authenticating");
-a
+
       // GETTING USER'S INFO FROM THE API
       const getUserInfo = await fetch("http://127.0.0.1:8000/api/v1/users/me", {
         method: "GET",
