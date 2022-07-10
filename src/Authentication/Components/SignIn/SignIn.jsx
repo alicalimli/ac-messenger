@@ -29,7 +29,6 @@ const SignIn = ({
 
       signInUser(userEmailRef.current.value, userPassRef.current.value);
     } catch (error) {
-      console.log("lalala");
       setErrorMsg(error.message);
     }
   };
@@ -40,7 +39,7 @@ const SignIn = ({
         <label className="text-2xl font-semibold text-left text-center">
           Sign in
         </label>
-        <label className="text-sm text-slate-500 text-center mb-4 ">
+        <label className="text-sm text-center text-muted mb-4 ">
           Enter your credentials
         </label>
       </div>
@@ -63,22 +62,22 @@ const SignIn = ({
       />
       <a
         onClick={() => setKeepSignedIn(!keepSignedIn)}
-        className="flex flex-wrap gap-2 items-center hover:cursor-pointer hover:bg-slate-500/10 p-2 px-4 rounded-xl text-slate-500 duration-200"
+        className="flex flex-wrap gap-2 items-center hover:cursor-pointer hover:bg-muted p-2 px-4 rounded-xl text-muted duration-200"
       >
-        <div className={`p-0.5 border  rounded-md bg-transparent duration-300 ${keepSignedIn ? `bg-blue-600 text-white ` : " text-transparent border-slate-500 " }`}>
+        <div className={`p-0.5 border rounded-md bg-transparent duration-300 ${keepSignedIn ? `bg-primary-main text-white ` : " text-transparent border-muted " }`}>
           <AiOutlineCheck />
         </div>
         Keep me signed in
       </a>
 
-      <button className="bg-blue-500 hover:bg-blue-400 duration-300 rounded-xl p-2 px-4 text-white">
+      <button className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white">
         Sign in
       </button>
-      <p className="text-slate-600 text-sm">
+      <p className="text-muted text-sm">
         Don't have an account?{" "}
         <a
           onClick={() => setIsSigningIn(false)}
-          className="text-blue-500 cursor-pointer hover:text-blue-400 duration-300 font-semibold"
+          className="text-primary-main hover:text-primary-tinted font-semibold cursor-pointer duration-300"
         >
           Sign up
         </a>

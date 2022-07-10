@@ -44,7 +44,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn }) => {
         <label className="text-2xl font-semibold text-left text-center">
           Sign up
         </label>
-        <label className="text-sm text-slate-500 text-center mb-4 ">
+        <label className="text-sm text-muted text-center mb-4 ">
           Fill in the form
         </label>
       </div>
@@ -88,14 +88,14 @@ const SignUp = ({ setPendingMsg, setIsSigningIn }) => {
         minLength="8"
         invalidLabel=""
       />
-      <button className="bg-blue-500 hover:bg-blue-400 duration-300 rounded-xl p-2 px-4 text-white">
+      <button className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white">
         Sign Up
       </button>
-      <p className="text-slate-600 text-sm">
+      <p className="text-muted text-sm">
         Already have an account?{" "}
         <a
           onClick={() => setIsSigningIn(true)}
-          className="text-blue-500 cursor-pointer hover:text-blue-400 duration-300 font-semibold"
+          className="text-primary-main cursor-pointer hover:text-primary-tinted duration-300 font-semibold"
         >
           Login
         </a>

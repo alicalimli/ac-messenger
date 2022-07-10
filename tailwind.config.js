@@ -5,9 +5,10 @@ module.exports = {
       colors:{
         primary: {
           main: "#6741d9",
-          shaded: "#5f3dc4",
-          tinted: "#7048e8"
-        }
+          shaded: "#5d3bc3",
+          tinted: "#7654dd"
+        },
+        muted: '#212529bf',
       }
     },
   },
