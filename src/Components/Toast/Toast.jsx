@@ -2,11 +2,10 @@ import React from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
-const Toast = ({ children, message }) => {
+const Toast = ({ children }) => {
   return createPortal(
     <AnimatePresence>
-      {console.log(message)}
-      {message && (
+      {children && (
         <motion.div
           animate={{ y: 0, x: "-50%" }}
           exit={{ y: -100, x: "-50%" }}

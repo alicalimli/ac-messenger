@@ -33,7 +33,7 @@ const SignIn = ({
     <form onSubmit={handleLogin} className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
         <label className="text-2xl font-semibold text-left text-center">
-          Sign in
+          Sign in to Chately
         </label>
         <label className="text-sm text-center text-muted mb-4 ">
           Enter your credentials

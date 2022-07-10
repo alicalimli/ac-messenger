@@ -45,11 +45,13 @@ const Main = () => {
   return (
     <StrictMode>
       <BrowserRouter>
-        <Toast message={pendingMsg}>
-          <h1 className="flex items-center gap-4">
-            {pendingMsg}...{" "}
-            <AiOutlineLoading3Quarters className="animate-spin" />
-          </h1>
+        <Toast>
+              {pendingMsg && (
+                <h1 className="flex items-center gap-4">
+                  {pendingMsg}...{" "}
+                  <AiOutlineLoading3Quarters className="animate-spin" />
+                </h1>
+            )}
         </Toast>
 
         {userInfo ? (
