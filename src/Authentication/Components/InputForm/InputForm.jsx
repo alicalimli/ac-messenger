@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
+const inputClass = `text-lg bg-transparent p-2 px-4 flex items-center rounded-xl border border-muted peer outline outline-1 outline-blue-500/0 duration-200 hover:outline-primary-main focus:outline-primary-main0 invalid:outline-red-600`
+
 const InputForm = ({
   label,
   invalidLabel,
@@ -29,9 +31,9 @@ const InputForm = ({
         {type === "password" ? (
           <a className="cursor-pointer" onClick={handleShowPass}>
             {inputType === "password" ? (
-              <BsFillEyeSlashFill className="text-slate-500 text-lg" />
+              <BsFillEyeSlashFill className="text-muted text-lg" />
             ) : (
-              <BsFillEyeFill className="text-slate-500 text-lg" />
+              <BsFillEyeFill className="text-muted text-lg text-primary-main" />
             )}
           </a>
         ) : (
@@ -40,7 +42,7 @@ const InputForm = ({
       </div>
       {isControlled ? (
           <input
-            className="text-lg bg-transparent p-2 px-4 flex items-center rounded-xl border border-slate-400 peer outline outline-1 outline-blue-500/0 duration-200 hover:outline-blue-500 focus:outline-blue-500 invalid:outline-red-600"
+            className={inputClass}
             type={inputType}
             value={state}
             ref={inputRef || null}
@@ -52,7 +54,7 @@ const InputForm = ({
           />
         ) : (
           <input
-            className="text-lg bg-transparent p-2 px-4 flex items-center rounded-xl border border-slate-400 peer outline outline-1 outline-blue-500/0 duration-200 hover:outline-blue-500 focus:outline-blue-500 invalid:outline-red-600"
+            className={inputClass}
             type={inputType}
             ref={inputRef}
             minLength={minLength}
