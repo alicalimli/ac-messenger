@@ -12,7 +12,7 @@ const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg }) => {
   const [isSigningIn, setIsSigningIn] = useState(true);
 
   return (
-    <div className="m-auto mt-8 w-[90%] sm:w-96 p-12 rounded-xl bg-white shadow-lg">
+    <div className="">
       <AnimatePresence>
         {isSigningIn && (
           <motion.div
