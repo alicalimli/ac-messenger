@@ -38,7 +38,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn }) => {
   };
 
   return (
-    <form onSubmit={handleSignUp} className="flex flex-col gap-4">
+    <form onSubmit={handleSignUp} className="flex flex-col gap-4 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
       {" "}
       <div className="flex flex-col gap-1">
         <label className="text-2xl font-semibold text-left text-center">
