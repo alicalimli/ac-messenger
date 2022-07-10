@@ -9,6 +9,8 @@ import { useLocalStorage } from "./Hooks";
 import { Home } from "./Containers";
 import { Toast } from "./Components";
 
+import { motion, AnimatePresence } from "framer-motion";
+
 const Main = () => {
   const [pendingMsg, setPendingMsg] = useState("");
 
@@ -51,7 +53,14 @@ const Main = () => {
         </Toast>
 
         {userInfo ? (
-          <Home />
+          <motion.div
+          className="flex"
+            animate={{ opacity: 1, x: "0", y: "0" }}
+            initial={{ opacity: 0, x: "30%" }}
+            exit={{ opacity: 0, x: "30%"}}
+          >
+            <Home />
+          </motion.div>
         ) : (
           <Authentication
             keepSignedIn={keepSignedIn}
