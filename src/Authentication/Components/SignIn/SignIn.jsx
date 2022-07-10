@@ -11,6 +11,7 @@ const SignIn = ({
   setIsSigningIn,
   setKeepSignedIn,
   keepSignedIn,
+  pendingMsg,
 }) => {
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -72,9 +73,18 @@ const SignIn = ({
         Keep me signed in
       </a>
 
-      <button className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white">
-        Sign in
-      </button>
+      {!pendingMsg && (
+        <button className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white">
+          Sign in
+        </button>
+      )}
+
+      {pendingMsg && (
+        <button disabled className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white">
+          Signing in...
+        </button>
+      )}
+
       <p className="text-muted text-sm">
         Don't have an account?{" "}
         <a

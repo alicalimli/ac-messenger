@@ -68,6 +68,7 @@ const Main = () => {
             keepSignedIn={keepSignedIn}
             setKeepSignedIn={setKeepSignedIn}
             setPendingMsg={setPendingMsg}
+            pendingMsg={pendingMsg}
           />
         )}
       </BrowserRouter>

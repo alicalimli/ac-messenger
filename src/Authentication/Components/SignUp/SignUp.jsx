@@ -5,7 +5,7 @@ import { InputForm } from "../";
 import { UserContext } from "../../../Contexts";
 import { useLocalStorage, useAuth } from "../../../Hooks";
 
-const SignUp = ({ setPendingMsg, setIsSigningIn }) => {
+const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
@@ -85,9 +85,19 @@ const SignUp = ({ setPendingMsg, setIsSigningIn }) => {
         minLength="8"
         invalidLabel=""
       />
-      <button className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white">
-        Sign Up
-      </button>
+
+      {!pendingMsg && (
+        <button className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white">
+          Sign up
+        </button>
+      )}
+
+      {pendingMsg && (
+        <button disabled className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white">
+          Signing up...
+        </button>
+      )}
+
       <p className="text-muted text-sm">
         Already have an account?{" "}
         <a

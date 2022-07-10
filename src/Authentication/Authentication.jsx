@@ -5,7 +5,7 @@ import { useLocalStorage, useAuth } from "../Hooks";
 import { SignIn, SignUp } from "./Components";
 import { UserContext } from "../Contexts";
 
-const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg }) => {
+const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg, pendingMsg }) => {
   const [isSigningIn, setIsSigningIn] = useState(true);
 
   return (
@@ -25,6 +25,7 @@ const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg }) => {
               setIsSigningIn={setIsSigningIn}
               setPendingMsg={setPendingMsg}
               keepSignedIn={keepSignedIn}
+              pendingMsg={pendingMsg}
             />
           </motion.div>
         )}
@@ -42,6 +43,7 @@ const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg }) => {
             <SignUp
               setPendingMsg={setPendingMsg}
               setIsSigningIn={setIsSigningIn}
+              pendingMsg={pendingMsg}
             />
           </motion.div>
         )}
