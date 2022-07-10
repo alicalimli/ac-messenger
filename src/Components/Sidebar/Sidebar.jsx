@@ -1,10 +1,9 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext, UserTokenContext } from "../../Contexts";
-
-import { useLocalStorage } from "../../Hooks/";
-
 import { BiLogOut } from "react-icons/bi";
+
+import { UserContext, UserTokenContext } from "../../Contexts";
+import { useLocalStorage } from "../../Hooks/";
 
 const Sidebar = () => {
   const navigate = useNavigate();

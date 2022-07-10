@@ -1,11 +1,8 @@
 import { useState, useEffect, useRef, useContext } from "react";
-
 import { motion } from "framer-motion";
 
 import { InputForm } from "../";
-
 import { UserContext } from "../../../Contexts";
-
 import { useLocalStorage, useAuth } from "../../../Hooks";
 
 const SignUp = ({ setPendingMsg, setIsSigningIn }) => {

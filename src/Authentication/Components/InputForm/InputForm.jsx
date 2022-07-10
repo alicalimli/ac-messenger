@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
-const inputClass = `text-lg bg-transparent p-2 px-4 flex items-center rounded-xl border border-muted peer outline outline-1 outline-blue-500/0 duration-200 hover:outline-primary-main focus:outline-primary-main0 invalid:outline-red-600`
+const inputClass = `text-lg bg-transparent p-2 px-4 flex items-center rounded-xl border border-muted peer outline outline-1 outline-blue-500/0 duration-200 hover:outline-primary-main focus:outline-primary-main0 invalid:outline-red-600`;
 
 const InputForm = ({
   label,
@@ -41,27 +41,27 @@ const InputForm = ({
         )}
       </div>
       {isControlled ? (
-          <input
-            className={inputClass}
-            type={inputType}
-            value={state}
-            ref={inputRef || null}
-            minLength={minLength}
-            placeholder={placeHolder}
-            id={label}
-            onChange={(e) => setState(e.target.value)}
-            onBlur={(e) => setState(e.target.value)}
-          />
-        ) : (
-          <input
-            className={inputClass}
-            type={inputType}
-            ref={inputRef}
-            minLength={minLength}
-            placeholder={placeHolder}
-            id={label}
-          />
-        )}
+        <input
+          className={inputClass}
+          type={inputType}
+          value={state}
+          ref={inputRef || null}
+          minLength={minLength}
+          placeholder={placeHolder}
+          id={label}
+          onChange={(e) => setState(e.target.value)}
+          onBlur={(e) => setState(e.target.value)}
+        />
+      ) : (
+        <input
+          className={inputClass}
+          type={inputType}
+          ref={inputRef}
+          minLength={minLength}
+          placeholder={placeHolder}
+          id={label}
+        />
+      )}
       <p className="hidden peer-invalid:block text-red-600 text-sm">
         {invalidLabel}
       </p>

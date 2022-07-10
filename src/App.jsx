@@ -54,10 +54,10 @@ const Main = () => {
 
         {userInfo ? (
           <motion.div
-          className="flex"
-            animate={{ opacity: 1, x:0, y:0}}
-            initial={{ opacity: 0}}
-            exit={{ opacity: 0}}
+            className="flex"
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            initial={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
           >
             <Home />
           </motion.div>

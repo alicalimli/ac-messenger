@@ -1,13 +1,9 @@
 import { useRef, useEffect, useState, useContext } from "react";
-
-import {AiOutlineCheck} from 'react-icons/ai'
-
+import { AiOutlineCheck } from "react-icons/ai";
 import { motion } from "framer-motion";
 
 import { InputForm } from "../";
-
 import { UserContext } from "../../../Contexts";
-
 import { useLocalStorage, useAuth } from "../../../Hooks";
 
 const SignIn = ({
@@ -62,9 +58,15 @@ const SignIn = ({
       />
       <a
         onClick={() => setKeepSignedIn(!keepSignedIn)}
-        className="flex flex-wrap gap-2 items-center hover:cursor-pointer hover:bg-muted p-2 px-4 rounded-xl text-muted duration-200"
+        className="flex flex-wrap gap-2 items-center hover:cursor-pointer hover:bg-muted/10 p-2 px-4 rounded-xl text-muted duration-200"
       >
-        <div className={`p-0.5 border rounded-md bg-transparent duration-300 ${keepSignedIn ? `bg-primary-main text-white ` : " text-transparent border-muted " }`}>
+        <div
+          className={`p-0.5 border rounded-md bg-transparent duration-300 ${
+            keepSignedIn
+              ? `bg-primary-main text-white `
+              : " text-transparent border-muted "
+          }`}
+        >
           <AiOutlineCheck />
         </div>
         Keep me signed in
