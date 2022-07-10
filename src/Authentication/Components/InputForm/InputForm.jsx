@@ -28,7 +28,7 @@ const InputForm = ({
       <div className="p-2 px-4 flex items-center rounded-xl border border-slate-400 peer outline outline-2 outline-blue-500/0 duration-200 hover:outline-blue-500 focus-within:outline-blue-500">
         {isControlled ? (
           <input
-            className="text-lg bg-transparent outline-none"
+            className="text-lg bg-transparent outline-none w-full"
             type={inputType}
             value={state}
             ref={inputRef || null}
@@ -40,7 +40,7 @@ const InputForm = ({
           />
         ) : (
           <input
-            className="text-lg bg-transparent outline-none"
+            className="text-lg bg-transparent outline-none w-full"
             type={inputType}
             ref={inputRef}
             minLength={minLength}
@@ -49,7 +49,7 @@ const InputForm = ({
           />
         )}
         {type === "password" ? (
-          <a className="cursor-pointer" onClick={handleShowPass}>
+          <a className="ml-auto cursor-pointer" onClick={handleShowPass}>
             {inputType === "password" ? (
               <BsFillEyeSlashFill className="text-slate-500 text-lg" />
             ) : (
