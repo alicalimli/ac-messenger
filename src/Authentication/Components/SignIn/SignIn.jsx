@@ -1,5 +1,7 @@
 import { useRef, useEffect, useState, useContext } from "react";
 
+import {AiOutlineCheck} from 'react-icons/ai'
+
 import { motion } from "framer-motion";
 
 import { InputForm } from "../";
@@ -63,12 +65,9 @@ const SignIn = ({
         onClick={() => setKeepSignedIn(!keepSignedIn)}
         className="flex flex-wrap gap-2 items-center hover:cursor-pointer hover:bg-slate-500/10 p-2 px-4 rounded-xl text-slate-500 duration-200"
       >
-        <input
-          className="w-4"
-          type="checkbox"
-          checked={keepSignedIn}
-          disabled
-        />
+        <div className={`p-0.5 border  rounded-md bg-transparent duration-300 ${keepSignedIn ? `bg-blue-600 text-white ` : " text-transparent border-slate-500 " }`}>
+          <AiOutlineCheck />
+        </div>
         Keep me signed in
       </a>
 
