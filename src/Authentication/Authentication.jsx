@@ -17,9 +17,11 @@ const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg }) => {
         {isSigningIn && (
           <motion.div
             className="absolute w-[90%] sm:w-96"
+            initial={{ opacity: 0, x: "-50%"}}
             animate={{ opacity: 1, x: "0"}}
-            initial={{ opacity: 0, x: "-150%"}}
-            exit={{ opacity: 0, x: "-150%"}}
+            exit={{ opacity: 0, x: "-50%"}}
+            transition={{duration: 0.2}}
+
           >
             {" "}
             <SignIn
@@ -36,9 +38,10 @@ const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg }) => {
         {!isSigningIn && (
           <motion.div
             className="absolute w-[90%] sm:w-96"
+            initial={{ opacity: 0, x: "50%"}}
             animate={{ opacity: 1, x: "0"}}
-            initial={{ opacity: 0, x: "150%"}}
-            exit={{ opacity: 0, x: "150%"}}
+            exit={{ opacity: 0, x: "50%"}}
+            transition={{duration: 0.2}}
           >
             <SignUp
               setPendingMsg={setPendingMsg}
