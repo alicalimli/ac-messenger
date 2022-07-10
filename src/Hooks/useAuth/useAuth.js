@@ -1,10 +1,10 @@
 import { useRef, useEffect, useState, useContext } from "react";
-
 import { useGenerateToken, useLocalStorage } from "../../Hooks";
-
 import { UserContext, UserTokenContext } from "../../Contexts";
 
 const useAuth = (setPendingMsg, setErrorMsg) => {
+  const defaultProfileURL = `https://cdn-icons-png.flaticon.com/512/1077/1077114.png?w=740`
+
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
 
@@ -68,7 +68,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
         password: password,
         status: true,
         is_active: true,
-        profile: "default.png",
+        profile: defaultProfileURL,
         websocket_id: timestamp.toString(),
       };
 
