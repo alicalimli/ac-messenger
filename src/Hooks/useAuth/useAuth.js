@@ -12,7 +12,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
 
   const authenticate = async (userToken) => {
     try {
-      setErrorMsg('');
+      setErrorMsg("");
 
       if (!userToken) return;
 
@@ -32,14 +32,14 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
       setUserInfo(getUserInfoRes.user);
       setPendingMsg("");
     } catch (error) {
-      setErrorMsg(error.message)
-      setPendingMsg('');
+      setErrorMsg(error.message);
+      setPendingMsg("");
     }
   };
 
   const signInUser = async (email, pass) => {
     try {
-      setErrorMsg('');
+      setErrorMsg("");
       setPendingMsg("generating token");
 
       const userToken = await generateToken(email, pass);
@@ -49,14 +49,14 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
 
       authenticate(userToken);
     } catch (error) {
-      setErrorMsg(error.message)
-      setPendingMsg('');
+      setErrorMsg(error.message);
+      setPendingMsg("");
     }
   };
 
   const signUpUser = async (email, username, password) => {
     try {
-      setErrorMsg('');
+      setErrorMsg("");
       setPendingMsg("Creating User");
 
       const date = new Date();
@@ -90,8 +90,8 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
 
       signInUser(email, password);
     } catch (error) {
-      setErrorMsg(error.message)
-      setPendingMsg('');
+      setErrorMsg(error.message);
+      setPendingMsg("");
     }
   };
 

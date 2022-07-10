@@ -9,7 +9,6 @@ import { useLocalStorage } from "./Hooks";
 import { Home } from "./Containers";
 import { Toast } from "./Components";
 
-
 const Main = () => {
   const [pendingMsg, setPendingMsg] = useState("");
 

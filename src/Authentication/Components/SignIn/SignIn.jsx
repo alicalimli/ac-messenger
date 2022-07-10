@@ -22,12 +22,12 @@ const SignIn = ({
   const { signInUser } = useAuth(setPendingMsg, setErrorMsg);
 
   const handleLogin = (e) => {
-    try{
+    try {
       e.preventDefault();
 
       signInUser(userEmailRef.current.value, userPassRef.current.value);
-    }catch(error){
-      console.log('lalala')
+    } catch (error) {
+      console.log("lalala");
       setErrorMsg(error.message);
     }
   };
