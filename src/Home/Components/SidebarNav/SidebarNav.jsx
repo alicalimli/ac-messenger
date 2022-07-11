@@ -49,33 +49,6 @@ const Sidebar = ({setSideBarContent}) => {
       <SidebarBtn clickHandler={handleLogOut} name="logout">
         <BiLogOut />
       </SidebarBtn>
-
-      {/*      <div>
-        <div className="flex flex-wrap gap-2 mt-auto">
-          <div className="p-2 w-12 h-12 rounded-full bg-white">
-             <img
-              className="w-full bg-cover bg-center "
-              src={userInfo.profile}
-              />
-          </div>
-           <img
-              className="w-full bg-cover bg-center bg-white "
-              style={{backgroundImage: `url("https://cdn-icons-png.flaticon.com/512/1077/1077114.png?w=740")`}}
-              />
-          <div className="flex flex-col">
-            <p className="text-lg text-black font-semibold">
-              {userInfo.username}
-            </p>
-            <p className="text-sm text-slate-500">{userInfo.email}</p>
-          </div>
-        </div>
-        <button
-          onClick={handleLogOut}
-          className="p-2 px-4 bg-blue-600 text-white rounded"
-        >
-          Logout
-        </button>
-      </div>*/}
     </nav>
   );
 };

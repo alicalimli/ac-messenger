@@ -10,7 +10,7 @@ const SidebarContent = ({sidebarContent, setSideBarContent}) => {
       <AnimatePresence>
         {sidebarContent === "profile" &&
         <motion.div
-        className="absolute"
+        className="absolute w-full h-full"
         animate={{opacity:1, x:0}}
         initial={{opacity:0, x:'50%'}}
         exit={{opacity:0, x:'-50%'}}
@@ -24,7 +24,7 @@ const SidebarContent = ({sidebarContent, setSideBarContent}) => {
       <AnimatePresence>
         {sidebarContent === "chats" &&
         <motion.div
-        className="absolute"
+        className="absolute w-full h-full"
         animate={{opacity:1, x:0}}
         initial={{opacity:0, x:'50%'}}
         exit={{opacity:0, x:'-50%'}}
