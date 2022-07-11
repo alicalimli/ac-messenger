@@ -35,7 +35,7 @@ const ChatBox = () => {
 
   return (
     <div className="h-screen w-screen p-4 flex justify-center">
-      <div className="w-full md:w-1/2 flex flex-col gap-4">
+      <div className="w-full flex flex-col gap-4">
         <div className="bg-white rounded-xl w-full h-20 p-2 px-4 flex items-center mb-auto">
           <div className="flex items-center gap-4">
             <div className="relative bg-transparent h-16 w-16">

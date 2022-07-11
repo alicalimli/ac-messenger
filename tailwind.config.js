@@ -1,14 +1,18 @@
 module.exports = {
   content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
+  darkMode:'class',
   theme: {
     extend: {
       colors:{
         primary: {
           main: "#6741d9",
           shaded: "#5d3bc3",
-          tinted: "#7654dd"
+          tinted: "#7654dd",
         },
-        muted: '#212529bf',
+        muted: {
+          light:'#212529bf',
+          dark: "#aaa",
+        }
       }
     },
   },

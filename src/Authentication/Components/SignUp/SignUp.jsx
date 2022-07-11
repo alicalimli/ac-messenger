@@ -38,10 +38,10 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
     <form onSubmit={handleSignUp} className="flex flex-col gap-4">
       {" "}
       <div className="flex flex-col gap-1">
-        <label className="text-2xl font-semibold text-left text-center">
+        <label className="text-2xl font-semibold text-left text-center text-black dark:text-white">
           Sign up
         </label>
-        <label className="text-sm text-muted text-center mb-4 ">
+        <label className="text-sm text-muted-light dark:text-muted-dark text-center mb-4">
           Fill in the form
         </label>
       </div>
@@ -98,7 +98,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         </button>
       )}
 
-      <p className="text-muted text-sm">
+      <p className="text-muted-light dark:text-muted-dark text-sm">
         Already have an account?{" "}
         <a
           onClick={() => setIsSigningIn(true)}
