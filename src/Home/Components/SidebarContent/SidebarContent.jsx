@@ -5,7 +5,7 @@ import {motion,AnimatePresence} from 'framer-motion'
 const SidebarContent = ({sidebarContent, setSideBarContent}) => {
   console.log(sidebarContent)
   return (
-  	<div className="relative border-r border-muted/10 w-full sm:w-[38rem] overflow-x-hidden">
+  	<div className="relative border-r border-muted-light/10 dark:border-muted-dark/10 w-full sm:w-[38rem] overflow-x-hidden">
 
       <AnimatePresence>
         {sidebarContent === "profile" &&

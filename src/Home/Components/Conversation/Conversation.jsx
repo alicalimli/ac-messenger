@@ -36,15 +36,15 @@ const ChatBox = () => {
   return (
     <div className="h-screen w-screen p-4 flex justify-center">
       <div className="w-full flex flex-col gap-4">
-        <div className="bg-white rounded-xl w-full h-20 p-2 px-4 flex items-center mb-auto">
+        <div className="bg-white dark:bg-black rounded-xl w-full h-20 p-2 px-4 flex items-center mb-auto">
           <div className="flex items-center gap-4">
             <div className="relative bg-transparent h-16 w-16">
               <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
               <img src={elvis} className="w-full rounded-full" />
             </div>
             <div className="flex flex-col gap-0">
-              <h2 className="text-xl text-black">Elvis</h2>
-              <p className="text-sm text-slate-500">online</p>
+              <h2 className="text-xl text-black dark:text-white">Elvis</h2>
+              <p className="text-sm text-muted-light dark:text-muted-dark">online</p>
             </div>
           </div>
         </div>
