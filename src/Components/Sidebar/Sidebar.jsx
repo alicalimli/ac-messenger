@@ -8,6 +8,8 @@ import { BiMessageSquareDetail } from "react-icons/bi";
 import { UserContext, UserTokenContext } from "../../Contexts";
 import { useLocalStorage } from "../../Hooks/";
 
+import SidebarBtn from "./SidebarBtn/SidebarBtn";
+
 const Sidebar = () => {
   const navigate = useNavigate();
 
@@ -34,22 +36,19 @@ const Sidebar = () => {
   return (
     <nav className="hidden p-4 w-fit sm:flex sm:flex-col gap-4 justify-center">
       <div className="flex flex-col gap-2 items-center">
-        <button className="p-2 text-muted text-2xl rounded">
+        <SidebarBtn clickHandler={handleLogOut}>
           <BiMessageSquareDetail />
-        </button>
-        <button className="p-2 text-muted text-2xl rounded">
+        </SidebarBtn>
+        <SidebarBtn clickHandler={handleLogOut}>
           <AiOutlineUser />
-        </button>
-        <button className="p-2 text-muted text-2xl rounded">
+        </SidebarBtn>
+        <SidebarBtn clickHandler={handleLogOut}>
           <FiSettings />
-        </button>
+        </SidebarBtn>
       </div>
-              <button
-          onClick={handleLogOut}
-          className="p-2 text-muted text-2xl rounded"
-        >
-          <BiLogOut />
-        </button>
+      <SidebarBtn clickHandler={handleLogOut}>
+        <BiLogOut />
+      </SidebarBtn>
 
       {/*      <div>
         <div className="flex flex-wrap gap-2 mt-auto">
