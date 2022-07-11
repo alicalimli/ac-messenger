@@ -34,7 +34,7 @@ const Sidebar = ({setSideBarContent}) => {
   };
 
   return (
-    <nav className="hidden p-4 w-fit  bg-muted/5  sm:flex sm:flex-col gap-4 justify-center">
+    <nav className="hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 sm:flex sm:flex-col gap-4 justify-center">
       <div className="flex flex-col gap-2 items-center">
         <SidebarBtn clickHandler={()=> setSideBarContent('chats')} name="chats">
           <BiMessageSquareDetail />
