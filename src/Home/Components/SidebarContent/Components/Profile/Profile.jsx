@@ -19,7 +19,7 @@ const Profile = () => {
           />
           <h2 className="text-lg">{userInfo.username}</h2>
           <p className="text-muted-light dark:text-muted-dark">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Front-end Developer
           </p>
         </div>
       </div>
