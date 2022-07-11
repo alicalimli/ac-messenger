@@ -6,8 +6,9 @@ import { UserContextProvider, UserContext, UserTokenContext } from "./Contexts";
 
 import { Authentication } from "./Authentication";
 import { useLocalStorage } from "./Hooks";
-import { Home } from "./Containers";
 import { Toast } from "./Components";
+
+import Home from "./Home/Home";
 
 import { motion, AnimatePresence } from "framer-motion";
 

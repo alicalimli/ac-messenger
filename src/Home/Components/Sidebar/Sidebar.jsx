@@ -5,8 +5,8 @@ import { AiOutlineUser } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 import { BiMessageSquareDetail } from "react-icons/bi";
 
-import { UserContext, UserTokenContext } from "../../Contexts";
-import { useLocalStorage } from "../../Hooks/";
+import { UserContext, UserTokenContext } from "../../../Contexts";
+import { useLocalStorage } from "../../../Hooks/";
 
 import SidebarBtn from "./SidebarBtn/SidebarBtn";
 
@@ -34,7 +34,7 @@ const Sidebar = () => {
   };
 
   return (
-    <nav className="hidden p-4 w-fit sm:flex sm:flex-col gap-4 justify-center">
+    <nav className="hidden p-4 w-fit  bg-muted/5  sm:flex sm:flex-col gap-4 justify-center">
       <div className="flex flex-col gap-2 items-center">
         <SidebarBtn clickHandler={handleLogOut} name="chats">
           <BiMessageSquareDetail />
