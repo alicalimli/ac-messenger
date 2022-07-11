@@ -36,17 +36,17 @@ const Sidebar = () => {
   return (
     <nav className="hidden p-4 w-fit sm:flex sm:flex-col gap-4 justify-center">
       <div className="flex flex-col gap-2 items-center">
-        <SidebarBtn clickHandler={handleLogOut}>
+        <SidebarBtn clickHandler={handleLogOut} name="chats">
           <BiMessageSquareDetail />
         </SidebarBtn>
-        <SidebarBtn clickHandler={handleLogOut}>
+        <SidebarBtn clickHandler={handleLogOut} name="profile">
           <AiOutlineUser />
         </SidebarBtn>
-        <SidebarBtn clickHandler={handleLogOut}>
+        <SidebarBtn clickHandler={handleLogOut} name="settings">
           <FiSettings />
         </SidebarBtn>
       </div>
-      <SidebarBtn clickHandler={handleLogOut}>
+      <SidebarBtn clickHandler={handleLogOut} name="logout">
         <BiLogOut />
       </SidebarBtn>
 
