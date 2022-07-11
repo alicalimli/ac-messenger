@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
+import { AiOutlineUser } from "react-icons/ai";
+import { FiSettings } from "react-icons/fi";
+import { BiMessageSquareDetail } from "react-icons/bi";
 
 import { UserContext, UserTokenContext } from "../../Contexts";
 import { useLocalStorage } from "../../Hooks/";
@@ -29,18 +32,26 @@ const Sidebar = () => {
   };
 
   return (
-    <nav className="hidden p-4 w-fit bg-gray-300 sm:flex sm:flex-col gap-4">
-      {/*  <div className="mt-auto flex flex-col gap-4 items-center">
-        <div className="p-6 bg-blue-600 rounded-full"></div>
-        <button
+    <nav className="hidden p-4 w-fit sm:flex sm:flex-col gap-4 justify-center">
+      <div className="flex flex-col gap-2 items-center">
+        <button className="p-2 text-muted text-2xl rounded">
+          <BiMessageSquareDetail />
+        </button>
+        <button className="p-2 text-muted text-2xl rounded">
+          <AiOutlineUser />
+        </button>
+        <button className="p-2 text-muted text-2xl rounded">
+          <FiSettings />
+        </button>
+      </div>
+              <button
           onClick={handleLogOut}
-          className="p-2 w-fit bg-blue-600 text-white rounded"
+          className="p-2 text-muted text-2xl rounded"
         >
           <BiLogOut />
         </button>
-      </div>*/}
 
-      <div>
+      {/*      <div>
         <div className="flex flex-wrap gap-2 mt-auto">
           <div className="p-2 w-12 h-12 rounded-full bg-white">
              <img
@@ -65,7 +76,7 @@ const Sidebar = () => {
         >
           Logout
         </button>
-      </div>
+      </div>*/}
     </nav>
   );
 };
