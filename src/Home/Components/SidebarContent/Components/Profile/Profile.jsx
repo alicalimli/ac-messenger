@@ -10,15 +10,13 @@ const Profile = () => {
 
   return (
     <div className="bg-white flex flex-col">
-      <div className="flex-col justify-center gap-4">
-        <div className="relative bg-primary-main p-4 h-32">
-          <h1 className="text-xl text-white">My Profile</h1>
-          <img
-            className="w-full bg-cover bg-center bg-blue-600 w-16 h-16 rounded-full border border-4 border-white dark:border-black absolute bottom-0 left-1/2 translate-y-1/2 -translate-x-1/2"
+      <div className="flex-col justify-center gap-4 p-6">
+        <h1 className="text-xl text-black dark:text-white">My Profile</h1>
+        <div className="flex flex-col items-center text-center p-4 px-8">
+           <img
+            className="w-full bg-cover bg-center bg-primary-main mb-4 w-16 h-16 rounded-full border border-4 border-white dark:border-black"
             src={userInfo.profile}
           />
-        </div>
-        <div className="flex flex-col items-center mt-8 text-center p-4 px-8">
           <h2 className="text-lg">{userInfo.username}</h2>
           <p className="text-muted-light dark:text-muted-dark">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
