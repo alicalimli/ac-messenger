@@ -1,4 +1,4 @@
 import Conversation from './Conversation/Conversation'
-import Sidebar from './Sidebar/Sidebar'
+import SidebarNav from './SidebarNav/SidebarNav'
 
-export{Sidebar, Conversation}
+export{SidebarNav, Conversation}
