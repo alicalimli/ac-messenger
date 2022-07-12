@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext,useState } from "react";
 
 import {
   UserContext,
@@ -20,6 +20,15 @@ const Profile = () => {
     { icon: GoMention, text: userInfo.username },
     { icon: HiOutlineLocationMarker, text: "fatsa" },
   ];
+
+  const copyToClipboard = (e) => {
+    const btn = e.target.closest('button')
+    const text = btn.textContent
+
+    navigator.clipboard.writeText(text);
+
+    setToastMsg(`Copied ${text}.`)
+  }
 
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
@@ -50,7 +59,7 @@ const Profile = () => {
           {infoButtons.map((obj) => {
             const Icon = obj.icon;
             return (
-              <TwTrnButton key={obj.text}>
+              <TwTrnButton clickHandler={copyToClipboard} key={obj.text}>
                 <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
                 {obj.text}
               </TwTrnButton>
