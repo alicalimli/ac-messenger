@@ -52,7 +52,7 @@ const SidebarNav = ({ setSideBarContent }) => {
             return (
               <TwTrnButton addClass="relative group" key={obj.name} clickHandler={()=>setSideBarContent(obj.name)}>
                 <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
-                <TwTooltip>{obj.name}</TwTooltip>
+                <TwTooltip position="right">{obj.name}</TwTooltip>
               </TwTrnButton>
             );
           })}
