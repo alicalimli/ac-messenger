@@ -7,7 +7,7 @@ import { UserContext } from "/src/setup/user-context-provider";
 
 import { useLocalStorage, useAuth } from "../../hooks";
 
-export const SignIn = ({
+const SignIn = ({
   setPendingMsg,
   setIsSigningIn,
   setKeepSignedIn,
@@ -103,3 +103,5 @@ export const SignIn = ({
     </form>
   );
 };
+
+export default SignIn;

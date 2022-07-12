@@ -23,4 +23,5 @@ const Home = ({ userInfo, setUserInfo }) => {
     </>
   );
 };
+
 export default Home;

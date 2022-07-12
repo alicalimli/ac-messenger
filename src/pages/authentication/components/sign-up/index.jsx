@@ -5,7 +5,7 @@ import { InputForm } from "/src/common/components";
 import { UserContext } from "/src/setup/user-context-provider";
 import { useLocalStorage, useAuth } from "../../hooks";
 
-export const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
+const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
@@ -110,3 +110,5 @@ export const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
     </form>
   );
 };
+
+export default SignUp;

@@ -8,7 +8,7 @@ import { BiMessageSquareDetail } from "react-icons/bi";
 import { UserContext, UserTokenContext } from "/src/setup/user-context-provider";
 import { useLocalStorage } from "/src/common/hooks";
 
-import {SidebarBtn} from "./sidebar-buttons";
+import SidebarBtn from "./sidebar-buttons";
 
 const SidebarNav = ({ setSideBarContent }) => {
   const navigate = useNavigate();

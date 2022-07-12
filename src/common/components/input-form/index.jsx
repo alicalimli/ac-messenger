@@ -3,7 +3,7 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 const inputClass = `text-lg bg-transparent peer p-2 px-4 flex items-center rounded-xl outline-none border border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main dark:focus-primary-main invalid:border-red-600 dark:invalid:border-red-500 duration-200 text-black dark:text-white`;
 
-export const InputForm = ({
+const InputForm = ({
   label,
   invalidLabel,
   type,
@@ -68,3 +68,5 @@ export const InputForm = ({
     </label>
   );
 };
+
+export default InputForm;

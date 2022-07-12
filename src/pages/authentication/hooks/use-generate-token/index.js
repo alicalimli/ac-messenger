@@ -1,4 +1,4 @@
-export const useGenerateToken = () => {
+const useGenerateToken = () => {
   const generateToken = async (email, pass) => {
     try {
       let formData = new FormData();
@@ -27,3 +27,5 @@ export const useGenerateToken = () => {
 
   return generateToken;
 };
+
+export default useGenerateToken;

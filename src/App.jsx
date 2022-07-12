@@ -4,12 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { UserContextProvider, UserContext, UserTokenContext } from "./setup/user-context-provider";
 
-import Authentication from "./pages/authentication/Authentication";
+import Authentication from "./pages/authentication";
 
 import { useLocalStorage } from "./common/hooks";
 import { Toast } from "./common/components";
 
-import Home from "./pages/home/Home";
+import Home from "./pages/home";
 
 import { motion, AnimatePresence } from "framer-motion";
 

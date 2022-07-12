@@ -5,8 +5,10 @@ import { useLocalStorage } from "/src/common/hooks";
 
 import { useGenerateToken } from "../";
 
-export const useAuth = (setPendingMsg, setErrorMsg) => {
+const useAuth = (setPendingMsg, setErrorMsg) => {
   const defaultProfileURL = `https://cdn-icons-png.flaticon.com/512/1077/1077114.png?w=740`;
+
+  console.log(useGenerateToken)
 
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
@@ -100,3 +102,5 @@ export const useAuth = (setPendingMsg, setErrorMsg) => {
 
   return { signInUser, signUpUser, authenticate };
 };
+
+export default useAuth;

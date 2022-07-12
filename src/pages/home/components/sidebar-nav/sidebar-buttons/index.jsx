@@ -1,4 +1,4 @@
-export const SidebarBtn = ({ children, clickHandler, name }) => {
+const SidebarBtn = ({ children, clickHandler, name }) => {
   return (
     <button
       onClick={clickHandler}
@@ -11,3 +11,5 @@ export const SidebarBtn = ({ children, clickHandler, name }) => {
     </button>
   );
 };
+
+export default SidebarBtn;
