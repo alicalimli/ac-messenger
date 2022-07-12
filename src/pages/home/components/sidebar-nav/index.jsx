@@ -50,7 +50,7 @@ const SidebarNav = ({ setSideBarContent }) => {
         {sidebarButtons.map((obj) => {
             const Icon = obj.icon;
             return (
-              <TwTrnButton addClass="relative group" key={obj.name} clickHandler={()=>setSideBarContent(obj.name)}>
+              <TwTrnButton addClass="relative group z-10" key={obj.name} clickHandler={()=>setSideBarContent(obj.name)}>
                 <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
                 <TwTooltip position="right">{obj.name}</TwTooltip>
               </TwTrnButton>
@@ -58,7 +58,7 @@ const SidebarNav = ({ setSideBarContent }) => {
           })}
       </div>
 
-      <TwTrnButton addClass="relative group" clickHandler={handleLogOut}>
+      <TwTrnButton addClass="relative group z-10" clickHandler={handleLogOut}>
         <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl"/>
         <TwTooltip position="right">logout</TwTooltip>
       </TwTrnButton>
