@@ -8,7 +8,7 @@ const Home = ({ userInfo, setUserInfo }) => {
   const defaultSideBarContent = "chats";
   const [sidebarContent, setSideBarContent] = useState(defaultSideBarContent);
 
-  const previousContentRef = useRef('');
+  const previousContentRef = useRef("");
 
   return (
     <>

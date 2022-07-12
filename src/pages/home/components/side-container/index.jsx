@@ -2,7 +2,11 @@ import { Profile, Chats } from "./components";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-const SidebarContent = ({ sidebarContent, setSideBarContent, previousContentRef }) => {
+const SidebarContent = ({
+  sidebarContent,
+  setSideBarContent,
+  previousContentRef,
+}) => {
   return (
     <div className="relative border-r border-muted-light/10 dark:border-muted-dark/10 w-full sm:w-[38rem] overflow-x-hidden">
       <AnimatePresence>
@@ -27,7 +31,10 @@ const SidebarContent = ({ sidebarContent, setSideBarContent, previousContentRef 
             exit={{ opacity: 0, x: "50%" }}
             transition={{ type: "spring", mass: 0.25 }}
           >
-            <Profile previousContentRef={previousContentRef} setSideBarContent={setSideBarContent}/>
+            <Profile
+              previousContentRef={previousContentRef}
+              setSideBarContent={setSideBarContent}
+            />
           </motion.div>
         )}
       </AnimatePresence>

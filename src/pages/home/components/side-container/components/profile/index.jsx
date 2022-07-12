@@ -1,4 +1,4 @@
-import { useContext,useState } from "react";
+import { useContext, useState } from "react";
 
 import {
   UserContext,
@@ -8,12 +8,18 @@ import {
 import { HiOutlineMail, HiOutlineLocationMarker } from "react-icons/hi";
 import { GoMention } from "react-icons/go";
 
-import { Modal, TwButton, TwTrnButton, TwTooltip, Toast} from "/src/common/components";
+import {
+  Modal,
+  TwButton,
+  TwTrnButton,
+  TwTooltip,
+  Toast,
+} from "/src/common/components";
 
-const Profile = ({previousContentRef, setSideBarContent}) => {
+const Profile = ({ previousContentRef, setSideBarContent }) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
 
-  const [toastMsg, setToastMsg] = useState('')
+  const [toastMsg, setToastMsg] = useState("");
 
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },
@@ -24,16 +30,18 @@ const Profile = ({previousContentRef, setSideBarContent}) => {
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
 
-    setToastMsg(`Copied ${text}.`)
-  }
+    setToastMsg(`Copied ${text}.`);
+  };
 
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
-      <Toast durationMs='3000' msg={toastMsg} setMsg={setToastMsg} />
+      <Toast durationMs="3000" msg={toastMsg} setMsg={setToastMsg} />
 
       <div className="flex-col justify-center gap-4 p-6">
-
-        <TwTrnButton clickHandler={() => setSideBarContent(previousContentRef.current)} addClass="w-full">{`< My Profile`}</TwTrnButton>
+        <TwTrnButton
+          clickHandler={() => setSideBarContent(previousContentRef.current)}
+          addClass="w-full"
+        >{`< My Profile`}</TwTrnButton>
 
         <div className="flex flex-col items-center text-center p-4 px-8">
           <img
@@ -54,11 +62,16 @@ const Profile = ({previousContentRef, setSideBarContent}) => {
         <p className="text-muted-light dark:text-muted-dark">
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </p>
+
         <div className="flex flex-col gap-1 w-100 ">
           {infoButtons.map((obj) => {
             const Icon = obj.icon;
             return (
-              <TwTrnButton addClass="relative group"clickHandler={()=> copyToClipboard(obj.text)} key={obj.text}>
+              <TwTrnButton
+                addClass="relative group"
+                clickHandler={() => copyToClipboard(obj.text)}
+                key={obj.text}
+              >
                 <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
                 {obj.text}
                 <TwTooltip position="top">Copy to clipboard</TwTooltip>

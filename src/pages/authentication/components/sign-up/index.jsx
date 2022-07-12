@@ -85,9 +85,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         minLength="8"
         invalidLabel=""
       />
-
       <TwButton isDisabled={pendingMsg}>Sign Up</TwButton>
-
       <p className="text-muted-light dark:text-muted-dark text-sm">
         Already have an account?{" "}
         <a

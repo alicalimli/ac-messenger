@@ -6,9 +6,9 @@ const Toast = ({ children, durationMs, msg, setMsg }) => {
   let toastTimeout;
 
   const removeMsg = () => {
-    if (!durationMs || typeof +durationMs !== 'number') return;
+    if (!durationMs || typeof +durationMs !== "number") return;
 
-    clearTimeout(toastTimeout)
+    clearTimeout(toastTimeout);
     toastTimeout = setTimeout(() => setMsg(""), +durationMs);
   };
 

@@ -13,7 +13,11 @@ import {
 import { useLocalStorage } from "/src/common/hooks";
 import { TwTrnButton, TwTooltip } from "/src/common/components";
 
-const SidebarNav = ({ sidebarContent, setSideBarContent, previousContentRef}) => {
+const SidebarNav = ({
+  sidebarContent,
+  setSideBarContent,
+  previousContentRef,
+}) => {
   const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useContext(UserContext);
@@ -27,10 +31,10 @@ const SidebarNav = ({ sidebarContent, setSideBarContent, previousContentRef}) =>
   );
 
   const sidebarButtons = [
-    {name: "chats", icon: BiMessageSquareDetail},
-    {name: "profile", icon: AiOutlineUser},
-    {name: "settings", icon: FiSettings},
-  ]
+    { name: "chats", icon: BiMessageSquareDetail },
+    { name: "profile", icon: AiOutlineUser },
+    { name: "settings", icon: FiSettings },
+  ];
 
   const handleLogOut = () => {
     setUserInfo(null);
@@ -44,25 +48,29 @@ const SidebarNav = ({ sidebarContent, setSideBarContent, previousContentRef}) =>
 
   const changeSideContent = (sideContentName) => {
     previousContentRef.current = sidebarContent;
-    setSideBarContent(sideContentName)
-  }
+    setSideBarContent(sideContentName);
+  };
 
   return (
     <nav className="hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 sm:flex sm:flex-col gap-4 justify-center">
       <div className="flex flex-col gap-2 items-center">
         {sidebarButtons.map((obj) => {
-            const Icon = obj.icon;
-            return (
-              <TwTrnButton addClass="relative group z-10" key={obj.name} clickHandler={() => changeSideContent(obj.name)}>
-                <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
-                <TwTooltip position="right">{obj.name}</TwTooltip>
-              </TwTrnButton>
-            );
-          })}
+          const Icon = obj.icon;
+          return (
+            <TwTrnButton
+              addClass="relative group z-10"
+              key={obj.name}
+              clickHandler={() => changeSideContent(obj.name)}
+            >
+              <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
+              <TwTooltip position="right">{obj.name}</TwTooltip>
+            </TwTrnButton>
+          );
+        })}
       </div>
 
       <TwTrnButton addClass="relative group z-10" clickHandler={handleLogOut}>
-        <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl"/>
+        <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl" />
         <TwTooltip position="right">logout</TwTooltip>
       </TwTrnButton>
     </nav>
