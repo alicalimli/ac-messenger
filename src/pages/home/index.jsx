@@ -11,7 +11,7 @@ const Home = ({ userInfo, setUserInfo }) => {
   const previousContentRef = useRef("");
 
   return (
-    <>
+    <div className="flex w-full min-h-screen">
       <SidebarNav
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
@@ -23,7 +23,7 @@ const Home = ({ userInfo, setUserInfo }) => {
         previousContentRef={previousContentRef}
       />
       <Conversation />
-    </>
+    </div>
   );
 };
 
