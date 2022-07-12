@@ -8,10 +8,16 @@ import {
 import { HiOutlineMail, HiOutlineLocationMarker } from "react-icons/hi";
 import { GoMention } from "react-icons/go";
 
-import {Modal, TwButton, TwTrnButton} from '/src/common/components'
+import { Modal, TwButton, TwTrnButton } from "/src/common/components";
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useContext(UserContext);
+
+  const infoButtons = [
+    { icon: HiOutlineMail, text: userInfo.email },
+    { icon: GoMention, text: userInfo.username },
+    { icon: HiOutlineLocationMarker, text: "fatsa" },
+  ];
 
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
@@ -36,21 +42,17 @@ const Profile = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </p>
         <div className="flex flex-col gap-1 w-100 ">
-          <TwTrnButton>
-            <HiOutlineMail className="text-muted-light dark:text-muted-dark text-2xl" />
-            {userInfo.email}
-          </TwTrnButton>
-          <TwTrnButton>
-            <GoMention className="text-muted-light dark:text-muted-dark text-2xl" />
-            {userInfo.username}
-          </TwTrnButton>
-          <TwTrnButton>
-            <HiOutlineLocationMarker className="text-muted-light dark:text-muted-dark text-2xl" />
-            Fatsa
-          </TwTrnButton>
-          <TwButton addClass="mt-2">
-            Edit Info
-          </TwButton>
+          {infoButtons.map((obj) => {
+            const Icon = obj.icon;
+            return (
+              <TwTrnButton key={obj.text}>
+                <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
+                {obj.text}
+              </TwTrnButton>
+            );
+          })}
+
+          <TwButton addClass="mt-2">Edit Info</TwButton>
         </div>
       </div>
     </div>
