@@ -2,11 +2,12 @@ import { StrictMode, useEffect, useState, useContext } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { UserContextProvider, UserContext, UserTokenContext } from "./Contexts";
+import { UserContextProvider, UserContext, UserTokenContext } from "./setup/user-context-provider";
 
 import Authentication from "./pages/authentication/Authentication";
+
 import { useLocalStorage } from "./common/hooks";
-import { Toast } from "./Components";
+import { Toast } from "./common/components";
 
 import Home from "./Home/Home";
 

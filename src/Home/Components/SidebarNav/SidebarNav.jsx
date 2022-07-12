@@ -5,7 +5,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 import { BiMessageSquareDetail } from "react-icons/bi";
 
-import { UserContext, UserTokenContext } from "/src/Contexts";
+import { UserContext, UserTokenContext } from "/src/setup/user-context-provider";
 import { useLocalStorage } from "/src/common/hooks";
 
 import SidebarBtn from "./SidebarBtn/SidebarBtn";

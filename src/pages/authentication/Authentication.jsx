@@ -1,7 +1,7 @@
 import { useRef, useState, useContext, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { UserContext } from "/src/Contexts";
+import { UserContext } from "/src/setup/user-context-provider";
 import { useLocalStorage } from "/src/common/hooks";
 
 import { useAuth } from "./hooks";

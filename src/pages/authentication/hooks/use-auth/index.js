@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState, useContext } from "react";
 
-import { UserContext, UserTokenContext } from "/src/Contexts";
+import { UserContext, UserTokenContext } from "/src/setup/user-context-provider";
 import { useLocalStorage } from "/src/common/hooks";
 
 import { useGenerateToken } from "../";

@@ -6,7 +6,7 @@ import { BiMicrophone } from "react-icons/bi";
 import { RiImageAddLine } from "react-icons/ri";
 import { BiUser } from "react-icons/bi";
 
-import elvis from "../../../Assets/elvis.jpg";
+import elvis from "/src/assets/images/elvis.jpg";
 import Messages from "./Messages/Messages";
 
 const ChatBox = () => {

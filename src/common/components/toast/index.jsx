@@ -2,7 +2,7 @@ import React from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
-const Toast = ({ children }) => {
+export const Toast = ({ children }) => {
   return createPortal(
     <AnimatePresence>
       {children && (
@@ -21,5 +21,3 @@ const Toast = ({ children }) => {
     document.getElementById("toast")
   );
 };
-
-export default Toast;
