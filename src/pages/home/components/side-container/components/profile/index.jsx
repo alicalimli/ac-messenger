@@ -8,10 +8,12 @@ import {
 import { HiOutlineMail, HiOutlineLocationMarker } from "react-icons/hi";
 import { GoMention } from "react-icons/go";
 
-import { Modal, TwButton, TwTrnButton } from "/src/common/components";
+import { Modal, TwButton, TwTrnButton, Toast} from "/src/common/components";
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useContext(UserContext);
+
+  const [toastMsg, setToastMsg] = useState('')
 
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },
@@ -21,6 +23,9 @@ const Profile = () => {
 
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
+      <Toast>
+        {toastMsg}
+      </Toast>
       <div className="flex-col justify-center gap-4 p-6">
         <h1 className="text-xl text-black dark:text-white">My Profile</h1>
         <div className="flex flex-col items-center text-center p-4 px-8">
