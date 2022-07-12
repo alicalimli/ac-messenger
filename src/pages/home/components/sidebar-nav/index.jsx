@@ -57,9 +57,9 @@ const SidebarNav = ({ setSideBarContent }) => {
           })}
       </div>
 
-      <SidebarBtn clickHandler={handleLogOut} name="logout">
-        <BiLogOut />
-      </SidebarBtn>
+      <TwTrnButton clickHandler={handleLogOut}>
+        <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl"/>
+      </TwTrnButton>
     </nav>
   );
 };
