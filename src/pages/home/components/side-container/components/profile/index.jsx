@@ -32,9 +32,8 @@ const Profile = () => {
 
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
-      <Toast>
-        {toastMsg}
-      </Toast>
+      <Toast durationMs='5000' msg={toastMsg} setMsg={setToastMsg} />
+
       <div className="flex-col justify-center gap-4 p-6">
         <h1 className="text-xl text-black dark:text-white">My Profile</h1>
         <div className="flex flex-col items-center text-center p-4 px-8">
