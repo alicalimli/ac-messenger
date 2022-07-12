@@ -11,7 +11,7 @@ import {
 } from "/src/setup/user-context-provider";
 
 import { useLocalStorage } from "/src/common/hooks";
-import { TwTrnButton } from "/src/common/components";
+import { TwTrnButton, TwTooltip } from "/src/common/components";
 
 import SidebarBtn from "./sidebar-buttons";
 
@@ -50,8 +50,9 @@ const SidebarNav = ({ setSideBarContent }) => {
         {sidebarButtons.map((obj) => {
             const Icon = obj.icon;
             return (
-              <TwTrnButton key={obj.name} clickHandler={()=>setSideBarContent(obj.name)}>
+              <TwTrnButton addClass="relative group" key={obj.name} clickHandler={()=>setSideBarContent(obj.name)}>
                 <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
+                <TwTooltip>{obj.name}</TwTooltip>
               </TwTrnButton>
             );
           })}
