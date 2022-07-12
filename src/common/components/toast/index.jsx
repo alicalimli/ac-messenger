@@ -7,11 +7,9 @@ const Toast = ({ children, durationMs, msg, setMsg }) => {
 
   const removeMsg = () => {
     if (!durationMs) return;
+
     clearTimeout(toastTimeout)
-    const ms = +durationMs;
-    toastTimeout = setTimeout(() => {
-      setMsg("");
-    }, ms);
+    toastTimeout = setTimeout(() => setMsg(""), +ms);
   };
 
   useEffect(() => {
