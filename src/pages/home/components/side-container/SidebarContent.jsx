@@ -1,4 +1,4 @@
-import { Profile, Chats } from "./Components";
+import { Profile, Chats } from "./components";
 
 import { motion, AnimatePresence } from "framer-motion";
 

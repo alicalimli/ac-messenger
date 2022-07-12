@@ -9,7 +9,7 @@ import Authentication from "./pages/authentication/Authentication";
 import { useLocalStorage } from "./common/hooks";
 import { Toast } from "./common/components";
 
-import Home from "./Home/Home";
+import Home from "./pages/home/Home";
 
 import { motion, AnimatePresence } from "framer-motion";
 

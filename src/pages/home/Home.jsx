@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { SidebarNav, Conversation, SidebarContent } from "./Components";
-import { useLocalStorage } from "../common/hooks";
+import { SidebarNav, Conversation, SidebarContent } from "./components";
+import { useLocalStorage } from "/src/common/hooks";
 
 const Home = ({ userInfo, setUserInfo }) => {
   const defaultSideBarContent = "chats";

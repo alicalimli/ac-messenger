@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AiOutlineArrowDown } from "react-icons/ai";
 
-const Messages = ({ messages }) => {
+export const Messages = ({ messages }) => {
   const [showArrowDown, setShowArrowDown] = useState(false);
   const conversationContainer = useRef("");
   const latestMsg = useRef("");
@@ -78,5 +78,3 @@ const Messages = ({ messages }) => {
     </main>
   );
 };
-
-export default Messages;
