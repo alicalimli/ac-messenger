@@ -21,10 +21,7 @@ const Profile = () => {
     { icon: HiOutlineLocationMarker, text: "fatsa" },
   ];
 
-  const copyToClipboard = (e) => {
-    const btn = e.target.closest('button')
-    const text = btn.textContent
-
+  const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
 
     setToastMsg(`Copied ${text}.`)
@@ -59,7 +56,7 @@ const Profile = () => {
           {infoButtons.map((obj) => {
             const Icon = obj.icon;
             return (
-              <TwTrnButton addClass="relative group"clickHandler={copyToClipboard} key={obj.text}>
+              <TwTrnButton addClass="relative group"clickHandler={()=> copyToClipboard(obj.text)} key={obj.text}>
                 <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
                 {obj.text}
                 <TwTooltip position="top">Copy to clipboard</TwTooltip>
