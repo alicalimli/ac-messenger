@@ -8,6 +8,8 @@ import {
 import { HiOutlineMail, HiOutlineLocationMarker } from "react-icons/hi";
 import { GoMention } from "react-icons/go";
 
+import {Modal} from '/src/common/components'
+
 const Profile = () => {
   const [userInfo, setUserInfo] = useContext(UserContext);
 
