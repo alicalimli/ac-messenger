@@ -9,7 +9,9 @@ import {
   UserContext,
   UserTokenContext,
 } from "/src/setup/user-context-provider";
+
 import { useLocalStorage } from "/src/common/hooks";
+import { TwTrnButton } from "/src/common/components";
 
 import SidebarBtn from "./sidebar-buttons";
 
@@ -26,6 +28,12 @@ const SidebarNav = ({ setSideBarContent }) => {
     false
   );
 
+  const sidebarButtons = [
+    {name: "chats", icon: BiMessageSquareDetail},
+    {name: "profile", icon: AiOutlineUser},
+    {name: "settings", icon: FiSettings},
+  ]
+
   const handleLogOut = () => {
     setUserInfo(null);
     setSavedUserInfo(null);
@@ -39,25 +47,16 @@ const SidebarNav = ({ setSideBarContent }) => {
   return (
     <nav className="hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 sm:flex sm:flex-col gap-4 justify-center">
       <div className="flex flex-col gap-2 items-center">
-        <SidebarBtn
-          clickHandler={() => setSideBarContent("chats")}
-          name="chats"
-        >
-          <BiMessageSquareDetail />
-        </SidebarBtn>
-        <SidebarBtn
-          clickHandler={() => setSideBarContent("profile")}
-          name="profile"
-        >
-          <AiOutlineUser />
-        </SidebarBtn>
-        <SidebarBtn
-          clickHandler={() => setSideBarContent("settings")}
-          name="settings"
-        >
-          <FiSettings />
-        </SidebarBtn>
+        {sidebarButtons.map((obj) => {
+            const Icon = obj.icon;
+            return (
+              <TwTrnButton key={obj.name} clickHandler={()=>setSideBarContent(obj.name)}>
+                <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
+              </TwTrnButton>
+            );
+          })}
       </div>
+
       <SidebarBtn clickHandler={handleLogOut} name="logout">
         <BiLogOut />
       </SidebarBtn>
