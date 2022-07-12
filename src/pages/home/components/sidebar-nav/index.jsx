@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineUser } from "react-icons/ai";
@@ -13,9 +13,7 @@ import {
 import { useLocalStorage } from "/src/common/hooks";
 import { TwTrnButton, TwTooltip } from "/src/common/components";
 
-import SidebarBtn from "./sidebar-buttons";
-
-const SidebarNav = ({ setSideBarContent }) => {
+const SidebarNav = ({ sidebarContent, setSideBarContent, previousContentRef}) => {
   const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useContext(UserContext);
@@ -44,13 +42,18 @@ const SidebarNav = ({ setSideBarContent }) => {
     setKeepSignedIn(false);
   };
 
+  const changeSideContent = (sideContentName) => {
+    previousContentRef.current = sidebarContent;
+    setSideBarContent(sideContentName)
+  }
+
   return (
     <nav className="hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 sm:flex sm:flex-col gap-4 justify-center">
       <div className="flex flex-col gap-2 items-center">
         {sidebarButtons.map((obj) => {
             const Icon = obj.icon;
             return (
-              <TwTrnButton addClass="relative group z-10" key={obj.name} clickHandler={()=>setSideBarContent(obj.name)}>
+              <TwTrnButton addClass="relative group z-10" key={obj.name} clickHandler={() => changeSideContent(obj.name)}>
                 <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
                 <TwTooltip position="right">{obj.name}</TwTooltip>
               </TwTrnButton>

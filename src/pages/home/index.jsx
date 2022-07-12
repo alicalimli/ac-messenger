@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { SidebarNav, Conversation, SidebarContent } from "./components";
@@ -8,17 +8,19 @@ const Home = ({ userInfo, setUserInfo }) => {
   const defaultSideBarContent = "chats";
   const [sidebarContent, setSideBarContent] = useState(defaultSideBarContent);
 
+  const previousContentRef = useRef('');
+
   return (
     <>
       <SidebarNav
-        userInfo={userInfo}
-        setUserInfo={setUserInfo}
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
+        previousContentRef={previousContentRef}
       />
       <SidebarContent
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
+        previousContentRef={previousContentRef}
       />
       <Conversation />
     </>

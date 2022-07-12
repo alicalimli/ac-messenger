@@ -10,7 +10,7 @@ import { GoMention } from "react-icons/go";
 
 import { Modal, TwButton, TwTrnButton, TwTooltip, Toast} from "/src/common/components";
 
-const Profile = () => {
+const Profile = ({previousContentRef, setSideBarContent}) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
 
   const [toastMsg, setToastMsg] = useState('')
@@ -32,7 +32,9 @@ const Profile = () => {
       <Toast durationMs='3000' msg={toastMsg} setMsg={setToastMsg} />
 
       <div className="flex-col justify-center gap-4 p-6">
-        <h1 className="text-xl text-black dark:text-white">My Profile</h1>
+
+        <TwTrnButton clickHandler={() => setSideBarContent(previousContentRef.current)} addClass="w-full">{`< My Profile`}</TwTrnButton>
+
         <div className="flex flex-col items-center text-center p-4 px-8">
           <img
             className="w-full bg-cover bg-center bg-primary-main mb-4 w-16 h-16 rounded-full border border-4 border-white dark:border-black"
