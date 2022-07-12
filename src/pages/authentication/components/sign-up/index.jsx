@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { motion } from "framer-motion";
 
-import { InputForm } from "/src/common/components";
+import { InputForm, TwButton } from "/src/common/components";
 import { UserContext } from "/src/setup/user-context-provider";
 import { useLocalStorage, useAuth } from "../../hooks";
 
@@ -85,19 +85,9 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         minLength="8"
         invalidLabel=""
       />
-      {!pendingMsg && (
-        <button className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white">
-          Sign up
-        </button>
-      )}
-      {pendingMsg && (
-        <button
-          disabled
-          className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white"
-        >
-          Signing up...
-        </button>
-      )}
+
+      <TwButton isDisabled={pendingMsg}>Sign Up</TwButton>
+
       <p className="text-muted-light dark:text-muted-dark text-sm">
         Already have an account?{" "}
         <a

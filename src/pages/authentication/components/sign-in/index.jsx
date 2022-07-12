@@ -2,7 +2,7 @@ import { useRef, useEffect, useState, useContext } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 import { motion } from "framer-motion";
 
-import { InputForm } from "/src/common/components";
+import { InputForm, TwButton } from "/src/common/components";
 import { UserContext } from "/src/setup/user-context-provider";
 
 import { useLocalStorage, useAuth } from "../../hooks";
@@ -76,20 +76,7 @@ const SignIn = ({
         Keep me signed in
       </a>
 
-      {!pendingMsg && (
-        <button className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white">
-          Sign in
-        </button>
-      )}
-
-      {pendingMsg && (
-        <button
-          disabled
-          className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white"
-        >
-          Signing in...
-        </button>
-      )}
+      <TwButton isDisabled={pendingMsg}>Sign In</TwButton>
 
       <p className="text-muted-light text-sm text-black dark:text-muted-dark">
         Don't have an account?{" "}
