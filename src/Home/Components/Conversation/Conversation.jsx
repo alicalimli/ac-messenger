@@ -44,7 +44,9 @@ const ChatBox = () => {
             </div>
             <div className="flex flex-col gap-0">
               <h2 className="text-xl text-black dark:text-white">Elvis</h2>
-              <p className="text-sm text-muted-light dark:text-muted-dark">online</p>
+              <p className="text-sm text-muted-light dark:text-muted-dark">
+                online
+              </p>
             </div>
           </div>
         </div>

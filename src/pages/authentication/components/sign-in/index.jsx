@@ -43,7 +43,9 @@ export const SignIn = ({
       </div>
 
       {errorMsg && (
-        <p className="text-red-600 text-md text-center dark:text-red-500">{errorMsg}</p>
+        <p className="text-red-600 text-md text-center dark:text-red-500">
+          {errorMsg}
+        </p>
       )}
 
       <InputForm
@@ -81,7 +83,10 @@ export const SignIn = ({
       )}
 
       {pendingMsg && (
-        <button disabled className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white">
+        <button
+          disabled
+          className="bg-primary-main hover:bg-primary-tinted duration-300 rounded-xl p-2 px-4 text-white"
+        >
           Signing in...
         </button>
       )}

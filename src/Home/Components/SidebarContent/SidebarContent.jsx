@@ -14,7 +14,7 @@ const SidebarContent = ({ sidebarContent, setSideBarContent }) => {
             animate={{ opacity: 1, x: 0 }}
             initial={{ opacity: 0, x: "-50%" }}
             exit={{ opacity: 0, x: "50%" }}
-              transition={{type:'spring', mass:0.25}}
+            transition={{ type: "spring", mass: 0.25 }}
           >
             <Chats />
           </motion.div>
@@ -26,7 +26,7 @@ const SidebarContent = ({ sidebarContent, setSideBarContent }) => {
             animate={{ opacity: 1, x: 0 }}
             initial={{ opacity: 0, x: "-50%" }}
             exit={{ opacity: 0, x: "50%" }}
-              transition={{type:'spring', mass:0.25}}
+            transition={{ type: "spring", mass: 0.25 }}
           >
             <Profile />
           </motion.div>

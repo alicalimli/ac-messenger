@@ -13,12 +13,14 @@ const Profile = () => {
       <div className="flex-col justify-center gap-4 p-6">
         <h1 className="text-xl text-black dark:text-white">My Profile</h1>
         <div className="flex flex-col items-center text-center p-4 px-8">
-           <img
+          <img
             className="w-full bg-cover bg-center bg-primary-main mb-4 w-16 h-16 rounded-full border border-4 border-white dark:border-black"
             alt={`${userInfo.username}'s profile picture`}
             src={userInfo.profile}
           />
-          <h2 className="text-lg text-black dark:text-white">{userInfo.username}</h2>
+          <h2 className="text-lg text-black dark:text-white">
+            {userInfo.username}
+          </h2>
           <p className="text-muted-light dark:text-muted-dark">
             Front-end Developer
           </p>

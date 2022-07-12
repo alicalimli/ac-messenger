@@ -1,12 +1,12 @@
 import { useRef, useEffect, useState, useContext } from "react";
 
 import { UserContext, UserTokenContext } from "/src/Contexts";
-import {useLocalStorage } from '/src/common/hooks'
+import { useLocalStorage } from "/src/common/hooks";
 
-import { useGenerateToken} from "../";
+import { useGenerateToken } from "../";
 
 export const useAuth = (setPendingMsg, setErrorMsg) => {
-  const defaultProfileURL = `https://cdn-icons-png.flaticon.com/512/1077/1077114.png?w=740`
+  const defaultProfileURL = `https://cdn-icons-png.flaticon.com/512/1077/1077114.png?w=740`;
 
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);

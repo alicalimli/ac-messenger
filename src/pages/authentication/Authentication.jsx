@@ -2,12 +2,17 @@ import { useRef, useState, useContext, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { UserContext } from "/src/Contexts";
-import { useLocalStorage } from '/src/common/hooks'
+import { useLocalStorage } from "/src/common/hooks";
 
 import { useAuth } from "./hooks";
 import { SignIn, SignUp } from "./components";
 
-const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg, pendingMsg }) => {
+const Authentication = ({
+  setKeepSignedIn,
+  keepSignedIn,
+  setPendingMsg,
+  pendingMsg,
+}) => {
   const [isSigningIn, setIsSigningIn] = useState(true);
 
   return (
@@ -16,12 +21,12 @@ const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg, pendingM
         <AnimatePresence>
           {isSigningIn && (
             <motion.div
-            key="signin-form"
+              key="signin-form"
               className="absolute w-[90%] sm:w-96 "
-             initial={{ x:'-50%', opacity: 0 }}
+              initial={{ x: "-50%", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              exit={{ x: '-50%', opacity: 0 }}
-              transition={{type:'spring', mass:0.25}}
+              exit={{ x: "-50%", opacity: 0 }}
+              transition={{ type: "spring", mass: 0.25 }}
             >
               {" "}
               <SignIn
@@ -35,12 +40,12 @@ const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg, pendingM
           )}
           {!isSigningIn && (
             <motion.div
-            key="signup-form"
+              key="signup-form"
               className="absolute w-[90%] sm:w-96"
-              initial={{ x: '50%', opacity: 0 }}
+              initial={{ x: "50%", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              exit={{ x:'50%', opacity: 0 }}
-              transition={{type:'spring', mass:0.25}}
+              exit={{ x: "50%", opacity: 0 }}
+              transition={{ type: "spring", mass: 0.25 }}
             >
               <SignUp
                 setPendingMsg={setPendingMsg}

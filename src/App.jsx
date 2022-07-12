@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { UserContextProvider, UserContext, UserTokenContext } from "./Contexts";
 
-import Authentication  from "./pages/authentication/Authentication";
+import Authentication from "./pages/authentication/Authentication";
 import { useLocalStorage } from "./common/hooks";
 import { Toast } from "./Components";
 
@@ -47,12 +47,12 @@ const Main = () => {
     <StrictMode>
       <BrowserRouter>
         <Toast>
-              {pendingMsg && (
-                <h1 className="flex items-center gap-4">
-                  {pendingMsg}...{" "}
-                  <AiOutlineLoading3Quarters className="animate-spin" />
-                </h1>
-            )}
+          {pendingMsg && (
+            <h1 className="flex items-center gap-4">
+              {pendingMsg}...{" "}
+              <AiOutlineLoading3Quarters className="animate-spin" />
+            </h1>
+          )}
         </Toast>
 
         {userInfo ? (
