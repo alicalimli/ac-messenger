@@ -8,7 +8,7 @@ import {
 import { HiOutlineMail, HiOutlineLocationMarker } from "react-icons/hi";
 import { GoMention } from "react-icons/go";
 
-import {Modal} from '/src/common/components'
+import {Modal, TwButton, TwTrnButton} from '/src/common/components'
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useContext(UserContext);
@@ -36,18 +36,21 @@ const Profile = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </p>
         <div className="flex flex-col gap-1 w-100 ">
-          <button className="flex gap-4 items-center text-lg hover:bg-muted-light/10 p-2 text-md rounded-xl dark:hover:bg-muted-dark/10 duration-200 text-black dark:text-white">
+          <TwTrnButton>
             <HiOutlineMail className="text-muted-light dark:text-muted-dark text-2xl" />
             {userInfo.email}
-          </button>
-          <button className="flex gap-4 items-center text-lg hover:bg-muted-light/10 p-2 text-md rounded-xl dark:hover:bg-muted-dark/10 duration-200 text-black dark:text-white">
+          </TwTrnButton>
+          <TwTrnButton>
             <GoMention className="text-muted-light dark:text-muted-dark text-2xl" />
             {userInfo.username}
-          </button>
-          <button className="flex gap-4 items-center text-lg hover:bg-muted-light/10 p-2 text-md rounded-xl dark:hover:bg-muted-dark/10 duration-200 text-black dark:text-white">
+          </TwTrnButton>
+          <TwTrnButton>
             <HiOutlineLocationMarker className="text-muted-light dark:text-muted-dark text-2xl" />
             Fatsa
-          </button>
+          </TwTrnButton>
+          <TwButton addClass="mt-2">
+            Edit Info
+          </TwButton>
         </div>
       </div>
     </div>
