@@ -14,11 +14,12 @@ const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg, pendingM
         <AnimatePresence>
           {isSigningIn && (
             <motion.div
-              className="absolute w-[90%] sm:w-96"
-              initial={{ opacity: 0, x: "-50%" }}
-              animate={{ opacity: 1, x: "0" }}
-              exit={{ opacity: 0, x: "-50%" }}
-              transition={{ duration: 0.2 }}
+            key="signin-form"
+              className="absolute w-[90%] sm:w-96 "
+             initial={{ x:'150%', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: '150%', opacity: 0 }}
+              transition={{type:'spring', mass:0.25}}
             >
               {" "}
               <SignIn
@@ -30,16 +31,14 @@ const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg, pendingM
               />
             </motion.div>
           )}
-        </AnimatePresence>
-
-        <AnimatePresence>
           {!isSigningIn && (
             <motion.div
+            key="signup-form"
               className="absolute w-[90%] sm:w-96"
-              initial={{ opacity: 0, x: "50%" }}
-              animate={{ opacity: 1, x: "0" }}
-              exit={{ opacity: 0, x: "50%" }}
-              transition={{ duration: 0.2 }}
+              initial={{ x: '-150%', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x:'-150%', opacity: 0 }}
+              transition={{type:'spring', mass:0.25}}
             >
               <SignUp
                 setPendingMsg={setPendingMsg}
