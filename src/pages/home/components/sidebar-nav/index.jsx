@@ -58,8 +58,9 @@ const SidebarNav = ({ setSideBarContent }) => {
           })}
       </div>
 
-      <TwTrnButton clickHandler={handleLogOut}>
+      <TwTrnButton addClass="relative group" clickHandler={handleLogOut}>
         <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl"/>
+        <TwTooltip position="right">logout</TwTooltip>
       </TwTrnButton>
     </nav>
   );
