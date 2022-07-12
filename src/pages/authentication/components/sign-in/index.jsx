@@ -3,10 +3,10 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { motion } from "framer-motion";
 
 import { InputForm } from "../";
-import { UserContext } from "../../../Contexts";
-import { useLocalStorage, useAuth } from "../../../Hooks";
+import { UserContext } from "/src/Contexts";
+import { useLocalStorage, useAuth } from "../../hooks";
 
-const SignIn = ({
+export const SignIn = ({
   setPendingMsg,
   setIsSigningIn,
   setKeepSignedIn,
@@ -97,5 +97,3 @@ const SignIn = ({
     </form>
   );
 };
-
-export default SignIn;

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { UserContext, UserTokenContext } from "../../../../../Contexts";
+import { UserContext, UserTokenContext } from "/src/Contexts";
 
 import { HiOutlineMail, HiOutlineLocationMarker } from "react-icons/hi";
 import { GoMention } from "react-icons/go";

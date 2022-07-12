@@ -2,10 +2,10 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { motion } from "framer-motion";
 
 import { InputForm } from "../";
-import { UserContext } from "../../../Contexts";
-import { useLocalStorage, useAuth } from "../../../Hooks";
+import { UserContext } from "/src/Contexts";
+import { useLocalStorage, useAuth } from "../../hooks";
 
-const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
+export const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const [userEmail, setUserEmail] = useState("");
@@ -110,5 +110,3 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
     </form>
   );
 };
-
-export default SignUp;

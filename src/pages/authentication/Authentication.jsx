@@ -1,9 +1,11 @@
 import { useRef, useState, useContext, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useLocalStorage, useAuth } from "../Hooks";
 
-import { SignIn, SignUp } from "./Components";
-import { UserContext } from "../Contexts";
+import { UserContext } from "/src/Contexts";
+import { useLocalStorage } from '/src/common/hooks'
+
+import { useAuth } from "./hooks";
+import { SignIn, SignUp } from "./components";
 
 const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg, pendingMsg }) => {
   const [isSigningIn, setIsSigningIn] = useState(true);
