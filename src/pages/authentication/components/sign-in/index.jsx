@@ -2,8 +2,9 @@ import { useRef, useEffect, useState, useContext } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 import { motion } from "framer-motion";
 
-import { InputForm } from "../";
+import { InputForm } from "/src/common/components";
 import { UserContext } from "/src/Contexts";
+
 import { useLocalStorage, useAuth } from "../../hooks";
 
 export const SignIn = ({

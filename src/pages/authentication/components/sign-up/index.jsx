@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { motion } from "framer-motion";
 
-import { InputForm } from "../";
+import { InputForm } from "/src/common/components";
 import { UserContext } from "/src/Contexts";
 import { useLocalStorage, useAuth } from "../../hooks";
 
