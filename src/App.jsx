@@ -2,7 +2,11 @@ import { StrictMode, useEffect, useState, useContext } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { UserContextProvider, UserContext, UserTokenContext } from "./setup/user-context-provider";
+import {
+  UserContextProvider,
+  UserContext,
+  UserTokenContext,
+} from "./setup/user-context-provider";
 
 import Authentication from "./pages/authentication";
 
