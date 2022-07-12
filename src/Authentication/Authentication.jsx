@@ -16,9 +16,9 @@ const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg, pendingM
             <motion.div
             key="signin-form"
               className="absolute w-[90%] sm:w-96 "
-             initial={{ x:'150%', opacity: 0 }}
+             initial={{ x:'-50%', opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              exit={{ x: '150%', opacity: 0 }}
+              exit={{ x: '-50%', opacity: 0 }}
               transition={{type:'spring', mass:0.25}}
             >
               {" "}
@@ -35,9 +35,9 @@ const Authentication = ({ setKeepSignedIn, keepSignedIn, setPendingMsg, pendingM
             <motion.div
             key="signup-form"
               className="absolute w-[90%] sm:w-96"
-              initial={{ x: '-150%', opacity: 0 }}
+              initial={{ x: '50%', opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              exit={{ x:'-150%', opacity: 0 }}
+              exit={{ x:'50%', opacity: 0 }}
               transition={{type:'spring', mass:0.25}}
             >
               <SignUp
