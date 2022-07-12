@@ -7,9 +7,9 @@ function reducer(state, action) {
 		case 'left':
 			return '-left-4 top-1/2 -translate-x-full -translate-y-1/2'
 		case 'top':
-			return 'left-0 -top-full -translate-y-1/4'
+			return 'left-1/2 -translate-x-1/2 -top-full -translate-y-1/4'
 		case 'bottom':
-			return 'left-0 top-full translate-y-1/4'
+			return 'left-1/2 -translate-x-1/2 top-full translate-y-1/4'
 		default:
 			return ''
 	}

@@ -8,7 +8,7 @@ import {
 import { HiOutlineMail, HiOutlineLocationMarker } from "react-icons/hi";
 import { GoMention } from "react-icons/go";
 
-import { Modal, TwButton, TwTrnButton, Toast} from "/src/common/components";
+import { Modal, TwButton, TwTrnButton, TwTooltip, Toast} from "/src/common/components";
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useContext(UserContext);
@@ -32,7 +32,7 @@ const Profile = () => {
 
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
-      <Toast durationMs='5000' msg={toastMsg} setMsg={setToastMsg} />
+      <Toast durationMs='3000' msg={toastMsg} setMsg={setToastMsg} />
 
       <div className="flex-col justify-center gap-4 p-6">
         <h1 className="text-xl text-black dark:text-white">My Profile</h1>
@@ -50,6 +50,7 @@ const Profile = () => {
           </p>
         </div>
       </div>
+
       <div className="p-6 flex flex-col gap-4 border-t border-muted-light/10 dark:border-muted-dark/10">
         <p className="text-muted-light dark:text-muted-dark">
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -58,9 +59,10 @@ const Profile = () => {
           {infoButtons.map((obj) => {
             const Icon = obj.icon;
             return (
-              <TwTrnButton clickHandler={copyToClipboard} key={obj.text}>
+              <TwTrnButton addClass="relative group"clickHandler={copyToClipboard} key={obj.text}>
                 <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
                 {obj.text}
+                <TwTooltip position="top">Copy to clipboard</TwTooltip>
               </TwTrnButton>
             );
           })}
