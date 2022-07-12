@@ -1,4 +1,8 @@
+import {useState} from 'react'
+
 import { Profile, Chats } from "./components";
+
+import {Toast} from '/src/common/components'
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -7,8 +11,11 @@ const SidebarContent = ({
   setSideBarContent,
   previousContentRef,
 }) => {
+  const [toastMsg, setToastMsg] = useState("");
   return (
     <div className="relative border-r border-muted-light/10 dark:border-muted-dark/10 w-full sm:w-[38rem] overflow-x-hidden">
+      <Toast durationMs="3000" msg={toastMsg} setMsg={setToastMsg} />
+
       <AnimatePresence>
         {sidebarContent === "chats" && (
           <motion.div
@@ -34,6 +41,8 @@ const SidebarContent = ({
             <Profile
               previousContentRef={previousContentRef}
               setSideBarContent={setSideBarContent}
+              toastMsg = {toastMsg}
+              setToastMsg= {setToastMsg}
             />
           </motion.div>
         )}

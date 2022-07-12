@@ -13,13 +13,10 @@ import {
   TwButton,
   TwTrnButton,
   TwTooltip,
-  Toast,
 } from "/src/common/components";
 
-const Profile = ({ previousContentRef, setSideBarContent }) => {
+const Profile = ({ previousContentRef, setSideBarContent, toastMsg, setToastMsg }) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
-
-  const [toastMsg, setToastMsg] = useState("");
 
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },
@@ -35,8 +32,6 @@ const Profile = ({ previousContentRef, setSideBarContent }) => {
 
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
-      <Toast durationMs="3000" msg={toastMsg} setMsg={setToastMsg} />
-
       <div className="flex-col justify-center gap-4 p-6">
         <TwTrnButton
           clickHandler={() => setSideBarContent(previousContentRef.current)}
