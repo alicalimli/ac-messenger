@@ -8,7 +8,7 @@ import { BiMessageSquareDetail } from "react-icons/bi";
 import {
   UserContext,
   UserTokenContext,
-} from "/src/setup/user-context-provider";
+} from "/src/setup/user-context-provider/UserContextProvider";
 
 import { useLocalStorage } from "/src/common/hooks";
 import { TwTrnButton, TwTooltip } from "/src/common/components";

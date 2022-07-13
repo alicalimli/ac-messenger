@@ -6,7 +6,7 @@ import {
   UserContextProvider,
   UserContext,
   UserTokenContext,
-} from "./setup/user-context-provider";
+} from "./setup/user-context-provider/UserContextProvider";
 
 import Authentication from "./pages/authentication";
 

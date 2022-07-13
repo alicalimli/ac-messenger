@@ -3,7 +3,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { motion } from "framer-motion";
 
 import { InputForm, TwButton } from "/src/common/components";
-import { UserContext } from "/src/setup/user-context-provider";
+import { UserContext } from "/src/setup/user-context-provider/UserContextProvider";
 
 import { useLocalStorage, useAuth } from "../../hooks";
 

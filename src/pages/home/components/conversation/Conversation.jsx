@@ -7,7 +7,7 @@ import { RiImageAddLine } from "react-icons/ri";
 import { BiUser } from "react-icons/bi";
 
 import elvis from "/src/assets/images/elvis.jpg";
-import Messages from "./messages";
+import Messages from "./messages/Messages";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);

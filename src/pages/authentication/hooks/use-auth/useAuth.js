@@ -3,7 +3,7 @@ import { useRef, useEffect, useState, useContext } from "react";
 import {
   UserContext,
   UserTokenContext,
-} from "/src/setup/user-context-provider";
+} from "/src/setup/user-context-provider/UserContextProvider";
 import { useLocalStorage } from "/src/common/hooks";
 
 import { useGenerateToken } from "../";
