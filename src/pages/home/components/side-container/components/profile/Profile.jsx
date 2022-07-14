@@ -36,6 +36,25 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
     setToastMsg(`Copied ${text}.`);
   };
 
+  const handleChangeInfo = async (e) => {
+    e.preventDefault();
+
+    const changeInfoData = {
+      profile: 'string',
+      username: userName
+    }
+
+    const changeInfo = await fetch("http://127.0.0.1:8000/api/v1/users/", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(changeInfoData),
+      });
+
+    console.log(await changeInfo.json())
+  }
+
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
       <Modal setShowModal={setShowModal}>
@@ -52,7 +71,7 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
               state={userName}
               setState={setUserName}
             />
-            <TwButton addClass="mt-4">Save</TwButton>
+            <TwButton clickHandler={handleChangeInfo} addClass="mt-4">Save</TwButton>
           </form>
         }
       </Modal>
