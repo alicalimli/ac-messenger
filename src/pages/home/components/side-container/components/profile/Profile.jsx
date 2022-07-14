@@ -19,7 +19,8 @@ import {
 
 const Profile = ({ previousContentRef, setSideBarContent}) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
-  const [toastMsg,setToastMsg] = useContext(ToastMsgContext)
+  const [toastMsg,setToastMsg] = useContext(ToastMsgContext);
+  const [showModal, setShowModal] = useState(false)
 
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },
@@ -35,6 +36,10 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
 
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
+      <Modal setShowModal={setShowModal}>
+        {showModal && <h1>This is modal</h1>}
+      </Modal>
+
       <div className="flex-col justify-center gap-4 p-6">
         <TwTrnButton
           clickHandler={() => setSideBarContent(previousContentRef.current)}
@@ -77,7 +82,7 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
             );
           })}
 
-          <TwButton addClass="mt-2">Edit Info</TwButton>
+          <TwButton clickHandler={() => setShowModal(true)} addClass="mt-2">Edit Info</TwButton>
         </div>
       </div>
     </div>
