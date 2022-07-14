@@ -24,19 +24,12 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const usernameRef = useRef();
-  const confirmPassRef = useRef();
 
   const { signUpUser } = useAuth(setPendingMsg, setErrorMsg);
 
   const handleSignUp = async (e) => {
     try {
       e.preventDefault();
-
-      const confirmPass = confirmPassRef.current;
-
-      if (confirmPass.value !== password) {
-        throw new Error("Passwords doesn't match.");
-      }
 
       signUpUser(email, username, password);
     } catch (error) {
@@ -112,14 +105,13 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
       <InputForm
         label="Confirm Password"
         type="password"
-        inputRef={confirmPassRef}
         placeHolder="*********"
         state={confirmPwd}
         setState={setConfirmPwd}
         isValid={validConfirmPwd}
         instruction="Passwords doesn't match"
       />
-      <TwButton isDisabled={pendingMsg}>Sign Up</TwButton>
+      <TwButton isDisabled={!validEmail || !validUsername || !validConfirmPwd || pendingMsg ? true : false}>Sign Up</TwButton>
       <p className="text-muted-light dark:text-muted-dark text-sm">
         Already have an account?{" "}
         <a
