@@ -41,6 +41,7 @@ const InputForm = ({
 
       <input
         className="text-lg bg-transparent p-2 px-4 flex items-center rounded-xl outline-none border border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main dark:focus-primary-main invalid:border-red-600 dark:invalid:border-red-500 duration-200 text-black dark:text-white"
+        autoComplete="off"
         type={inputType}
         value={state}
         ref={inputRef || null}

@@ -84,37 +84,36 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
       <InputForm
         label="Email"
         type="email"
+        state={email}
+        setState={setEmail}
         inputRef={usernameRef}
         placeHolder="e.g example@email.com"
         isValid={validEmail}
         invalidLabel="Please input a valid email."
-        state={email}
-        setState={setEmail}
       />
       <InputForm
         label="Username"
         type="text"
-        placeHolder="e.g example123"
-        minLength="6"
-        invalidLabel="Please use at least 6 characters for the username."
         state={username}
         setState={setUsername}
+        placeHolder="e.g example123"
+        isValid={validUsername}
+        invalidLabel="Must be 4 to 24 characters and begins with a letter. Hyphen and underscore are allowed"
       />
       <InputForm
         label="Password"
         type="password"
-        placeHolder="*********"
-        minLength="8"
-        invalidLabel="Please use at least 8 characters for the password."
         state={password}
         setState={setPassword}
+        placeHolder="*********"
+        isValid={validPassword}
+        invalidLabel="Please use at least 8 characters for the password."
       />
       <InputForm
         label="Confirm Password"
         type="password"
         inputRef={confirmPassRef}
         placeHolder="*********"
-        minLength="8"
         invalidLabel=""
       />
       <TwButton isDisabled={pendingMsg}>Sign Up</TwButton>

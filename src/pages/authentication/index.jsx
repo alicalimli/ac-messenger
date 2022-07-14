@@ -17,7 +17,7 @@ const Authentication = ({
 
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <div className="w-[90%] sm:w-[25rem] h-[600px] relative overflow-x-hidden flex items-center justify-center">
+      <div className="w-[90%] sm:w-[25rem] h-[700px] relative overflow-x-hidden flex items-center justify-center">
         <AnimatePresence>
           {isSigningIn && (
             <motion.div
