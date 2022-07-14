@@ -107,7 +107,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         setState={setPassword}
         placeHolder="*********"
         isValid={validPassword}
-        invalidLabel='8-24 characters and must include upper and lower case characters. Dollar and Hashtag sign are allowed.'
+        invalidLabel='8-24 characters and must include upper and lower case characters. Dollar or Hashtag sign are required.'
       />
       <InputForm
         label="Confirm Password"
