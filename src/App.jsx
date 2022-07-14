@@ -3,10 +3,10 @@ import { BrowserRouter } from "react-router-dom";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import {
-  UserContextProvider,
+  AppContextProvider,
   UserContext,
   UserTokenContext,
-} from "./setup/user-context-provider/UserContextProvider";
+} from "./setup/app-context-manager";
 
 import Authentication from "./pages/authentication";
 
@@ -84,9 +84,9 @@ const Main = () => {
 
 const App = () => {
   return (
-    <UserContextProvider>
+    <AppContextProvider>
       <Main />
-    </UserContextProvider>
+    </AppContextProvider>
   );
 };
 

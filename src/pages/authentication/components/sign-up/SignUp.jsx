@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { motion } from "framer-motion";
 
 import { InputForm, TwButton } from "/src/common/components";
-import { UserContext } from "/src/setup/user-context-provider/UserContextProvider";
 import { useLocalStorage, useAuth } from "../../hooks";
 
 const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {

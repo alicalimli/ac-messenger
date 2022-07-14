@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import {
   UserContext,
   UserTokenContext,
-} from "/src/setup/user-context-provider/UserContextProvider";
+} from "/src/setup/app-context-manager";
 
 import { HiOutlineMail, HiOutlineLocationMarker } from "react-icons/hi";
 import { GoMention } from "react-icons/go";
