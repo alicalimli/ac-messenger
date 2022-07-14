@@ -2,7 +2,7 @@ import { useRef, useEffect, useState, useContext } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 import { motion } from "framer-motion";
 
-import { InputForm, TwButton } from "/src/common/components";
+import { InputForm, TwButton, TwTrnButton } from "/src/common/components";
 import { useLocalStorage, useAuth } from "../../hooks";
 
 const SignIn = ({
@@ -58,9 +58,10 @@ const SignIn = ({
         placeHolder="*********"
         inputRef={userPassRef}
       />
-      <a
-        onClick={() => setKeepSignedIn(!keepSignedIn)}
-        className="flex flex-wrap gap-2 items-center hover:cursor-pointer hover:bg-muted-light/10 p-2 px-4 rounded-xl text-muted-light duration-200 text-black dark:text-muted-dark"
+      <TwTrnButton
+        clickHandler={() => setKeepSignedIn(!keepSignedIn)}
+        btnType="button"
+        addClass="flex flex-wrap gap-2 items-center "
       >
         <div
           className={`p-0.5 border border-2 text-sm rounded-md bg-transparent duration-300 ${
@@ -72,7 +73,7 @@ const SignIn = ({
           <AiOutlineCheck />
         </div>
         Keep me signed in
-      </a>
+      </TwTrnButton>
 
       <TwButton isDisabled={pendingMsg}>Sign In</TwButton>
 
