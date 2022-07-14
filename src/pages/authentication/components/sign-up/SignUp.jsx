@@ -5,20 +5,21 @@ import { InputForm, TwButton } from "/src/common/components";
 import { useLocalStorage, useAuth } from "../../hooks";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
   const [email, setEmail] = useState("");
-  const [validEmail, setValidEmail] = useState(false)
+  const [validEmail, setValidEmail] = useState(false);
 
   const [username, setUsername] = useState("");
-  const [validUsername, setValidUsername] = useState(false)
+  const [validUsername, setValidUsername] = useState(false);
 
   const [password, setPassword] = useState("");
-  const [validPassword, setValidPassword] = useState(false)
+  const [validPassword, setValidPassword] = useState(false);
 
-  const [confirmPwd, setConfirmPwd] = useState('');
-  const [validConfirmPwd, setValidConfirmPwd] = useState(false)
+  const [confirmPwd, setConfirmPwd] = useState("");
+  const [validConfirmPwd, setValidConfirmPwd] = useState(false);
 
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -45,7 +46,20 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
     }
   };
 
-  useEffect(()=> setErrorMsg('') ,[email,username,password])
+  useEffect(() => setErrorMsg(""), [email, username, password]);
+
+  useEffect(() => {
+    setValidEmail(EMAIL_REGEX.test(email));
+  }, [email]);
+
+  useEffect(() => {
+    setValidUsername(USER_REGEX.test(username));
+  }, [username]);
+
+  useEffect(() => {
+    setValidPassword(PWD_REGEX.test(password));
+    setValidConfirmPwd(password === confirmPwd);
+  }, [password, confirmPwd]);
 
   return (
     <form onSubmit={handleSignUp} className="flex flex-col gap-4">
@@ -59,14 +73,21 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         </label>
       </div>
 
-       <p className={`text-red-600 text-md text-center ${errorMsg ? "visible block" : "absolute invisible"}`}>{errorMsg}</p>
+      <p
+        className={`text-red-600 text-md text-center ${
+          errorMsg ? "visible block" : "absolute invisible"
+        }`}
+      >
+        {errorMsg}
+      </p>
 
       <InputForm
         label="Email"
         type="email"
         inputRef={usernameRef}
         placeHolder="e.g example@email.com"
-        invalidLabel="Please provide a valid Email Address"
+        isValid={validEmail}
+        invalidLabel="Please input a valid email."
         state={email}
         setState={setEmail}
       />

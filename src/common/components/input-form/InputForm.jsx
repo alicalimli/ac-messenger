@@ -7,6 +7,7 @@ const InputForm = ({
   type,
   placeHolder,
   inputRef,
+  isValid,
   state,
   setState,
   minLength,
@@ -37,9 +38,9 @@ const InputForm = ({
           ""
         )}
       </div>
-      {console.log(setState)}
+
       <input
-        className="peer text-lg bg-transparent p-2 px-4 flex items-center rounded-xl outline-none border border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main dark:focus-primary-main invalid:border-red-600 dark:invalid:border-red-500 duration-200 text-black dark:text-white"
+        className="text-lg bg-transparent p-2 px-4 flex items-center rounded-xl outline-none border border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main dark:focus-primary-main invalid:border-red-600 dark:invalid:border-red-500 duration-200 text-black dark:text-white"
         type={inputType}
         value={state}
         ref={inputRef || null}
@@ -50,9 +51,11 @@ const InputForm = ({
         onBlur={(e) => setState && setState(e.target.value)}
       />
 
-      <p className="hidden peer-invalid:block text-red-600 text-sm dark:text-red-500">
+      {!isValid && state &&
+      <p className="text-red-600 text-sm dark:text-red-500">
         {invalidLabel}
       </p>
+      }
     </label>
   );
 };
