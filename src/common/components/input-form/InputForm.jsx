@@ -43,6 +43,8 @@ const InputForm = ({
         className={`text-lg bg-transparent p-2 px-4 flex items-center rounded-xl outline-none border duration-200 text-black dark:text-white ${!isValid && state ? 'border-red-500' : "border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main"}`}
         autoComplete="off"
         type={inputType}
+        aria-invalid={isValid ? false : true}
+        aria-note={`${label}-note`}
         value={state}
         ref={inputRef || null}
         minLength={minLength}
@@ -53,7 +55,7 @@ const InputForm = ({
       />
 
       {!isValid && state &&
-      <p className="text-red-600 text-sm dark:text-red-500">
+      <p id={`${label}-note`} className="text-red-600 text-sm dark:text-red-500">
         {invalidLabel}
       </p>
       }
