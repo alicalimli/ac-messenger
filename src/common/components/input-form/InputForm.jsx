@@ -3,7 +3,7 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 const InputForm = ({
   label,
-  invalidLabel,
+  instruction,
   type,
   placeHolder,
   inputRef,
@@ -56,7 +56,7 @@ const InputForm = ({
 
       {!isValid && state &&
       <p id={`${label}-note`} className="text-red-600 text-sm dark:text-red-500">
-        {invalidLabel}
+        {instruction}
       </p>
       }
     </label>

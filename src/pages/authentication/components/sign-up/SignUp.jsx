@@ -89,7 +89,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         inputRef={usernameRef}
         placeHolder="e.g example@email.com"
         isValid={validEmail}
-        invalidLabel="Please input a valid email."
+        instruction="Please input a valid email."
       />
       <InputForm
         label="Username"
@@ -98,7 +98,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         setState={setUsername}
         placeHolder="e.g example123"
         isValid={validUsername}
-        invalidLabel="Must be 4 to 24 characters and begins with a letter. Hyphen and underscore are allowed"
+        instruction="Must be 4 to 24 characters and begins with a letter. Hyphen and underscore are allowed"
       />
       <InputForm
         label="Password"
@@ -107,14 +107,14 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         setState={setPassword}
         placeHolder="*********"
         isValid={validPassword}
-        invalidLabel='8-24 characters and must include upper and lower case characters. Dollar or Hashtag sign are required.'
+        instruction='8-24 characters and must include upper and lower case characters. Dollar or Hashtag sign are required.'
       />
       <InputForm
         label="Confirm Password"
         type="password"
         inputRef={confirmPassRef}
         placeHolder="*********"
-        invalidLabel=""
+        instruction=""
       />
       <TwButton isDisabled={pendingMsg}>Sign Up</TwButton>
       <p className="text-muted-light dark:text-muted-dark text-sm">
