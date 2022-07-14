@@ -4,9 +4,13 @@ import {
   UserContext,
   UserTokenContext,
 } from "/src/setup/app-context-manager"
+
 import { useLocalStorage } from "/src/common/hooks";
+import axios from '/src/api/axios'
 
 import { useGenerateToken } from "../";
+
+const SIGNUP_URL = '/users'
 
 const useAuth = (setPendingMsg, setErrorMsg) => {
   const defaultProfileURL = `https://cdn-icons-png.flaticon.com/512/1077/1077114.png?w=740`;
@@ -78,24 +82,17 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
         websocket_id: timestamp.toString(),
       };
 
-      const createUser = await fetch("http://127.0.0.1:8000/api/v1/users/", {
-        method: "POST",
+      console.log(axios)
+      const createUserResponse = await axios.post(SIGNUP_URL, JSON.stringify(userSignUpData),{
         headers: {
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userSignUpData),
-      });
+        }
+      })
 
       setPendingMsg("User Created");
-
-      const createUserRes = await createUser.json();
-
-      if (!createUserRes.id) throw new Error(createUserRes.detail[0].msg);
-
-      setPendingMsg("Signing In");
-
       signInUser(email, password);
     } catch (error) {
+      console.error(error)
       setErrorMsg(error.message);
       setPendingMsg("");
     }
