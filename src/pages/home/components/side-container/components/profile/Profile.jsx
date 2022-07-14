@@ -3,12 +3,11 @@ import { useContext, useState } from "react";
 import {
   UserContext,
   UserTokenContext,
+  ToastMsgContext,
 } from "/src/setup/app-context-manager";
 
 import { HiOutlineMail, HiOutlineLocationMarker } from "react-icons/hi";
 import { GoMention } from "react-icons/go";
-
-import {ToastMsgContext} from '/src/setup/app-context-manager'
 
 import {
   Modal,
@@ -21,6 +20,8 @@ import {
 const Profile = ({ previousContentRef, setSideBarContent}) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [toastMsg,setToastMsg] = useContext(ToastMsgContext);
+  const [userToken, setUserToken] = useContext(UserTokenContext)
+
   const [showModal, setShowModal] = useState(false)
   const [userName, setUserName] = useState("");
 
@@ -39,20 +40,29 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
   const handleChangeInfo = async (e) => {
     e.preventDefault();
 
+    setToastMsg("Changing Info")
+
     const changeInfoData = {
       profile: 'string',
       username: userName
     }
 
+    console.log(userToken)
+
     const changeInfo = await fetch("http://127.0.0.1:8000/api/v1/users/", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + userToken,
         },
         body: JSON.stringify(changeInfoData),
       });
 
-    console.log(await changeInfo.json())
+    if(!changeInfo.ok) throw new Error("Edit information failed.")
+
+    setUserInfo(Object.assign(userInfo, {username: userName}))
+    setShowModal(false);
+    setToastMsg("Changed Sucessfully")
   }
 
   return (
