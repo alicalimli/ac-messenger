@@ -15,12 +15,14 @@ import {
   TwButton,
   TwTrnButton,
   TwTooltip,
+  InputForm,
 } from "/src/common/components";
 
 const Profile = ({ previousContentRef, setSideBarContent}) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [toastMsg,setToastMsg] = useContext(ToastMsgContext);
   const [showModal, setShowModal] = useState(false)
+  const [userName, setUserName] = useState("");
 
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },
@@ -37,7 +39,22 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
       <Modal setShowModal={setShowModal}>
-        {showModal && <h1>This is modal</h1>}
+        {showModal &&
+          <form action="#" className="flex flex-col gap-2">
+            <h2 className="text-black dark:text-white text-xl text-center">Edit Information</h2>
+             <InputForm
+              label="Username"
+              type="text"
+              placeHolder="e.g example123"
+              minLength="6"
+              invalidLabel="Please use at least 6 characters for the username."
+              isControlled="true"
+              state={userName}
+              setState={setUserName}
+            />
+            <TwButton addClass="mt-4">Save</TwButton>
+          </form>
+        }
       </Modal>
 
       <div className="flex-col justify-center gap-4 p-6">
