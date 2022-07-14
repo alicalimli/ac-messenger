@@ -4,13 +4,25 @@ import { motion } from "framer-motion";
 import { InputForm, TwButton } from "/src/common/components";
 import { useLocalStorage, useAuth } from "../../hooks";
 
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
 const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
+  const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(false)
+
+  const [username, setUsername] = useState("");
+  const [validUsername, setValidUsername] = useState(false)
+
+  const [password, setPassword] = useState("");
+  const [validPassword, setValidPassword] = useState(false)
+
+  const [confirmPwd, setConfirmPwd] = useState('');
+  const [validConfirmPwd, setValidConfirmPwd] = useState(false)
+
   const [errorMsg, setErrorMsg] = useState("");
 
-  const [userEmail, setUserEmail] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userPass, setUserPass] = useState("");
-
+  const usernameRef = useRef();
   const confirmPassRef = useRef();
 
   const { signUpUser } = useAuth(setPendingMsg, setErrorMsg);
@@ -21,11 +33,11 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
 
       const confirmPass = confirmPassRef.current;
 
-      if (confirmPass.value !== userPass) {
+      if (confirmPass.value !== password) {
         throw new Error("Passwords doesn't match.");
       }
 
-      signUpUser(userEmail, userName, userPass);
+      signUpUser(email, username, password);
     } catch (error) {
       setErrorMsg(error.message);
       setPendingMsg("");
@@ -44,17 +56,17 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
           Fill in the form
         </label>
       </div>
-      {errorMsg && (
-        <p className="text-red-600 text-md text-center">{errorMsg}</p>
-      )}
+
+       <p className={`text-red-600 text-md text-center ${errorMsg ? "visible block" : "absolute invisible"}`}>{errorMsg}</p>
+
       <InputForm
         label="Email"
         type="email"
+        inputRef={usernameRef}
         placeHolder="e.g example@email.com"
-        isControlled="true"
         invalidLabel="Please provide a valid Email Address"
-        state={userEmail}
-        setState={setUserEmail}
+        state={email}
+        setState={setEmail}
       />
       <InputForm
         label="Username"
@@ -62,9 +74,8 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         placeHolder="e.g example123"
         minLength="6"
         invalidLabel="Please use at least 6 characters for the username."
-        isControlled="true"
-        state={userName}
-        setState={setUserName}
+        state={username}
+        setState={setUsername}
       />
       <InputForm
         label="Password"
@@ -72,15 +83,14 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         placeHolder="*********"
         minLength="8"
         invalidLabel="Please use at least 8 characters for the password."
-        isControlled="true"
-        state={userPass}
-        setState={setUserPass}
+        state={password}
+        setState={setPassword}
       />
       <InputForm
         label="Confirm Password"
         type="password"
-        placeHolder="*********"
         inputRef={confirmPassRef}
+        placeHolder="*********"
         minLength="8"
         invalidLabel=""
       />
