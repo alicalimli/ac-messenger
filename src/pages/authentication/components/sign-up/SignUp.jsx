@@ -45,6 +45,8 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
     }
   };
 
+  useEffect(()=> setErrorMsg('') ,[email,username,password])
+
   return (
     <form onSubmit={handleSignUp} className="flex flex-col gap-4">
       {" "}
