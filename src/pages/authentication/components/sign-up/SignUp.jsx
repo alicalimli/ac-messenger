@@ -31,6 +31,8 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
     try {
       e.preventDefault();
 
+      if(!validEmail || !validUsername || !validPassword) throw new Error("Invalid Entry.")
+
       signUpUser(email, username, password);
     } catch (error) {
       setErrorMsg(error.message);
