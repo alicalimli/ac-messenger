@@ -107,14 +107,17 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         setState={setPassword}
         placeHolder="*********"
         isValid={validPassword}
-        instruction='8-24 characters and must include upper and lower case characters. Dollar or Hashtag sign are required.'
+        instruction='8-24 characters and must include upper and lower case characters.Numbers and Dollar or Hashtag sign are required.'
       />
       <InputForm
         label="Confirm Password"
         type="password"
         inputRef={confirmPassRef}
         placeHolder="*********"
-        instruction=""
+        state={confirmPwd}
+        setState={setConfirmPwd}
+        isValid={validConfirmPwd}
+        instruction="Passwords doesn't match"
       />
       <TwButton isDisabled={pendingMsg}>Sign Up</TwButton>
       <p className="text-muted-light dark:text-muted-dark text-sm">
