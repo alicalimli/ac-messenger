@@ -12,9 +12,9 @@ export const AppContextProvider = ({ children }) => {
   return (
     <UserContext.Provider value={[user, setUser]}>
       <UserTokenContext.Provider value={[userToken, setUserToken]}>
-        <toastMsg value={[toastMsg,setToastMsg]}>
+        <ToastMsgContext.Provider value={[toastMsg,setToastMsg]}>
           {children}
-        </toastMsg>
+        </ToastMsgContext.Provider>
       </UserTokenContext.Provider>
     </UserContext.Provider>
   );

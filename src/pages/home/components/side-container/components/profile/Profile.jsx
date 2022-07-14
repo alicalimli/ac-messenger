@@ -8,6 +8,8 @@ import {
 import { HiOutlineMail, HiOutlineLocationMarker } from "react-icons/hi";
 import { GoMention } from "react-icons/go";
 
+import {ToastMsgContext} from '/src/setup/app-context-manager'
+
 import {
   Modal,
   TwButton,
@@ -15,8 +17,9 @@ import {
   TwTooltip,
 } from "/src/common/components";
 
-const Profile = ({ previousContentRef, setSideBarContent, toastMsg, setToastMsg }) => {
+const Profile = ({ previousContentRef, setSideBarContent}) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
+  const [toastMsg,setToastMsg] = useContext(ToastMsgContext)
 
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },

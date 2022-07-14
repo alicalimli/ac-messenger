@@ -6,6 +6,7 @@ import {
   AppContextProvider,
   UserContext,
   UserTokenContext,
+  ToastMsgContext
 } from "./setup/app-context-manager";
 
 import Authentication from "./pages/authentication";
@@ -22,6 +23,7 @@ const Main = () => {
 
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
+  const [toastMsg,setToastMsg] = useContext(ToastMsgContext)
 
   const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
   const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");
@@ -51,6 +53,7 @@ const Main = () => {
   return (
     <StrictMode>
       <BrowserRouter>
+        {/* Loading Toast */}
         <Toast>
           {pendingMsg && (
             <h1 className="flex items-center gap-4">
@@ -59,6 +62,9 @@ const Main = () => {
             </h1>
           )}
         </Toast>
+
+        {/* Notification Toast */}
+        <Toast durationMs="3000" msg={toastMsg} setMsg={setToastMsg} />
 
         {userInfo ? (
           <motion.div
