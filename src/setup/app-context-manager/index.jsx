@@ -6,7 +6,7 @@ export const UserTokenContext = createContext();
 export const ToastMsgContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
-  const [auth,setAuth] = useState(false)
+  const [auth,setAuth] = useState({})
   const [user, setUser] = useState(null);
   const [userToken, setUserToken] = useState("");
   const [toastMsg, setToastMsg] = useState('');

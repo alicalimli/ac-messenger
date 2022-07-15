@@ -10,13 +10,10 @@ const useGenerateToken = () => {
       formData.append("password", password);
 
       // Request login from the API
-      const fetchTokenResult = await axios.post(GENERATE_TOKEN_URL, formData)
+      const response = await axios.post(GENERATE_TOKEN_URL, formData)
 
-      console.log(await fetchTokenResult)
-
-      return fetchTokenResult.data.access_token;
+      return await response.data.access_token;
     } catch (error) {
-      console.log(error.response.data.detail)
       throw new Error(error.response.data.detail)
     }
   };

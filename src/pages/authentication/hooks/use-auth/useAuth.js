@@ -3,6 +3,7 @@ import { useRef, useEffect, useState, useContext } from "react";
 import {
   UserContext,
   UserTokenContext,
+  AuthContext,
 } from "/src/setup/app-context-manager"
 
 import { useLocalStorage } from "/src/common/hooks";
@@ -17,6 +18,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
 
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
+  const {auth, setAuth} = useContext(AuthContext);
 
   const generateToken = useGenerateToken();
 
@@ -37,8 +39,8 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
       });
 
       const getUserInfoRes = await getUserInfo.json();
+      const userInfoRes = await getUserInfoRes.user
 
-      // Saves data's to local storage
       setUserInfo(getUserInfoRes.user);
       setPendingMsg("");
     } catch (error) {
@@ -59,6 +61,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
 
       authenticate(userToken);
     } catch (error) {
+      console.error(error)
       setErrorMsg(error.message);
       setPendingMsg("");
     }
