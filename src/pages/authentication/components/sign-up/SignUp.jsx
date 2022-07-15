@@ -125,15 +125,18 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         isValid={validConfirmPwd}
         instruction="Should match the first password."
       />
+
       <TwButton isDisabled={!validEmail || !validUsername || !validConfirmPwd || pendingMsg ? true : false}>Sign Up</TwButton>
+
       <p className="text-muted-light dark:text-muted-dark text-sm">
         Already have an account?{" "}
-        <a
+        <button
+          type="button"
           onClick={() => setIsSigningIn(true)}
           className="text-primary-main cursor-pointer hover:text-primary-tinted duration-300 font-semibold"
         >
           Login
-        </a>
+        </button>
       </p>
     </form>
   );
