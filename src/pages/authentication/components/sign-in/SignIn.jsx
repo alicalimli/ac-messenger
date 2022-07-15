@@ -12,10 +12,10 @@ const SignIn = ({
   keepSignedIn,
   pendingMsg,
 }) => {
-  const [errorMsg, setErrorMsg] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const userEmailRef = useRef();
-  const userPassRef = useRef();
+  const [errorMsg, setErrorMsg] = useState("");
 
   const { signInUser } = useAuth(setPendingMsg, setErrorMsg);
 
@@ -23,11 +23,15 @@ const SignIn = ({
     try {
       e.preventDefault();
 
-      signInUser(userEmailRef.current.value, userPassRef.current.value);
+      signInUser(email, password);
     } catch (error) {
       setErrorMsg(error.message);
     }
   };
+
+    useEffect(() => {
+        setErrorMsg('');
+    }, [email, password])
 
   return (
     <form onSubmit={handleLogin} className="flex flex-col gap-4">
@@ -40,24 +44,29 @@ const SignIn = ({
         </label>
       </div>
 
-      {errorMsg && (
-        <p className="text-red-600 text-md text-center dark:text-red-500">
-          {errorMsg}
-        </p>
-      )}
+      <p
+        className={`text-red-600 text-md text-center ${
+          errorMsg ? "visible block" : "absolute invisible"
+        }`}
+      >
+        {errorMsg}
+      </p>
 
       <InputForm
         label="Email"
         type="email"
+        state={email}
+        setState={setEmail}
         placeHolder="e.g example123@example.com"
-        inputRef={userEmailRef}
       />
       <InputForm
         label="Password"
         type="password"
+        state={password}
+        setState={setPassword}
         placeHolder="*********"
-        inputRef={userPassRef}
       />
+
       <TwTrnButton
         clickHandler={() => setKeepSignedIn(!keepSignedIn)}
         btnType="button"
@@ -79,12 +88,13 @@ const SignIn = ({
 
       <p className="text-muted-light text-sm text-black dark:text-muted-dark">
         Don't have an account?{" "}
-        <a
+        <button
+        type="button"
           onClick={() => setIsSigningIn(false)}
           className="text-primary-main hover:text-primary-tinted dark:text-primary-tinted dark:hover:text-primary-main font-semibold cursor-pointer duration-300"
         >
           Sign up
-        </a>
+        </button>
       </p>
     </form>
   );
