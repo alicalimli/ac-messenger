@@ -111,7 +111,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         state={confirmPwd}
         setState={setConfirmPwd}
         isValid={validConfirmPwd}
-        instruction="Passwords doesn't match"
+        instruction="Should match the first password."
       />
       <TwButton isDisabled={!validEmail || !validUsername || !validConfirmPwd || pendingMsg ? true : false}>Sign Up</TwButton>
       <p className="text-muted-light dark:text-muted-dark text-sm">

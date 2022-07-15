@@ -43,7 +43,7 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
     setToastMsg("Changing Info")
 
     const changeInfoData = {
-      profile: 'string',
+      profile: userInfo.profile,
       username: userName
     }
 
