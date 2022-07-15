@@ -1,27 +1,23 @@
+import axios from '/src/api/axios'
+
+const GENERATE_TOKEN_URL = '/auth/login'
+
 const useGenerateToken = () => {
-  const generateToken = async (email, pass) => {
+  const generateToken = async (email, password) => {
     try {
       let formData = new FormData();
       formData.append("username", email);
-      formData.append("password", pass);
+      formData.append("password", password);
 
       // Request login from the API
-      const fetchToken = await fetch(
-        "http://127.0.0.1:8000/api/v1/auth/login",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const fetchTokenResult = await axios.post(GENERATE_TOKEN_URL, formData)
 
-      const fetchTokenResults = await fetchToken.json();
+      console.log(await fetchTokenResult)
 
-      if (!fetchTokenResults.access_token)
-        throw new Error(fetchTokenResults.detail);
-
-      return fetchTokenResults.access_token;
+      return fetchTokenResult.data.access_token;
     } catch (error) {
-      throw error;
+      console.log(error.response.data.detail)
+      throw new Error(error.response.data.detail)
     }
   };
 
