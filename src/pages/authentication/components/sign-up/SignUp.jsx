@@ -90,7 +90,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         inputRef={usernameRef}
         placeHolder="e.g example@email.com"
         isValid={validEmail}
-        instruction="Please input a valid email."
+        instruction="Should be a valid email."
       />
       <InputForm
         label="Username"

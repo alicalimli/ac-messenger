@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+import { BsFillEyeFill, BsFillEyeSlashFill, BsInfoCircleFill } from "react-icons/bs";
 
 const InputForm = ({
   label,
@@ -29,7 +29,7 @@ const InputForm = ({
       <div className="flex flex-wrap gap-2 items-center">
         <p className="text-black dark:text-white">{label}</p>
         {type === "password" ? (
-          <a className="cursor-pointer" onClick={handleShowPass}>
+          <a className="cursor-pointer text-black dark:text-white" onClick={handleShowPass}>
             {inputType === "password" ? (
               <BsFillEyeSlashFill className="text-muted text-lg" />
             ) : (
@@ -55,8 +55,8 @@ const InputForm = ({
         onBlur={() => setStateFocus && setStateFocus(false)}
       />
 
-      <p id={`${noSpaceLabel}-note`} className={`text-red-600 text-sm dark:text-red-500 ${stateFocus && state && !isValid  ? "visible block" : "absolute invisible"}`}>
-        {instruction}
+      <p id={`${noSpaceLabel}-note`} className={`flex flex-col gap-2 text-sm text-muted-light dark:text-muted-dark ${stateFocus && state && !isValid  ? "visible block" : "absolute invisible"}`}>
+        <BsInfoCircleFill className="text-xl"/> {instruction}
       </p>
     </label>
   );
