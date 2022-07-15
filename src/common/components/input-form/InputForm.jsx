@@ -10,7 +10,8 @@ const InputForm = ({
   isValid,
   state,
   setState,
-  minLength,
+  stateFocus,
+  setStateFocus,
 }) => {
   const [inputType, setInputType] = useState(type);
   const noSpaceLabel = label.replace(/\s+/g, '');
@@ -41,20 +42,20 @@ const InputForm = ({
       </div>
       <input
         className={`text-lg bg-transparent p-2 px-4 flex items-center rounded-xl outline-none border duration-200 text-black dark:text-white ${!isValid && state ? 'border-red-500' : "border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main"}`}
+        id={noSpaceLabel}
         autoComplete="off"
         type={inputType}
-        aria-invalid={isValid ? false : true}
-        aria-describedby={`${noSpaceLabel}-note`}
         value={state}
         ref={inputRef || null}
-        minLength={minLength}
+        aria-invalid={isValid ? false : true}
+        aria-describedby={`${noSpaceLabel}-note`}
         placeholder={placeHolder}
-        id={noSpaceLabel}
         onChange={(e) => setState && setState(e.target.value)}
-        onBlur={(e) => setState && setState(e.target.value)}
+        onFocus={() => setStateFocus && setStateFocus(true)}
+        onBlur={() => setStateFocus && setStateFocus(false)}
       />
 
-      <p id={`${noSpaceLabel}-note`} className={`text-red-600 text-sm dark:text-red-500 ${!isValid && state ? "visible block" : "absolute invisible"}`}>
+      <p id={`${noSpaceLabel}-note`} className={`text-red-600 text-sm dark:text-red-500 ${stateFocus && state && !isValid  ? "visible block" : "absolute invisible"}`}>
         {instruction}
       </p>
     </label>

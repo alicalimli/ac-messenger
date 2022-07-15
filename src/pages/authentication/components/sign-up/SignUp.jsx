@@ -11,15 +11,19 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#$]).{8,24}$/;
 const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false)
 
   const [username, setUsername] = useState("");
   const [validUsername, setValidUsername] = useState(false);
+  const [usernameFocus, setUsernameFocus] = useState(false)
 
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
+  const [passwordFocus, setPasswordFocus] = useState(false)
 
   const [confirmPwd, setConfirmPwd] = useState("");
   const [validConfirmPwd, setValidConfirmPwd] = useState(false);
+  const [confirmPwdFocus, setConfirmPwdFocus] = useState(false)
 
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -81,6 +85,8 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         type="email"
         state={email}
         setState={setEmail}
+        stateFocus={emailFocus}
+        setStateFocus={setEmailFocus}
         inputRef={usernameRef}
         placeHolder="e.g example@email.com"
         isValid={validEmail}
@@ -91,6 +97,8 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         type="text"
         state={username}
         setState={setUsername}
+        stateFocus={usernameFocus}
+        setStateFocus={setUsernameFocus}
         placeHolder="e.g example123"
         isValid={validUsername}
         instruction="Must be 4 to 24 characters and begins with a letter. Hyphen and underscore are allowed"
@@ -100,6 +108,8 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         type="password"
         state={password}
         setState={setPassword}
+        stateFocus={passwordFocus}
+        setStateFocus={setPasswordFocus}
         placeHolder="*********"
         isValid={validPassword}
         instruction='8-24 characters and must include upper and lower case characters.Numbers and Dollar or Hashtag sign are required.'
@@ -110,6 +120,8 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         placeHolder="*********"
         state={confirmPwd}
         setState={setConfirmPwd}
+        stateFocus={confirmPwdFocus}
+        setStateFocus={setConfirmPwdFocus}
         isValid={validConfirmPwd}
         instruction="Should match the first password."
       />
