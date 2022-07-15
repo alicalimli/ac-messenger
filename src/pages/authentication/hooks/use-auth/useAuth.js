@@ -12,6 +12,7 @@ import axios from '/src/api/axios'
 import { useGenerateToken } from "../";
 
 const SIGNUP_URL = '/users'
+const GETUSER_URL = '/users/me'
 
 const useAuth = (setPendingMsg, setErrorMsg) => {
   const defaultProfileURL = `https://cdn-icons-png.flaticon.com/512/1077/1077114.png?w=740`;
@@ -31,17 +32,13 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
       setPendingMsg("Authenticating");
 
       // GETTING USER'S INFO FROM THE API
-      const getUserInfo = await fetch("http://127.0.0.1:8000/api/v1/users/me", {
-        method: "GET",
+      const response = await axios.get(GETUSER_URL, {
         headers: {
           Authorization: "Bearer " + userToken,
         },
-      });
+      })
 
-      const getUserInfoRes = await getUserInfo.json();
-      const userInfoRes = await getUserInfoRes.user
-
-      setUserInfo(getUserInfoRes.user);
+      setUserInfo(response.data.user);
       setPendingMsg("");
     } catch (error) {
       setErrorMsg(error.message);
