@@ -7,6 +7,24 @@ import { useLocalStorage } from "/src/common/hooks";
 import { useAuth } from "./hooks";
 import { SignIn, SignUp } from "./components";
 
+const VARIANT_MANAGER = {
+  'slide-in': {
+    x:0,
+    opacity: 1,
+    transition: { type: "spring", mass: 0.25 }
+  },
+  'slide-from-left': {
+    x: "-50%",
+    opacity: 0,
+    transition: { type: "spring", mass: 0.25 }
+  },
+  'slide-from-right': {
+    x: "50%",
+    opacity: 0,
+    transition: { type: "spring", mass: 0.25 }
+  }
+}
+
 const Authentication = ({
   setKeepSignedIn,
   keepSignedIn,
@@ -23,10 +41,10 @@ const Authentication = ({
             <motion.div
               key="signin-form"
               className="absolute w-[90%] sm:w-96 "
-              initial={{ x: "-50%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "-50%", opacity: 0 }}
-              transition={{ type: "spring", mass: 0.25 }}
+              variants={VARIANT_MANAGER}
+              initial='slide-from-left'
+              animate='slide-in'
+              exit='slide-from-left'
             >
               {" "}
               <SignIn
@@ -42,10 +60,10 @@ const Authentication = ({
             <motion.div
               key="signup-form"
               className="absolute w-[90%] sm:w-96"
-              initial={{ x: "50%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "50%", opacity: 0 }}
-              transition={{ type: "spring", mass: 0.25 }}
+              variants={VARIANT_MANAGER}
+              initial='slide-from-right'
+              animate='slide-in'
+              exit='slide-from-right'
             >
               <SignUp
                 setPendingMsg={setPendingMsg}
