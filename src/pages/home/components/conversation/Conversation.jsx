@@ -9,7 +9,7 @@ import { BiUser } from "react-icons/bi";
 import elvis from "/src/assets/images/elvis.jpg";
 import Messages from "./messages/Messages";
 
-import {TwTrnButton} from '/src/common/components'
+import { TwTrnButton } from "/src/common/components";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
@@ -38,9 +38,7 @@ const ChatBox = () => {
   return (
     <section className="h-screen w-screen p-4 md:px-32 justify-center hidden lg:flex">
       <div className="w-full flex flex-col gap-4">
-              <TwTrnButton
-              addClass="block md:hidden"
-        >{`< Back`}</TwTrnButton>
+        <TwTrnButton addClass="block md:hidden">{`< Back`}</TwTrnButton>
         <header className="bg-white dark:bg-black rounded-xl w-full h-20 p-2 px-4 flex items-center mb-auto">
           <div className="flex items-center gap-4">
             <div className="relative bg-transparent h-16 w-16">

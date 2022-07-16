@@ -1,9 +1,6 @@
 import { useRef, useEffect, useState, useContext } from "react";
 
-import {
-  UserContext,
-  UserTokenContext,
-} from "/src/setup/app-context-manager";
+import { UserContext, UserTokenContext } from "/src/setup/app-context-manager";
 
 import { useLocalStorage, useGenerateToken } from "/src/common/hooks";
 import axios from "/src/api/axios";

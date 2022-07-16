@@ -6,19 +6,22 @@ const friends = [
     name: "Elvis",
     lastMsg: "this is a test message",
     profile: elvis,
-  },  {
+  },
+  {
     name: "Elvis",
     lastMsg: "this is a test message",
     profile: elvis,
-  },  {
+  },
+  {
     name: "Elvis",
     lastMsg: "this is a test message",
     profile: elvis,
-  },  {
+  },
+  {
     name: "Elvis",
     lastMsg: "this is a test message",
     profile: elvis,
-  }
+  },
 ];
 
 const Chats = () => {
@@ -33,7 +36,9 @@ const Chats = () => {
               <img src={friend.profile} className="w-full rounded-full" />
             </div>
             <div className="flex flex-col items-start">
-              <h2 className="text-xl text-black dark:text-white">{friend.name}</h2>
+              <h2 className="text-xl text-black dark:text-white">
+                {friend.name}
+              </h2>
               <p className="text-sm text-muted-light dark:text-muted-dark">
                 {friend.lastMsg}
               </p>

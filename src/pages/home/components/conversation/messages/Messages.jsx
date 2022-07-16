@@ -58,13 +58,16 @@ const Messages = ({ messages }) => {
         >
           <motion.button
             animate={{ scale: 1, opacity: 1 }}
-            initial={{ scale: 0.5, opacity: 0 }}
+            initial={{ scale: 0, opacity: 0 }}
             ref={latestMsg}
-            className={
-              currentMsg.user
-                ? "peer focus:bg-blue-400 flex bg-blue-500 text-white p-1.5 px-3 w-fit rounded-xl"
-                : "peer flex bg-white text-black p-1.5 px-3 w-fit rounded-xl"
-            }
+            className={`
+              peer flex rounded-xl p-1.5 px-3 w-fit
+              ${
+                currentMsg.user
+                  ? "focus:bg-blue-400  bg-blue-500 text-white"
+                  : "bg-white text-black"
+              }
+            `}
           >
             <p className="text-md">{currentMsg.message}</p>
           </motion.button>
