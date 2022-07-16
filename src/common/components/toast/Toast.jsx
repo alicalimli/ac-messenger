@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 let toastTimeout;
 
+// Pass only children when duration isn't needed in the toast message.
 const Toast = ({ children, durationMs, msg, setMsg }) => {
   const removeMsg = () => {
     if (!durationMs || typeof +durationMs !== "number") return;

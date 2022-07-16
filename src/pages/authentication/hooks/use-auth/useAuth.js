@@ -3,7 +3,6 @@ import { useRef, useEffect, useState, useContext } from "react";
 import {
   UserContext,
   UserTokenContext,
-  AuthContext,
 } from "/src/setup/app-context-manager";
 
 import { useLocalStorage, useGenerateToken } from "/src/common/hooks";
@@ -17,7 +16,6 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
 
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
-  const { auth, setAuth } = useContext(AuthContext);
 
   const generateToken = useGenerateToken();
 
