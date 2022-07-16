@@ -1,3 +1,3 @@
-import useEditInfo from './use-edit-info/useEditInfo'
+import useEditInfo from "./use-edit-info/useEditInfo";
 
-export {useEditInfo};
+export { useEditInfo };

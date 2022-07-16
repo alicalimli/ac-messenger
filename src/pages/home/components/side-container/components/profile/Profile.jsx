@@ -19,7 +19,7 @@ import {
 
 import axios from "/src/api/axios";
 
-import {useEditInfo} from '../../hooks'
+import { useEditInfo } from "../../hooks";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 
@@ -36,7 +36,7 @@ const Profile = ({ previousContentRef, setSideBarContent }) => {
 
   const [password, setPassword] = useState("");
 
-  const {editInfo, errorMsg, setErrorMsg, pendingMsg} = useEditInfo();
+  const { editInfo, errorMsg, setErrorMsg, pendingMsg } = useEditInfo();
 
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },
@@ -51,15 +51,15 @@ const Profile = ({ previousContentRef, setSideBarContent }) => {
   };
 
   const handleChangeInfo = async (e) => {
-    try{
+    try {
       e.preventDefault();
 
       if (!validUsername) return;
 
       await editInfo(userInfo.email, username, password);
-      setShowModal(false)
-    }catch(error){
-      console.error(error)
+      setShowModal(false);
+    } catch (error) {
+      console.error(error);
     }
   };
 

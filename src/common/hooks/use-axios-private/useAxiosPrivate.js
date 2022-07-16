@@ -6,7 +6,7 @@ import { useGenerateToken } from "../";
 const useAxiosPrivate = () => {
   const generateToken = useGenerateToken();
   const [userToken, setUserToken] = useContext(UserTokenContext);
-  const [userInfo, setUserInfo] = useContext(UserContext)
+  const [userInfo, setUserInfo] = useContext(UserContext);
 
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
