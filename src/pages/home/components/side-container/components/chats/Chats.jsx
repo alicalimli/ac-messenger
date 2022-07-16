@@ -26,8 +26,8 @@ const Chats = () => {
     <div className="bg-white dark:bg-gray-900 p-4 flex flex-col gap-4">
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
       <div>
-        {friends.map((friend) => (
-          <TwTrnButton addClass="w-full p-4">
+        {friends.map((friend, i) => (
+          <TwTrnButton addClass="w-full p-4" key={friend.name + i}>
             <div className="relative bg-transparent h-16 w-16">
               <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
               <img src={friend.profile} className="w-full rounded-full" />
