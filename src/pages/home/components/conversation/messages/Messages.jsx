@@ -30,7 +30,7 @@ const Messages = ({ messages }) => {
   return (
     <main
       ref={conversationContainer}
-      className="relative flex flex-col overflow-scroll scrollbar-hide"
+      className="relative flex flex-col overflow-scroll scrollbar-hide px-4"
     >
       <AnimatePresence>
         {showArrowDown && (

@@ -54,7 +54,7 @@ const ChatBox = () => {
 
         <Messages messages={messages} />
 
-        <div className="w-full h-16 p-2 pl-4 flex items-center relative gap-2  border-t border-3 border-slate-400">
+        <div className="w-full h-16 p-2 pl-4 flex items-center relative gap-2  border-t border-muted-light/10 dark:border-muted-dark/10 p-4 bg-gray-900">
           <button className="bg-slate-300 text-slate-700 p-2 rounded-xl">
             <VscSmiley className="text-2xl" />
           </button>
