@@ -68,6 +68,10 @@ const Profile = ({ previousContentRef, setSideBarContent }) => {
     console.log(USER_REGEX.test(username));
   }, [username]);
 
+  useEffect(()=>{
+    setErrorMsg("");
+  }, [username,password])
+
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
       <Modal setShowModal={setShowModal}>
