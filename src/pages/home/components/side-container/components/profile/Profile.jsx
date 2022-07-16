@@ -18,7 +18,8 @@ import {
 } from "/src/common/components";
 
 import axios from "/src/api/axios";
-import { useAxiosPrivate } from "/src/common/hooks";
+
+import {useEditInfo} from '../../hooks'
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 
@@ -26,8 +27,6 @@ const Profile = ({ previousContentRef, setSideBarContent }) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [toastMsg, setToastMsg] = useContext(ToastMsgContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
-
-  const axiosPrivate = useAxiosPrivate();
 
   const [showModal, setShowModal] = useState(false);
 
@@ -37,8 +36,7 @@ const Profile = ({ previousContentRef, setSideBarContent }) => {
 
   const [password, setPassword] = useState("");
 
-  const [pendingMsg, setPendingMsg] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+  const {editInfo, errorMsg, setErrorMsg, pendingMsg} = useEditInfo();
 
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },
@@ -53,37 +51,15 @@ const Profile = ({ previousContentRef, setSideBarContent }) => {
   };
 
   const handleChangeInfo = async (e) => {
-    try {
+    try{
       e.preventDefault();
 
       if (!validUsername) return;
 
-      setErrorMsg("");
-      setPendingMsg("Changing Info...");
-
-      const changeInfoData = {
-        profile: userInfo.profile,
-        username: username,
-      };
-
-      const changeInfo = await axiosPrivate.put(
-        "http://127.0.0.1:8000/api/v1/users/",
-        JSON.stringify(changeInfoData),
-        {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + userToken,
-          password: password,
-        }
-      );
-
-      setPendingMsg("");
-      setUserInfo(Object.assign(userInfo, { username: username }));
-      setShowModal(false);
-      setToastMsg("Changed Sucessfully");
-    } catch (error) {
-      console.error(error);
-      setErrorMsg(error.message);
-      setPendingMsg("");
+      await editInfo(userInfo.email, username, password);
+      setShowModal(false)
+    }catch(error){
+      console.error(error)
     }
   };
 
@@ -91,10 +67,6 @@ const Profile = ({ previousContentRef, setSideBarContent }) => {
     setValidUsername(USER_REGEX.test(username));
     console.log(USER_REGEX.test(username));
   }, [username]);
-
-  useEffect(() => {
-    setErrorMsg("");
-  }, [username, password]);
 
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">

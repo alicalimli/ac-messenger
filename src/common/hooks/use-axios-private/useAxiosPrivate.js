@@ -1,12 +1,12 @@
 import { axiosPrivate } from "/src/api/axios";
 import { useEffect, useContext } from "react";
-import { UserContext, UserTokenContext } from "/src/setup/app-context-manager";
+import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
 import { useGenerateToken } from "../";
 
 const useAxiosPrivate = () => {
   const generateToken = useGenerateToken();
-  const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
+  const [userInfo, setUserInfo] = useContext(UserContext)
 
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
@@ -23,7 +23,7 @@ const useAxiosPrivate = () => {
       (response) => response,
       async (error) => {
         const prevRequest = error?.config;
-        const email = userInfo.email;
+        const email = error?.config?.email;
         const password = error?.config.password;
         console.log(error);
         if (error?.response?.status === 401 && !prevRequest.sent) {
