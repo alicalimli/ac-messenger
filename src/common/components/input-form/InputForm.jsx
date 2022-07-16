@@ -42,12 +42,13 @@ const InputForm = ({
       </div>
 
       <input
-        className={`text-lg bg-transparent p-2 px-4 flex items-center rounded-xl outline-none border duration-200 text-black dark:text-white ${!isValid && state ? 'border-red-500' : "border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main"}`}
+        className={`text-lg bg-transparent p-2 px-4 flex items-center rounded-xl outline-none border duration-200 text-black dark:text-white ${!isValid && state ? instruction && 'border-red-500' : "border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main"}`}
         id={noSpaceLabel}
         autoComplete="off"
         type={inputType}
         value={state}
         ref={inputRef || null}
+        required
         aria-invalid={isValid ? false : true}
         aria-describedby={`${noSpaceLabel}-note`}
         placeholder={placeHolder}

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import {
   UserContext,
@@ -20,6 +20,8 @@ import {
 import axios from '/src/api/axios'
 import {useAxiosPrivate} from  '/src/common/hooks'
 
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+
 const Profile = ({ previousContentRef, setSideBarContent}) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [toastMsg,setToastMsg] = useContext(ToastMsgContext);
@@ -28,7 +30,12 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
   const axiosPrivate = useAxiosPrivate();
 
   const [showModal, setShowModal] = useState(false)
+
   const [username, setUsername] = useState("");
+  const [validUsername, setValidUsername] = useState(false)
+  const [usernameFocus, setUsernameFocus] = useState(false)
+
+
   const [password, setPassword] = useState('');
 
   const infoButtons = [
@@ -46,6 +53,8 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
   const handleChangeInfo = async (e) => {
     try{
       e.preventDefault();
+
+      if(!validUsername) return;
 
       setToastMsg("Changing Info")
 
@@ -69,18 +78,26 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
     }
   }
 
+  useEffect(()=>{
+    setValidUsername(USER_REGEX.test(username))
+    console.log(USER_REGEX.test(username))
+  }, [username])
+
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
       <Modal setShowModal={setShowModal}>
         {showModal &&
-          <form action="#" className="flex flex-col gap-2">
+          <form onSubmit={handleChangeInfo} className="flex flex-col gap-2 w-96">
             <h2 className="text-black dark:text-white text-xl text-center">Edit Information</h2>
             <InputForm
               label="Username"
               type="text"
               state={username}
               setState={setUsername}
+              stateFocus={usernameFocus}
+              setStateFocus={setUsernameFocus}
               placeHolder="e.g example123"
+              isValid={validUsername}
               instruction="Must be 4 to 24 characters and begins with a letter. Hyphen and underscore are allowed"
             />
             <InputForm
@@ -90,7 +107,8 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
               setState={setPassword}
               placeHolder="*********"
             />
-            <TwButton clickHandler={handleChangeInfo} addClass="mt-4">Save</TwButton>
+            {console.log(validUsername)}
+            <TwButton isDisabled={`${validUsername}`} addClass="mt-4">Save</TwButton>
           </form>
         }
       </Modal>
