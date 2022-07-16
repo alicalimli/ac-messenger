@@ -38,6 +38,7 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
   const [password, setPassword] = useState('');
 
   const [pendingMsg,setPendingMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },
@@ -57,6 +58,7 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
 
       if(!validUsername) return;
 
+      setErrorMsg('')
       setPendingMsg("Changing Info...")
 
       const changeInfoData = {
@@ -77,6 +79,7 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
       setToastMsg("Changed Sucessfully")
     }catch(error){
       console.error(error)
+      setErrorMsg(error.message)
       setPendingMsg('');
     }
   }
@@ -86,12 +89,25 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
     console.log(USER_REGEX.test(username))
   }, [username])
 
+  useEffect(()=>{
+
+    setErrorMsg('')
+  }, [username,password])
+
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
       <Modal setShowModal={setShowModal}>
         {showModal &&
           <form onSubmit={handleChangeInfo} className="flex flex-col gap-2 w-96">
             <h2 className="text-black dark:text-white text-xl text-center">Edit Information</h2>
+                        <p
+              className={`text-red-600 text-md text-center ${
+                errorMsg ? "visible block" : "absolute invisible"
+              }`}
+            >
+              {errorMsg}
+            </p>
+
             <InputForm
               label="Username"
               type="text"
