@@ -1,3 +1,3 @@
-import Authentication from './Authentication'
+import Authentication from "./Authentication";
 
-export {Authentication};
+export { Authentication };

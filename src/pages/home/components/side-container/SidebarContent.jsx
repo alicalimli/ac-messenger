@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from "react";
 
 import { Profile, Chats } from "./components";
 
@@ -11,7 +11,6 @@ const SidebarContent = ({
 }) => {
   return (
     <div className="relative border-r border-muted-light/10 dark:border-muted-dark/10 w-full sm:w-[38rem] overflow-x-hidden">
-
       <AnimatePresence>
         {sidebarContent === "chats" && (
           <motion.div

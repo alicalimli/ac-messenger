@@ -29,9 +29,9 @@ const SignIn = ({
     }
   };
 
-    useEffect(() => {
-        setErrorMsg('');
-    }, [email, password])
+  useEffect(() => {
+    setErrorMsg("");
+  }, [email, password]);
 
   return (
     <form onSubmit={handleLogin} className="flex flex-col gap-4">
@@ -89,7 +89,7 @@ const SignIn = ({
       <p className="text-muted-light text-sm text-black dark:text-muted-dark">
         Don't have an account?{" "}
         <button
-        type="button"
+          type="button"
           onClick={() => setIsSigningIn(false)}
           className="text-primary-main hover:text-primary-tinted dark:text-primary-tinted dark:hover:text-primary-main font-semibold cursor-pointer duration-300"
         >

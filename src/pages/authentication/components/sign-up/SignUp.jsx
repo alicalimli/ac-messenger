@@ -11,19 +11,19 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#$]).{8,24}$/;
 const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
-  const [emailFocus, setEmailFocus] = useState(false)
+  const [emailFocus, setEmailFocus] = useState(false);
 
   const [username, setUsername] = useState("");
   const [validUsername, setValidUsername] = useState(false);
-  const [usernameFocus, setUsernameFocus] = useState(false)
+  const [usernameFocus, setUsernameFocus] = useState(false);
 
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
-  const [passwordFocus, setPasswordFocus] = useState(false)
+  const [passwordFocus, setPasswordFocus] = useState(false);
 
   const [confirmPwd, setConfirmPwd] = useState("");
   const [validConfirmPwd, setValidConfirmPwd] = useState(false);
-  const [confirmPwdFocus, setConfirmPwdFocus] = useState(false)
+  const [confirmPwdFocus, setConfirmPwdFocus] = useState(false);
 
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -35,7 +35,8 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
     try {
       e.preventDefault();
 
-      if(!validEmail || !validUsername || !validPassword) throw new Error("Invalid Entry.")
+      if (!validEmail || !validUsername || !validPassword)
+        throw new Error("Invalid Entry.");
 
       signUpUser(email, username, password);
     } catch (error) {
@@ -71,7 +72,6 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
           Fill in the form
         </label>
       </div>
-
       <p
         className={`text-red-600 text-md text-center ${
           errorMsg ? "visible block" : "absolute invisible"
@@ -79,7 +79,6 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
       >
         {errorMsg}
       </p>
-
       <InputForm
         label="Email"
         type="email"
@@ -112,7 +111,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         setStateFocus={setPasswordFocus}
         placeHolder="*********"
         isValid={validPassword}
-        instruction='8-24 characters and must include upper and lower case characters.Numbers and Dollar or Hashtag sign are required.'
+        instruction="8-24 characters and must include upper and lower case characters.Numbers and Dollar or Hashtag sign are required."
       />
       <InputForm
         label="Confirm Password"
@@ -125,9 +124,15 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         isValid={validConfirmPwd}
         instruction="Should match the first password."
       />
-
-      <TwButton isDisabled={!validEmail || !validUsername || !validConfirmPwd || pendingMsg ? true : false}>Sign Up</TwButton>
-
+      <TwButton
+        isDisabled={
+          !validEmail || !validUsername || !validConfirmPwd || pendingMsg
+            ? true
+            : false
+        }
+      >
+        Sign Up
+      </TwButton>
       <p className="text-muted-light dark:text-muted-dark text-sm">
         Already have an account?{" "}
         <button

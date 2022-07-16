@@ -1,6 +1,12 @@
 import { motion } from "framer-motion";
 
-const TwTrnButton = ({ children, isDisabled, addClass, clickHandler, btnType}) => {
+const TwTrnButton = ({
+  children,
+  isDisabled,
+  addClass,
+  clickHandler,
+  btnType,
+}) => {
   return (
     <motion.button
       whileHover={{ scale: 1.03 }}

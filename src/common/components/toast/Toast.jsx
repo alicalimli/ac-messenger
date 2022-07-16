@@ -5,10 +5,9 @@ import { AnimatePresence, motion } from "framer-motion";
 let toastTimeout;
 
 const Toast = ({ children, durationMs, msg, setMsg }) => {
-
   const removeMsg = () => {
     if (!durationMs || typeof +durationMs !== "number") return;
-    clearTimeout(toastTimeout)
+    clearTimeout(toastTimeout);
     toastTimeout = setTimeout(() => setMsg(""), +durationMs);
   };
 

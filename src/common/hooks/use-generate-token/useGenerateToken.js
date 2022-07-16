@@ -1,6 +1,6 @@
-import axios from '/src/api/axios'
+import axios from "/src/api/axios";
 
-const GENERATE_TOKEN_URL = '/auth/login'
+const GENERATE_TOKEN_URL = "/auth/login";
 
 const useGenerateToken = () => {
   const generateToken = async (email, password) => {
@@ -11,13 +11,13 @@ const useGenerateToken = () => {
 
       // Request login from the API
       const response = await axios.post(GENERATE_TOKEN_URL, formData, {
-        withCredentials: true
-      })
-      console.log(response.data.access_token)
+        withCredentials: true,
+      });
+      console.log(response.data.access_token);
 
       return response.data.access_token;
     } catch (error) {
-      throw new Error(error.response.data.detail)
+      throw new Error(error.response.data.detail);
     }
   };
 

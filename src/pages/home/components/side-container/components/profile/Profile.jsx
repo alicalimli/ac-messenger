@@ -17,28 +17,28 @@ import {
   InputForm,
 } from "/src/common/components";
 
-import axios from '/src/api/axios'
-import {useAxiosPrivate} from  '/src/common/hooks'
+import axios from "/src/api/axios";
+import { useAxiosPrivate } from "/src/common/hooks";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 
-const Profile = ({ previousContentRef, setSideBarContent}) => {
+const Profile = ({ previousContentRef, setSideBarContent }) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
-  const [toastMsg,setToastMsg] = useContext(ToastMsgContext);
-  const [userToken, setUserToken] = useContext(UserTokenContext)
+  const [toastMsg, setToastMsg] = useContext(ToastMsgContext);
+  const [userToken, setUserToken] = useContext(UserTokenContext);
 
   const axiosPrivate = useAxiosPrivate();
 
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
 
   const [username, setUsername] = useState("");
-  const [validUsername, setValidUsername] = useState(false)
-  const [usernameFocus, setUsernameFocus] = useState(false)
+  const [validUsername, setValidUsername] = useState(false);
+  const [usernameFocus, setUsernameFocus] = useState(false);
 
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
 
-  const [pendingMsg,setPendingMsg] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
+  const [pendingMsg, setPendingMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },
@@ -53,54 +53,61 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
   };
 
   const handleChangeInfo = async (e) => {
-    try{
+    try {
       e.preventDefault();
 
-      if(!validUsername) return;
+      if (!validUsername) return;
 
-      setErrorMsg('')
-      setPendingMsg("Changing Info...")
+      setErrorMsg("");
+      setPendingMsg("Changing Info...");
 
       const changeInfoData = {
         profile: userInfo.profile,
-        username: username
-      }
+        username: username,
+      };
 
-      const changeInfo = await axiosPrivate.put("http://127.0.0.1:8000/api/v1/users/", JSON.stringify(changeInfoData),
-          {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + userToken,
-            password: password
-          })
+      const changeInfo = await axiosPrivate.put(
+        "http://127.0.0.1:8000/api/v1/users/",
+        JSON.stringify(changeInfoData),
+        {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + userToken,
+          password: password,
+        }
+      );
 
-      setPendingMsg('');
-      setUserInfo(Object.assign(userInfo, {username: username}))
+      setPendingMsg("");
+      setUserInfo(Object.assign(userInfo, { username: username }));
       setShowModal(false);
-      setToastMsg("Changed Sucessfully")
-    }catch(error){
-      console.error(error)
-      setErrorMsg(error.message)
-      setPendingMsg('');
+      setToastMsg("Changed Sucessfully");
+    } catch (error) {
+      console.error(error);
+      setErrorMsg(error.message);
+      setPendingMsg("");
     }
-  }
+  };
 
-  useEffect(()=>{
-    setValidUsername(USER_REGEX.test(username))
-    console.log(USER_REGEX.test(username))
-  }, [username])
+  useEffect(() => {
+    setValidUsername(USER_REGEX.test(username));
+    console.log(USER_REGEX.test(username));
+  }, [username]);
 
-  useEffect(()=>{
-
-    setErrorMsg('')
-  }, [username,password])
+  useEffect(() => {
+    setErrorMsg("");
+  }, [username, password]);
 
   return (
     <div className="bg-white dark:bg-gray-900 flex flex-col">
       <Modal setShowModal={setShowModal}>
-        {showModal &&
-          <form onSubmit={handleChangeInfo} className="flex flex-col gap-2 w-96">
-            <h2 className="text-black dark:text-white text-xl text-center">Edit Information</h2>
-                        <p
+        {showModal && (
+          <form
+            onSubmit={handleChangeInfo}
+            className="flex flex-col gap-2 w-96"
+          >
+            <h2 className="text-black dark:text-white text-xl text-center">
+              Edit Information
+            </h2>
+            <p
               className={`text-red-600 text-md text-center ${
                 errorMsg ? "visible block" : "absolute invisible"
               }`}
@@ -126,11 +133,14 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
               setState={setPassword}
               placeHolder="*********"
             />
-            <TwButton isDisabled={validUsername && !pendingMsg ? false : true} addClass="mt-4">
-              {pendingMsg ? pendingMsg : 'Save'}
+            <TwButton
+              isDisabled={validUsername && !pendingMsg ? false : true}
+              addClass="mt-4"
+            >
+              {pendingMsg ? pendingMsg : "Save"}
             </TwButton>
           </form>
-        }
+        )}
       </Modal>
 
       <div className="flex-col justify-center gap-4 p-6">
@@ -175,7 +185,9 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
             );
           })}
 
-          <TwButton clickHandler={() => setShowModal(true)} addClass="mt-2">Edit Info</TwButton>
+          <TwButton clickHandler={() => setShowModal(true)} addClass="mt-2">
+            Edit Info
+          </TwButton>
         </div>
       </div>
     </div>

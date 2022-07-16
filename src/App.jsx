@@ -6,15 +6,15 @@ import {
   AppContextProvider,
   UserContext,
   UserTokenContext,
-  ToastMsgContext
+  ToastMsgContext,
 } from "./setup/app-context-manager";
 
-import {Authentication} from "./pages/authentication";
+import { Authentication } from "./pages/authentication";
 
 import { useLocalStorage } from "./common/hooks";
 import { Toast } from "./common/components";
 
-import {Home} from "./pages/home";
+import { Home } from "./pages/home";
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -23,7 +23,7 @@ const Main = () => {
 
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
-  const [toastMsg,setToastMsg] = useContext(ToastMsgContext)
+  const [toastMsg, setToastMsg] = useContext(ToastMsgContext);
 
   const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
   const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");

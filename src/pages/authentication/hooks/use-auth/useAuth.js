@@ -4,20 +4,20 @@ import {
   UserContext,
   UserTokenContext,
   AuthContext,
-} from "/src/setup/app-context-manager"
+} from "/src/setup/app-context-manager";
 
-import { useLocalStorage,useGenerateToken } from "/src/common/hooks";
-import axios from '/src/api/axios'
+import { useLocalStorage, useGenerateToken } from "/src/common/hooks";
+import axios from "/src/api/axios";
 
-const SIGNUP_URL = '/users'
-const GETUSER_URL = '/users/me'
+const SIGNUP_URL = "/users";
+const GETUSER_URL = "/users/me";
 
 const useAuth = (setPendingMsg, setErrorMsg) => {
   const defaultProfileURL = `https://cdn-icons-png.flaticon.com/512/1077/1077114.png?w=740`;
 
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
-  const {auth, setAuth} = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
 
   const generateToken = useGenerateToken();
 
@@ -34,7 +34,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
         headers: {
           Authorization: "Bearer " + userToken,
         },
-      })
+      });
 
       setUserInfo(response.data.user);
       setPendingMsg("");
@@ -56,7 +56,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
 
       authenticate(userToken);
     } catch (error) {
-      console.error(error)
+      console.error(error);
       setErrorMsg(error.message);
       setPendingMsg("");
     }
@@ -80,17 +80,21 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
         websocket_id: timestamp.toString(),
       };
 
-      console.log(axios)
-      const createUserResponse = await axios.post(SIGNUP_URL, JSON.stringify(userSignUpData),{
-        headers: {
-          "Content-Type": "application/json",
+      console.log(axios);
+      const createUserResponse = await axios.post(
+        SIGNUP_URL,
+        JSON.stringify(userSignUpData),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      })
+      );
 
       setPendingMsg("User Created");
       signInUser(email, password);
     } catch (error) {
-      console.error(error)
+      console.error(error);
       setErrorMsg(error.message);
       setPendingMsg("");
     }
