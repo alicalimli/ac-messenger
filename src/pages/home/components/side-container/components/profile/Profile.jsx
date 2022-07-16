@@ -28,7 +28,8 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
   const axiosPrivate = useAxiosPrivate();
 
   const [showModal, setShowModal] = useState(false)
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState('');
 
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },
@@ -50,7 +51,7 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
 
       const changeInfoData = {
         profile: userInfo.profile,
-        username: userName
+        username: username
       }
 
       const changeInfo = await axiosPrivate.put("http://127.0.0.1:8000/api/v1/users/", JSON.stringify(changeInfoData),
@@ -59,7 +60,7 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
             Authorization: "Bearer " + userToken,
           })
 
-      setUserInfo(Object.assign(userInfo, {username: userName}))
+      setUserInfo(Object.assign(userInfo, {username: username}))
       setShowModal(false);
       setToastMsg("Changed Sucessfully")
     }catch(error){
@@ -73,15 +74,20 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
         {showModal &&
           <form action="#" className="flex flex-col gap-2">
             <h2 className="text-black dark:text-white text-xl text-center">Edit Information</h2>
-             <InputForm
+            <InputForm
               label="Username"
               type="text"
+              state={username}
+              setState={setUsername}
               placeHolder="e.g example123"
-              minLength="6"
-              invalidLabel="Please use at least 6 characters for the username."
-              isControlled="true"
-              state={userName}
-              setState={setUserName}
+              instruction="Must be 4 to 24 characters and begins with a letter. Hyphen and underscore are allowed"
+            />
+            <InputForm
+              label="Current Password"
+              type="password"
+              state={password}
+              setState={setPassword}
+              placeHolder="*********"
             />
             <TwButton clickHandler={handleChangeInfo} addClass="mt-4">Save</TwButton>
           </form>

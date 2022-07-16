@@ -24,6 +24,7 @@ const useAxiosPrivate = () => {
 			async (error) => {
 				const prevRequest = error?.config;
 				if (error?.response?.status === 401 && !prevRequest.sent) {
+					console.log(error)
 					prevRequest.sent = true;
 					const email = "admin@chately.com";
 					const pass = "admin1234";
