@@ -35,8 +35,9 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
   const [validUsername, setValidUsername] = useState(false)
   const [usernameFocus, setUsernameFocus] = useState(false)
 
-
   const [password, setPassword] = useState('');
+
+  const [pendingMsg,setPendingMsg] = useState('');
 
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },
@@ -56,7 +57,7 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
 
       if(!validUsername) return;
 
-      setToastMsg("Changing Info")
+      setPendingMsg("Changing Info...")
 
       const changeInfoData = {
         profile: userInfo.profile,
@@ -70,11 +71,13 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
             password: password
           })
 
+      setPendingMsg('');
       setUserInfo(Object.assign(userInfo, {username: username}))
       setShowModal(false);
       setToastMsg("Changed Sucessfully")
     }catch(error){
       console.error(error)
+      setPendingMsg('');
     }
   }
 
@@ -107,8 +110,9 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
               setState={setPassword}
               placeHolder="*********"
             />
-            {console.log(validUsername)}
-            <TwButton isDisabled={`${validUsername}`} addClass="mt-4">Save</TwButton>
+            <TwButton isDisabled={validUsername && !pendingMsg ? false : true} addClass="mt-4">
+              {pendingMsg ? pendingMsg : 'Save'}
+            </TwButton>
           </form>
         }
       </Modal>
