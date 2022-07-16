@@ -121,13 +121,13 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
         </p>
 
         <div className="flex flex-col gap-1 w-100 ">
-          {infoButtons.map((obj) => {
+          {infoButtons.map((obj, i) => {
             const Icon = obj.icon;
             return (
               <TwTrnButton
                 addClass="relative group"
                 clickHandler={() => copyToClipboard(obj.text)}
-                key={obj.text}
+                key={obj.text + i}
               >
                 <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
                 {obj.text}
