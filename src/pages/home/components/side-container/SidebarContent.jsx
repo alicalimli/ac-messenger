@@ -4,6 +4,9 @@ import { Profile, Chats } from "./components";
 
 import { motion, AnimatePresence } from "framer-motion";
 
+import {VARIANTS_MANAGER} from '/src/setup/variants-manager'
+
+
 const SidebarContent = ({
   sidebarContent,
   setSideBarContent,
@@ -16,10 +19,10 @@ const SidebarContent = ({
           <motion.div
             key="chats"
             className="absolute w-full h-full"
-            animate={{ opacity: 1, x: 0 }}
-            initial={{ opacity: 0, x: "-50%" }}
-            exit={{ opacity: 0, x: "50%" }}
-            transition={{ type: "spring", mass: 0.25 }}
+              variants={VARIANTS_MANAGER}
+              initial='slide-from-left'
+              animate='slide-in'
+              exit='slide-from-right'
           >
             <Chats />
           </motion.div>
@@ -28,10 +31,10 @@ const SidebarContent = ({
           <motion.div
             key="profile"
             className="absolute w-full h-full"
-            animate={{ opacity: 1, x: 0 }}
-            initial={{ opacity: 0, x: "-50%" }}
-            exit={{ opacity: 0, x: "50%" }}
-            transition={{ type: "spring", mass: 0.25 }}
+              variants={VARIANTS_MANAGER}
+              initial='slide-from-left'
+              animate='slide-in'
+              exit='slide-from-right'
           >
             <Profile
               previousContentRef={previousContentRef}
