@@ -36,11 +36,10 @@ const ChatBox = () => {
   };
 
   return (
-    <section className="h-screen w-screen p-4 md:px-32 justify-center hidden lg:flex">
+    <section className="h-screen w-screen justify-center hidden lg:flex">
       <div className="w-full flex flex-col gap-4">
         <TwTrnButton addClass="block md:hidden">{`< Back`}</TwTrnButton>
-        <header className="bg-white dark:bg-black rounded-xl w-full h-20 p-2 px-4 flex items-center mb-auto">
-          <div className="flex items-center gap-4">
+        <header className="bg-transparent border-b border-muted-light/10 dark:border-muted-dark/10 w-full p-4 flex items-center mb-auto flex items-center gap-4">
             <div className="relative bg-transparent h-16 w-16">
               <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
               <img src={elvis} className="w-full rounded-full" />
@@ -51,7 +50,6 @@ const ChatBox = () => {
                 online
               </p>
             </div>
-          </div>
         </header>
 
         <Messages messages={messages} />
