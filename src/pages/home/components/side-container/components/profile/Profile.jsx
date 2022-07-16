@@ -17,10 +17,15 @@ import {
   InputForm,
 } from "/src/common/components";
 
+import axios from '/src/api/axios'
+import {useAxiosPrivate} from  '/src/common/hooks'
+
 const Profile = ({ previousContentRef, setSideBarContent}) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [toastMsg,setToastMsg] = useContext(ToastMsgContext);
   const [userToken, setUserToken] = useContext(UserTokenContext)
+
+  const axiosPrivate = useAxiosPrivate();
 
   const [showModal, setShowModal] = useState(false)
   const [userName, setUserName] = useState("");
@@ -38,31 +43,28 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
   };
 
   const handleChangeInfo = async (e) => {
-    e.preventDefault();
+    try{
+      e.preventDefault();
 
-    setToastMsg("Changing Info")
+      setToastMsg("Changing Info")
 
-    const changeInfoData = {
-      profile: userInfo.profile,
-      username: userName
+      const changeInfoData = {
+        profile: userInfo.profile,
+        username: userName
+      }
+
+      const changeInfo = await axiosPrivate.put("http://127.0.0.1:8000/api/v1/users/", JSON.stringify(changeInfoData),
+          {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + userToken,
+          })
+
+      setUserInfo(Object.assign(userInfo, {username: userName}))
+      setShowModal(false);
+      setToastMsg("Changed Sucessfully")
+    }catch(error){
+      console.error(error)
     }
-
-    console.log(userToken)
-
-    const changeInfo = await fetch("http://127.0.0.1:8000/api/v1/users/", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + userToken,
-        },
-        body: JSON.stringify(changeInfoData),
-      });
-
-    if(!changeInfo.ok) throw new Error("Edit information failed.")
-
-    setUserInfo(Object.assign(userInfo, {username: userName}))
-    setShowModal(false);
-    setToastMsg("Changed Sucessfully")
   }
 
   return (

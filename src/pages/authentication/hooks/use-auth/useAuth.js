@@ -6,10 +6,8 @@ import {
   AuthContext,
 } from "/src/setup/app-context-manager"
 
-import { useLocalStorage } from "/src/common/hooks";
+import { useLocalStorage,useGenerateToken } from "/src/common/hooks";
 import axios from '/src/api/axios'
-
-import { useGenerateToken } from "../";
 
 const SIGNUP_URL = '/users'
 const GETUSER_URL = '/users/me'
