@@ -23,12 +23,11 @@ const useAxiosPrivate = () => {
 			(response) => response,
 			async (error) => {
 				const prevRequest = error?.config;
+				const email = userInfo.email;
+				const password = error?.config.password;
 				if (error?.response?.status === 401 && !prevRequest.sent) {
-					console.log(error)
 					prevRequest.sent = true;
-					const email = "admin@chately.com";
-					const pass = "admin1234";
-					const accessToken = await generateToken(email, pass);
+					const accessToken = await generateToken(email, password);
 					prevRequest.headers["Authorization"] = `Bearer ${accessToken}`;
 					return axiosPrivate(prevRequest);
 				}

@@ -58,6 +58,7 @@ const Profile = ({ previousContentRef, setSideBarContent}) => {
           {
             "Content-Type": "application/json",
             Authorization: "Bearer " + userToken,
+            password: password
           })
 
       setUserInfo(Object.assign(userInfo, {username: username}))
