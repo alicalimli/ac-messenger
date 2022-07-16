@@ -1,6 +1,12 @@
 const MASS_TRANSITION = { type: "spring", mass: 0.25 };
 
 export const VARIANTS_MANAGER = {
+  'fade-in':{
+    opacity: 1,
+  },
+  'fade-out':{
+    opacity:0,
+  },
   'slide-in': {
     x:0,
     opacity: 1,
@@ -15,5 +21,13 @@ export const VARIANTS_MANAGER = {
     x: "50%",
     opacity: 0,
     transition: MASS_TRANSITION,
+  },
+  'pop-in':{
+    opacity:1,
+    scale:1,
+  },
+  'pop-out':{
+    opacity: 0,
+    scale: 0
   }
 }

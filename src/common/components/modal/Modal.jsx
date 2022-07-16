@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
+import {VARIANTS_MANAGER} from '/src/setup/variants-manager'
+
 const Modal = ({ children, setShowModal }) => {
   const modalParentRef = useRef();
 
@@ -17,15 +19,17 @@ const Modal = ({ children, setShowModal }) => {
         <motion.div
           onClick={handleParentClick}
           ref={modalParentRef}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          initial={{ opacity: 0 }}
+              variants={VARIANTS_MANAGER}
+              initial='fade-out'
+              animate='fade-in'
+              exit='fade-out'
           className="bg-black/10 dark:bg-white/10 w-screen h-screen absolute top-0 left-0 z-20 flex justify-center items-center"
         >
           <motion.div
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            initial={{ opacity: 0, scale: 0 }}
+              variants={VARIANTS_MANAGER}
+              initial='pop-out'
+              animate='pop-in'
+              exit='pop-out'
             className="bg-white text-black dark:bg-black dark:text-white flex items-center justify-center z-10 shadow-md p-4 px-8 rounded-xl"
           >
             {" "}
