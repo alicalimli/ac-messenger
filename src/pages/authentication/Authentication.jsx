@@ -7,7 +7,7 @@ import { useLocalStorage } from "/src/common/hooks";
 import { useAuth } from "./hooks";
 import { SignIn, SignUp } from "./components";
 
-import {VARIANTS_MANAGER} from '/src/setup/variants-manager'
+import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
 
 const Authentication = ({
   setKeepSignedIn,
@@ -26,9 +26,9 @@ const Authentication = ({
               key="signin-form"
               className="absolute w-[90%] sm:w-96 "
               variants={VARIANTS_MANAGER}
-              initial='slide-from-left'
-              animate='slide-in'
-              exit='slide-from-left'
+              initial="slide-from-left"
+              animate="slide-in"
+              exit="slide-from-left"
             >
               {" "}
               <SignIn
@@ -45,9 +45,9 @@ const Authentication = ({
               key="signup-form"
               className="absolute w-[90%] sm:w-96"
               variants={VARIANTS_MANAGER}
-              initial='slide-from-right'
-              animate='slide-in'
-              exit='slide-from-right'
+              initial="slide-from-right"
+              animate="slide-in"
+              exit="slide-from-right"
             >
               <SignUp
                 setPendingMsg={setPendingMsg}
