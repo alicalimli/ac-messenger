@@ -1,6 +1,8 @@
-import { axiosPrivate } from "/src/api/axios";
 import { useEffect, useContext } from "react";
+
+import { axiosPrivate } from "/src/api/axios";
 import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
+
 import { useGenerateToken } from "../";
 
 const useAxiosPrivate = () => {
@@ -25,11 +27,13 @@ const useAxiosPrivate = () => {
         const prevRequest = error?.config;
         const email = error?.config?.email;
         const password = error?.config.password;
-        console.log(error);
+
         if (error?.response?.status === 401 && !prevRequest.sent) {
           prevRequest.sent = true;
+
           const accessToken = await generateToken(email, password);
           prevRequest.headers["Authorization"] = `Bearer ${accessToken}`;
+
           return axiosPrivate(prevRequest);
         } else if (error.response.status === 0) {
           throw new Error("Username already taken.");

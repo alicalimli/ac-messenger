@@ -17,8 +17,6 @@ import {
   InputForm,
 } from "/src/common/components";
 
-import axios from "/src/api/axios";
-
 import { useEditInfo } from "../../hooks";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
