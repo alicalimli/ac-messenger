@@ -7,23 +7,7 @@ import { useLocalStorage } from "/src/common/hooks";
 import { useAuth } from "./hooks";
 import { SignIn, SignUp } from "./components";
 
-const VARIANT_MANAGER = {
-  'slide-in': {
-    x:0,
-    opacity: 1,
-    transition: { type: "spring", mass: 0.25 }
-  },
-  'slide-from-left': {
-    x: "-50%",
-    opacity: 0,
-    transition: { type: "spring", mass: 0.25 }
-  },
-  'slide-from-right': {
-    x: "50%",
-    opacity: 0,
-    transition: { type: "spring", mass: 0.25 }
-  }
-}
+import {VARIANTS_MANAGER} from '/src/setup/variants-manager'
 
 const Authentication = ({
   setKeepSignedIn,
@@ -41,7 +25,7 @@ const Authentication = ({
             <motion.div
               key="signin-form"
               className="absolute w-[90%] sm:w-96 "
-              variants={VARIANT_MANAGER}
+              variants={VARIANTS_MANAGER}
               initial='slide-from-left'
               animate='slide-in'
               exit='slide-from-left'
@@ -60,7 +44,7 @@ const Authentication = ({
             <motion.div
               key="signup-form"
               className="absolute w-[90%] sm:w-96"
-              variants={VARIANT_MANAGER}
+              variants={VARIANTS_MANAGER}
               initial='slide-from-right'
               animate='slide-in'
               exit='slide-from-right'
