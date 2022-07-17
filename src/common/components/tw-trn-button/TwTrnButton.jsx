@@ -9,7 +9,7 @@ const TwTrnButton = ({
 }) => {
   return (
     <motion.button
-      whileHover={{ scale: 1.03 }}
+      whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       type={btnType || null}
       onClick={clickHandler || null}
