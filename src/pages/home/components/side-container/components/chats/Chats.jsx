@@ -30,7 +30,7 @@ const Chats = () => {
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
       <div>
         {friends.map((friend, i) => (
-          <TwTrnButton addClass="w-full p-4" key={friend.name + i}>
+          <TwTrnButton addClass="w-full p-2" key={friend.name + i}>
             <div className="relative bg-transparent h-16 w-16">
               <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
               <img src={friend.profile} className="w-full rounded-full" />

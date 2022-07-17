@@ -24,7 +24,7 @@ const Toast = ({ children, durationMs, msg, setMsg }) => {
           animate={{ y: 0, x: "-50%" }}
           exit={{ y: -100, x: "-50%" }}
           initial={{ y: -100, x: "-50%" }}
-          className="bg-white mt-4 fixed top-0 left-1/2 flex items-center justify-center z-10 shadow-md p-4 px-8 rounded-xl"
+          className="bg-white mt-4 fixed top-0 left-1/2 flex items-center justify-center z-10 shadow-md p-2 px-4 rounded-xl"
         >
           {" "}
           {msg}

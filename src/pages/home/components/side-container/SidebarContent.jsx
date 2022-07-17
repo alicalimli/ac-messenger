@@ -12,7 +12,7 @@ const SidebarContent = ({
   previousContentRef,
 }) => {
   return (
-    <section className="relative border-r border-muted-light/10 dark:border-muted-dark/10 w-full sm:w-[38rem] overflow-x-hidden">
+    <section className="relative border-r border-muted-light/10 dark:border-muted-dark/10 w-full sm:w-[32rem] overflow-x-hidden">
       <AnimatePresence>
         {sidebarContent === "chats" && (
           <motion.div
