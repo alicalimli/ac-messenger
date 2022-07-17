@@ -73,13 +73,13 @@ const InputForm = ({
 
       <p
         id={`${noSpaceLabel}-note`}
-        className={`flex flex-col gap-2 text-sm text-muted-light dark:text-muted-dark ${
+        className={`gap-2 text-sm text-muted-light dark:text-muted-dark ${
           stateFocus && state && !isValid
             ? "visible block"
             : "absolute invisible"
         }`}
       >
-        <BsInfoCircleFill className="text-xl" /> {instruction}
+        {instruction}
       </p>
     </label>
   );
