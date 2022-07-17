@@ -36,66 +36,65 @@ const ChatBox = () => {
   };
 
   return (
-    <section className="h-screen w-screen justify-center hidden lg:flex">
+    <section className="h-screen w-screen justify-center hidden lg:flex bg-black">
       <div className="w-full flex flex-col gap-4">
         <TwTrnButton addClass="block md:hidden">{`< Back`}</TwTrnButton>
-        <header className="bg-transparent border-b border-muted-light/10 dark:border-muted-dark/10 w-full p-4 flex items-center mb-auto flex items-center gap-4">
-            <div className="relative bg-transparent h-16 w-16">
-              <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
-              <img src={elvis} className="w-full rounded-full" />
-            </div>
-            <div className="flex flex-col gap-0">
-              <h2 className="text-xl text-black dark:text-white">Elvis</h2>
-              <p className="text-sm text-muted-light dark:text-muted-dark">
-                online
-              </p>
-            </div>
+        <header className="bg-transparent border-b border-muted-light/10 dark:border-muted-dark/10 w-full p-4 flex items-center mb-auto flex items-center gap-4 bg-gray-900">
+          <div className="relative bg-transparent h-16 w-16">
+            <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
+            <img src={elvis} className="w-full rounded-full" />
+          </div>
+          <div className="flex flex-col gap-0">
+            <h2 className="text-xl text-black dark:text-white">Elvis</h2>
+            <p className="text-sm text-muted-light dark:text-muted-dark">
+              online
+            </p>
+          </div>
         </header>
 
         <Messages messages={messages} />
 
-        <div className="w-full h-16 p-2 pl-4 flex items-center relative gap-2  border-t border-muted-light/10 dark:border-muted-dark/10 p-4 bg-gray-900">
-          <button className="bg-slate-300 text-slate-700 p-2 rounded-xl">
-            <VscSmiley className="text-2xl" />
-          </button>
-          <button className="bg-slate-300 text-slate-700 p-2 rounded-xl">
-            <BiMicrophone className="text-2xl" />
-          </button>
-          <button className="bg-slate-300 text-slate-700 p-2 rounded-xl">
-            <RiImageAddLine className="text-2xl" />
-          </button>
-          <button
-            onClick={(e) => {
-              const btn = e.target.closest("button");
-
-              console.log(active);
-              if (active) {
-                setActive(false);
-                btn.style.background = "gray";
-                console.log("not active");
-              } else if (!active) {
-                setActive(true);
-                console.log("active");
-                btn.style.background = "blue";
-              }
-
-              setUser(!user);
-            }}
-            className="bg-slate-300 text-slate-700 p-2 rounded-xl"
-          >
-            <BiUser className="text-2xl" />
-          </button>
-
+        <div className="w-full flex items-center relative gap-2 p-4">
           <form
             onSubmit={sendMessage}
-            className="w-full flex items-center gap-1 "
+            className="w-full flex items-center gap-1 bg-black p-2 dark:bg-gray-900 rounded-xl"
           >
+            <button className="text-muted-light/10 dark:text-muted-dark/50 p-2">
+              <VscSmiley className="text-2xl" />
+            </button>
+                 <button className="text-muted-light/10 dark:text-muted-dark/50 p-2">
+              <BiMicrophone className="text-2xl" />
+            </button>
+               <button className="text-muted-light/10 dark:text-muted-dark/50 p-2">
+              <RiImageAddLine className="text-2xl" />
+            </button>
+            <button
+              onClick={(e) => {
+                const btn = e.target.closest("button");
+
+                console.log(active);
+                if (active) {
+                  setActive(false);
+                  btn.style.background = "gray";
+                  console.log("not active");
+                } else if (!active) {
+                  setActive(true);
+                  console.log("active");
+                  btn.style.background = "blue";
+                }
+
+                setUser(!user);
+              }}
+             className="text-muted-light/10 dark:text-muted-dark/50 p-2"
+            >
+              <BiUser className="text-2xl" />
+            </button>
             <input
               required
               type="text"
               value={message}
               placeholder="Message here"
-              className="p-2 px-4 w-full bg-transparent rounded-xl "
+              className="p-2 px-4 w-full bg-transparent rounded-xl outline-none text-dark dark:text-white"
               onChange={(e) => setMessage(e.target.value)}
               onBlur={(e) => setMessage(e.target.value)}
             />
