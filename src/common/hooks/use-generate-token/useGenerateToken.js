@@ -13,9 +13,8 @@ const useGenerateToken = () => {
       const response = await axios.post(GENERATE_TOKEN_URL, formData, {
         withCredentials: true,
       });
-      console.log(response.data.access_token);
 
-      return response.data.access_token;
+      return response.data;
     } catch (error) {
       throw new Error(error.response.data.detail);
     }
