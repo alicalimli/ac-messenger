@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineUser } from "react-icons/ai";
@@ -26,6 +26,7 @@ const SidebarNav = ({
     "keepSignedIn",
     false
   );
+  const [darkmode, setDarkmode] = useLocalStorage('darkmode', false);
 
   const sidebarButtons = [
     { name: "chats", icon: BiMessageSquareDetail },
@@ -48,6 +49,10 @@ const SidebarNav = ({
     setSideBarContent(sideContentName);
   };
 
+  useEffect(()=>{
+    document.documentElement.classList.toggle('dark')
+  }, [darkmode])
+
   return (
     <nav className="relative hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 sm:flex sm:flex-col gap-4 justify-center">
       <div className="flex flex-col gap-2 items-center">
@@ -67,7 +72,7 @@ const SidebarNav = ({
       </div>
 
       <div className="absolute bottom-4 flex flex-col gap-1">
-        <TwTrnButton addClass="relative group z-10" clickHandler={handleLogOut}>
+        <TwTrnButton addClass="relative group z-10" clickHandler={()=> setDarkmode(!darkmode)}>
           <BiMoon className="text-muted-light dark:text-muted-dark text-2xl" />
           <TwTooltip position="right">darkmode</TwTooltip>
         </TwTrnButton>
