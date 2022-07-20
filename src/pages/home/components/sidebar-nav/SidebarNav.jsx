@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineUser } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
-import { BiMessageSquareDetail, BiMoon } from "react-icons/bi";
+import { BiMessageSquareDetail, BiMoon,BiSun } from "react-icons/bi";
 
 import { UserContext, UserTokenContext } from "/src/setup/app-context-manager";
 
@@ -73,7 +73,9 @@ const SidebarNav = ({
 
       <div className="absolute bottom-4 flex flex-col gap-1">
         <TwTrnButton addClass="relative group z-10" clickHandler={()=> setDarkmode(!darkmode)}>
-          <BiMoon className="text-muted-light dark:text-muted-dark text-2xl" />
+          {darkmode ?
+          <BiSun className="text-muted-light dark:text-muted-dark text-2xl" /> :
+          <BiMoon className="text-muted-light dark:text-muted-dark text-2xl" />}
           <TwTooltip position="right">darkmode</TwTooltip>
         </TwTrnButton>
         <TwTrnButton addClass="relative group z-10" clickHandler={handleLogOut}>
