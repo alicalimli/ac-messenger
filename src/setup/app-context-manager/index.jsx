@@ -1,12 +1,12 @@
 import React, { useState, createContext } from "react";
 
-export const AuthContext = createContext();
+export const UserRefreshContext = createContext();
 export const UserContext = createContext();
 export const UserTokenContext = createContext();
 export const ToastMsgContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
-  const [auth, setAuth] = useState({});
+  const [userRefresh, setUserRefresh] = useState('');
   const [user, setUser] = useState(null);
   const [userToken, setUserToken] = useState("");
   const [toastMsg, setToastMsg] = useState("");
@@ -15,9 +15,9 @@ export const AppContextProvider = ({ children }) => {
     <UserContext.Provider value={[user, setUser]}>
       <UserTokenContext.Provider value={[userToken, setUserToken]}>
         <ToastMsgContext.Provider value={[toastMsg, setToastMsg]}>
-          <AuthContext.Provider value={{ auth, setAuth }}>
+          <UserRefreshContext.Provider value={{ userRefresh, setUserRefresh }}>
             {children}
-          </AuthContext.Provider>
+          </UserRefreshContext.Provider>
         </ToastMsgContext.Provider>
       </UserTokenContext.Provider>
     </UserContext.Provider>
