@@ -57,15 +57,15 @@ const ChatBox = () => {
         <div className="w-full flex items-center relative gap-2 p-4">
           <form
             onSubmit={sendMessage}
-            className="w-full flex items-center gap-1 bg-muted-light/10 p-2 dark:bg-gray-900 rounded-xl"
+            className="w-full flex items-center gap-1 bg-white p-2 dark:bg-gray-900 rounded-xl"
           >
-            <button className="text-muted-light/50 dark:text-muted-dark/50 p-2">
+            <button className="text-muted-light dark:text-muted-dark/50 p-2">
               <VscSmiley className="text-2xl" />
             </button>
-            <button className="text-muted-light/50 dark:text-muted-dark/50 p-2">
+            <button className="text-muted-light dark:text-muted-dark/50 p-2">
               <BiMicrophone className="text-2xl" />
             </button>
-            <button className="text-muted-light/50 dark:text-muted-dark/50 p-2">
+            <button className="text-muted-light dark:text-muted-dark/50 p-2">
               <RiImageAddLine className="text-2xl" />
             </button>
             <button
@@ -85,7 +85,7 @@ const ChatBox = () => {
 
                 setUser(!user);
               }}
-              className="text-muted-light/50 dark:text-muted-dark/50 p-2"
+              className="text-muted-light dark:text-muted-dark/50 p-2"
             >
               <BiUser className="text-2xl" />
             </button>
