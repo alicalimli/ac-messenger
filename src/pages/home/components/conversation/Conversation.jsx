@@ -62,10 +62,10 @@ const ChatBox = () => {
             <button className="text-muted-light/10 dark:text-muted-dark/50 p-2">
               <VscSmiley className="text-2xl" />
             </button>
-                 <button className="text-muted-light/10 dark:text-muted-dark/50 p-2">
+            <button className="text-muted-light/10 dark:text-muted-dark/50 p-2">
               <BiMicrophone className="text-2xl" />
             </button>
-               <button className="text-muted-light/10 dark:text-muted-dark/50 p-2">
+            <button className="text-muted-light/10 dark:text-muted-dark/50 p-2">
               <RiImageAddLine className="text-2xl" />
             </button>
             <button
@@ -85,7 +85,7 @@ const ChatBox = () => {
 
                 setUser(!user);
               }}
-             className="text-muted-light/10 dark:text-muted-dark/50 p-2"
+              className="text-muted-light/10 dark:text-muted-dark/50 p-2"
             >
               <BiUser className="text-2xl" />
             </button>

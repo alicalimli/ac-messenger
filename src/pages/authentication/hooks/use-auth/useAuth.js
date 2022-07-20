@@ -1,6 +1,10 @@
 import { useRef, useEffect, useState, useContext } from "react";
 
-import { UserContext, UserTokenContext,UserRefreshContext} from "/src/setup/app-context-manager";
+import {
+  UserContext,
+  UserTokenContext,
+  UserRefreshContext,
+} from "/src/setup/app-context-manager";
 
 import { useLocalStorage, useGenerateToken } from "/src/common/hooks";
 import axios from "/src/api/axios";
@@ -13,7 +17,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
 
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
-  const {userRefresh, setUserRefresh} = useContext(UserRefreshContext)
+  const { userRefresh, setUserRefresh } = useContext(UserRefreshContext);
 
   const generateToken = useGenerateToken();
 
@@ -50,7 +54,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
       setPendingMsg("done");
 
       setUserToken(userToken.access_token);
-      setUserRefresh(userToken.refresh_token)
+      setUserRefresh(userToken.refresh_token);
 
       authenticate(userToken.access_token);
     } catch (error) {
