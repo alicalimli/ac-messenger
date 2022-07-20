@@ -10,6 +10,12 @@ import { UserContext, UserTokenContext } from "/src/setup/app-context-manager";
 import { useLocalStorage } from "/src/common/hooks";
 import { TwTrnButton, TwTooltip } from "/src/common/components";
 
+  const SIDEBAR_PAGE_BUTTONS = [
+    { name: "chats", icon: BiMessageSquareDetail },
+    { name: "profile", icon: AiOutlineUser },
+    { name: "settings", icon: FiSettings },
+  ];
+
 const SidebarNav = ({
   sidebarContent,
   setSideBarContent,
@@ -27,12 +33,6 @@ const SidebarNav = ({
     false
   );
   const [darkmode, setDarkmode] = useLocalStorage('darkmode', false);
-
-  const sidebarButtons = [
-    { name: "chats", icon: BiMessageSquareDetail },
-    { name: "profile", icon: AiOutlineUser },
-    { name: "settings", icon: FiSettings },
-  ];
 
   const handleLogOut = () => {
     setUserInfo(null);
@@ -56,7 +56,7 @@ const SidebarNav = ({
   return (
     <nav className="relative hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 sm:flex sm:flex-col gap-4 justify-center">
       <div className="flex flex-col gap-2 items-center">
-        {sidebarButtons.map((obj) => {
+        {SIDEBAR_PAGE_BUTTONS.map((obj) => {
           const Icon = obj.icon;
           return (
             <TwTrnButton
