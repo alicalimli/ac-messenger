@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineUser } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
-import { BiMessageSquareDetail } from "react-icons/bi";
+import { BiMessageSquareDetail,BiMoon } from "react-icons/bi";
 
 import { UserContext, UserTokenContext } from "/src/setup/app-context-manager";
 
@@ -31,6 +31,7 @@ const SidebarNav = ({
     { name: "chats", icon: BiMessageSquareDetail },
     { name: "profile", icon: AiOutlineUser },
     { name: "settings", icon: FiSettings },
+    { name: "darkmode", icon: BiMoon}
   ];
 
   const handleLogOut = () => {

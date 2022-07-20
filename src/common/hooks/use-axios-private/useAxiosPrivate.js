@@ -3,10 +3,10 @@ import { useEffect, useContext } from "react";
 import { axiosPrivate } from "/src/api/axios";
 import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
 
-import { useGenerateToken } from "../";
+import { useRefreshToken } from "../";
 
 const useAxiosPrivate = () => {
-  const generateToken = useGenerateToken();
+  const refreshToken = useRefreshToken();
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const [userInfo, setUserInfo] = useContext(UserContext);
 
@@ -31,7 +31,7 @@ const useAxiosPrivate = () => {
         if (error?.response?.status === 401 && !prevRequest.sent) {
           prevRequest.sent = true;
 
-          const accessToken = await generateToken(email, password);
+          const accessToken = await refreshToken(email, password);
           prevRequest.headers["Authorization"] = `Bearer ${accessToken}`;
 
           return axiosPrivate(prevRequest);
@@ -46,7 +46,7 @@ const useAxiosPrivate = () => {
       axiosPrivate.interceptors.request.eject(requestIntercept);
       axiosPrivate.interceptors.response.eject(responseIntercept);
     };
-  }, [userInfo, generateToken]);
+  }, [userInfo, refreshToken]);
 
   return axiosPrivate;
 };
