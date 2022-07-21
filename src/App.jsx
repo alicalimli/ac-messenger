@@ -7,6 +7,7 @@ import {
   UserContext,
   UserTokenContext,
   ToastMsgContext,
+  DarkmodeContext
 } from "./setup/app-context-manager";
 
 import { Authentication } from "./pages/authentication";
@@ -24,6 +25,7 @@ const Main = () => {
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const [toastMsg, setToastMsg] = useContext(ToastMsgContext);
+  const [darkmode, setDarkmode] = useContext(DarkmodeContext);
 
   const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
   const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");
@@ -49,6 +51,14 @@ const Main = () => {
       setUserInfo(savedUserInfo);
     }
   }, []);
+
+    useEffect(() => {
+    if(darkmode) {
+      document.documentElement.classList.add("dark");
+    }else{
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkmode]);
 
   return (
     <StrictMode>
