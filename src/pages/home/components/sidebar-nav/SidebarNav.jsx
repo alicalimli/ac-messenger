@@ -5,7 +5,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 import { BiMessageSquareDetail, BiMoon, BiSun } from "react-icons/bi";
 
-import { UserContext, UserTokenContext } from "/src/setup/app-context-manager";
+import { UserContext, UserTokenContext, DarkmodeContext } from "/src/setup/app-context-manager";
 
 import { useLocalStorage } from "/src/common/hooks";
 import { TwTrnButton, TwTooltip } from "/src/common/components";
@@ -25,6 +25,7 @@ const SidebarNav = ({
 
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
+  const [darkmode, setDarkmode] = useContext(DarkmodeContext);
 
   const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
   const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");
@@ -32,7 +33,6 @@ const SidebarNav = ({
     "keepSignedIn",
     false
   );
-  const [darkmode, setDarkmode] = useLocalStorage("darkmode", false);
 
   const handleLogOut = () => {
     setUserInfo(null);
@@ -48,14 +48,6 @@ const SidebarNav = ({
     previousContentRef.current = sidebarContent;
     setSideBarContent(sideContentName);
   };
-
-  useEffect(() => {
-    if(darkmode) {
-      document.documentElement.classList.add("dark");
-    }else{
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkmode]);
 
   return (
     <nav className="relative hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 sm:flex sm:flex-col gap-4 justify-center">
