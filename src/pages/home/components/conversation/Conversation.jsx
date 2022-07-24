@@ -98,7 +98,7 @@ const ChatBox = () => {
               onChange={(e) => setMessage(e.target.value)}
               onBlur={(e) => setMessage(e.target.value)}
             />
-            <button className="absolute right-0 rounded-xl ml-auto h-full p-4 bg-blue-500 flex items-center justify-center active:scale-90 duration-300 hover:bg-blue-400">
+            <button className="absolute right-0 rounded-xl ml-auto h-full p-4 bg-primary-main hover:bg-primary-tinted flex items-center justify-center active:scale-90 duration-300">
               <MdSend className="text-white text-2xl" />
             </button>
           </form>

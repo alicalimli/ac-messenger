@@ -42,7 +42,7 @@ const Messages = ({ messages }) => {
           >
             <button
               onClick={scrollDown}
-              className="cursor-pointer bg-blue-500 rounded-xl p-2"
+              className="cursor-pointer bg-primary-main rounded-xl p-2"
             >
               <AiOutlineArrowDown className="text-xl text-white " />
             </button>
@@ -64,7 +64,7 @@ const Messages = ({ messages }) => {
               peer flex rounded-xl p-1.5 px-3 w-fit
               ${
                 currentMsg.user
-                  ? "focus:bg-blue-400  bg-blue-500 text-white"
+                  ? "focus:bg-primary-tinted  bg-primary-main text-white"
                   : "bg-white text-black"
               }
             `}
