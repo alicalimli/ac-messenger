@@ -1,8 +1,8 @@
 import { TwTrnButton } from "/src/common/components";
 import elvis from "/src/assets/images/elvis.jpg";
 
-const Chats = ({inboxLists}) => {
-  console.log(inboxLists)
+const Chats = ({ inboxLists }) => {
+  console.log(inboxLists);
   return (
     <div className=" p-4 flex flex-col gap-4">
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>

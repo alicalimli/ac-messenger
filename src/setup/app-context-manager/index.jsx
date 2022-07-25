@@ -1,6 +1,6 @@
 import React, { useState, createContext } from "react";
 
-import {useLocalStorage} from '/src/common/hooks'
+import { useLocalStorage } from "/src/common/hooks";
 
 export const UserRefreshContext = createContext();
 export const UserContext = createContext();

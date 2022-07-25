@@ -8,7 +8,7 @@ import { BiUser } from "react-icons/bi";
 
 import { AiOutlineArrowDown } from "react-icons/ai";
 
-import {motion, AnimatePresence} from 'framer-motion'
+import { motion, AnimatePresence } from "framer-motion";
 
 import elvis from "/src/assets/images/elvis.jpg";
 import Messages from "./messages/Messages";
@@ -85,27 +85,27 @@ const ChatBox = () => {
           ref={conversationContainer}
           className="relative flex flex-col overflow-scroll scrollbar-hide px-4"
         >
-          <Messages messages={messages} latestMsgRef={latestMsg}/>
+          <Messages messages={messages} latestMsgRef={latestMsg} />
         </main>
 
         <div className="relative w-full flex items-center relative gap-2 p-4">
-            <AnimatePresence>
-              {showArrowDown && (
-                <motion.div
-                  animate={{ opacity: 1, x: -50}}
-                  initial={{ opacity: 0, x: -50}}
-                  exit={{ opacity: 0, x: -50}}
-                  className="absolute -top-1/2 left-1/2 z-10"
+          <AnimatePresence>
+            {showArrowDown && (
+              <motion.div
+                animate={{ opacity: 1, x: -50 }}
+                initial={{ opacity: 0, x: -50 }}
+                exit={{ opacity: 0, x: -50 }}
+                className="absolute -top-1/2 left-1/2 z-10"
+              >
+                <TwButton
+                  clickHandler={scrollDown}
+                  addClass="rounded-full px-2"
                 >
-                  <TwButton
-                    clickHandler={scrollDown}
-                    addClass="rounded-full px-2"
-                  >
-                    <AiOutlineArrowDown className="text-xl text-white " />
-                  </TwButton>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  <AiOutlineArrowDown className="text-xl text-white " />
+                </TwButton>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <form
             onSubmit={sendMessage}

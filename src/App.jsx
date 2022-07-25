@@ -7,7 +7,7 @@ import {
   UserContext,
   UserTokenContext,
   ToastMsgContext,
-  DarkmodeContext
+  DarkmodeContext,
 } from "./setup/app-context-manager";
 
 import { Authentication } from "./pages/authentication";
@@ -52,10 +52,10 @@ const Main = () => {
     }
   }, []);
 
-    useEffect(() => {
-    if(darkmode) {
+  useEffect(() => {
+    if (darkmode) {
       document.documentElement.classList.add("dark");
-    }else{
+    } else {
       document.documentElement.classList.remove("dark");
     }
   }, [darkmode]);
