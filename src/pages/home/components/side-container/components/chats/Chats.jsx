@@ -1,7 +1,7 @@
 import { TwTrnButton } from "/src/common/components";
 import elvis from "/src/assets/images/elvis.jpg";
 
-import { useGetUsers } from "/src/common/hooks";
+import { useGetInboxList } from "/src/common/hooks";
 
 const friends = [
   {
@@ -27,6 +27,9 @@ const friends = [
 ];
 
 const Chats = () => {
+  const inboxLists = useGetInboxList();
+  console.log(inboxLists)
+
   return (
     <div className=" p-4 flex flex-col gap-4">
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
