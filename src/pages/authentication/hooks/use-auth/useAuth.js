@@ -49,6 +49,20 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
       setErrorMsg("");
       setPendingMsg("generating token");
 
+      // For bypassing authentication
+      if(email === 'admin@chately.com' && pass === 'admin'){
+        setUserInfo(Object.assign({}, {
+            email: "admin@chately.com",
+            profile: "default.png",
+            status: true,
+            user_id: 3,
+            username: "chately2423",
+            websocket_id: "1657349013.3553238",
+        }));
+        setPendingMsg("");
+        return
+      }
+
       const userToken = await generateToken(email, pass);
 
       setPendingMsg("done");
