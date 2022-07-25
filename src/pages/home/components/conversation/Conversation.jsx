@@ -36,10 +36,10 @@ const ChatBox = () => {
   };
 
   return (
-    <section className="h-screen w-screen justify-center hidden lg:flex bg-muted-light/10 dark:bg-black">
+    <section className="h-screen w-screen justify-center hidden lg:flex bg-muted-light/10 dark:bg-black duration-300">
       <div className="w-full flex flex-col gap-4">
         <TwTrnButton addClass="block md:hidden">{`< Back`}</TwTrnButton>
-        <header className="border-b border-muted-light/10 dark:border-muted-dark/10 w-full p-4 flex items-center mb-auto flex items-center gap-4 bg-white dark:bg-gray-900">
+        <header className="border-b border-muted-light/10 dark:border-muted-dark/10 w-full p-4 flex items-center mb-auto flex items-center gap-4 bg-white dark:bg-gray-900 duration-300">
           <div className="relative bg-transparent h-16 w-16">
             <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
             <img src={elvis} className="w-full rounded-full" />
@@ -57,7 +57,7 @@ const ChatBox = () => {
         <div className="w-full flex items-center relative gap-2 p-4">
           <form
             onSubmit={sendMessage}
-            className="relative w-full flex items-center gap-1 bg-white p-2 dark:bg-gray-900 rounded-xl"
+            className="relative w-full flex items-center gap-1 bg-white p-2 dark:bg-gray-900 rounded-xl duration-300"
           >
             <button className="text-muted-light dark:text-muted-dark/50 p-2">
               <VscSmiley className="text-2xl" />
@@ -98,7 +98,7 @@ const ChatBox = () => {
               onChange={(e) => setMessage(e.target.value)}
               onBlur={(e) => setMessage(e.target.value)}
             />
-            <button className="absolute right-0 rounded-xl ml-auto h-full p-4 bg-blue-500 flex items-center justify-center active:scale-90 duration-300 hover:bg-blue-400">
+            <button className="absolute right-0 rounded-xl ml-auto h-full p-4 bg-primary-main hover:bg-primary-tinted flex items-center justify-center active:scale-90 duration-300">
               <MdSend className="text-white text-2xl" />
             </button>
           </form>

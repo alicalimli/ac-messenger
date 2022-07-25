@@ -71,7 +71,7 @@ const Profile = ({ previousContentRef, setSideBarContent }) => {
   }, [username, password]);
 
   return (
-    <div className="bg-white dark:bg-gray-900 flex flex-col">
+    <div className=" flex flex-col">
       <Modal setShowModal={setShowModal}>
         {showModal && (
           <form
