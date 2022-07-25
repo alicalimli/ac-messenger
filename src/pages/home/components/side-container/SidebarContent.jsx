@@ -5,12 +5,15 @@ import { Profile, Chats } from "./components";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
+import { useGetInboxList } from "/src/common/hooks";
 
 const SidebarContent = ({
   sidebarContent,
   setSideBarContent,
   previousContentRef,
 }) => {
+  const inboxLists = useGetInboxList();
+
   return (
     <section className="relative border-r border-muted-light/10 dark:border-muted-dark/10 w-full sm:w-[32rem] overflow-x-hidden">
       <AnimatePresence>
@@ -23,7 +26,7 @@ const SidebarContent = ({
             animate="slide-in"
             exit="slide-from-right"
           >
-            <Chats />
+            <Chats inboxLists={inboxLists} />
           </motion.div>
         )}
         {sidebarContent === "profile" && (
