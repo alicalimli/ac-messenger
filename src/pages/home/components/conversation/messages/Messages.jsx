@@ -42,7 +42,7 @@ const Messages = ({ messages }) => {
           >
             <button
               onClick={scrollDown}
-              className="cursor-pointer bg-primary-main rounded-xl p-2"
+              className="cursor-pointer bg-primary-main rounded-full p-2"
             >
               <AiOutlineArrowDown className="text-xl text-white " />
             </button>
@@ -61,11 +61,11 @@ const Messages = ({ messages }) => {
             initial={{ scale: 0, opacity: 0 }}
             ref={latestMsg}
             className={`
-              peer flex rounded-xl p-1.5 px-3 w-fit
+              peer flex rounded-full p-1.5 px-3 w-fit
               ${
                 currentMsg.user
-                  ? "focus:bg-primary-tinted  bg-primary-main text-white"
-                  : "bg-white text-black"
+                  ? "focus:bg-primary-tinted  bg-primary-main text-white rounded-br-sm"
+                  : "bg-white text-black rounded-bl-sm"
               }
             `}
           >

@@ -57,7 +57,7 @@ const ChatBox = () => {
         <div className="w-full flex items-center relative gap-2 p-4">
           <form
             onSubmit={sendMessage}
-            className="relative w-full flex items-center gap-1 bg-white p-2 dark:bg-gray-900 rounded-xl duration-300"
+            className="relative w-full flex items-center gap-1 bg-white p-2 dark:bg-gray-900 rounded-full duration-300"
           >
             <button className="text-muted-light dark:text-muted-dark/50 p-2">
               <VscSmiley className="text-2xl" />
@@ -94,11 +94,11 @@ const ChatBox = () => {
               type="text"
               value={message}
               placeholder="Message here"
-              className="p-2 px-4 w-full bg-transparent rounded-xl outline-none text-dark dark:text-white"
+              className="p-2 px-4 w-full bg-transparent outline-none text-dark dark:text-white"
               onChange={(e) => setMessage(e.target.value)}
               onBlur={(e) => setMessage(e.target.value)}
             />
-            <button className="absolute right-0 rounded-xl ml-auto h-full p-4 bg-primary-main hover:bg-primary-tinted flex items-center justify-center active:scale-90 duration-300">
+            <button className="absolute right-0 rounded-full ml-auto h-full p-4 bg-primary-main hover:bg-primary-tinted flex items-center justify-center active:scale-90 duration-300">
               <MdSend className="text-white text-2xl" />
             </button>
           </form>
