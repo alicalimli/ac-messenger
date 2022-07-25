@@ -13,7 +13,7 @@ import {motion, AnimatePresence} from 'framer-motion'
 import elvis from "/src/assets/images/elvis.jpg";
 import Messages from "./messages/Messages";
 
-import { TwTrnButton } from "/src/common/components";
+import { TwTrnButton, TwButton } from "/src/common/components";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
@@ -97,13 +97,12 @@ const ChatBox = () => {
                   exit={{ opacity: 0, x: -50}}
                   className="absolute -top-1/2 left-1/2 z-10"
                 >
-                  <button
-                    onClick={scrollDown}
-                    className="cursor-pointer bg-primary-main
-                    rounded-full p-2"
+                  <TwButton
+                    clickHandler={scrollDown}
+                    addClass="rounded-full px-2"
                   >
                     <AiOutlineArrowDown className="text-xl text-white " />
-                  </button>
+                  </TwButton>
                 </motion.div>
               )}
             </AnimatePresence>
