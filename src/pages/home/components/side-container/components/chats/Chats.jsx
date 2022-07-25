@@ -27,10 +27,6 @@ const friends = [
 ];
 
 const Chats = () => {
-  const allUsers = useGetUsers();
-
-  console.log(allUsers)
-
   return (
     <div className=" p-4 flex flex-col gap-4">
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
