@@ -35,10 +35,10 @@ const Messages = ({ messages }) => {
       <AnimatePresence>
         {showArrowDown && (
           <motion.div
-            animate={{ opacity: 1, scale: 1, y: "0%", x: "-50%" }}
-            initial={{ opacity: 0, scale: 0, y: "50%", x: "-50%" }}
-            exit={{ opacity: 0, scale: 0, y: "50%", x: "-50%" }}
-            className="fixed bottom-[12%] left-1/2 -translate-x-1/2"
+            animate={{ opacity: 1}}
+            initial={{ opacity: 0}}
+            exit={{ opacity: 0}}
+            className="sticky "
           >
             <button
               onClick={scrollDown}
