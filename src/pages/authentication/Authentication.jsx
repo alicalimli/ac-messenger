@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { SignIn, SignUp } from "./components";
+import { SignIn, SignUp } from "/src/features/authentication/components";
 import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
 
 const Authentication = ({
