@@ -153,9 +153,9 @@ const ChatBox = () => {
               onChange={(e) => setMessage(e.target.value)}
               onBlur={(e) => setMessage(e.target.value)}
             />
-            <button className="rounded-full ml-auto h-full p-4 bg-primary-main hover:bg-primary-tinted flex items-center justify-center active:scale-90 duration-300">
+            <TwButton addClass="rounded-full ml-auto h-full p-4 flex items-center justify-center">
               <MdSend className="text-white text-2xl" />
-            </button>
+            </TwButton>
           </form>
         </div>
       </div>
