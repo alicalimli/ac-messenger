@@ -1,18 +1,17 @@
-import { useContext, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { BiLogOut } from "react-icons/bi";
+import { useContext } from "react";
 import { AiOutlineUser } from "react-icons/ai";
+import { BiLogOut, BiMessageSquareDetail, BiMoon, BiSun } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
-import { BiMessageSquareDetail, BiMoon, BiSun } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 import {
+  DarkmodeContext,
   UserContext,
   UserTokenContext,
-  DarkmodeContext,
 } from "/src/setup/app-context-manager";
 
-import { useLocalStorage } from "/src/common/hooks";
-import { TwTrnButton, TwTooltip } from "/src/common/components";
+import { TwTooltip, TwTrnButton } from "/src/components";
+import { useLocalStorage } from "/src/hooks";
 
 const SIDEBAR_PAGE_BUTTONS = [
   { name: "chats", icon: BiMessageSquareDetail },

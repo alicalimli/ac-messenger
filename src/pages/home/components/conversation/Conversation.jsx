@@ -1,19 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
+import { BiMicrophone, BiUser } from "react-icons/bi";
 import { MdSend } from "react-icons/md";
-import { VscSmiley } from "react-icons/vsc";
-import { BiMicrophone } from "react-icons/bi";
 import { RiImageAddLine } from "react-icons/ri";
-import { BiUser } from "react-icons/bi";
+import { VscSmiley } from "react-icons/vsc";
 
 import { AiOutlineArrowDown } from "react-icons/ai";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
+import Messages from "../messages/Messages";
 import elvis from "/src/assets/images/elvis.jpg";
-import Messages from "./messages/Messages";
 
-import { TwTrnButton, TwButton } from "/src/common/components";
+import { TwButton, TwTrnButton } from "/src/components";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
@@ -112,17 +111,26 @@ const ChatBox = () => {
             className="relative w-full flex items-center gap-1 bg-white dark:bg-gray-900 rounded-full duration-300"
           >
             <div className="flex p-2">
-              <button type="button" className="text-muted-light dark:text-muted-dark/50 p-2">
+              <button
+                type="button"
+                className="text-muted-light dark:text-muted-dark/50 p-2"
+              >
                 <VscSmiley className="text-2xl" />
               </button>
-              <button type="button" className="text-muted-light dark:text-muted-dark/50 p-2">
+              <button
+                type="button"
+                className="text-muted-light dark:text-muted-dark/50 p-2"
+              >
                 <BiMicrophone className="text-2xl" />
               </button>
-              <button type="button" className="text-muted-light dark:text-muted-dark/50 p-2">
+              <button
+                type="button"
+                className="text-muted-light dark:text-muted-dark/50 p-2"
+              >
                 <RiImageAddLine className="text-2xl" />
               </button>
               <button
-              type="button"
+                type="button"
                 onClick={(e) => {
                   const btn = e.target.closest("button");
                   if (active) {

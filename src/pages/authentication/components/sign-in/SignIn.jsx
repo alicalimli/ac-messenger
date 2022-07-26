@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 
-import { InputForm, TwButton, TwTrnButton } from "/src/common/components";
 import { useAuth } from "../../hooks";
+import { InputForm, TwButton, TwTrnButton } from "/src/components";
 
 const SignIn = ({
   setPendingMsg,

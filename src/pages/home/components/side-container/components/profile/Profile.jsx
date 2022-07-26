@@ -1,21 +1,21 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import {
+  ToastMsgContext,
   UserContext,
   UserTokenContext,
-  ToastMsgContext,
 } from "/src/setup/app-context-manager";
 
-import { HiOutlineMail, HiOutlineLocationMarker } from "react-icons/hi";
 import { GoMention } from "react-icons/go";
+import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 
 import {
+  InputForm,
   Modal,
   TwButton,
-  TwTrnButton,
   TwTooltip,
-  InputForm,
-} from "/src/common/components";
+  TwTrnButton,
+} from "/src/components";
 
 import { useEditInfo } from "../../hooks";
 

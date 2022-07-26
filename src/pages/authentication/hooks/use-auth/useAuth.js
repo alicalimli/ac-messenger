@@ -1,13 +1,13 @@
-import { useRef, useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 
 import {
   UserContext,
-  UserTokenContext,
   UserRefreshContext,
+  UserTokenContext,
 } from "/src/setup/app-context-manager";
 
-import { useLocalStorage, useGenerateToken } from "/src/common/hooks";
 import axios from "/src/api/axios";
+import { useGenerateToken } from "/src/hooks";
 
 const SIGNUP_URL = "/users";
 const GETUSER_URL = "/users/me";
@@ -15,7 +15,6 @@ const GETUSER_URL = "/users/me";
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
 const useAuth = (setPendingMsg, setErrorMsg) => {
-
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const { userRefresh, setUserRefresh } = useContext(UserRefreshContext);
@@ -51,17 +50,22 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
       setPendingMsg("generating token");
 
       // For bypassing authentication
-      if(email === 'admin@chately.com' && pass === 'admin'){
-        setUserInfo(Object.assign({}, {
-            email: "admin@chately.com",
-            profile: "default.png",
-            status: true,
-            user_id: 3,
-            username: "chately2423",
-            websocket_id: "1657349013.3553238",
-        }));
+      if (email === "admin@chately.com" && pass === "admin") {
+        setUserInfo(
+          Object.assign(
+            {},
+            {
+              email: "admin@chately.com",
+              profile: "default.png",
+              status: true,
+              user_id: 3,
+              username: "chately2423",
+              websocket_id: "1657349013.3553238",
+            }
+          )
+        );
         setPendingMsg("");
-        return
+        return;
       }
 
       const userToken = await generateToken(email, pass);

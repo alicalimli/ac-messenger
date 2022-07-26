@@ -1,5 +1,5 @@
-import { TwTrnButton } from "/src/common/components";
 import elvis from "/src/assets/images/elvis.jpg";
+import { TwTrnButton } from "/src/components";
 
 const Chats = ({ inboxLists }) => {
   console.log(inboxLists);

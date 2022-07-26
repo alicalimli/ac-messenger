@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Messages = ({ messages, latestMsgRef }) => {

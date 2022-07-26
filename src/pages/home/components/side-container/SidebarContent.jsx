@@ -1,8 +1,8 @@
-import { Profile, Chats } from "./components";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { Chats, Profile } from "./components";
 
+import { useGetInboxList } from "/src/hooks";
 import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
-import { useGetInboxList } from "/src/common/hooks";
 
 const SidebarContent = ({
   sidebarContent,
