@@ -1,5 +1,8 @@
-import React, { useState, useRef } from "react";
-import { SidebarNav, Conversation, SidebarContent } from "./components";
+import React from "react";
+
+import { useState, useRef } from "react";
+import { SidebarNav, SidebarContent } from "./components";
+import { ConversationBox } from "../../features/conversation/components";
 
 const Home = () => {
   const defaultSideBarContent = "chats";
@@ -19,7 +22,7 @@ const Home = () => {
         setSideBarContent={setSideBarContent}
         previousContentRef={previousContentRef}
       />
-      <Conversation />
+      <ConversationBox />
     </div>
   );
 };

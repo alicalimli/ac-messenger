@@ -9,12 +9,12 @@ import { AiOutlineArrowDown } from "react-icons/ai";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import Messages from "../messages/Messages";
+import Messages from "./Messages";
 import elvis from "/src/assets/images/elvis.jpg";
 
 import { TwButton, TwTrnButton } from "/src/components";
 
-const ChatBox = () => {
+const ConversationBox = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
@@ -170,4 +170,4 @@ const ChatBox = () => {
   );
 };
 
-export default ChatBox;
+export default ConversationBox;
