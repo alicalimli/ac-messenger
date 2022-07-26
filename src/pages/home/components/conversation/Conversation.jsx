@@ -95,7 +95,7 @@ const ChatBox = () => {
                 animate={{ opacity: 1, x: -50 }}
                 initial={{ opacity: 0, x: -50 }}
                 exit={{ opacity: 0, x: -50 }}
-                className="absolute -top-1/2 left-1/2 z-10"
+                className="absolute -top-3/4 left-1/2 z-10"
               >
                 <TwButton
                   clickHandler={scrollDown}
@@ -109,38 +109,40 @@ const ChatBox = () => {
 
           <form
             onSubmit={sendMessage}
-            className="relative w-full flex items-center gap-1 bg-white p-2 dark:bg-gray-900 rounded-full duration-300"
+            className="relative w-full flex items-center gap-1 bg-white dark:bg-gray-900 rounded-full duration-300"
           >
-            <button className="text-muted-light dark:text-muted-dark/50 p-2">
-              <VscSmiley className="text-2xl" />
-            </button>
-            <button className="text-muted-light dark:text-muted-dark/50 p-2">
-              <BiMicrophone className="text-2xl" />
-            </button>
-            <button className="text-muted-light dark:text-muted-dark/50 p-2">
-              <RiImageAddLine className="text-2xl" />
-            </button>
-            <button
-              onClick={(e) => {
-                const btn = e.target.closest("button");
+            <div className="flex p-2">
+              <button className="text-muted-light dark:text-muted-dark/50 p-2">
+                <VscSmiley className="text-2xl" />
+              </button>
+              <button className="text-muted-light dark:text-muted-dark/50 p-2">
+                <BiMicrophone className="text-2xl" />
+              </button>
+              <button className="text-muted-light dark:text-muted-dark/50 p-2">
+                <RiImageAddLine className="text-2xl" />
+              </button>
+              <button
+                onClick={(e) => {
+                  const btn = e.target.closest("button");
 
-                console.log(active);
-                if (active) {
-                  setActive(false);
-                  btn.style.background = "gray";
-                  console.log("not active");
-                } else if (!active) {
-                  setActive(true);
-                  console.log("active");
-                  btn.style.background = "blue";
-                }
+                  console.log(active);
+                  if (active) {
+                    setActive(false);
+                    btn.style.background = "gray";
+                    console.log("not active");
+                  } else if (!active) {
+                    setActive(true);
+                    console.log("active");
+                    btn.style.background = "blue";
+                  }
 
-                setUser(!user);
-              }}
-              className="text-muted-light dark:text-muted-dark/50 p-2"
-            >
-              <BiUser className="text-2xl" />
-            </button>
+                  setUser(!user);
+                }}
+                className="text-muted-light dark:text-muted-dark/50 p-2"
+              >
+                <BiUser className="text-2xl" />
+              </button>
+            </div>
 
             <input
               required
