@@ -125,7 +125,7 @@ const Profile = ({ previousContentRef, setSideBarContent }) => {
 
         <div className="flex flex-col items-center text-center p-4 px-8">
           <img
-            className="w-full bg-cover bg-center bg-primary-main mb-4 w-16 h-16 rounded-full border border-4 border-white dark:border-black"
+            className="bg-cover bg-center bg-transparent mb-2 w-24 h-24 rounded-full shadow-md"
             alt={`${userInfo.username}'s profile picture`}
             src={userInfo.profile}
           />
