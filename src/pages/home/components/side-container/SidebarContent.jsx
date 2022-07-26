@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Chats, Profile } from "./components";
+import { Chats } from "./components";
+import { ProfileContainer } from "/src/features/profile/components";
 
 import { useGetInboxList } from "/src/hooks";
 import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
@@ -35,7 +36,7 @@ const SidebarContent = ({
             animate="slide-in"
             exit="slide-from-right"
           >
-            <Profile
+            <ProfileContainer
               previousContentRef={previousContentRef}
               setSideBarContent={setSideBarContent}
             />

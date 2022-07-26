@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useAxiosPrivate } from "/src/common/hooks";
+import { useAxiosPrivate } from "/src/hooks";
 import { ToastMsgContext } from "/src/setup/app-context-manager";
 import { UserContext, UserTokenContext } from "/src/setup/app-context-manager";
 

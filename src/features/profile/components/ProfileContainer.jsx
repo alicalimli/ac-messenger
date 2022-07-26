@@ -17,11 +17,11 @@ import {
   TwTrnButton,
 } from "/src/components";
 
-import { useEditInfo } from "../../hooks";
+import { useEditInfo } from "../hooks";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 
-const Profile = ({ previousContentRef, setSideBarContent }) => {
+const ProfileContainer = ({ previousContentRef, setSideBarContent }) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [toastMsg, setToastMsg] = useContext(ToastMsgContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
@@ -168,4 +168,4 @@ const Profile = ({ previousContentRef, setSideBarContent }) => {
   );
 };
 
-export default Profile;
+export default ProfileContainer;
