@@ -1,8 +1,11 @@
 import elvis from "/src/assets/images/elvis.jpg";
-import { TwTrnButton } from "/src/components";
 
-const Chats = ({ inboxLists }) => {
-  console.log(inboxLists);
+import { TwTrnButton } from "/src/components";
+import { useGetInboxList } from "../hooks";
+
+const InboxList = () => {
+  const inboxLists = useGetInboxList();
+
   return (
     <div className=" p-4 flex flex-col gap-4">
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
@@ -28,4 +31,4 @@ const Chats = ({ inboxLists }) => {
   );
 };
 
-export default Chats;
+export default InboxList;
