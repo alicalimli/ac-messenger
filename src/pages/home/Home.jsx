@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { SidebarNav, Conversation, SidebarContent } from "./components";
 
-const Home = ({ userInfo, setUserInfo }) => {
+const Home = () => {
   const defaultSideBarContent = "chats";
   const [sidebarContent, setSideBarContent] = useState(defaultSideBarContent);
 
