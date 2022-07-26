@@ -112,20 +112,19 @@ const ChatBox = () => {
             className="relative w-full flex items-center gap-1 bg-white dark:bg-gray-900 rounded-full duration-300"
           >
             <div className="flex p-2">
-              <button className="text-muted-light dark:text-muted-dark/50 p-2">
+              <button type="button" className="text-muted-light dark:text-muted-dark/50 p-2">
                 <VscSmiley className="text-2xl" />
               </button>
-              <button className="text-muted-light dark:text-muted-dark/50 p-2">
+              <button type="button" className="text-muted-light dark:text-muted-dark/50 p-2">
                 <BiMicrophone className="text-2xl" />
               </button>
-              <button className="text-muted-light dark:text-muted-dark/50 p-2">
+              <button type="button" className="text-muted-light dark:text-muted-dark/50 p-2">
                 <RiImageAddLine className="text-2xl" />
               </button>
               <button
+              type="button"
                 onClick={(e) => {
                   const btn = e.target.closest("button");
-
-                  console.log(active);
                   if (active) {
                     setActive(false);
                     btn.style.background = "gray";
@@ -154,7 +153,7 @@ const ChatBox = () => {
               onBlur={(e) => setMessage(e.target.value)}
             />
             <TwButton addClass="rounded-full ml-auto h-full p-4 flex items-center justify-center">
-              <MdSend className="text-white text-2xl" />
+              <MdSend className={`text-white text-2xl`} />
             </TwButton>
           </form>
         </div>
