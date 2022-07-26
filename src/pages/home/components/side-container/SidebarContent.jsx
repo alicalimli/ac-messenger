@@ -1,7 +1,4 @@
-import { useState, useEffect } from "react";
-
 import { Profile, Chats } from "./components";
-
 import { motion, AnimatePresence } from "framer-motion";
 
 import { VARIANTS_MANAGER } from "/src/setup/variants-manager";

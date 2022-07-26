@@ -1,9 +1,8 @@
-import { useRef, useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
-import { motion } from "framer-motion";
 
 import { InputForm, TwButton, TwTrnButton } from "/src/common/components";
-import { useLocalStorage, useAuth } from "../../hooks";
+import { useAuth } from "../../hooks";
 
 const SignIn = ({
   setPendingMsg,
