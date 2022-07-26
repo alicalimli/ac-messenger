@@ -14,8 +14,8 @@ const TwButton = ({
       type={btnType || null}
       onClick={clickHandler || null}
       disabled={isDisabled ? true : false}
-      className={`bg-primary-main hover:bg-primary-tinted
-          	rounded-xl p-2 px-4 text-white ${addClass}`}
+      className={`${addClass} bg-primary-main hover:bg-primary-tinted
+          	rounded-xl p-2 px-4 text-white`}
     >
       {children}
     </motion.button>

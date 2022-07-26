@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { MdSend } from "react-icons/md";
 import { VscSmiley } from "react-icons/vsc";
@@ -6,10 +6,14 @@ import { BiMicrophone } from "react-icons/bi";
 import { RiImageAddLine } from "react-icons/ri";
 import { BiUser } from "react-icons/bi";
 
+import { AiOutlineArrowDown } from "react-icons/ai";
+
+import { motion, AnimatePresence } from "framer-motion";
+
 import elvis from "/src/assets/images/elvis.jpg";
 import Messages from "./messages/Messages";
 
-import { TwTrnButton } from "/src/common/components";
+import { TwTrnButton, TwButton } from "/src/common/components";
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
@@ -17,6 +21,11 @@ const ChatBox = () => {
 
   const [active, setActive] = useState(false);
   const [user, setUser] = useState(true);
+
+  const [showArrowDown, setShowArrowDown] = useState(false);
+
+  const conversationContainer = useRef("");
+  const latestMsg = useRef("");
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -35,6 +44,26 @@ const ChatBox = () => {
     ]);
   };
 
+  const scrollDown = () => {
+    latestMsg.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  if (conversationContainer.current) {
+    conversationContainer.current.addEventListener("scroll", (event) => {
+      const target = event.target;
+      if (target.scrollHeight - target.scrollTop > target.clientHeight + 300) {
+        setShowArrowDown(true);
+      } else {
+        setShowArrowDown(false);
+      }
+    });
+  }
+
+  useEffect(() => {
+    if (!latestMsg.current) return;
+    latestMsg.current.scrollIntoView();
+  }, [messages, latestMsg.current]);
+
   return (
     <section className="h-screen w-screen justify-center hidden lg:flex bg-muted-light/10 dark:bg-black duration-300">
       <div className="w-full flex flex-col gap-4">
@@ -52,12 +81,35 @@ const ChatBox = () => {
           </div>
         </header>
 
-        <Messages messages={messages} />
+        <main
+          ref={conversationContainer}
+          className="relative flex flex-col overflow-scroll scrollbar-hide px-4"
+        >
+          <Messages messages={messages} latestMsgRef={latestMsg} />
+        </main>
 
-        <div className="w-full flex items-center relative gap-2 p-4">
+        <div className="relative w-full flex items-center relative gap-2 p-4">
+          <AnimatePresence>
+            {showArrowDown && (
+              <motion.div
+                animate={{ opacity: 1, x: -50 }}
+                initial={{ opacity: 0, x: -50 }}
+                exit={{ opacity: 0, x: -50 }}
+                className="absolute -top-1/2 left-1/2 z-10"
+              >
+                <TwButton
+                  clickHandler={scrollDown}
+                  addClass="rounded-full px-2"
+                >
+                  <AiOutlineArrowDown className="text-xl text-white " />
+                </TwButton>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <form
             onSubmit={sendMessage}
-            className="relative w-full flex items-center gap-1 bg-white p-2 dark:bg-gray-900 rounded-xl duration-300"
+            className="relative w-full flex items-center gap-1 bg-white p-2 dark:bg-gray-900 rounded-full duration-300"
           >
             <button className="text-muted-light dark:text-muted-dark/50 p-2">
               <VscSmiley className="text-2xl" />
@@ -89,16 +141,17 @@ const ChatBox = () => {
             >
               <BiUser className="text-2xl" />
             </button>
+
             <input
               required
               type="text"
               value={message}
               placeholder="Message here"
-              className="p-2 px-4 w-full bg-transparent rounded-xl outline-none text-dark dark:text-white"
+              className="p-2 px-4 w-full bg-transparent outline-none text-dark dark:text-white"
               onChange={(e) => setMessage(e.target.value)}
               onBlur={(e) => setMessage(e.target.value)}
             />
-            <button className="absolute right-0 rounded-xl ml-auto h-full p-4 bg-primary-main hover:bg-primary-tinted flex items-center justify-center active:scale-90 duration-300">
+            <button className="absolute right-0 rounded-full ml-auto h-full p-4 bg-primary-main hover:bg-primary-tinted flex items-center justify-center active:scale-90 duration-300">
               <MdSend className="text-white text-2xl" />
             </button>
           </form>
