@@ -65,7 +65,7 @@ const ChatBox = () => {
   }, [messages, latestMsg.current]);
 
   return (
-    <section className="h-screen w-screen justify-center hidden lg:flex bg-muted-light/10 dark:bg-black duration-300">
+    <section className="h-screen w-screen justify-center hidden md:flex bg-muted-light/10 dark:bg-black duration-300">
       <div className="w-full flex flex-col gap-4">
         <TwTrnButton addClass="block md:hidden">{`< Back`}</TwTrnButton>
         <header className="border-b border-muted-light/10 dark:border-muted-dark/10 w-full p-4 flex items-center mb-auto flex items-center gap-4 bg-white dark:bg-gray-900 duration-300">
@@ -88,14 +88,14 @@ const ChatBox = () => {
           <Messages messages={messages} latestMsgRef={latestMsg} />
         </main>
 
-        <div className="relative w-full flex items-center relative gap-2 p-4">
+        <div className="relative w-full flex items-center relative gap-2 p-4 pt-0">
           <AnimatePresence>
             {showArrowDown && (
               <motion.div
                 animate={{ opacity: 1, x: -50 }}
                 initial={{ opacity: 0, x: -50 }}
                 exit={{ opacity: 0, x: -50 }}
-                className="absolute -top-1/2 left-1/2 z-10"
+                className="absolute -top-3/4 left-1/2 z-10"
               >
                 <TwButton
                   clickHandler={scrollDown}
@@ -109,38 +109,39 @@ const ChatBox = () => {
 
           <form
             onSubmit={sendMessage}
-            className="relative w-full flex items-center gap-1 bg-white p-2 dark:bg-gray-900 rounded-full duration-300"
+            className="relative w-full flex items-center gap-1 bg-white dark:bg-gray-900 rounded-full duration-300"
           >
-            <button className="text-muted-light dark:text-muted-dark/50 p-2">
-              <VscSmiley className="text-2xl" />
-            </button>
-            <button className="text-muted-light dark:text-muted-dark/50 p-2">
-              <BiMicrophone className="text-2xl" />
-            </button>
-            <button className="text-muted-light dark:text-muted-dark/50 p-2">
-              <RiImageAddLine className="text-2xl" />
-            </button>
-            <button
-              onClick={(e) => {
-                const btn = e.target.closest("button");
+            <div className="flex p-2">
+              <button type="button" className="text-muted-light dark:text-muted-dark/50 p-2">
+                <VscSmiley className="text-2xl" />
+              </button>
+              <button type="button" className="text-muted-light dark:text-muted-dark/50 p-2">
+                <BiMicrophone className="text-2xl" />
+              </button>
+              <button type="button" className="text-muted-light dark:text-muted-dark/50 p-2">
+                <RiImageAddLine className="text-2xl" />
+              </button>
+              <button
+              type="button"
+                onClick={(e) => {
+                  const btn = e.target.closest("button");
+                  if (active) {
+                    setActive(false);
+                    btn.style.background = "gray";
+                    console.log("not active");
+                  } else if (!active) {
+                    setActive(true);
+                    console.log("active");
+                    btn.style.background = "blue";
+                  }
 
-                console.log(active);
-                if (active) {
-                  setActive(false);
-                  btn.style.background = "gray";
-                  console.log("not active");
-                } else if (!active) {
-                  setActive(true);
-                  console.log("active");
-                  btn.style.background = "blue";
-                }
-
-                setUser(!user);
-              }}
-              className="text-muted-light dark:text-muted-dark/50 p-2"
-            >
-              <BiUser className="text-2xl" />
-            </button>
+                  setUser(!user);
+                }}
+                className="text-muted-light dark:text-muted-dark/50 p-2"
+              >
+                <BiUser className="text-2xl" />
+              </button>
+            </div>
 
             <input
               required
@@ -151,9 +152,9 @@ const ChatBox = () => {
               onChange={(e) => setMessage(e.target.value)}
               onBlur={(e) => setMessage(e.target.value)}
             />
-            <button className="absolute right-0 rounded-full ml-auto h-full p-4 bg-primary-main hover:bg-primary-tinted flex items-center justify-center active:scale-90 duration-300">
-              <MdSend className="text-white text-2xl" />
-            </button>
+            <TwButton addClass="rounded-full ml-auto h-full p-4 flex items-center justify-center">
+              <MdSend className={`text-white text-2xl`} />
+            </TwButton>
           </form>
         </div>
       </div>

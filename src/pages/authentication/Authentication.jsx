@@ -1,12 +1,7 @@
-import { useRef, useState, useContext, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { UserContext } from "/src/setup/app-context-manager";
-import { useLocalStorage } from "/src/common/hooks";
-
-import { useAuth } from "./hooks";
 import { SignIn, SignUp } from "./components";
-
 import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
 
 const Authentication = ({

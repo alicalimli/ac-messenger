@@ -12,8 +12,9 @@ import axios from "/src/api/axios";
 const SIGNUP_URL = "/users";
 const GETUSER_URL = "/users/me";
 
+const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
+
 const useAuth = (setPendingMsg, setErrorMsg) => {
-  const defaultProfileURL = `https://cdn-icons-png.flaticon.com/512/1077/1077114.png?w=740`;
 
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
@@ -49,6 +50,20 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
       setErrorMsg("");
       setPendingMsg("generating token");
 
+      // For bypassing authentication
+      if(email === 'admin@chately.com' && pass === 'admin'){
+        setUserInfo(Object.assign({}, {
+            email: "admin@chately.com",
+            profile: "default.png",
+            status: true,
+            user_id: 3,
+            username: "chately2423",
+            websocket_id: "1657349013.3553238",
+        }));
+        setPendingMsg("");
+        return
+      }
+
       const userToken = await generateToken(email, pass);
 
       setPendingMsg("done");
@@ -78,7 +93,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
         password: password,
         status: true,
         is_active: true,
-        profile: defaultProfileURL,
+        profile: DEFAULT_PROFILE_IMAGE,
         websocket_id: timestamp.toString(),
       };
 
