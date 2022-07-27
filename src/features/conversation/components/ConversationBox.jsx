@@ -206,26 +206,6 @@ const ConversationBox = () => {
               >
                 <RiImageAddLine className="text-2xl" />
               </button>
-              <button
-                type="button"
-                onClick={(e) => {
-                  const btn = e.target.closest("button");
-                  if (active) {
-                    setActive(false);
-                    btn.style.background = "gray";
-                    console.log("not active");
-                  } else if (!active) {
-                    setActive(true);
-                    console.log("active");
-                    btn.style.background = "blue";
-                  }
-
-                  setUser(!user);
-                }}
-                className="text-muted-light dark:text-muted-dark/50 p-2"
-              >
-                <BiUser className="text-2xl" />
-              </button>
             </div>
 
             <input
