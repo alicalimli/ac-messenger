@@ -16,6 +16,8 @@ import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
 
 import { TwButton, TwTrnButton } from "/src/components";
 
+let ws = null
+
 const ConversationBox = () => {
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const [userInfo, setUserInfo] = useContext(UserContext);
@@ -33,18 +35,37 @@ const ConversationBox = () => {
 
   const sendMessage = (event) => {
     event.preventDefault();
+        if (ws != null && message.length) {
+          if (ws.readyState == 3) {
+            ws_connect(e);
+            console.log("Reconnect");
+          }
 
-    const timeOptions = {
-      hour: "numeric",
-      minute: "numeric",
-    };
+          if (ws.readyState == 1) {
+            let data = { msg: message };
+            ws.send(JSON.stringify(data));
+            console.log("Message sent");
+          }
+        }
+        if (ws == null && msg.length) {
+          console.log("Connection to inbox is required");
+          console.log("Connection to inbox is required");
+        }
+        if (!msg.length) {
+          console.log("Empty message");
+        }
 
-    const time = Intl.DateTimeFormat("en-us", timeOptions).format(new Date());
+    // const timeOptions = {
+    //   hour: "numeric",
+    //   minute: "numeric",
+    // };
 
-    setMessage("");
-    setMessages((messages) => [
-      ...messages,
-      { user: user, message: message, time: time },
+    // const time = Intl.DateTimeFormat("en-us", timeOptions).format(new Date());
+
+    // setMessage("");
+    // setMessages((messages) => [
+    //   ...messages,
+    //   { user: user, message: message, time: time },
     ]);
   };
 
@@ -70,8 +91,6 @@ const ConversationBox = () => {
 
   useEffect(() => {
     console.log(userToken);
-
-    let ws = null;
 
     if (ws != null && ws.readyState == 1) {
       ws.close();
