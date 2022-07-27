@@ -39,6 +39,7 @@ const ConversationBox = () => {
     if (!message) return;
 
     setMessage("");
+
     if (ws != null && message.length) {
       if (ws.readyState == 3) {
         connect();
@@ -60,14 +61,6 @@ const ConversationBox = () => {
     //   hour: "numeric",
     //   minute: "numeric",
     // };
-
-    // const time = Intl.DateTimeFormat("en-us", timeOptions).format(new Date());
-
-    // setMessage("");
-    // setMessages((messages) => [
-    //   ...messages,
-    //   { user: user, message: message, time: time },
-    // ]);
   };
 
   const scrollDown = () => {
@@ -94,14 +87,9 @@ const ConversationBox = () => {
     if (window.location.protocol == "http:") {
       ws_protocol = "ws://";
     }
-    ws = new WebSocket(
-      ws_protocol +
-        "0.0.0.0:9080" +
-        "/ws?" +
-        "inbox=13-3" +
-        "&token=" +
-        userToken
-    );
+
+    ws = new WebSocket(`${ws_protocol}0.0.0.0:9080/ws?inbox=13-3&token=${userToken}`);
+
     // Listen for the connection open event then call the sendMessage function
     ws.onopen = function (e) {
       console.log(e);
@@ -146,10 +134,14 @@ const ConversationBox = () => {
 
   useEffect(() => {
     connect();
+
+    return () => {
+      ws.close();
+    };
   }, []);
 
   return (
-    <section className="h-screen w-screen justify-center absolute bg-black md:flex bg-muted-light/10 dark:bg-black duration-300">
+    <section className="h-screen w-screen justify-center hidden bg-black md:flex bg-muted-light/10 dark:bg-black duration-300">
       <div className="w-full flex flex-col gap-4">
         <TwTrnButton addClass="block md:hidden">{`< Back`}</TwTrnButton>
         <header className="border-b border-muted-light/10 dark:border-muted-dark/10 w-full p-4 flex items-center mb-auto flex items-center gap-4 bg-white dark:bg-bgmain-dark duration-300">
