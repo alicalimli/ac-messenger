@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Messages from "./Messages";
 import elvis from "/src/assets/images/elvis.jpg";
 
-import { UserTokenContext, UserContext} from '/src/setup/app-context-manager'
+import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
 
 import { TwButton, TwTrnButton } from "/src/components";
 
@@ -68,72 +68,72 @@ const ConversationBox = () => {
     latestMsg.current.scrollIntoView();
   }, [messages, latestMsg.current]);
 
-  useEffect(()=> {
-        console.log(userToken)
+  useEffect(() => {
+    console.log(userToken);
 
-        let ws = null
+    let ws = null;
 
-        if (ws != null && ws.readyState == 1) {
-          ws.close();
-        }
+    if (ws != null && ws.readyState == 1) {
+      ws.close();
+    }
 
-        let ws_protocol = "wss://";
-        if (window.location.protocol == "http:") {
-          ws_protocol = "ws://";
-        }
-        ws = new WebSocket(
-          ws_protocol +
-            '0.0.0.0:9080' +
-            "/ws?" +
-            "inbox=13-3" +
-            "&token=" +
-            userToken
-        );
-                // Listen for the connection open event then call the sendMessage function
-        ws.onopen = function (e) {
-          console.log(e)
-          console.log("Connected");
-        };
-
-        // Listen for the close connection event
-        ws.onclose = function (e) {
-          console.log(e)
-          console.log("Disconnected " + e.reason);
-        };
-
-        // Listen for connection errors
-        ws.onerror = function (e) {
-          console.log(e)
-          console.log("Error " + e.reason);
-        };
-
-        ws.onmessage = function (e) {
-          try{
-         let data = JSON.parse(e.data);
-            console.log(data)
-                      // if data sent is a text
-          if (data["type"] == "txt") {
-            const {uname, msg} = data;
-            const user = uname === userInfo.email
-            console.log(user)
-    const timeOptions = {
-      hour: "numeric",
-      minute: "numeric",
+    let ws_protocol = "wss://";
+    if (window.location.protocol == "http:") {
+      ws_protocol = "ws://";
+    }
+    ws = new WebSocket(
+      ws_protocol +
+        "0.0.0.0:9080" +
+        "/ws?" +
+        "inbox=13-3" +
+        "&token=" +
+        userToken
+    );
+    // Listen for the connection open event then call the sendMessage function
+    ws.onopen = function (e) {
+      console.log(e);
+      console.log("Connected");
     };
 
-    const time = Intl.DateTimeFormat("en-us", timeOptions).format(new Date());
-            const friend =
-            setMessages((messages) => [
-              ...messages,
-              { user: user, message: msg, time: time },
-            ]);
-          }
-          }catch(error){
-            console.error(error)
-          }
+    // Listen for the close connection event
+    ws.onclose = function (e) {
+      console.log(e);
+      console.log("Disconnected " + e.reason);
+    };
 
+    // Listen for connection errors
+    ws.onerror = function (e) {
+      console.log(e);
+      console.log("Error " + e.reason);
+    };
+
+    ws.onmessage = function (e) {
+      try {
+        let data = JSON.parse(e.data);
+        console.log(data);
+        // if data sent is a text
+        if (data["type"] == "txt") {
+          const { uname, msg } = data;
+          const user = uname === userInfo.email;
+          console.log(user);
+          const timeOptions = {
+            hour: "numeric",
+            minute: "numeric",
           };
-  },[])
+
+          const time = Intl.DateTimeFormat("en-us", timeOptions).format(
+            new Date()
+          );
+          const friend = setMessages((messages) => [
+            ...messages,
+            { user: user, message: msg, time: time },
+          ]);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  }, []);
 
   return (
     <section className="h-screen w-screen justify-center hidden md:flex bg-muted-light/10 dark:bg-black duration-300">
