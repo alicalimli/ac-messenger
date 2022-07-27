@@ -24,9 +24,7 @@ const Messages = ({ messages, latestMsgRef }) => {
         <p className="text-md">{currentMsg.message}</p>
       </motion.button>
       <div className="opacity-0 peer-focus:opacity-100 group-hover:opacity-100 duration-300">
-        <time className="ml-auto text-sm text-slate-500">
-          {'12:33'}
-        </time>
+        <time className="ml-auto text-sm text-slate-500">{"12:33"}</time>
       </div>
     </div>
   ));

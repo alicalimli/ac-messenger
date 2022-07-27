@@ -16,7 +16,7 @@ import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
 
 import { TwButton, TwTrnButton } from "/src/components";
 
-let ws = null
+let ws = null;
 
 const ConversationBox = () => {
   const [userToken, setUserToken] = useContext(UserTokenContext);
@@ -36,25 +36,25 @@ const ConversationBox = () => {
   const sendMessage = (event) => {
     event.preventDefault();
 
-    if(!message) return;
+    if (!message) return;
 
-    setMessage('')
-        if (ws != null && message.length) {
-          if (ws.readyState == 3) {
-            ws_connect(e);
-            console.log("Reconnect");
-          }
+    setMessage("");
+    if (ws != null && message.length) {
+      if (ws.readyState == 3) {
+        connect();
+        console.log("Reconnect");
+      }
 
-          if (ws.readyState == 1) {
-            let data = { msg: message };
-            ws.send(JSON.stringify(data));
-            console.log("Message sent");
-          }
-        }
-        if (ws == null && msg.length) {
-          console.log("Connection to inbox is required");
-          console.log("Connection to inbox is required");
-        }
+      if (ws.readyState == 1) {
+        let data = { msg: message };
+        ws.send(JSON.stringify(data));
+        console.log("Message sent");
+      }
+    }
+    if (ws == null && msg.length) {
+      console.log("Connection to inbox is required");
+      console.log("Connection to inbox is required");
+    }
 
     // const timeOptions = {
     //   hour: "numeric",
@@ -85,14 +85,7 @@ const ConversationBox = () => {
     });
   }
 
-  useEffect(() => {
-    if (!latestMsg.current) return;
-    latestMsg.current.scrollIntoView();
-  }, [messages, latestMsg.current]);
-
-  useEffect(() => {
-    console.log(userToken);
-
+  const connect = () => {
     if (ws != null && ws.readyState == 1) {
       ws.close();
     }
@@ -137,17 +130,26 @@ const ConversationBox = () => {
 
           const friend = setMessages((messages) => [
             ...messages,
-            { user: user, message: msg},
+            { user: user, message: msg },
           ]);
         }
       } catch (error) {
         console.error(error);
       }
     };
+  };
+
+  useEffect(() => {
+    if (!latestMsg.current) return;
+    latestMsg.current.scrollIntoView();
+  }, [messages, latestMsg.current]);
+
+  useEffect(() => {
+    connect();
   }, []);
 
   return (
-    <section className="h-screen w-screen justify-center hidden md:flex bg-muted-light/10 dark:bg-black duration-300">
+    <section className="h-screen w-screen justify-center absolute bg-black md:flex bg-muted-light/10 dark:bg-black duration-300">
       <div className="w-full flex flex-col gap-4">
         <TwTrnButton addClass="block md:hidden">{`< Back`}</TwTrnButton>
         <header className="border-b border-muted-light/10 dark:border-muted-dark/10 w-full p-4 flex items-center mb-auto flex items-center gap-4 bg-white dark:bg-bgmain-dark duration-300">
