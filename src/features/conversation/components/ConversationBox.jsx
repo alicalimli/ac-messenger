@@ -35,6 +35,10 @@ const ConversationBox = () => {
 
   const sendMessage = (event) => {
     event.preventDefault();
+
+    if(!message) return;
+
+    setMessage('')
         if (ws != null && message.length) {
           if (ws.readyState == 3) {
             ws_connect(e);
@@ -51,9 +55,6 @@ const ConversationBox = () => {
           console.log("Connection to inbox is required");
           console.log("Connection to inbox is required");
         }
-        if (!msg.length) {
-          console.log("Empty message");
-        }
 
     // const timeOptions = {
     //   hour: "numeric",
@@ -66,7 +67,7 @@ const ConversationBox = () => {
     // setMessages((messages) => [
     //   ...messages,
     //   { user: user, message: message, time: time },
-    ]);
+    // ]);
   };
 
   const scrollDown = () => {
@@ -129,7 +130,6 @@ const ConversationBox = () => {
     ws.onmessage = function (e) {
       try {
         let data = JSON.parse(e.data);
-        console.log(data);
         // if data sent is a text
         if (data["type"] == "txt") {
           const { uname, msg } = data;
