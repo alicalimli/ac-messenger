@@ -134,18 +134,10 @@ const ConversationBox = () => {
         if (data["type"] == "txt") {
           const { uname, msg } = data;
           const user = uname === userInfo.email;
-          console.log(user);
-          const timeOptions = {
-            hour: "numeric",
-            minute: "numeric",
-          };
 
-          const time = Intl.DateTimeFormat("en-us", timeOptions).format(
-            new Date()
-          );
           const friend = setMessages((messages) => [
             ...messages,
-            { user: user, message: msg, time: time },
+            { user: user, message: msg},
           ]);
         }
       } catch (error) {
