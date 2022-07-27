@@ -67,7 +67,7 @@ const ConversationBox = () => {
     <section className="h-screen w-screen justify-center hidden md:flex bg-muted-light/10 dark:bg-black duration-300">
       <div className="w-full flex flex-col gap-4">
         <TwTrnButton addClass="block md:hidden">{`< Back`}</TwTrnButton>
-        <header className="border-b border-muted-light/10 dark:border-muted-dark/10 w-full p-4 flex items-center mb-auto flex items-center gap-4 bg-white dark:bg-gray-900 duration-300">
+        <header className="border-b border-muted-light/10 dark:border-muted-dark/10 w-full p-4 flex items-center mb-auto flex items-center gap-4 bg-white dark:bg-bgmain-dark duration-300">
           <div className="relative bg-transparent h-16 w-16">
             <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
             <img src={elvis} className="w-full rounded-full" />
@@ -108,7 +108,7 @@ const ConversationBox = () => {
 
           <form
             onSubmit={sendMessage}
-            className="relative w-full flex items-center gap-1 bg-white dark:bg-gray-900 rounded-full duration-300"
+            className="relative w-full flex items-center gap-1 bg-white dark:bg-bgmain-dark rounded-full duration-300"
           >
             <div className="flex p-2">
               <button

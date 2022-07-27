@@ -12,6 +12,9 @@ module.exports = {
         muted: {
           light:'#212529bf',
           dark: "#aaa",
+        },
+        bgmain: {
+          dark: "#0F172A"
         }
       }
     },
