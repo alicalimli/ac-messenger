@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 
 import { BiMicrophone, BiUser } from "react-icons/bi";
 import { MdSend } from "react-icons/md";
@@ -12,9 +12,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import Messages from "./Messages";
 import elvis from "/src/assets/images/elvis.jpg";
 
+import { UserTokenContext } from '/src/setup/app-context-manager'
+
 import { TwButton, TwTrnButton } from "/src/components";
 
 const ConversationBox = () => {
+  const [userToken, setUserToken] = useContext(UserTokenContext);
+
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
@@ -62,6 +66,46 @@ const ConversationBox = () => {
     if (!latestMsg.current) return;
     latestMsg.current.scrollIntoView();
   }, [messages, latestMsg.current]);
+
+  useEffect(()=> {
+        console.log(userToken)
+
+        let ws = null
+
+        if (ws != null && ws.readyState == 1) {
+          ws.close();
+        }
+
+        let ws_protocol = "wss://";
+        if (window.location.protocol == "http:") {
+          ws_protocol = "ws://";
+        }
+        ws = new WebSocket(
+          ws_protocol +
+            '0.0.0.0:9080' +
+            "/ws?" +
+            "inbox=13-3" +
+            "&token=" +
+            userToken
+        );
+                // Listen for the connection open event then call the sendMessage function
+        ws.onopen = function (e) {
+          console.log(e)
+          console.log("Connected");
+        };
+
+        // Listen for the close connection event
+        ws.onclose = function (e) {
+          console.log(e)
+          console.log("Disconnected " + e.reason);
+        };
+
+        // Listen for connection errors
+        ws.onerror = function (e) {
+          console.log(e)
+          console.log("Error " + e.reason);
+        };
+  },[])
 
   return (
     <section className="h-screen w-screen justify-center hidden md:flex bg-muted-light/10 dark:bg-black duration-300">
