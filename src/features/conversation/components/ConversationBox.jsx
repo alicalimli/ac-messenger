@@ -12,12 +12,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import Messages from "./Messages";
 import elvis from "/src/assets/images/elvis.jpg";
 
-import { UserTokenContext } from '/src/setup/app-context-manager'
+import { UserTokenContext, UserContext} from '/src/setup/app-context-manager'
 
 import { TwButton, TwTrnButton } from "/src/components";
 
 const ConversationBox = () => {
   const [userToken, setUserToken] = useContext(UserTokenContext);
+  const [userInfo, setUserInfo] = useContext(UserContext);
 
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
@@ -105,6 +106,33 @@ const ConversationBox = () => {
           console.log(e)
           console.log("Error " + e.reason);
         };
+
+        ws.onmessage = function (e) {
+          try{
+         let data = JSON.parse(e.data);
+            console.log(data)
+                      // if data sent is a text
+          if (data["type"] == "txt") {
+            const {uname, msg} = data;
+            const user = uname === userInfo.email
+            console.log(user)
+    const timeOptions = {
+      hour: "numeric",
+      minute: "numeric",
+    };
+
+    const time = Intl.DateTimeFormat("en-us", timeOptions).format(new Date());
+            const friend =
+            setMessages((messages) => [
+              ...messages,
+              { user: user, message: msg, time: time },
+            ]);
+          }
+          }catch(error){
+            console.error(error)
+          }
+
+          };
   },[])
 
   return (
