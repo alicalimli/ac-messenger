@@ -13,7 +13,7 @@ import elvis from "/src/assets/images/elvis.jpg";
 let ws = null;
 
 const ChatBox = () => {
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(true);
 
   const [showArrowDown, setShowArrowDown] = useState(false);
@@ -21,7 +21,7 @@ const ChatBox = () => {
   const conversationContainer = useRef("");
   const latestMsg = useRef("");
 
-  const wsConnect = useConnect();
+  const wsConnect = useConnect(ws);
 
   const scrollDown = () => {
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
