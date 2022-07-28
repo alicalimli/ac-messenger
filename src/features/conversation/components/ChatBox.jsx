@@ -1,15 +1,13 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 
-import { BiMicrophone, BiUser } from "react-icons/bi";
-import { MdSend } from "react-icons/md";
-import { RiImageAddLine } from "react-icons/ri";
-import { VscSmiley } from "react-icons/vsc";
-
 import { AiOutlineArrowDown } from "react-icons/ai";
 
 import { AnimatePresence, motion } from "framer-motion";
 
 import Messages from "./Messages";
+import ChatHeader from "./ChatHeader";
+import ChatForm from "./ChatForm";
+
 import elvis from "/src/assets/images/elvis.jpg";
 
 import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
@@ -18,12 +16,11 @@ import { TwButton, TwTrnButton } from "/src/components";
 
 let ws = null;
 
-const ConversationBox = () => {
+const ChatBox = () => {
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const [userInfo, setUserInfo] = useContext(UserContext);
 
   const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState("");
 
   const [active, setActive] = useState(false);
   const [user, setUser] = useState(true);
@@ -32,36 +29,6 @@ const ConversationBox = () => {
 
   const conversationContainer = useRef("");
   const latestMsg = useRef("");
-
-  const sendMessage = (event) => {
-    event.preventDefault();
-
-    if (!message) return;
-
-    setMessage("");
-
-    if (ws != null && message.length) {
-      if (ws.readyState == 3) {
-        connect();
-        console.log("Reconnect");
-      }
-
-      if (ws.readyState == 1) {
-        let data = { msg: message };
-        ws.send(JSON.stringify(data));
-        console.log("Message sent");
-      }
-    }
-    if (ws == null && msg.length) {
-      console.log("Connection to inbox is required");
-      console.log("Connection to inbox is required");
-    }
-
-    // const timeOptions = {
-    //   hour: "numeric",
-    //   minute: "numeric",
-    // };
-  };
 
   const scrollDown = () => {
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
@@ -144,18 +111,8 @@ const ConversationBox = () => {
     <section className="h-screen w-screen justify-center hidden bg-black md:flex bg-muted-light/10 dark:bg-black duration-300">
       <div className="w-full flex flex-col gap-4">
         <TwTrnButton addClass="block md:hidden">{`< Back`}</TwTrnButton>
-        <header className="border-b border-muted-light/10 dark:border-muted-dark/10 w-full p-4 flex items-center mb-auto flex items-center gap-4 bg-white dark:bg-bgmain-dark duration-300">
-          <div className="relative bg-transparent h-16 w-16">
-            <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
-            <img src={elvis} className="w-full rounded-full" />
-          </div>
-          <div className="flex flex-col gap-0">
-            <h2 className="text-xl text-black dark:text-white">Elvis</h2>
-            <p className="text-sm text-muted-light dark:text-muted-dark">
-              online
-            </p>
-          </div>
-        </header>
+
+        <ChatHeader />
 
         <main
           ref={conversationContainer}
@@ -183,48 +140,11 @@ const ConversationBox = () => {
             )}
           </AnimatePresence>
 
-          <form
-            onSubmit={sendMessage}
-            className="relative w-full flex items-center gap-1 bg-white dark:bg-bgmain-dark rounded-full duration-300"
-          >
-            <div className="flex p-2">
-              <button
-                type="button"
-                className="text-muted-light dark:text-muted-dark/50 p-2"
-              >
-                <VscSmiley className="text-2xl" />
-              </button>
-              <button
-                type="button"
-                className="text-muted-light dark:text-muted-dark/50 p-2"
-              >
-                <BiMicrophone className="text-2xl" />
-              </button>
-              <button
-                type="button"
-                className="text-muted-light dark:text-muted-dark/50 p-2"
-              >
-                <RiImageAddLine className="text-2xl" />
-              </button>
-            </div>
-
-            <input
-              required
-              type="text"
-              value={message}
-              placeholder="Message here"
-              className="p-2 px-4 w-full bg-transparent outline-none text-dark dark:text-white"
-              onChange={(e) => setMessage(e.target.value)}
-              onBlur={(e) => setMessage(e.target.value)}
-            />
-            <TwButton addClass="rounded-full ml-auto h-full p-4 flex items-center justify-center">
-              <MdSend className={`text-white text-2xl`} />
-            </TwButton>
-          </form>
+          <ChatForm ws={ws} connect={connect}/>
         </div>
       </div>
     </section>
   );
 };
 
-export default ConversationBox;
+export default ChatBox;

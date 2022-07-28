@@ -1,3 +1,3 @@
-import ConversationBox from "./ConversationBox";
+import ChatBox from "./ChatBox";
 
-export { ConversationBox };
+export { ChatBox };
