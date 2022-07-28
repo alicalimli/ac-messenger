@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useState, useRef } from "react";
-import { SidebarNav, SidebarContent } from "./components";
+import { Sidebar, SideContent } from "/src/features/sidebar/components";
 import { ChatBox } from "../../features/conversation/components";
 
 const Home = () => {
@@ -12,12 +12,12 @@ const Home = () => {
 
   return (
     <div className="flex w-full min-h-screen">
-      <SidebarNav
+      <Sidebar
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
         previousContentRef={previousContentRef}
       />
-      <SidebarContent
+      <SideContent
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
         previousContentRef={previousContentRef}

@@ -3,7 +3,7 @@ import { InboxList } from "/src/features/inbox/components";
 import { ProfileContainer } from "/src/features/profile/components";
 import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
 
-const SidebarContent = ({
+const SideContent = ({
   sidebarContent,
   setSideBarContent,
   previousContentRef,
@@ -42,4 +42,4 @@ const SidebarContent = ({
     </section>
   );
 };
-export default SidebarContent;
+export default SideContent;
