@@ -23,7 +23,7 @@ const useGetInboxList = () => {
       setInboxList([...inboxList, ...inbox_cache]);
     }
   }, []);
-  console.log(inboxList)
+  console.log(inboxList);
 
   return inboxList;
 };

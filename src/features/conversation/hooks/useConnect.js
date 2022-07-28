@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import { useContext } from "react";
 import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
 
 const useConnect = (ws) => {
@@ -6,7 +6,7 @@ const useConnect = (ws) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
 
   const wsConnect = () => {
-     if (ws != null && ws.readyState == 1) {
+    if (ws != null && ws.readyState == 1) {
       ws.close();
     }
 
@@ -15,7 +15,9 @@ const useConnect = (ws) => {
       ws_protocol = "ws://";
     }
 
-    ws = new WebSocket(`${ws_protocol}0.0.0.0:9080/ws?inbox=13-3&token=${userToken}`);
+    ws = new WebSocket(
+      `${ws_protocol}0.0.0.0:9080/ws?inbox=13-3&token=${userToken}`
+    );
 
     // Listen for the connection open event then call the sendMessage function
     ws.onopen = function (e) {
@@ -52,9 +54,9 @@ const useConnect = (ws) => {
     //     console.error(error);
     //   }
     // };
-  }
+  };
 
   return wsConnect;
-}
+};
 
 export default useConnect;

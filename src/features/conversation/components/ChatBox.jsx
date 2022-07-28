@@ -1,20 +1,15 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 
 import { AiOutlineArrowDown } from "react-icons/ai";
-
 import { AnimatePresence, motion } from "framer-motion";
+import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
+import { TwButton, TwTrnButton } from "/src/components";
+import { useConnect } from "../hooks";
 
 import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
-
 import elvis from "/src/assets/images/elvis.jpg";
-
-import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
-
-import { TwButton, TwTrnButton } from "/src/components";
-
-import {useConnect} from '../hooks'
 
 let ws = null;
 
@@ -32,7 +27,7 @@ const ChatBox = () => {
   const conversationContainer = useRef("");
   const latestMsg = useRef("");
 
-  const wsConnect = useConnect()
+  const wsConnect = useConnect();
 
   const scrollDown = () => {
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
@@ -95,7 +90,7 @@ const ChatBox = () => {
             )}
           </AnimatePresence>
 
-          <ChatForm/>
+          <ChatForm />
         </div>
       </div>
     </section>

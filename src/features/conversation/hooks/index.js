@@ -1,3 +1,3 @@
-import useConnect from './useConnect'
+import useConnect from "./useConnect";
 
-export {useConnect}
+export { useConnect };
