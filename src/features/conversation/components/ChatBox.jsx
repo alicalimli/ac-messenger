@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState, useContext } from "react";
 
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
-import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
 import { TwButton, TwTrnButton } from "/src/components";
 import { useConnect } from "../hooks";
 
@@ -14,12 +13,7 @@ import elvis from "/src/assets/images/elvis.jpg";
 let ws = null;
 
 const ChatBox = () => {
-  const [userToken, setUserToken] = useContext(UserTokenContext);
-  const [userInfo, setUserInfo] = useContext(UserContext);
-
-  const [messages, setMessages] = useState([]);
-
-  const [active, setActive] = useState(false);
+  const [messages, setMessages] = useState([])
   const [user, setUser] = useState(true);
 
   const [showArrowDown, setShowArrowDown] = useState(false);
