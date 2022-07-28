@@ -7,8 +7,12 @@ import { VscSmiley } from "react-icons/vsc";
 
 import { TwButton, TwTrnButton } from "/src/components";
 
-const ChatForm = ({ws, connect}) => {
+import {useConnect} from '../hooks'
+
+const ChatForm = () => {
   const [message, setMessage] = useState("");
+
+  const wsConnect = useConnect();
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -19,7 +23,7 @@ const ChatForm = ({ws, connect}) => {
 
     if (ws != null && message.length) {
       if (ws.readyState == 3) {
-        connect();
+        wsConnect();
         console.log("Reconnect");
       }
 
