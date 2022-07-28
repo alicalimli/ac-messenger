@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { BiLogOut, BiMessageSquareDetail, BiMoon, BiSun } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
 
 import {
   DarkmodeContext,
@@ -11,7 +10,7 @@ import {
 } from "/src/setup/app-context-manager";
 
 import { TwTooltip, TwTrnButton } from "/src/components";
-import { useLocalStorage } from "/src/hooks";
+import { useLocalStorage, useSignOut } from "/src/hooks";
 
 const SIDEBAR_PAGE_BUTTONS = [
   { name: "chats", icon: BiMessageSquareDetail },
@@ -24,28 +23,9 @@ const SidebarNav = ({
   setSideBarContent,
   previousContentRef,
 }) => {
-  const navigate = useNavigate();
-
-  const [userInfo, setUserInfo] = useContext(UserContext);
-  const [userToken, setUserToken] = useContext(UserTokenContext);
   const [darkmode, setDarkmode] = useContext(DarkmodeContext);
 
-  const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
-  const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");
-  const [keepSignedIn, setKeepSignedIn] = useLocalStorage(
-    "keepSignedIn",
-    false
-  );
-
-  const handleLogOut = () => {
-    setUserInfo(null);
-    setSavedUserInfo(null);
-
-    setUserToken("");
-    setSavedUserToken("");
-
-    setKeepSignedIn(false);
-  };
+  const signOut = useSignOut();
 
   const changeSideContent = (sideContentName) => {
     previousContentRef.current = sidebarContent;
@@ -83,7 +63,7 @@ const SidebarNav = ({
           <TwTooltip position="right">darkmode</TwTooltip>
         </TwTrnButton>
 
-        <TwTrnButton addClass="relative group z-10" clickHandler={handleLogOut}>
+        <TwTrnButton addClass="relative group z-10" clickHandler={signOut}>
           <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl" />
           <TwTooltip position="right">logout</TwTooltip>
         </TwTrnButton>
