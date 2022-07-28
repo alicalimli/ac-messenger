@@ -18,7 +18,7 @@ const SIDEBAR_PAGE_BUTTONS = [
   { name: "settings", icon: FiSettings },
 ];
 
-const SidebarNav = ({
+const Sidebar = ({
   sidebarContent,
   setSideBarContent,
   previousContentRef,
@@ -72,4 +72,4 @@ const SidebarNav = ({
   );
 };
 
-export default SidebarNav;
+export default Sidebar;
