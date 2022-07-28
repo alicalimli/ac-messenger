@@ -9,6 +9,8 @@ import {
 import { GoMention } from "react-icons/go";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 
+import ProfileEditForm from './ProfileEditForm'
+
 import {
   InputForm,
   Modal,
@@ -17,9 +19,6 @@ import {
   TwTrnButton,
 } from "/src/components";
 
-import { useEditInfo } from "../hooks";
-
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 
 const ProfileContainer = ({ previousContentRef, setSideBarContent }) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
@@ -27,14 +26,6 @@ const ProfileContainer = ({ previousContentRef, setSideBarContent }) => {
   const [userToken, setUserToken] = useContext(UserTokenContext);
 
   const [showModal, setShowModal] = useState(false);
-
-  const [username, setUsername] = useState("");
-  const [validUsername, setValidUsername] = useState(false);
-  const [usernameFocus, setUsernameFocus] = useState(false);
-
-  const [password, setPassword] = useState("");
-
-  const { editInfo, errorMsg, setErrorMsg, pendingMsg } = useEditInfo();
 
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },
@@ -48,73 +39,10 @@ const ProfileContainer = ({ previousContentRef, setSideBarContent }) => {
     setToastMsg(`Copied ${text}.`);
   };
 
-  const handleChangeInfo = async (e) => {
-    try {
-      e.preventDefault();
-
-      if (!validUsername) return;
-
-      await editInfo(userInfo.email, username, password);
-      setShowModal(false);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    setValidUsername(USER_REGEX.test(username));
-    console.log(USER_REGEX.test(username));
-  }, [username]);
-
-  useEffect(() => {
-    setErrorMsg("");
-  }, [username, password]);
-
   return (
     <div className=" flex flex-col">
       <Modal setShowModal={setShowModal}>
-        {showModal && (
-          <form
-            onSubmit={handleChangeInfo}
-            className="flex flex-col gap-2 w-96"
-          >
-            <h2 className="text-black dark:text-white text-xl text-center">
-              Edit Information
-            </h2>
-            <p
-              className={`text-red-600 text-md text-center ${
-                errorMsg ? "visible block" : "absolute invisible"
-              }`}
-            >
-              {errorMsg}
-            </p>
-
-            <InputForm
-              label="Username"
-              type="text"
-              state={username}
-              setState={setUsername}
-              stateFocus={usernameFocus}
-              setStateFocus={setUsernameFocus}
-              placeHolder="e.g example123"
-              isValid={validUsername}
-              instruction="Must be 4 to 24 characters and begins with a letter. Hyphen and underscore are allowed"
-            />
-            <InputForm
-              label="Current Password"
-              type="password"
-              state={password}
-              setState={setPassword}
-              placeHolder="*********"
-            />
-            <TwButton
-              isDisabled={validUsername && !pendingMsg ? false : true}
-              addClass="mt-4"
-            >
-              {pendingMsg ? pendingMsg : "Save"}
-            </TwButton>
-          </form>
-        )}
+        {showModal && <ProfileEditForm email={userInfo.email} setShowModal={setShowModal}/>}
       </Modal>
 
       <div className="flex-col justify-center gap-4 p-6">
