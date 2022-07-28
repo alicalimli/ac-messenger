@@ -9,7 +9,7 @@ import {
 import { GoMention } from "react-icons/go";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 
-import ProfileEditForm from './ProfileEditForm'
+import ProfileEditForm from "./ProfileEditForm";
 
 import {
   InputForm,
@@ -18,7 +18,6 @@ import {
   TwTooltip,
   TwTrnButton,
 } from "/src/components";
-
 
 const ProfileContainer = ({ previousContentRef, setSideBarContent }) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
@@ -42,7 +41,9 @@ const ProfileContainer = ({ previousContentRef, setSideBarContent }) => {
   return (
     <div className=" flex flex-col">
       <Modal setShowModal={setShowModal}>
-        {showModal && <ProfileEditForm email={userInfo.email} setShowModal={setShowModal}/>}
+        {showModal && (
+          <ProfileEditForm email={userInfo.email} setShowModal={setShowModal} />
+        )}
       </Modal>
 
       <div className="flex-col justify-center gap-4 p-6">
