@@ -31,12 +31,13 @@ const Home = () => {
         setSideBarContent={setSideBarContent}
         previousContentRef={previousContentRef}
       />
-      <div className="h-screen w-screen justify-center hidden bg-muted-light/10 dark:bg-black duration-300 md:flex items-center justify-center">
         {currentChat ? (
+          <div className="h-screen w-screen justify-center absolute z-10 bg-muted-light/10 dark:bg-black duration-300 md:relative md:flex items-center justify-center">
           <ChatBox currentChat={currentChat} />
+          </div>
         ) : (
           <motion.div
-            className="flex flex-col gap-4 items-center justify-center"
+            className="hidden md:flex flex-col gap-4 items-center justify-center"
             variants={VARIANTS_MANAGER}
             initial="pop-out"
             animate="pop-in"
@@ -53,7 +54,6 @@ const Home = () => {
             </div>
           </motion.div>
         )}
-      </div>
     </div>
   );
 };
