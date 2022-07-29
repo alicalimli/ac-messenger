@@ -9,7 +9,7 @@ import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
 
-const ChatBox = ({ currentChat }) => {
+const ChatBox = ({ currentChat, setCurrentChat }) => {
   const [user, setUser] = useState(true);
 
   const [showArrowDown, setShowArrowDown] = useState(false);
@@ -34,6 +34,10 @@ const ChatBox = ({ currentChat }) => {
     });
   }
 
+  const handleBackBtn = () => {
+    setCurrentChat(null)
+  }
+
   useEffect(() => {
     if (!latestMsg.current) return;
     latestMsg.current.scrollIntoView();
@@ -46,7 +50,7 @@ const ChatBox = ({ currentChat }) => {
   return (
     <section className="flex h-full w-full">
       <div className="w-full flex flex-col gap-4">
-        <TwTrnButton addClass="block md:hidden">{`< Back`}</TwTrnButton>
+        <TwTrnButton clickHandler={handleBackBtn} addClass="block md:hidden">{`< Back`}</TwTrnButton>
 
         <ChatHeader currentChat={currentChat} />
 

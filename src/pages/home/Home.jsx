@@ -33,7 +33,7 @@ const Home = () => {
       />
         {currentChat ? (
           <div className="h-screen w-screen justify-center absolute z-10 bg-muted-light/10 dark:bg-black duration-300 md:relative md:flex items-center justify-center">
-          <ChatBox currentChat={currentChat} />
+          <ChatBox currentChat={currentChat} setCurrentChat={setCurrentChat} />
           </div>
         ) : (
           <motion.div
