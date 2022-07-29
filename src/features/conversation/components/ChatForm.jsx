@@ -12,7 +12,7 @@ import { useConnect } from "../hooks";
 const ChatForm = ({ inboxHash }) => {
   const [message, setMessage] = useState("");
 
-  const {ws, wsConnect, setMessages} = useConnect(inboxHash);
+  const { ws, wsConnect, setMessages } = useConnect(inboxHash);
 
   const sendMessage = (event) => {
     event.preventDefault();

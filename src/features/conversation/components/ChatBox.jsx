@@ -9,7 +9,7 @@ import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
 
-const ChatBox = ({currentChat}) => {
+const ChatBox = ({ currentChat }) => {
   const [user, setUser] = useState(true);
 
   const [showArrowDown, setShowArrowDown] = useState(false);
@@ -17,7 +17,7 @@ const ChatBox = ({currentChat}) => {
   const conversationContainer = useRef("");
   const latestMsg = useRef("");
 
-  const {messages, wsConnect} = useConnect(currentChat.inbox_hash);
+  const { messages, wsConnect } = useConnect(currentChat.inbox_hash);
 
   const scrollDown = () => {
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
@@ -48,7 +48,7 @@ const ChatBox = ({currentChat}) => {
       <div className="w-full flex flex-col gap-4">
         <TwTrnButton addClass="block md:hidden">{`< Back`}</TwTrnButton>
 
-        <ChatHeader currentChat={currentChat}/>
+        <ChatHeader currentChat={currentChat} />
 
         <main
           ref={conversationContainer}
@@ -76,7 +76,7 @@ const ChatBox = ({currentChat}) => {
             )}
           </AnimatePresence>
 
-          <ChatForm inboxHash={currentChat.inbox_hash}/>
+          <ChatForm inboxHash={currentChat.inbox_hash} />
         </div>
       </div>
     </section>

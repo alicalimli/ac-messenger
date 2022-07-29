@@ -11,5 +11,5 @@ export {
   useAxiosPrivate,
   useRefreshToken,
   useGetUsers,
-  useSignOut
+  useSignOut,
 };

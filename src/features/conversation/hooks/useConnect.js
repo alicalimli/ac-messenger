@@ -10,8 +10,8 @@ const useConnect = (inboxHash) => {
   const [messages, setMessages] = useState([]);
 
   const wsConnect = () => {
-    if(ws) ws.close();
-    if(messages) setMessages([]);
+    if (ws) ws.close();
+    if (messages) setMessages([]);
 
     if (ws != null && ws.readyState == 1) {
       ws.close();
@@ -26,7 +26,7 @@ const useConnect = (inboxHash) => {
       `${ws_protocol}0.0.0.0:9080/ws?inbox=${inboxHash}&token=${userToken}`
     );
 
-    console.log(ws)
+    console.log(ws);
 
     // Listen for the connection open event then call the sendMessage function
     ws.onopen = function (e) {
@@ -43,7 +43,7 @@ const useConnect = (inboxHash) => {
       console.log("Error " + e.reason);
     };
 
-    console.log('blah')
+    console.log("blah");
 
     ws.onmessage = function (e) {
       try {
@@ -52,8 +52,8 @@ const useConnect = (inboxHash) => {
         if (data["type"] == "txt") {
           const { uname, msg } = data;
           const user = uname === userInfo.email;
-          console.log('blah')
-          console.log(msg, uname)
+          console.log("blah");
+          console.log(msg, uname);
 
           const friend = setMessages((messages) => [
             ...messages,
@@ -66,7 +66,7 @@ const useConnect = (inboxHash) => {
     };
   };
 
-  return {ws, wsConnect, messages, setMessages};
+  return { ws, wsConnect, messages, setMessages };
 };
 
 export default useConnect;

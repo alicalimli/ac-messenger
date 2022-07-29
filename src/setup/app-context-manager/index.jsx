@@ -24,7 +24,9 @@ export const AppContextProvider = ({ children }) => {
         <ToastMsgContext.Provider value={[toastMsg, setToastMsg]}>
           <UserRefreshContext.Provider value={{ userRefresh, setUserRefresh }}>
             <DarkmodeContext.Provider value={[darkmode, setDarkmode]}>
-              <CurrentChatContext.Provider value={[currentChat, setCurrentChat]}>
+              <CurrentChatContext.Provider
+                value={[currentChat, setCurrentChat]}
+              >
                 {children}
               </CurrentChatContext.Provider>
             </DarkmodeContext.Provider>

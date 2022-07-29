@@ -1,9 +1,9 @@
-import { useContext } from 'react'
+import { useContext } from "react";
 
 import {
   UserContext,
   UserTokenContext,
-  CurrentChatContext
+  CurrentChatContext,
 } from "/src/setup/app-context-manager";
 
 import { useLocalStorage } from "/src/hooks";
@@ -26,9 +26,9 @@ const useSignOut = (key, initialValue) => {
 
     setSavedUserInfo(null);
     setSavedUserToken("");
-    setCurrentChat(null)
+    setCurrentChat(null);
     setKeepSignedIn(false);
-  }
+  };
 
   return signOut;
 };
