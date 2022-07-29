@@ -9,10 +9,10 @@ import { TwButton, TwTrnButton } from "/src/components";
 
 import { useConnect } from "../hooks";
 
-const ChatForm = ({setMessages, inboxHash}) => {
+const ChatForm = ({ inboxHash }) => {
   const [message, setMessage] = useState("");
 
-  const {ws, wsConnect} = useConnect(setMessages, inboxHash);
+  const {ws, wsConnect, setMessages} = useConnect(inboxHash);
 
   const sendMessage = (event) => {
     event.preventDefault();

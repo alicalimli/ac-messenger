@@ -11,7 +11,6 @@ import ChatForm from "./ChatForm";
 import elvis from "/src/assets/images/elvis.jpg";
 
 const ChatBox = ({currentChat}) => {
-  const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(true);
 
   const [showArrowDown, setShowArrowDown] = useState(false);
@@ -19,7 +18,7 @@ const ChatBox = ({currentChat}) => {
   const conversationContainer = useRef("");
   const latestMsg = useRef("");
 
-  const {wsConnect} = useConnect(setMessages, currentChat.inbox_hash);
+  const {messages, wsConnect} = useConnect(currentChat.inbox_hash);
 
   const scrollDown = () => {
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
@@ -78,7 +77,7 @@ const ChatBox = ({currentChat}) => {
             )}
           </AnimatePresence>
 
-          <ChatForm setMessages={setMessages} inboxHash={currentChat.inbox_hash}/>
+          <ChatForm inboxHash={currentChat.inbox_hash}/>
         </div>
       </div>
     </section>

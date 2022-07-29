@@ -1,14 +1,18 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
 
+let ws;
 
-const useConnect = (setMessages, inboxHash) => {
-  let ws;
-
+const useConnect = (inboxHash) => {
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const [userInfo, setUserInfo] = useContext(UserContext);
 
+  const [messages, setMessages] = useState([]);
+
   const wsConnect = () => {
+    if(ws) ws.close();
+    if(messages) setMessages([]);
+
     if (ws != null && ws.readyState == 1) {
       ws.close();
     }
@@ -62,7 +66,7 @@ const useConnect = (setMessages, inboxHash) => {
     };
   };
 
-  return {ws, wsConnect};
+  return {ws, wsConnect, messages, setMessages};
 };
 
 export default useConnect;
