@@ -26,7 +26,7 @@ const Home = () => {
         setSideBarContent={setSideBarContent}
         previousContentRef={previousContentRef}
       />
-      { currentChat && <ChatBox /> }
+      { currentChat && <ChatBox currentChat={currentChat} /> }
     </div>
   );
 };

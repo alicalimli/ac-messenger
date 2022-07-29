@@ -12,7 +12,8 @@ import elvis from "/src/assets/images/elvis.jpg";
 
 let ws = null;
 
-const ChatBox = () => {
+const ChatBox = ({currentChat}) => {
+  console.log(currentChat)
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(true);
 
@@ -56,7 +57,7 @@ const ChatBox = () => {
       <div className="w-full flex flex-col gap-4">
         <TwTrnButton addClass="block md:hidden">{`< Back`}</TwTrnButton>
 
-        <ChatHeader />
+        <ChatHeader currentChat={currentChat}/>
 
         <main
           ref={conversationContainer}

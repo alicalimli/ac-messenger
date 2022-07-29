@@ -21,19 +21,16 @@ const useConnect = (ws) => {
 
     // Listen for the connection open event then call the sendMessage function
     ws.onopen = function (e) {
-      console.log(e);
       console.log("Connected");
     };
 
     // Listen for the close connection event
     ws.onclose = function (e) {
-      console.log(e);
       console.log("Disconnected " + e.reason);
     };
 
     // Listen for connection errors
     ws.onerror = function (e) {
-      console.log(e);
       console.log("Error " + e.reason);
     };
 
