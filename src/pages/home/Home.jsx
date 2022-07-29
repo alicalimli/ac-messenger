@@ -45,7 +45,10 @@ const Home = () => {
             exit="pop-out"
         >
               <img src={start_messaging_img} className="w-full md:w-96" />
-              <h1 className="text-black dark:text-white text-2xl max-w-md text-center">Select a chat in your inbox to start messaging.</h1>
+              <div className="flex flex-col gap-2 text-center">
+                           <h1 className="text-black dark:text-white text-2xl max-w-md ">Start messaging with Chately.</h1>
+              <p className="text-muted-light dark:text-muted-dark text-sm ">Select a chat in your inbox to start messaging.</p>
+              </div>
         </motion.div>
       }
       </div>
