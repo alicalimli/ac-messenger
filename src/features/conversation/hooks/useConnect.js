@@ -1,7 +1,12 @@
 import { useContext } from "react";
 import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
 
-const useConnect = (ws) => {
+
+let ws;
+
+const useConnect = (setMessages, inboxHash) => {
+  if (ws) ws.close();
+
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const [userInfo, setUserInfo] = useContext(UserContext);
 
@@ -16,7 +21,7 @@ const useConnect = (ws) => {
     }
 
     ws = new WebSocket(
-      `${ws_protocol}0.0.0.0:9080/ws?inbox=13-3&token=${userToken}`
+      `${ws_protocol}0.0.0.0:9080/ws?inbox=${inboxHash}&token=${userToken}`
     );
 
     // Listen for the connection open event then call the sendMessage function
@@ -34,23 +39,23 @@ const useConnect = (ws) => {
       console.log("Error " + e.reason);
     };
 
-    // ws.onmessage = function (e) {
-    //   try {
-    //     let data = JSON.parse(e.data);
-    //     // if data sent is a text
-    //     if (data["type"] == "txt") {
-    //       const { uname, msg } = data;
-    //       const user = uname === userInfo.email;
+    ws.onmessage = function (e) {
+      try {
+        let data = JSON.parse(e.data);
+        // if data sent is a text
+        if (data["type"] == "txt") {
+          const { uname, msg } = data;
+          const user = uname === userInfo.email;
 
-    //       const friend = setMessages((messages) => [
-    //         ...messages,
-    //         { user: user, message: msg },
-    //       ]);
-    //     }
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // };
+          const friend = setMessages((messages) => [
+            ...messages,
+            { user: user, message: msg },
+          ]);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
   };
 
   return wsConnect;
