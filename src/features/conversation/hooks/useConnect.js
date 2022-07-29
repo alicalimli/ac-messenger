@@ -2,10 +2,8 @@ import { useContext } from "react";
 import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
 
 
-let ws;
-
 const useConnect = (setMessages, inboxHash) => {
-  if (ws) ws.close();
+  let ws;
 
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const [userInfo, setUserInfo] = useContext(UserContext);
@@ -24,6 +22,8 @@ const useConnect = (setMessages, inboxHash) => {
       `${ws_protocol}0.0.0.0:9080/ws?inbox=${inboxHash}&token=${userToken}`
     );
 
+    console.log(ws)
+
     // Listen for the connection open event then call the sendMessage function
     ws.onopen = function (e) {
       console.log("Connected");
@@ -39,6 +39,8 @@ const useConnect = (setMessages, inboxHash) => {
       console.log("Error " + e.reason);
     };
 
+    console.log('blah')
+
     ws.onmessage = function (e) {
       try {
         let data = JSON.parse(e.data);
@@ -46,6 +48,8 @@ const useConnect = (setMessages, inboxHash) => {
         if (data["type"] == "txt") {
           const { uname, msg } = data;
           const user = uname === userInfo.email;
+          console.log('blah')
+          console.log(msg, uname)
 
           const friend = setMessages((messages) => [
             ...messages,
@@ -58,7 +62,7 @@ const useConnect = (setMessages, inboxHash) => {
     };
   };
 
-  return wsConnect;
+  return {ws, wsConnect};
 };
 
 export default useConnect;

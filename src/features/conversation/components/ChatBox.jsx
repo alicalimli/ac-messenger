@@ -19,7 +19,7 @@ const ChatBox = ({currentChat}) => {
   const conversationContainer = useRef("");
   const latestMsg = useRef("");
 
-  const wsConnect = useConnect(setMessages, currentChat.inbox_hash);
+  const {wsConnect} = useConnect(setMessages, currentChat.inbox_hash);
 
   const scrollDown = () => {
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
