@@ -8,7 +8,6 @@ import { useConnect } from "../hooks";
 import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
-import elvis from "/src/assets/images/elvis.jpg";
 
 const ChatBox = ({currentChat}) => {
   const [user, setUser] = useState(true);
