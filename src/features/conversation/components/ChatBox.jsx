@@ -34,10 +34,6 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
     });
   }
 
-  const handleBackBtn = () => {
-    setCurrentChat(null)
-  }
-
   useEffect(() => {
     if (!latestMsg.current) return;
     latestMsg.current.scrollIntoView();
@@ -50,9 +46,7 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
   return (
     <section className="flex h-full w-full">
       <div className="w-full flex flex-col gap-4">
-        <TwTrnButton clickHandler={handleBackBtn} addClass="block md:hidden">{`< Back`}</TwTrnButton>
-
-        <ChatHeader currentChat={currentChat} />
+        <ChatHeader currentChat={currentChat} setCurrentChat={setCurrentChat} />
 
         <main
           ref={conversationContainer}
