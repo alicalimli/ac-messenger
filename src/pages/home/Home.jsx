@@ -1,10 +1,13 @@
-import React, {useContext} from "react";
+import React from "react";
 
-import { useState, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState, useRef, useContext } from "react";
+
 import { Sidebar, SideContent } from "/src/features/sidebar/components";
 import { ChatBox } from "../../features/conversation/components";
 
 import {CurrentChatContext} from '/src/setup/app-context-manager'
+import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
 
 const Home = () => {
   const defaultSideBarContent = "chats";
@@ -26,7 +29,13 @@ const Home = () => {
         setSideBarContent={setSideBarContent}
         previousContentRef={previousContentRef}
       />
-      { currentChat && <ChatBox currentChat={currentChat} /> }
+      { currentChat && (
+      <div
+        className="h-screen w-screen justify-center hidden md:block bg-muted-light/10 dark:bg-black duration-300"
+      >
+        <ChatBox currentChat={currentChat} />
+      </div>
+        ) }
     </div>
   );
 };

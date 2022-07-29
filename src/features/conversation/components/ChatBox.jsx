@@ -44,7 +44,7 @@ const ChatBox = ({currentChat}) => {
   }, [currentChat]);
 
   return (
-    <section className="h-screen w-screen justify-center hidden bg-black md:flex bg-muted-light/10 dark:bg-black duration-300">
+    <section className="flex h-full w-full">
       <div className="w-full flex flex-col gap-4">
         <TwTrnButton addClass="block md:hidden">{`< Back`}</TwTrnButton>
 
