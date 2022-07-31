@@ -29,7 +29,7 @@ const Sidebar = ({ sidebarContent, setSideBarContent, previousContentRef }) => {
   };
 
   return (
-    <nav className="relative hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 sm:flex sm:flex-col gap-4 justify-center">
+    <nav className="relative hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 justify-center">
       <div className="flex flex-col gap-2 items-center">
         {SIDEBAR_PAGE_BUTTONS.map((obj) => {
           const Icon = obj.icon;

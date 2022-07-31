@@ -37,7 +37,7 @@ const Home = () => {
           </div>
         ) : (
           <motion.div
-            className="hidden md:flex flex-col gap-4 items-center justify-center"
+            className="hidden md:flex flex-col gap-4 items-center justify-center w-screen p-4"
             variants={VARIANTS_MANAGER}
             initial="pop-out"
             animate="pop-in"

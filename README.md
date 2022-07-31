@@ -7,7 +7,7 @@
 | React [**Javascript**]   | FastAPI [**Python**], Javascipt, C  | Redis, PostgreSQL |
 
 ## 2. How it works
-### Front-end (You are here)
+### Front-end
 ...
 
 
