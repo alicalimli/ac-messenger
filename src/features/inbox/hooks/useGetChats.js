@@ -4,9 +4,9 @@ import { UserTokenContext } from "/src/setup/app-context-manager";
 
 const GET_INBOX_LISTS_URL = "/chat/mine";
 
-const useGetInboxList = () => {
+const useGetChats = () => {
   const [userToken, setUserToken] = useContext(UserTokenContext);
-  const [inboxList, setInboxList] = useState([]);
+  const [chats, setChats] = useState([]);
 
   useEffect(async () => {
     const response = await axios.get(GET_INBOX_LISTS_URL, {
@@ -14,11 +14,11 @@ const useGetInboxList = () => {
         Authorization: "Bearer " + userToken,
       },
     });
-    setInboxList([...inboxList, ...response.data]);
+    setChats([...chats, ...response.data]);
   }, []);
-  console.log(inboxList);
+  console.log(chats);
 
-  return inboxList;
+  return chats;
 };
 
-export default useGetInboxList;
+export default useGetChats;

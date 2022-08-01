@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { InboxList } from "/src/features/inbox/components";
+import { ChatsContainer } from "/src/features/inbox/components";
 import { ProfileContainer } from "/src/features/profile/components";
 import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
 
@@ -20,7 +20,7 @@ const SideContent = ({
             animate="slide-in"
             exit="slide-from-right"
           >
-            <InboxList />
+            <ChatsContainer />
           </motion.div>
         )}
         {sidebarContent === "profile" && (

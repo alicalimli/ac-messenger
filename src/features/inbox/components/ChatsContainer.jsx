@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { TwTrnButton } from "/src/components";
-import { useGetInboxList } from "../hooks";
+import { useGetChats } from "../hooks";
 
 import { CurrentChatContext } from "/src/setup/app-context-manager";
 
-const InboxList = () => {
-  const inboxLists = useGetInboxList();
+const ChatsContainer = () => {
+  const chats = useGetChats();
   const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
 
-  const inboxListClickHandler = (inboxList) => {
+  const chatClickHandler = (inboxList) => {
     setCurrentChat(inboxList);
   };
 
@@ -16,9 +16,9 @@ const InboxList = () => {
     <div className=" p-4 flex flex-col gap-4">
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
       <div>
-        {inboxLists.map((inboxList, i) => (
+        {chats.map((inboxList, i) => (
           <TwTrnButton
-            clickHandler={() => inboxListClickHandler(inboxList)}
+            clickHandler={() => chatClickHandler(inboxList)}
             addClass="w-full p-2"
             key={inboxList.sender_name + i}
           >
@@ -41,4 +41,4 @@ const InboxList = () => {
   );
 };
 
-export default InboxList;
+export default ChatsContainer;
