@@ -22,7 +22,7 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
   const conversationContainer = useRef("");
   const latestMsg = useRef("");
 
-  const { messages, setMessages, wsConnect } = useConnect(currentChat.inbox_hash);
+  const { messages, setMessages,ws, wsConnect } = useConnect(currentChat.inbox_hash);
 
   const scrollDown = () => {
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
@@ -98,7 +98,7 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
             )}
           </AnimatePresence>
 
-          <ChatForm inboxHash={currentChat.inbox_hash} />
+          <ChatForm ws={ws} wsConnect={wsConnect} inboxHash={currentChat.inbox_hash} messages={messages} setMessages={setMessages} />
         </div>
       </div>
     </section>
