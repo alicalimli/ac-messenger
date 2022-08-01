@@ -1,11 +1,9 @@
-import {useEffect, useContext} from 'react'
-import { motion, AnimatePresence} from "framer-motion";
+import { useEffect, useContext } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-import {
-  UserContext,
-} from "/src/setup/app-context-manager";
+import { UserContext } from "/src/setup/app-context-manager";
 
-const Messages = ({ messages, latestMsgRef}) => {
+const Messages = ({ messages, latestMsgRef }) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
   return messages.map((currentMsg, i) => (
     <div

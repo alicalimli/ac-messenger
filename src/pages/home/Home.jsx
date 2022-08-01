@@ -31,29 +31,29 @@ const Home = () => {
         setSideBarContent={setSideBarContent}
         previousContentRef={previousContentRef}
       />
-        {currentChat ? (
-          <div className="h-screen w-screen justify-center absolute z-10 bg-muted-light/10 dark:bg-black duration-300 md:relative md:flex items-center justify-center">
+      {currentChat ? (
+        <div className="h-screen w-screen justify-center absolute z-10 bg-muted-light/10 dark:bg-black duration-300 md:relative md:flex items-center justify-center">
           <ChatBox currentChat={currentChat} setCurrentChat={setCurrentChat} />
+        </div>
+      ) : (
+        <motion.div
+          className="hidden md:flex flex-col gap-4 items-center justify-center w-screen p-4"
+          variants={VARIANTS_MANAGER}
+          initial="pop-out"
+          animate="pop-in"
+          exit="pop-out"
+        >
+          <img src={start_messaging_img} className="w-full md:w-96" />
+          <div className="flex flex-col gap-2 text-center">
+            <h1 className="text-black dark:text-white text-2xl max-w-md ">
+              Start messaging with Chately.
+            </h1>
+            <p className="text-muted-light dark:text-muted-dark text-sm ">
+              Select a chat in your inbox to start messaging.
+            </p>
           </div>
-        ) : (
-          <motion.div
-            className="hidden md:flex flex-col gap-4 items-center justify-center w-screen p-4"
-            variants={VARIANTS_MANAGER}
-            initial="pop-out"
-            animate="pop-in"
-            exit="pop-out"
-          >
-            <img src={start_messaging_img} className="w-full md:w-96" />
-            <div className="flex flex-col gap-2 text-center">
-              <h1 className="text-black dark:text-white text-2xl max-w-md ">
-                Start messaging with Chately.
-              </h1>
-              <p className="text-muted-light dark:text-muted-dark text-sm ">
-                Select a chat in your inbox to start messaging.
-              </p>
-            </div>
-          </motion.div>
-        )}
+        </motion.div>
+      )}
     </div>
   );
 };
