@@ -1,14 +1,11 @@
 import { TwTrnButton } from "/src/components";
 
-const ChatList = ({ chat, setCurrentChat}) => {
-
-  const chatClickHandler = (chat) => {
-    setCurrentChat(chat);
-  };
-  return (
+const ChatList = ({ chats, chatClickHandler }) => {
+  return chats.map((chat, i) => (
           <TwTrnButton
-            clickHandler={() => chatClickHandler(chat)}
-            addClass="w-full p-2"
+            clickHandler={(e) => chatClickHandler(e, chat)}
+            key={chat.sender_name + i}
+            addClass={`w-full p-2 ${chat.active_chat && "bg-primary-main hover:bg-primary-tinted dark:hover:bg-primary-tinted" }`}
           >
             <div className="relative bg-transparent h-16 w-16">
               <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
@@ -23,7 +20,7 @@ const ChatList = ({ chat, setCurrentChat}) => {
               </p>
             </div>
           </TwTrnButton>
-  );
+  ));
 };
 
 export default ChatList;
