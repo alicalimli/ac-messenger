@@ -1,13 +1,15 @@
 import { useContext, useState } from "react";
 import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
 
+import useGetMessages from './useGetMessages'
+
 let ws;
 
 const useConnect = (inboxHash) => {
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const [userInfo, setUserInfo] = useContext(UserContext);
 
-  const [messages, setMessages] = useState([]);
+  const {messages,setMessages} = useGetMessages(inboxHash);
 
   const wsConnect = () => {
     if (ws) ws.close();

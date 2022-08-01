@@ -5,9 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { TwButton, TwTrnButton } from "/src/components";
 import { useConnect } from "../hooks";
 
-import axios from '/src/api/axios'
-const GET_MSGs_URL = "/chat/msg"
-
 import {UserTokenContext} from '/src/setup/app-context-manager'
 
 import Messages from "./Messages";
@@ -38,27 +35,6 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
       }
     });
   }
-
-    const [userToken, setUserToken] = useContext(UserTokenContext);
-
-  useEffect(async ()=>{
-    try{
-      const response = await axios.get(`${GET_MSGs_URL}/${currentChat.inbox_hash}`, {
-        headers: {
-          Authorization: "Bearer " + userToken,
-        },
-      });
-
-          const friend = setMessages((messages) => [
-            ...messages,
-            ...response.data,
-          ]);
-
-          console.log(response.data)
-    }catch(error){
-      console.error(error)
-    }
-  }, [currentChat.inbox_hash])
 
   useEffect(() => {
     if (!latestMsg.current) return;
