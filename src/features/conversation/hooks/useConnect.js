@@ -26,8 +26,6 @@ const useConnect = (inboxHash) => {
       `${ws_protocol}0.0.0.0:9080/ws?inbox=${inboxHash}&token=${userToken}`
     );
 
-    console.log(ws);
-
     // Listen for the connection open event then call the sendMessage function
     ws.onopen = function (e) {
       console.log("Connected");
@@ -43,8 +41,6 @@ const useConnect = (inboxHash) => {
       console.log("Error " + e.reason);
     };
 
-    console.log("blah");
-
     ws.onmessage = function (e) {
       try {
         let data = JSON.parse(e.data);
@@ -52,13 +48,6 @@ const useConnect = (inboxHash) => {
         if (data["type"] == "txt") {
           const { uname, msg } = data;
           const user = uname === userInfo.email;
-          console.log("blah");
-          console.log(msg, uname);
-
-          const friend = setMessages((messages) => [
-            ...messages,
-            { user: user, message: msg },
-          ]);
         }
       } catch (error) {
         console.error(error);
