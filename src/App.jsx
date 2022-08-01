@@ -1,23 +1,20 @@
-import { StrictMode, useEffect, useState, useContext } from "react";
+import { StrictMode, useContext, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-
+import { motion } from "framer-motion";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
 import {
   AppContextProvider,
+  DarkmodeContext,
+  ToastMsgContext,
   UserContext,
   UserTokenContext,
-  ToastMsgContext,
-  DarkmodeContext,
 } from "./setup/app-context-manager";
 
-import { Authentication } from "./pages/authentication";
-
-import { useLocalStorage } from "./common/hooks";
-import { Toast } from "./common/components";
-
-import { Home } from "./pages/home";
-
-import { motion, AnimatePresence } from "framer-motion";
+import { Authentication } from "./pages";
+import { Home } from "./pages";
+import { Toast } from "./components";
+import { useLocalStorage } from "./hooks";
 
 const Main = () => {
   const [pendingMsg, setPendingMsg] = useState("");
