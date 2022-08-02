@@ -1,3 +1,3 @@
-import InboxList from "./InboxList";
+import ChatsContainer from "./ChatsContainer";
 
-export { InboxList };
+export { ChatsContainer };

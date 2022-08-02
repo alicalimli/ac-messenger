@@ -1,4 +1,4 @@
-import {AiOutlineArrowLeft} from 'react-icons/ai'
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import { TwTrnButton } from "/src/components";
 
@@ -9,10 +9,8 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
 
   return (
     <header className="border-b border-muted-light/10 dark:border-muted-dark/10 w-full p-4  mb-auto bg-white dark:bg-bgmain-dark duration-300 flex gap-2">
-      <TwTrnButton
-        clickHandler={handleBackBtn}
-        addClass="md:hidden px-4"
-      ><AiOutlineArrowLeft className="text-xl" />
+      <TwTrnButton clickHandler={handleBackBtn} addClass="md:hidden px-4">
+        <AiOutlineArrowLeft className="text-xl" />
       </TwTrnButton>
       <div className="flex items-center gap-4">
         <div className="relative bg-transparent h-16 w-16">

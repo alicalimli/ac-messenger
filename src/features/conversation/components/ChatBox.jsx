@@ -5,6 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { TwButton, TwTrnButton } from "/src/components";
 import { useConnect } from "../hooks";
 
+import { UserTokenContext } from "/src/setup/app-context-manager";
+
 import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
@@ -17,7 +19,9 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
   const conversationContainer = useRef("");
   const latestMsg = useRef("");
 
-  const { messages, wsConnect } = useConnect(currentChat.inbox_hash);
+  const { messages, setMessages, ws, wsConnect } = useConnect(
+    currentChat.inbox_hash
+  );
 
   const scrollDown = () => {
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
@@ -74,7 +78,13 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
             )}
           </AnimatePresence>
 
-          <ChatForm inboxHash={currentChat.inbox_hash} />
+          <ChatForm
+            ws={ws}
+            wsConnect={wsConnect}
+            inboxHash={currentChat.inbox_hash}
+            messages={messages}
+            setMessages={setMessages}
+          />
         </div>
       </div>
     </section>

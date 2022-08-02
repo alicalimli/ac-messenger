@@ -1,3 +1,3 @@
-import useGetInboxList from "./useGetInboxList";
+import useGetChats from "./useGetChats";
 
-export { useGetInboxList };
+export { useGetChats };

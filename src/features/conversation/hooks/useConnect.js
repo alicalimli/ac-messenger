@@ -1,13 +1,15 @@
 import { useContext, useState } from "react";
 import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
 
+import useGetMessages from "./useGetMessages";
+
 let ws;
 
 const useConnect = (inboxHash) => {
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const [userInfo, setUserInfo] = useContext(UserContext);
 
-  const [messages, setMessages] = useState([]);
+  const { messages, setMessages } = useGetMessages(inboxHash);
 
   const wsConnect = () => {
     if (ws) ws.close();
@@ -26,8 +28,6 @@ const useConnect = (inboxHash) => {
       `${ws_protocol}0.0.0.0:9080/ws?inbox=${inboxHash}&token=${userToken}`
     );
 
-    console.log(ws);
-
     // Listen for the connection open event then call the sendMessage function
     ws.onopen = function (e) {
       console.log("Connected");
@@ -43,27 +43,22 @@ const useConnect = (inboxHash) => {
       console.log("Error " + e.reason);
     };
 
-    console.log("blah");
+    // ws.onmessage = function (e) {
+    //   try {
+    //     let data = JSON.parse(e.data);
+    //     // if data sent is a text
+    //     if (data["type"] == "txt") {
+    //       const { uname: username, msg } = data;
 
-    ws.onmessage = function (e) {
-      try {
-        let data = JSON.parse(e.data);
-        // if data sent is a text
-        if (data["type"] == "txt") {
-          const { uname, msg } = data;
-          const user = uname === userInfo.email;
-          console.log("blah");
-          console.log(msg, uname);
-
-          const friend = setMessages((messages) => [
-            ...messages,
-            { user: user, message: msg },
-          ]);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    //       const friend = setMessages((messages) => [
+    //         ...messages,
+    //         { username,  msg },
+    //       ]);
+    //     }
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // };
   };
 
   return { ws, wsConnect, messages, setMessages };
