@@ -1,8 +1,14 @@
 import { useContext } from "react";
 import { AiOutlineUser } from "react-icons/ai";
-import { BiLogOut, BiUser, BiMessageSquareDetail, BiMoon, BiSun } from "react-icons/bi";
+import {
+  BiLogOut,
+  BiUser,
+  BiMessageSquareDetail,
+  BiMoon,
+  BiSun,
+} from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
-import {RiContactsLine} from 'react-icons/ri'
+import { RiContactsLine } from "react-icons/ri";
 
 import {
   DarkmodeContext,
@@ -15,7 +21,7 @@ import { useLocalStorage, useSignOut } from "/src/hooks";
 
 const SIDEBAR_PAGE_BUTTONS = [
   { name: "chats", icon: BiMessageSquareDetail },
-  { name: "add contacts", icon: RiContactsLine},
+  { name: "add contacts", icon: RiContactsLine },
   { name: "profile", icon: BiUser },
   { name: "settings", icon: FiSettings },
 ];
