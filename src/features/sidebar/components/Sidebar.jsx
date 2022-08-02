@@ -32,6 +32,7 @@ const Sidebar = ({ sidebarContent, setSideBarContent, previousContentRef }) => {
   const signOut = useSignOut();
 
   const changeSideContent = (sideContentName) => {
+    sideContentName = sideContentName.replace(" ", "");
     previousContentRef.current = sidebarContent;
     setSideBarContent(sideContentName);
   };

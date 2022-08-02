@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ChatsContainer } from "/src/features/inbox/components";
 import { ProfileContainer } from "/src/features/profile/components";
+import {AddContacts} from "/src/features/add-contacts/components"
 import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
 
 const SideContent = ({
@@ -36,6 +37,20 @@ const SideContent = ({
               previousContentRef={previousContentRef}
               setSideBarContent={setSideBarContent}
             />
+          </motion.div>
+        )}
+         {sidebarContent === "addcontacts" && (
+          <motion.div
+            key="add-contacts"
+            className="absolute w-full h-full"
+            variants={VARIANTS_MANAGER}
+            initial="slide-from-left"
+            animate="slide-in"
+            exit="slide-from-right"
+          >
+            <AddContacts
+              previousContentRef={previousContentRef}
+              setSideBarContent={setSideBarContent}/>
           </motion.div>
         )}
       </AnimatePresence>
