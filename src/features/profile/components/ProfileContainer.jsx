@@ -7,6 +7,7 @@ import {
 } from "/src/setup/app-context-manager";
 
 import { GoMention } from "react-icons/go";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 
 import ProfileEditForm from "./ProfileEditForm";
@@ -49,8 +50,8 @@ const ProfileContainer = ({ previousContentRef, setSideBarContent }) => {
       <div className="flex-col justify-center gap-4 p-6">
         <TwTrnButton
           clickHandler={() => setSideBarContent(previousContentRef.current)}
-          addClass="w-full"
-        >{`< My Profile`}</TwTrnButton>
+          addClass="w-full flex gap-2"
+        ><AiOutlineArrowLeft className="text-xl" /> My Profile</TwTrnButton>
 
         <div className="flex flex-col items-center text-center p-4 px-8">
           <img
