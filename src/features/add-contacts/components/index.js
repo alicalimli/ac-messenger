@@ -1,3 +1,3 @@
-import AddContacts from './AddContacts'
+import AddContacts from "./AddContacts";
 
-export {AddContacts}
+export { AddContacts };

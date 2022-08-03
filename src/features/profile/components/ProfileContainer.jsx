@@ -51,7 +51,9 @@ const ProfileContainer = ({ setSideBarContent }) => {
         <TwTrnButton
           clickHandler={() => setSideBarContent("chats")}
           addClass="w-full flex gap-2"
-        ><AiOutlineArrowLeft className="text-xl" /> My Profile</TwTrnButton>
+        >
+          <AiOutlineArrowLeft className="text-xl" /> My Profile
+        </TwTrnButton>
 
         <div className="flex flex-col items-center text-center p-4 px-8">
           <img
