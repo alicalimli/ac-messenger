@@ -34,7 +34,7 @@ const AddContacts = ({ setSideBarContent }) => {
         <AiOutlineArrowLeft className="text-lg" /> Add Contacts
       </TwTrnButton>
 
-      {users.map((user, i) => (
+      {users.filter((user)=> user.id !== userInfo.user_id).map((user, i) => (
         <TwTrnButton
           key={i}
           clickHandler={() => contactClickHandler(user)}

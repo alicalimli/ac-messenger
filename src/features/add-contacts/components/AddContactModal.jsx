@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { TwTrnButton, TwButton } from "/src/components";
 
+import {useAddContact} from '../hooks'
+
 const AddContactModal = ({ setShowModal, otherUser }) => {
+  const {addContact} = useAddContact(otherUser);
+
+  const addContactBtnHandler = () => {
+    console.log(otherUser)
+    addContact();
+  }
+
   const cancelBtnHandler = () => setShowModal(false);
 
   return (
@@ -20,7 +29,9 @@ const AddContactModal = ({ setShowModal, otherUser }) => {
         </p>
       </div>
       <div className="flex flex-col gap-2">
-        <TwButton addClass="w-full flex justify-center py-1">
+        <TwButton
+        clickHandler={addContactBtnHandler}
+        addClass="w-full flex justify-center py-1">
           Add Contact
         </TwButton>
         <TwTrnButton
