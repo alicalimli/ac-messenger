@@ -12,17 +12,16 @@ const useAddContact = (otherUser) => {
   const addContact = async () => {
     try {
       const addContactData = {
-      	   sender_id: userInfo.user_id,
-          recepient_id: otherUser.id,
+      	   "sender_id": +userInfo.user_id,
+          "recepient_id": +otherUser.id,
+          "msg": "string",
+          "timestamp": "string",
+          "read": true
       }
-
-            let formData = new FormData();
-      formData.append("sender_id", userInfo.user_id);
-      formData.append("recepient_id", otherUser.id);
 
       const response = await axios.post(
         ADD_CONTACT_URL,
-        formData,
+        JSON.stringify(addContactData),
         {
         withCredentials: true,
         }

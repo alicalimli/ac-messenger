@@ -23,7 +23,7 @@ const TwTooltip = ({ children, addClass, position }) => {
   return (
     // NOTE: Parent Element Must Have a Group and Relative Class.
     <span
-      className={`absolute shadow-md bg-gray-800 dark:bg-white text-white dark:text-black rounded-xl p-2 px-4 text-sm invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus:visible group-focus:opacity-100 duration-200 z-10 pointer-events-none outline-none ${positionClasses} `}
+      className={`absolute shadow-md bg-gray-800 dark:bg-white text-white dark:text-black rounded-xl p-2 px-4 text-sm invisible opacity-0 group-hover:visible group-hover:opacity-100 duration-200 z-10 pointer-events-none ${positionClasses} `}
     >
       {children}
     </span>
