@@ -9,12 +9,16 @@ const useGetChats = () => {
   const [chats, setChats] = useState([]);
 
   useEffect(async () => {
-    const response = await axios.get(GET_INBOX_LISTS_URL, {
+    try{
+const response = await axios.get(GET_INBOX_LISTS_URL, {
       headers: {
         Authorization: "Bearer " + userToken,
       },
     });
     setChats([...chats, ...response.data]);
+    }catch(error){
+      console.error(error)
+    }
   }, []);
   console.log(chats);
 

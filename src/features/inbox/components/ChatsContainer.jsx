@@ -1,6 +1,7 @@
 import { useContext, useRef } from "react";
 import { TwTrnButton } from "/src/components";
 import { useGetChats } from "../hooks";
+import {inbox_empty} from '/src/assets/images'
 
 import { CurrentChatContext } from "/src/setup/app-context-manager";
 import ChatList from "./ChatList";
@@ -25,7 +26,8 @@ const ChatsContainer = () => {
     <div className=" p-4 flex flex-col gap-4">
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
       <div>
-        <ChatList chats={chats} chatClickHandler={chatClickHandler} />
+        {chats.length ? <ChatList chats={chats} chatClickHandler={chatClickHandler} /> :
+        <img src={inbox_empty} alt="" /> }
       </div>
     </div>
   );
