@@ -22,12 +22,10 @@ const Home = () => {
       <Sidebar
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
-        previousContentRef={previousContentRef}
       />
       <SideContent
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
-        previousContentRef={previousContentRef}
       />
       {currentChat ? (
         <div className="h-screen w-screen justify-center absolute z-10 bg-muted-light/10 dark:bg-black duration-300 md:relative md:flex items-center justify-center">

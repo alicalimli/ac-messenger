@@ -26,14 +26,13 @@ const SIDEBAR_PAGE_BUTTONS = [
   { name: "settings", icon: FiSettings },
 ];
 
-const Sidebar = ({ sidebarContent, setSideBarContent, previousContentRef }) => {
+const Sidebar = ({ sidebarContent, setSideBarContent }) => {
   const [darkmode, setDarkmode] = useContext(DarkmodeContext);
 
   const signOut = useSignOut();
 
   const changeSideContent = (sideContentName) => {
     sideContentName = sideContentName.replace(" ", "");
-    previousContentRef.current = sidebarContent;
     setSideBarContent(sideContentName);
   };
 
