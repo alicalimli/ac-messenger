@@ -3,13 +3,13 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import { useGetUsers } from '/src/hooks'
 
-const AddContacts = ({ previousContentRef, setSideBarContent }) => {
+const AddContacts = ({ setSideBarContent }) => {
   const users = useGetUsers();
 
   return (
     <section className="flex flex-col items-center p-4 px-8">
         <TwTrnButton
-          clickHandler={() => setSideBarContent(previousContentRef.current)}
+          clickHandler={() => setSideBarContent("chats")}
           addClass="w-full flex gap-2"
         ><AiOutlineArrowLeft className="text-lg" /> Add Contacts</TwTrnButton>
         {users.map((user) => (

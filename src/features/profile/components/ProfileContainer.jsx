@@ -20,7 +20,7 @@ import {
   TwTrnButton,
 } from "/src/components";
 
-const ProfileContainer = ({ previousContentRef, setSideBarContent }) => {
+const ProfileContainer = ({ setSideBarContent }) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [toastMsg, setToastMsg] = useContext(ToastMsgContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
@@ -49,7 +49,7 @@ const ProfileContainer = ({ previousContentRef, setSideBarContent }) => {
 
       <div className="flex-col justify-center gap-4 p-6">
         <TwTrnButton
-          clickHandler={() => setSideBarContent(previousContentRef.current)}
+          clickHandler={() => setSideBarContent("chats")}
           addClass="w-full flex gap-2"
         ><AiOutlineArrowLeft className="text-xl" /> My Profile</TwTrnButton>
 

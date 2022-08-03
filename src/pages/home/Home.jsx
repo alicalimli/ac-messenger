@@ -17,8 +17,6 @@ const Home = () => {
 
   const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
 
-  const previousContentRef = useRef("");
-
   return (
     <div className="flex w-full min-h-screen">
       <Sidebar

@@ -7,7 +7,6 @@ import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
 const SideContent = ({
   sidebarContent,
   setSideBarContent,
-  previousContentRef,
 }) => {
   return (
     <section className="relative border-r border-muted-light/10 dark:border-muted-dark/10 w-full md:w-32 md:min-w-[24rem] overflow-x-hidden">
@@ -34,7 +33,6 @@ const SideContent = ({
             exit="slide-from-right"
           >
             <ProfileContainer
-              previousContentRef={previousContentRef}
               setSideBarContent={setSideBarContent}
             />
           </motion.div>
@@ -49,7 +47,6 @@ const SideContent = ({
             exit="slide-from-right"
           >
             <AddContacts
-              previousContentRef={previousContentRef}
               setSideBarContent={setSideBarContent}/>
           </motion.div>
         )}
