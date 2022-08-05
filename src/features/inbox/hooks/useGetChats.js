@@ -20,7 +20,6 @@ const response = await axios.get(GET_INBOX_LISTS_URL, {
       console.error(error)
     }
   }, []);
-  console.log(chats);
 
   return chats;
 };

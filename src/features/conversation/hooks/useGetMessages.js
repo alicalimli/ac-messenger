@@ -17,8 +17,6 @@ const useGetMessages = (inboxHash) => {
       });
 
       const friend = setMessages((messages) => [...messages, ...response.data]);
-
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }

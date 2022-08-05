@@ -42,23 +42,6 @@ const useConnect = (inboxHash) => {
     ws.onerror = function (e) {
       console.log("Error " + e.reason);
     };
-
-    // ws.onmessage = function (e) {
-    //   try {
-    //     let data = JSON.parse(e.data);
-    //     // if data sent is a text
-    //     if (data["type"] == "txt") {
-    //       const { uname: username, msg } = data;
-
-    //       const friend = setMessages((messages) => [
-    //         ...messages,
-    //         { username,  msg },
-    //       ]);
-    //     }
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // };
   };
 
   return { ws, wsConnect, messages, setMessages };

@@ -35,6 +35,22 @@ const ChatForm = ({ ws, wsConnect, inboxHash, messages, setMessages }) => {
       console.log("Connection to inbox is required");
       console.log("Connection to inbox is required");
     }
+        ws.onmessage = function (e) {
+      try {
+        let data = JSON.parse(e.data);
+        // if data sent is a text
+        if (data["type"] == "txt") {
+          const { uname: username, msg } = data;
+
+          const friend = setMessages((messages) => [
+            ...messages,
+            { username,  msg },
+          ]);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
     // const timeOptions = {
     //   hour: "numeric",
