@@ -1,5 +1,5 @@
 import { useContext, useRef } from "react";
-import { TwTrnButton } from "/src/components";
+import { TwTrnButton, ErrorMsg } from "/src/components";
 import { useGetChats } from "../hooks";
 import {inbox_empty} from '/src/assets/images'
 
@@ -27,7 +27,8 @@ const ChatsContainer = () => {
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
       <div>
         {chats.length ? <ChatList chats={chats} chatClickHandler={chatClickHandler} /> :
-        <img src={inbox_empty} alt="" /> }
+        <ErrorMsg img={inbox_empty} msg="Your inbox is empty" subMsg="Find a contact in AddContacts section." />
+      }
       </div>
     </div>
   );

@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import {VARIANTS_MANAGER} from '/src/setup/variants-manager'
 
 
-const ErrorMsg = ({ img, msg, subMsg }) => {
+const ErrorMsg = ({ img, msg, subMsg, addClass }) => {
   return (
   	 <motion.div
-          className="hidden md:flex flex-col gap-4 items-center justify-center w-screen p-4"
+          className={`${addClass} flex flex-col gap-4 items-center justify-center w-full p-4`}
           variants={VARIANTS_MANAGER}
           initial="pop-out"
           animate="pop-in"

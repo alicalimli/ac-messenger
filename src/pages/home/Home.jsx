@@ -34,7 +34,7 @@ const Home = () => {
           <ChatBox currentChat={currentChat} setCurrentChat={setCurrentChat} />
         </div>
       ) : (
-        <ErrorMsg img={start_messaging_img} msg="Start Messaging with Chately" subMsg="Select a chat in your inbox to start messaging." />
+        <ErrorMsg addClass="hidden md:flex" img={start_messaging_img} msg="Start Messaging with Chately" subMsg="Select a chat in your inbox to start messaging." />
       )}
     </div>
   );
