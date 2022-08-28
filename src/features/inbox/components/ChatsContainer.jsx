@@ -7,7 +7,7 @@ import { CurrentChatContext } from "/src/setup/app-context-manager";
 import ChatList from "./ChatList";
 
 const ChatsContainer = () => {
-  const chats = useGetChats();
+  const chats = [];
   const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
 
   const chatListRef = useRef();

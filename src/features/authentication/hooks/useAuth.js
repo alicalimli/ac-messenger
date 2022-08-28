@@ -50,17 +50,18 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
       setPendingMsg("generating token");
 
       // For bypassing authentication
-      if (email === "admin@chately.com" && pass === "admin") {
+      if (email === "admin@chately.io" && pass === "admin") {
         setUserInfo(
           Object.assign(
             {},
             {
-              email: "admin@chately.com",
-              profile: "default.png",
+              email: "admin@chately.io",
+              profile: DEFAULT_PROFILE_IMAGE,
               status: true,
-              user_id: 3,
-              username: "chately2423",
-              websocket_id: "1657349013.3553238",
+              user_id: 1,
+              username: "admin_chately",
+              location: "Fatsa",
+              bio: "A developer"
             }
           )
         );

@@ -30,7 +30,7 @@ const ProfileContainer = ({ setSideBarContent }) => {
   const infoButtons = [
     { icon: HiOutlineMail, text: userInfo.email },
     { icon: GoMention, text: userInfo.username },
-    { icon: HiOutlineLocationMarker, text: "fatsa" },
+    { icon: HiOutlineLocationMarker, text: userInfo.location },
   ];
 
   const copyToClipboard = (text) => {
@@ -65,15 +65,12 @@ const ProfileContainer = ({ setSideBarContent }) => {
             {userInfo.username}
           </h2>
           <p className="text-muted-light dark:text-muted-dark">
-            Front-end Developer
+            {userInfo.bio}
           </p>
         </div>
       </div>
 
       <div className="p-6 flex flex-col gap-4 border-t border-muted-light/10 dark:border-muted-dark/10">
-        <p className="text-muted-light dark:text-muted-dark">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </p>
 
         <div className="flex flex-col gap-1 w-100 ">
           {infoButtons.map((obj, i) => {
