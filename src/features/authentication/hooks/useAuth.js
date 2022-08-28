@@ -51,21 +51,24 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
 
       // For bypassing authentication
       if (email === "admin@chately.io" && pass === "admin") {
-        setUserInfo(
-          Object.assign(
-            {},
-            {
-              email: "admin@chately.io",
-              profile: DEFAULT_PROFILE_IMAGE,
-              status: true,
-              user_id: 1,
-              username: "admin_chately",
-              location: "Fatsa",
-              bio: "A developer"
-            }
-          )
-        );
-        setPendingMsg("");
+        // Delay the login for 500ms to show pending msg
+        setTimeout(()=>{
+          setUserInfo(
+            Object.assign(
+              {},
+              {
+                email: "admin@chately.io",
+                profile: DEFAULT_PROFILE_IMAGE,
+                status: true,
+                user_id: 1,
+                username: "admin_chately",
+                location: "Fatsa",
+                bio: "A developer"
+              }
+            )
+          );
+          setPendingMsg("");
+        }, 500)
         return;
       }
 
