@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
 
-let toastTimeout: any;
+let toastTimeout: ReturnType<typeof setTimeout>;
 
 interface ToastProps {
   msg: string | undefined;
