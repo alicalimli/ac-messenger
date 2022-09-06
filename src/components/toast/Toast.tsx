@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
-let toastTimeout;
+let toastTimeout: any;
+
+interface ToastProps {
+  children: HTMLElement | undefined;
+  durationMs: number;
+  msg: string | undefined;
+  setMsg: any;
+}
 
 // Pass only children when duration isn't needed in the toast message.
-const Toast = ({ children, durationMs, msg, setMsg }) => {
+const Toast = ({ children, durationMs, msg, setMsg }: ToastProps) => {
   const removeMsg = () => {
     if (!durationMs || typeof +durationMs !== "number") return;
     clearTimeout(toastTimeout);
@@ -40,12 +47,11 @@ const Toast = ({ children, durationMs, msg, setMsg }) => {
           initial={{ y: -100, x: "-50%" }}
           className="bg-white mt-4 fixed top-0 left-1/2 flex items-center justify-center z-10 shadow-md p-4 px-8 rounded-xl"
         >
-          {" "}
-          {children}
+          {children as unknown as ReactNode}
         </motion.div>
       )}
     </AnimatePresence>,
-    document.getElementById("toast")
+    document.getElementById("toast") as HTMLElement
   );
 };
 
