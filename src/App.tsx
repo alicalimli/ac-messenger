@@ -62,7 +62,7 @@ const Main = () => {
       <BrowserRouter>
         <AnimatePresence>
           {/* Loading Toast */}
-          {pendingMsg && <Toast msg={pendingMsg} />}
+          {pendingMsg && <Toast type="loading" msg={pendingMsg} />}
 
           {/* Notification Toast */}
           {toastMsg && (
