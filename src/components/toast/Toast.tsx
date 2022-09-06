@@ -20,18 +20,6 @@ const Toast = ({ type, durationMS, msg, setMsg }: ToastProps): JSX.Element => {
     toastTimeout = setTimeout(() => setMsg && setMsg(""), durationMS);
   };
 
-  const renderIcon = (): JSX.Element | null => {
-    console.log("ss");
-    switch (type) {
-      case "loading":
-        return <AiOutlineLoading3Quarters />;
-      case "notification":
-        return <IoMdNotificationsOutline className="text-green-500" />;
-      default:
-        return null;
-    }
-  };
-
   useEffect(() => {
     if (durationMS) removeMsg();
   }, [msg]);

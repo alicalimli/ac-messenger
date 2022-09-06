@@ -1,7 +1,6 @@
 import { StrictMode, useContext, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import {
   AppContextProvider,
