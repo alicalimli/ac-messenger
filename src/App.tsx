@@ -1,6 +1,6 @@
 import { StrictMode, useContext, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import {
@@ -60,18 +60,15 @@ const Main = () => {
   return (
     <StrictMode>
       <BrowserRouter>
-        {/* Loading Toast */}
-        <Toast>
-          {pendingMsg && (
-            <h1 className="flex items-center gap-4">
-              {pendingMsg}...{" "}
-              <AiOutlineLoading3Quarters className="animate-spin" />
-            </h1>
-          )}
-        </Toast>
+        <AnimatePresence>
+          {/* Loading Toast */}
+          {pendingMsg && <Toast msg={pendingMsg} />}
 
-        {/* Notification Toast */}
-        <Toast durationMs={3000} msg={toastMsg} setMsg={setToastMsg} />
+          {/* Notification Toast */}
+          {toastMsg && (
+            <Toast msg={toastMsg} durationMS={3000} setMsg={setToastMsg} />
+          )}
+        </AnimatePresence>
 
         {userInfo ? (
           <motion.div
