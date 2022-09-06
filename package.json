@@ -4,14 +4,14 @@
   "description": "**Instant messaging & voice-over-IP WebApp**",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel ./src/index.html",
+    "start": "parcel ./src/index.html",
+    "test": "react-scripts test",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "format:check": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "react-scripts start"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
