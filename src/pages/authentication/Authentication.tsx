@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { SignIn, SignUp } from "/src/features/authentication/components";
-import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
+import { SignIn, SignUp } from "../../features/authentication/components";
+import { VARIANTS_MANAGER } from "../../setup/variants-manager";
+
+interface AuthenticationProps {
+  setKeepSignedIn: any;
+  keepSignedIn: Boolean;
+  setPendingMsg: any;
+  pendingMsg: String;
+}
 
 const Authentication = ({
   setKeepSignedIn,
   keepSignedIn,
   setPendingMsg,
   pendingMsg,
-}) => {
+}: AuthenticationProps) => {
   const [isSigningIn, setIsSigningIn] = useState(true);
 
   return (
