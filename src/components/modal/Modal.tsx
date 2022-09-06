@@ -2,17 +2,22 @@ import React, { useRef } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
+import { VARIANTS_MANAGER } from "../../setup/variants-manager";
 
-const Modal = ({ children, setShowModal }) => {
-  const modalParentRef = useRef();
+interface ModalProps {
+  children: JSX.Element;
+  setShowModal: (state: boolean) => void;
+}
 
-  const handleParentClick = (e) => {
+const Modal = ({ children, setShowModal }: ModalProps) => {
+  const modalParentRef = useRef<HTMLDivElement>(null);
+
+  const handleParentClick = (e: React.MouseEvent) => {
     if (e.target === modalParentRef.current) {
       setShowModal(false);
     }
   };
-
+  ``;
   return createPortal(
     <AnimatePresence>
       {children && (
@@ -38,7 +43,7 @@ const Modal = ({ children, setShowModal }) => {
         </motion.div>
       )}
     </AnimatePresence>,
-    document.getElementById("modal")
+    document.getElementById("modal") as HTMLElement
   );
 };
 
