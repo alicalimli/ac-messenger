@@ -13,7 +13,6 @@ interface ToastProps {
   type?: string;
 }
 
-// Pass only children when duration isn't needed in the toast message.
 const Toast = ({ type, durationMS, msg, setMsg }: ToastProps): JSX.Element => {
   const removeMsg = () => {
     clearTimeout(toastTimeout);
