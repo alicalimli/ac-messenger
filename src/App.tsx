@@ -71,7 +71,7 @@ const Main = () => {
         </Toast>
 
         {/* Notification Toast */}
-        <Toast durationMs="3000" msg={toastMsg} setMsg={setToastMsg} />
+        <Toast durationMs={3000} msg={toastMsg} setMsg={setToastMsg} />
 
         {userInfo ? (
           <motion.div

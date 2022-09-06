@@ -5,10 +5,10 @@ import { AnimatePresence, motion } from "framer-motion";
 let toastTimeout: any;
 
 interface ToastProps {
-  children: HTMLElement | undefined;
-  durationMs: number;
-  msg: string | undefined;
-  setMsg: any;
+  children?: JSX.Element | any;
+  durationMs?: number;
+  msg?: string | undefined;
+  setMsg?: any;
 }
 
 // Pass only children when duration isn't needed in the toast message.
