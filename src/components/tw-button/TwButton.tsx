@@ -5,7 +5,7 @@ interface TwButtonProps {
   disabled?: boolean;
   onClick?: any;
   className?: string;
-  type?: "submit" | "reset" | "button" | undefined;
+  type?: "submit" | "reset" | "button";
   variant?: "contained" | "transparent";
 }
 
@@ -18,7 +18,7 @@ const TwButton = ({
   disabled,
   className = "",
   onClick,
-  type,
+  type = "button",
   variant = "contained",
 }: TwButtonProps) => {
   const getVariantClass = (): string => {
@@ -36,7 +36,7 @@ const TwButton = ({
     <motion.button
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-      type={type || undefined}
+      type={type}
       onClick={onClick || null}
       disabled={disabled ? true : false}
       className={`${className} ${getVariantClass()}`}

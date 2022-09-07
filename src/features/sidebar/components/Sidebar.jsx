@@ -41,7 +41,7 @@ const Sidebar = ({ setSideBarContent }) => {
               variant="transparent"
               className="relative group z-10"
               key={obj.name}
-              clickHandler={() => changeSideContent(obj.name)}
+              onClick={() => changeSideContent(obj.name)}
             >
               <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
               <TwTooltip tip={obj.name} position="right" />
@@ -54,7 +54,7 @@ const Sidebar = ({ setSideBarContent }) => {
         <TwButton
           variant="transparent"
           className="relative group z-10"
-          clickHandler={() => setDarkmode(!darkmode)}
+          onClick={() => setDarkmode(!darkmode)}
         >
           {darkmode ? (
             <BiSun className="text-muted-light dark:text-muted-dark text-2xl" />
@@ -67,7 +67,7 @@ const Sidebar = ({ setSideBarContent }) => {
         <TwButton
           variant="transparent"
           className="relative group z-10"
-          clickHandler={signOut}
+          onClick={signOut}
         >
           <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl" />
           <TwTooltip tip="logout" position="right" />

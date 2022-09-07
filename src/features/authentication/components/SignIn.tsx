@@ -92,7 +92,9 @@ const SignIn = ({
         Keep me signed in
       </TwButton>
 
-      <TwButton disabled={pendingMsg as unknown as boolean}>Sign In</TwButton>
+      <TwButton type="submit" disabled={pendingMsg as unknown as boolean}>
+        Sign In
+      </TwButton>
 
       <p className="text-muted-light text-sm text-black dark:text-muted-dark">
         Don't have an account?{" "}

@@ -130,6 +130,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
         instruction="Should match the first password."
       />
       <TwButton
+        type="submit"
         disabled={
           !validEmail || !validUsername || !validConfirmPwd || pendingMsg
             ? true

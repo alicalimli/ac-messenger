@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import {
   ToastMsgContext,
@@ -12,13 +12,7 @@ import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 
 import ProfileEditForm from "./ProfileEditForm";
 
-import {
-  InputForm,
-  Modal,
-  TwButton,
-  TwTooltip,
-  TwTrnButton,
-} from "/src/components";
+import { Modal, TwTooltip, TwButton } from "/src/components";
 
 const ProfileContainer = ({ setSideBarContent }) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
@@ -48,12 +42,13 @@ const ProfileContainer = ({ setSideBarContent }) => {
       </Modal>
 
       <div className="flex-col justify-center gap-4 p-6">
-        <TwTrnButton
-          clickHandler={() => setSideBarContent("chats")}
-          addClass="w-full flex gap-2"
+        <TwButton
+          variant="transparent"
+          onClick={() => setSideBarContent("chats")}
+          className="w-full flex gap-2"
         >
           <AiOutlineArrowLeft className="text-xl" /> My Profile
-        </TwTrnButton>
+        </TwButton>
 
         <div className="flex flex-col items-center text-center p-4 px-8">
           <img
@@ -75,19 +70,20 @@ const ProfileContainer = ({ setSideBarContent }) => {
           {infoButtons.map((obj, i) => {
             const Icon = obj.icon;
             return (
-              <TwTrnButton
-                addClass="relative group"
-                clickHandler={() => copyToClipboard(obj.text)}
+              <TwButton
+                variant="transparent"
+                className="relative group"
+                onClick={() => copyToClipboard(obj.text)}
                 key={obj.text + i}
               >
                 <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
                 {obj.text}
-                <TwTooltip tip="Copy to clipboard" position="top" />
-              </TwTrnButton>
+                <TwTooltip position="top">Copy to clipboard</TwTooltip>
+              </TwButton>
             );
           })}
 
-          <TwButton clickHandler={() => setShowModal(true)} addClass="mt-2">
+          <TwButton onClick={() => setShowModal(true)} className="mt-2">
             Edit Info
           </TwButton>
         </div>
