@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 
 import { useAuth } from "../hooks";
-import { InputForm, TwButton, TwTrnButton } from "../../../components";
+import { InputForm, TwButton } from "../../../components";
 
 interface SignInProps {
   setPendingMsg: (state: string) => void;
