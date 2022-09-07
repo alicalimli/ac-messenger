@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { VARIANTS_MANAGER } from "../../setup/variants-manager";
 
 interface ModalProps {
-  children: JSX.Element;
+  children: JSX.Element | boolean;
   setShowModal: (state: boolean) => void;
 }
 

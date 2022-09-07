@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { TwTrnButton, TwButton } from "/src/components";
 
-import {useAddContact} from '../hooks'
+import { useAddContact } from "../hooks";
 
 const AddContactModal = ({ setShowModal, otherUser }) => {
-  const {addContact} = useAddContact(otherUser);
+  const { addContact } = useAddContact(otherUser);
 
   const addContactBtnHandler = () => {
-    console.log(otherUser)
+    console.log(otherUser);
     addContact();
-  }
+  };
 
   const cancelBtnHandler = () => setShowModal(false);
 
@@ -30,8 +30,9 @@ const AddContactModal = ({ setShowModal, otherUser }) => {
       </div>
       <div className="flex flex-col gap-2">
         <TwButton
-        clickHandler={addContactBtnHandler}
-        addClass="w-full flex justify-center py-1">
+          clickHandler={addContactBtnHandler}
+          addClass="w-full flex justify-center py-1"
+        >
           Add Contact
         </TwButton>
         <TwTrnButton
