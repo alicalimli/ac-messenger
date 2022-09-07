@@ -14,7 +14,7 @@ const TwTrnButton = ({
       type={btnType || null}
       onClick={clickHandler || null}
       disabled={isDisabled ? true : false}
-      className={`${addClass} flex gap-4 items-center  hover:bg-muted-light/5 p-2 text-md rounded-xl dark:hover:bg-muted-dark/10 text-black dark:text-white`}
+      className={`${addClass} `}
     >
       {children}
     </motion.button>

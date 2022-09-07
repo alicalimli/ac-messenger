@@ -74,10 +74,11 @@ const SignIn = ({
         placeHolder="*********"
       />
 
-      <TwTrnButton
-        clickHandler={() => setKeepSignedIn(!keepSignedIn)}
-        btnType="button"
-        addClass="flex flex-wrap gap-2 items-center "
+      <TwButton
+        onClick={() => setKeepSignedIn(!keepSignedIn)}
+        variant="transparent"
+        type="button"
+        className="flex flex-wrap gap-2 items-center "
       >
         <div
           className={`p-0.5 border-2 text-sm rounded-md bg-transparent duration-300 ${
@@ -89,7 +90,7 @@ const SignIn = ({
           <AiOutlineCheck />
         </div>
         Keep me signed in
-      </TwTrnButton>
+      </TwButton>
 
       <TwButton disabled={pendingMsg as unknown as boolean}>Sign In</TwButton>
 
