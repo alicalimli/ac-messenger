@@ -78,7 +78,7 @@ const ProfileContainer = ({ setSideBarContent }) => {
               >
                 <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
                 {obj.text}
-                <TwTooltip position="top">Copy to clipboard</TwTooltip>
+                <TwTooltip tip="Copy to clipboard" position="top" />
               </TwButton>
             );
           })}
