@@ -1,13 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { useAuth } from "../hooks";
-import { InputForm, TwButton } from "/src/components";
+import { InputForm, TwButton } from "../../../../src/components";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#$]).{8,24}$/;
 
-const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
+interface SignUpProps {
+  setPendingMsg: (state: string) => void;
+  setIsSigningIn: (state: boolean) => void;
+  pendingMsg: string;
+}
+
+const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
@@ -26,11 +32,11 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
 
   const [errorMsg, setErrorMsg] = useState("");
 
-  const usernameRef = useRef();
+  const usernameRef = useRef<HTMLInputElement | null>(null);
 
   const { signUpUser } = useAuth(setPendingMsg, setErrorMsg);
 
-  const handleSignUp = async (e) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     try {
       e.preventDefault();
 
@@ -38,7 +44,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         throw new Error("Invalid Entry.");
 
       signUpUser(email, username, password);
-    } catch (error) {
+    } catch (error: any) {
       setErrorMsg(error.message);
       setPendingMsg("");
       console.error(error);
@@ -64,7 +70,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
     <form onSubmit={handleSignUp} className="flex flex-col gap-4">
       {" "}
       <div className="flex flex-col gap-1">
-        <label className="text-2xl font-semibold text-left text-center text-black dark:text-white">
+        <label className="text-2xl font-semibold text-center text-black dark:text-white">
           Sign up
         </label>
         <label className="text-sm text-muted-light dark:text-muted-dark text-center mb-4">
@@ -85,8 +91,8 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         setState={setEmail}
         stateFocus={emailFocus}
         setStateFocus={setEmailFocus}
-        inputRef={usernameRef}
-        placeHolder="e.g example@email.com"
+        ref={usernameRef}
+        placeholder="e.g example@email.com"
         isValid={validEmail}
         instruction="Should be a valid email."
       />
@@ -97,7 +103,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         setState={setUsername}
         stateFocus={usernameFocus}
         setStateFocus={setUsernameFocus}
-        placeHolder="e.g example123"
+        placeholder="e.g example123"
         isValid={validUsername}
         instruction="Must be 4 to 24 characters and begins with a letter. Hyphen and underscore are allowed"
       />
@@ -108,14 +114,14 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         setState={setPassword}
         stateFocus={passwordFocus}
         setStateFocus={setPasswordFocus}
-        placeHolder="*********"
+        placeholder="*********"
         isValid={validPassword}
         instruction="8-24 characters and must include upper and lower case characters.Numbers and Dollar or Hashtag sign are required."
       />
       <InputForm
         label="Confirm Password"
         type="password"
-        placeHolder="*********"
+        placeholder="*********"
         state={confirmPwd}
         setState={setConfirmPwd}
         stateFocus={confirmPwdFocus}
@@ -124,7 +130,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }) => {
         instruction="Should match the first password."
       />
       <TwButton
-        isDisabled={
+        disabled={
           !validEmail || !validUsername || !validConfirmPwd || pendingMsg
             ? true
             : false

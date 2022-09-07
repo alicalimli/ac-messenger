@@ -1,4 +1,4 @@
-import { LegacyRef, useState } from "react";
+import { LegacyRef, Ref, useState } from "react";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 interface InputFormProps {
@@ -8,7 +8,7 @@ interface InputFormProps {
   type: string;
   placeholder: string;
   instruction?: string;
-  ref?: LegacyRef<HTMLInputElement> | null;
+  ref?: LegacyRef<HTMLInputElement> | undefined;
   isValid?: boolean;
   stateFocus?: boolean;
   setStateFocus?: (state: boolean) => void;
