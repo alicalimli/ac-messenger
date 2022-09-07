@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { AiOutlineUser } from "react-icons/ai";
 import {
   BiLogOut,
   BiUser,
@@ -10,14 +9,10 @@ import {
 import { FiSettings } from "react-icons/fi";
 import { RiContactsLine } from "react-icons/ri";
 
-import {
-  DarkmodeContext,
-  UserContext,
-  UserTokenContext,
-} from "/src/setup/app-context-manager";
+import { DarkmodeContext } from "/src/setup/app-context-manager";
 
-import { TwTooltip, TwTrnButton } from "/src/components";
-import { useLocalStorage, useSignOut } from "/src/hooks";
+import { TwTooltip, TwButton } from "/src/components";
+import { useSignOut } from "/src/hooks";
 
 const SIDEBAR_PAGE_BUTTONS = [
   { name: "chats", icon: BiMessageSquareDetail },
@@ -26,7 +21,7 @@ const SIDEBAR_PAGE_BUTTONS = [
   { name: "settings", icon: FiSettings },
 ];
 
-const Sidebar = ({ sidebarContent, setSideBarContent }) => {
+const Sidebar = ({ setSideBarContent }) => {
   const [darkmode, setDarkmode] = useContext(DarkmodeContext);
 
   const signOut = useSignOut();
@@ -42,21 +37,23 @@ const Sidebar = ({ sidebarContent, setSideBarContent }) => {
         {SIDEBAR_PAGE_BUTTONS.map((obj) => {
           const Icon = obj.icon;
           return (
-            <TwTrnButton
-              addClass="relative group z-10"
+            <TwButton
+              variant="transparent"
+              className="relative group z-10"
               key={obj.name}
               clickHandler={() => changeSideContent(obj.name)}
             >
               <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
               <TwTooltip tip={obj.name} position="right" />
-            </TwTrnButton>
+            </TwButton>
           );
         })}
       </div>
 
       <div className="absolute bottom-4 flex flex-col gap-1">
-        <TwTrnButton
-          addClass="relative group z-10"
+        <TwButton
+          variant="transparent"
+          className="relative group z-10"
           clickHandler={() => setDarkmode(!darkmode)}
         >
           {darkmode ? (
@@ -65,12 +62,16 @@ const Sidebar = ({ sidebarContent, setSideBarContent }) => {
             <BiMoon className="text-muted-light dark:text-muted-dark text-2xl" />
           )}
           <TwTooltip tip="toggle darkmode" position="right"></TwTooltip>
-        </TwTrnButton>
+        </TwButton>
 
-        <TwTrnButton addClass="relative group z-10" clickHandler={signOut}>
+        <TwButton
+          variant="transparent"
+          className="relative group z-10"
+          clickHandler={signOut}
+        >
           <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl" />
           <TwTooltip tip="logout" position="right" />
-        </TwTrnButton>
+        </TwButton>
       </div>
     </nav>
   );
