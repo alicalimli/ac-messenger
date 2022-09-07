@@ -4,16 +4,11 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Modal } from "components";
 import { useGetUsers } from "hooks";
 import { UserContext } from "setup/app-context-manager";
-import { User } from "interfaces/users";
 
 import AddContactModal from "./AddContactModal";
 
 interface AddContactsProps {
   setSideBarContent: (state: string) => void;
-}
-
-interface Users extends User {
-  users: Users[];
 }
 
 const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
