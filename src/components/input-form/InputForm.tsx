@@ -1,26 +1,35 @@
-import { useState } from "react";
-import {
-  BsFillEyeFill,
-  BsFillEyeSlashFill,
-  BsInfoCircleFill,
-} from "react-icons/bs";
+import { LegacyRef, useState } from "react";
+import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+
+interface InputFormProps {
+  state: string;
+  setState: (state: string) => void;
+  label: string;
+  type: string;
+  placeholder: string;
+  instruction?: string;
+  ref?: LegacyRef<HTMLInputElement> | null;
+  isValid?: boolean;
+  stateFocus?: boolean;
+  setStateFocus?: (state: boolean) => void;
+}
 
 const InputForm = ({
   label,
   instruction,
   type,
-  placeHolder,
-  inputRef,
+  placeholder,
+  ref = null,
   isValid,
   state,
   setState,
   stateFocus,
   setStateFocus,
-}) => {
+}: InputFormProps) => {
   const [inputType, setInputType] = useState(type);
   const noSpaceLabel = label.replace(/\s+/g, "");
 
-  const handleShowPass = (e) => {
+  const handleShowPass = (e: React.MouseEvent) => {
     if (inputType === "password") {
       setInputType("text");
     } else {
@@ -61,11 +70,11 @@ const InputForm = ({
         autoComplete="off"
         type={inputType}
         value={state}
-        ref={inputRef || null}
+        ref={ref}
         required
         aria-invalid={isValid ? false : true}
         aria-describedby={`${noSpaceLabel}-note`}
-        placeholder={placeHolder}
+        placeholder={placeholder}
         onChange={(e) => setState && setState(e.target.value)}
         onFocus={() => setStateFocus && setStateFocus(true)}
         onBlur={() => setStateFocus && setStateFocus(false)}

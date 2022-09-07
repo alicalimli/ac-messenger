@@ -64,14 +64,14 @@ const SignIn = ({
         type="email"
         state={email}
         setState={setEmail}
-        placeHolder="e.g example123@example.com"
+        placeholder="e.g example123@example.com"
       />
       <InputForm
         label="Password"
         type="password"
         state={password}
         setState={setPassword}
-        placeHolder="*********"
+        placeholder="*********"
       />
 
       <TwButton
