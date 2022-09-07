@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-import { BiMicrophone, BiUser } from "react-icons/bi";
+import { BiMicrophone } from "react-icons/bi";
 import { MdSend } from "react-icons/md";
 import { RiImageAddLine } from "react-icons/ri";
 import { VscSmiley } from "react-icons/vsc";
 
-import { TwButton, TwTrnButton } from "/src/components";
-
-import { useConnect } from "../hooks";
+import { TwButton } from "/src/components";
 
 const ChatForm = ({ ws, wsConnect, inboxHash, messages, setMessages }) => {
   const [message, setMessage] = useState("");
@@ -35,7 +33,7 @@ const ChatForm = ({ ws, wsConnect, inboxHash, messages, setMessages }) => {
       console.log("Connection to inbox is required");
       console.log("Connection to inbox is required");
     }
-        ws.onmessage = function (e) {
+    ws.onmessage = function (e) {
       try {
         let data = JSON.parse(e.data);
         // if data sent is a text
@@ -44,7 +42,7 @@ const ChatForm = ({ ws, wsConnect, inboxHash, messages, setMessages }) => {
 
           const friend = setMessages((messages) => [
             ...messages,
-            { username,  msg },
+            { username, msg },
           ]);
         }
       } catch (error) {

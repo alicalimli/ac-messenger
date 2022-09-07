@@ -1,19 +1,15 @@
-import React, { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
-import { TwButton, TwTrnButton } from "/src/components";
+import { TwButton } from "/src/components";
 import { useConnect } from "../hooks";
-
-import { UserTokenContext } from "/src/setup/app-context-manager";
 
 import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
 
 const ChatBox = ({ currentChat, setCurrentChat }) => {
-  const [user, setUser] = useState(true);
-
   const [showArrowDown, setShowArrowDown] = useState(false);
 
   const conversationContainer = useRef("");

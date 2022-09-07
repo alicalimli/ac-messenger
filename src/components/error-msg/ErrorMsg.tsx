@@ -5,13 +5,13 @@ interface ErrorMsgProps {
   img: any;
   msg: String;
   subMsg: String;
-  addClass: string;
+  className: string;
 }
 
-const ErrorMsg = ({ img, msg, subMsg, addClass }: ErrorMsgProps) => {
+const ErrorMsg = ({ img, msg, subMsg, className }: ErrorMsgProps) => {
   return (
     <motion.div
-      className={`${addClass} flex flex-col gap-4 items-center justify-center w-full p-4`}
+      className={`${className} flex flex-col gap-4 items-center justify-center w-full p-4`}
       variants={VARIANTS_MANAGER}
       initial="pop-out"
       animate="pop-in"

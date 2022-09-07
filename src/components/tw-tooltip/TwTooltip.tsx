@@ -32,7 +32,7 @@ interface TwTooltipProps {
   className?: string;
 }
 
-const TwTooltip = ({ tip, position, className }: TwTooltipProps) => {
+const TwTooltip = ({ tip, position, className = "" }: TwTooltipProps) => {
   const [positionClasses, dispatch] = useReducer(reducer, "");
 
   useEffect(() => dispatch({ type: position }), []);
