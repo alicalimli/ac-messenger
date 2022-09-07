@@ -21,6 +21,17 @@ const TwButton = ({
   type,
   variant = "contained",
 }: TwButtonProps) => {
+  const getVariantClass = (): string => {
+    switch (variant) {
+      case "transparent":
+        return TransparentBtnClass;
+      case "contained":
+        return ContainedBtnClass;
+      default:
+        return "";
+    }
+  };
+
   return (
     <motion.button
       whileHover={{ scale: 1.02 }}
@@ -28,10 +39,7 @@ const TwButton = ({
       type={type || undefined}
       onClick={onClick || null}
       disabled={disabled ? true : false}
-      className={`${className} ${
-        variant === "transparent" && TransparentBtnClass
-      }
-      ${variant === "contained" && ContainedBtnClass}`}
+      className={`${className} ${getVariantClass()}`}
     >
       {children}
     </motion.button>
