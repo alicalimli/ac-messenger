@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 
 interface TwButtonProps {
-  children: JSX.Element;
-  disabled: boolean;
-  onClick: any;
+  children: JSX.Element | string;
+  disabled?: boolean;
+  onClick?: any;
   className?: string;
   btnType?: "submit" | "reset" | "button" | undefined;
 }
