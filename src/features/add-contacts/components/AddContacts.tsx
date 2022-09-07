@@ -4,6 +4,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Modal } from "components";
 import { useGetUsers } from "hooks";
 import { UserContext } from "setup/app-context-manager";
+import { User } from "interfaces/users";
 
 import AddContactModal from "./AddContactModal";
 
