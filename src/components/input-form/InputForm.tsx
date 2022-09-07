@@ -1,4 +1,4 @@
-import { LegacyRef, Ref, useState } from "react";
+import { LegacyRef, useState } from "react";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 interface InputFormProps {
