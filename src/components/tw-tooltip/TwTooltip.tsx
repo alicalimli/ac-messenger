@@ -1,6 +1,17 @@
 import { useReducer, useEffect } from "react";
 
-function reducer(state, action) {
+enum ActionKind {
+  right = "right",
+  left = "left",
+  Top = "top",
+  Bottom = "bottom",
+}
+
+interface Action {
+  type: ActionKind;
+}
+
+function reducer(state: string, action: Action): string {
   switch (action.type) {
     case "right":
       return "-right-4 top-1/2 translate-x-full -translate-y-1/2";
@@ -15,7 +26,13 @@ function reducer(state, action) {
   }
 }
 
-const TwTooltip = ({ children, addClass, position }) => {
+interface TwTooltipProps {
+  tip: string;
+  position: ActionKind;
+  className?: string;
+}
+
+const TwTooltip = ({ tip, position, className }: TwTooltipProps) => {
   const [positionClasses, dispatch] = useReducer(reducer, "");
 
   useEffect(() => dispatch({ type: position }), []);
@@ -23,9 +40,9 @@ const TwTooltip = ({ children, addClass, position }) => {
   return (
     // NOTE: Parent Element Must Have a Group and Relative Class.
     <span
-      className={`absolute shadow-md bg-gray-800 dark:bg-white text-white dark:text-black rounded-xl p-2 px-4 text-sm invisible opacity-0 group-hover:visible group-hover:opacity-100 duration-200 z-10 pointer-events-none ${positionClasses} `}
+      className={`${className} absolute shadow-md bg-gray-800 dark:bg-white text-white dark:text-black rounded-xl p-2 px-4 text-sm invisible opacity-0 group-hover:visible group-hover:opacity-100 duration-200 z-10 pointer-events-none ${positionClasses} `}
     >
-      {children}
+      {tip}
     </span>
   );
 };

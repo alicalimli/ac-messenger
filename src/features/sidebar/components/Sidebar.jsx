@@ -48,7 +48,7 @@ const Sidebar = ({ sidebarContent, setSideBarContent }) => {
               clickHandler={() => changeSideContent(obj.name)}
             >
               <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
-              <TwTooltip position="right">{obj.name}</TwTooltip>
+              <TwTooltip tip={obj.name} position="right" />
             </TwTrnButton>
           );
         })}
@@ -64,12 +64,12 @@ const Sidebar = ({ sidebarContent, setSideBarContent }) => {
           ) : (
             <BiMoon className="text-muted-light dark:text-muted-dark text-2xl" />
           )}
-          <TwTooltip position="right">darkmode</TwTooltip>
+          <TwTooltip tip="toggle darkmode" position="right"></TwTooltip>
         </TwTrnButton>
 
         <TwTrnButton addClass="relative group z-10" clickHandler={signOut}>
           <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl" />
-          <TwTooltip position="right">logout</TwTooltip>
+          <TwTooltip tip="logout" position="right" />
         </TwTrnButton>
       </div>
     </nav>

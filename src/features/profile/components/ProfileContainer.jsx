@@ -71,7 +71,6 @@ const ProfileContainer = ({ setSideBarContent }) => {
       </div>
 
       <div className="p-6 flex flex-col gap-4 border-t border-muted-light/10 dark:border-muted-dark/10">
-
         <div className="flex flex-col gap-1 w-100 ">
           {infoButtons.map((obj, i) => {
             const Icon = obj.icon;
@@ -83,7 +82,7 @@ const ProfileContainer = ({ setSideBarContent }) => {
               >
                 <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
                 {obj.text}
-                <TwTooltip position="top">Copy to clipboard</TwTooltip>
+                <TwTooltip tip="Copy to clipboard" position="top" />
               </TwTrnButton>
             );
           })}
