@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { TwTrnButton, TwButton } from "/src/components";
+import { TwButton } from "/src/components";
 
 import { useAddContact } from "../hooks";
 
@@ -30,17 +29,18 @@ const AddContactModal = ({ setShowModal, otherUser }) => {
       </div>
       <div className="flex flex-col gap-2">
         <TwButton
-          clickHandler={addContactBtnHandler}
-          addClass="w-full flex justify-center py-1"
+          onClick={addContactBtnHandler}
+          className="w-full flex justify-center py-1"
         >
           Add Contact
         </TwButton>
-        <TwTrnButton
-          clickHandler={cancelBtnHandler}
-          addClass="w-full flex justify-center border border-muted-light/50 dark:border-muted-dark/50 py-1"
+        <TwButton
+          variant="transparent"
+          onClick={cancelBtnHandler}
+          className="w-full flex justify-center border border-muted-light/50 dark:border-muted-dark/50 py-1"
         >
           Cancel
-        </TwTrnButton>
+        </TwButton>
       </div>
     </div>
   );
