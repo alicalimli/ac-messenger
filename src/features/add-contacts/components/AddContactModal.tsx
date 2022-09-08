@@ -1,8 +1,14 @@
-import { TwButton } from "/src/components";
-
+import { TwButton } from "components";
 import { useAddContact } from "../hooks";
 
-const AddContactModal = ({ setShowModal, otherUser }) => {
+import { User } from "interfaces/users";
+
+interface AddContactModalProps {
+  setShowModal: (state: boolean) => void;
+  otherUser: User;
+}
+
+const AddContactModal = ({ setShowModal, otherUser }: AddContactModalProps) => {
   const { addContact } = useAddContact(otherUser);
 
   const addContactBtnHandler = () => {
