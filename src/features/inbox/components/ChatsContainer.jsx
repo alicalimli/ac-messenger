@@ -2,12 +2,17 @@ import { useContext, useRef } from "react";
 import { ErrorMsg } from "/src/components";
 import { inbox_empty } from "/src/assets/images";
 
-import { CurrentChatContext } from "/src/setup/app-context-manager";
+import {
+  CurrentChatContext,
+  UserContext,
+} from "/src/setup/app-context-manager";
 import ChatList from "./ChatList";
 
 const ChatsContainer = () => {
-  const chats = [];
   const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
+  const [userInfo, setUserInfo] = useContext(UserContext);
+
+  const chats = userInfo.inbox;
 
   const chatListRef = useRef();
 
@@ -26,7 +31,11 @@ const ChatsContainer = () => {
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
       <div>
         {chats.length ? (
-          <ChatList chats={chats} chatClickHandler={chatClickHandler} />
+          <ChatList
+            chats={chats}
+            currentUser={userInfo}
+            chatClickHandler={chatClickHandler}
+          />
         ) : (
           <ErrorMsg
             img={inbox_empty}

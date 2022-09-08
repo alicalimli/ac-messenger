@@ -1,4 +1,4 @@
-export interface User {
+export default interface User {
   user_id: number;
   username: string;
   email: string;
@@ -7,4 +7,6 @@ export interface User {
   status: boolean;
   bio: string;
   location: string;
+  contacts: number[];
+  inbox: string[];
 }

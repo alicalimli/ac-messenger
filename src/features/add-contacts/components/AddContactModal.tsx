@@ -1,7 +1,7 @@
 import { TwButton } from "components";
 import { useAddContact } from "../hooks";
 
-import { User } from "interfaces/users";
+import User from "interfaces/users";
 
 interface AddContactModalProps {
   setShowModal: (state: boolean) => void;

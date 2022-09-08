@@ -1,4 +1,4 @@
-import { User } from "interfaces/users";
+import User from "interfaces/users";
 
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
@@ -12,6 +12,8 @@ export const UsersData: User[] = [
     status: true,
     bio: "A developer",
     location: "Earth",
+    contacts: [2, 3],
+    inbox: ["1-2"],
   },
   {
     user_id: 2,
@@ -22,6 +24,8 @@ export const UsersData: User[] = [
     status: true,
     bio: "A front-end developer",
     location: "Turkey",
+    contacts: [1],
+    inbox: ["1-2"],
   },
   {
     user_id: 3,
@@ -32,5 +36,7 @@ export const UsersData: User[] = [
     status: true,
     bio: "Artist",
     location: "Earth",
+    contacts: [1],
+    inbox: ["1-3"],
   },
 ];
