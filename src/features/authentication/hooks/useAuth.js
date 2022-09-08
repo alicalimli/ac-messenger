@@ -1,5 +1,7 @@
 import { useContext } from "react";
 
+import { UsersData } from "/src/localdatas";
+
 import {
   UserContext,
   UserRefreshContext,
@@ -49,37 +51,34 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
       setErrorMsg("");
       setPendingMsg("generating token");
 
+      console.log(UsersData);
+
+      const user = UsersData.find(
+        (user) => user.email === email && user.password === pass
+      );
+
+      if (!user)
+        throw new Error(
+          "Authentication Failed, username or password you have entered is incorrect."
+        );
+
       // For bypassing authentication
-      if (email === "admin@chately.io" && pass === "admin") {
-        // Delay the login for 500ms to show pending msg
-        setTimeout(()=>{
-          setUserInfo(
-            Object.assign(
-              {},
-              {
-                email: "admin@chately.io",
-                profile: DEFAULT_PROFILE_IMAGE,
-                status: true,
-                user_id: 1,
-                username: "admin_chately",
-                location: "Fatsa",
-                bio: "A developer"
-              }
-            )
-          );
-          setPendingMsg("");
-        }, 500)
-        return;
-      }
+      // Delay the login for 500ms to show pending msg
+      setTimeout(() => {
+        setUserInfo(Object.assign({}, user));
+        setPendingMsg("");
+      }, 500);
 
-      const userToken = await generateToken(email, pass);
+      // Bypassing ends here
 
-      setPendingMsg("done");
+      // const userToken = await generateToken(email, pass);
 
-      setUserToken(userToken.access_token);
-      setUserRefresh(userToken.refresh_token);
+      // setPendingMsg("done");
 
-      authenticate(userToken.access_token);
+      // setUserToken(userToken.access_token);
+      // setUserRefresh(userToken.refresh_token);
+
+      // authenticate(userToken.access_token);
     } catch (error) {
       console.error(error);
       setErrorMsg(error.message);
