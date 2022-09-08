@@ -89,34 +89,36 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
   const signUpUser = async (email, username, password) => {
     try {
       setErrorMsg("");
-      setPendingMsg("Creating User");
 
-      const date = new Date();
-      const timestamp = date.getTime();
+      throw new Error("Creating user is not available");
+      // setPendingMsg("Creating User");
 
-      const userSignUpData = {
-        username: username,
-        email: email,
-        password: password,
-        status: true,
-        is_active: true,
-        profile: DEFAULT_PROFILE_IMAGE,
-        websocket_id: timestamp.toString(),
-      };
+      // const date = new Date();
+      // const timestamp = date.getTime();
 
-      console.log(axios);
-      const createUserResponse = await axios.post(
-        SIGNUP_URL,
-        JSON.stringify(userSignUpData),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      // const userSignUpData = {
+      //   username: username,
+      //   email: email,
+      //   password: password,
+      //   status: true,
+      //   is_active: true,
+      //   profile: DEFAULT_PROFILE_IMAGE,
+      //   websocket_id: timestamp.toString(),
+      // };
 
-      setPendingMsg("User Created");
-      signInUser(email, password);
+      // console.log(axios);
+      // const createUserResponse = await axios.post(
+      //   SIGNUP_URL,
+      //   JSON.stringify(userSignUpData),
+      //   {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
+
+      // setPendingMsg("User Created");
+      // signInUser(email, password);
     } catch (error) {
       console.error(error);
       setErrorMsg(error.message);
