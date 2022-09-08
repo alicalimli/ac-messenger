@@ -6,6 +6,8 @@ import { useGetUsers } from "hooks";
 import { UserContext } from "setup/app-context-manager";
 import { User } from "interfaces/users";
 
+import { UsersData } from "localdatas";
+
 import AddContactModal from "./AddContactModal";
 
 interface AddContactsProps {
@@ -14,7 +16,8 @@ interface AddContactsProps {
 
 const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   // Will update the type later on
-  const users: any = useGetUsers();
+  const users: User[] = UsersData;
+  // const users: any = useGetUsers();
   const [userInfo, setUserInfo] = useContext(UserContext);
   const [otherUser, setOtherUser] = useState<User>();
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -42,7 +45,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
       </TwButton>
 
       {users
-        .filter((user: User) => user.id !== userInfo.user_id)
+        .filter((user: User) => user.user_id !== userInfo.user_id)
         .map((user: User, i: number) => (
           <TwButton
             variant="transparent"
@@ -51,7 +54,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
             className="w-full flex gap-4"
           >
             <div className="relative bg-transparent h-12 w-12">
-              {user.active && (
+              {user.status && (
                 <div className="bg-green-500 p-1.5 rounded-full absolute right-1 bottom-0"></div>
               )}
               <img src={user.profile} className="w-full rounded-full" />

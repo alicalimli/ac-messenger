@@ -1,10 +1,10 @@
 export interface User {
-  id: number;
+  user_id: number;
   username: string;
+  email: string;
   profile: string;
-  active: boolean;
-}
-
-export interface Users extends User {
-  users: User[];
+  password?: string;
+  status: boolean;
+  bio: string;
+  location: string;
 }

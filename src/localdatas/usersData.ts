@@ -1,15 +1,6 @@
-const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
+import { User } from "interfaces/users";
 
-type User = {
-  user_id: number;
-  username: string;
-  email: string;
-  profile: string;
-  password: string;
-  status: boolean;
-  bio: string;
-  location: string;
-};
+const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
 export const UsersData: User[] = [
   {
@@ -23,7 +14,7 @@ export const UsersData: User[] = [
     location: "Earth",
   },
   {
-    user_id: 1,
+    user_id: 2,
     username: "alicalimli",
     email: "alicalimli@gmail.com",
     profile: DEFAULT_PROFILE_IMAGE,
@@ -33,7 +24,7 @@ export const UsersData: User[] = [
     location: "Turkey",
   },
   {
-    user_id: 1,
+    user_id: 3,
     username: "chately",
     email: "chately@gmail.com",
     profile: DEFAULT_PROFILE_IMAGE,
