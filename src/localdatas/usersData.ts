@@ -12,7 +12,7 @@ export const UsersData: User[] = [
     status: true,
     bio: "A developer",
     location: "Earth",
-    contacts: [2, 3],
+    contacts: [2],
     inbox: ["1-2"],
   },
   {
@@ -36,7 +36,7 @@ export const UsersData: User[] = [
     status: true,
     bio: "Artist",
     location: "Earth",
-    contacts: [1],
-    inbox: ["1-3"],
+    contacts: [],
+    inbox: [""],
   },
 ];

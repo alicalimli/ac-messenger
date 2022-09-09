@@ -26,7 +26,6 @@ const ChatList = ({ chats, currentUser, chatClickHandler }: ChatListProps) => {
   return chats.map((chatRoomId: string, i: number): JSX.Element | null => {
     const recipient = getRecipient(chatRoomId);
     const chatRoom = ChatsData.find((chatRoom) => {
-      console.log(chatRoom.chat_room_id, chatRoomId + "eee");
       return chatRoom.chat_room_id === chatRoomId;
     });
 
