@@ -1,12 +1,10 @@
 import { useContext, useRef } from "react";
-import { ErrorMsg } from "/src/components";
-import { inbox_empty } from "/src/assets/images";
+import { ErrorMsg } from "components";
+import { inbox_empty } from "assets/images";
 
-import {
-  CurrentChatContext,
-  UserContext,
-} from "/src/setup/app-context-manager";
+import { CurrentChatContext, UserContext } from "setup/app-context-manager";
 import ChatList from "./ChatList";
+import Chat from "interfaces/chats";
 
 const ChatsContainer = () => {
   const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
@@ -14,9 +12,9 @@ const ChatsContainer = () => {
 
   const chats = userInfo.inbox;
 
-  const chatListRef = useRef();
+  const chatListRef = useRef<Chat>();
 
-  const chatClickHandler = (e, chat) => {
+  const chatClickHandler = (e: React.MouseEvent, chat: Chat) => {
     if (chatListRef.current) {
       chatListRef.current.active_chat = false;
     }

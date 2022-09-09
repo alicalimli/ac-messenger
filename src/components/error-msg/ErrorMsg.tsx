@@ -5,7 +5,7 @@ interface ErrorMsgProps {
   img: any;
   msg: String;
   subMsg: String;
-  className: string;
+  className?: string;
 }
 
 const ErrorMsg = ({ img, msg, subMsg, className }: ErrorMsgProps) => {

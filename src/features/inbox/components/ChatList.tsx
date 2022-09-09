@@ -25,9 +25,9 @@ const ChatList = ({ chats, currentUser, chatClickHandler }: ChatListProps) => {
 
   return chats.map((chatRoomId: string, i: number): JSX.Element | null => {
     const recipient = getRecipient(chatRoomId);
-    const chatRoom = ChatsData.find((chatRoom) => {
-      return chatRoom.chat_room_id === chatRoomId;
-    });
+    const chatRoom = ChatsData.find(
+      (chatRoom) => chatRoom.chat_room_id === chatRoomId
+    );
 
     if (!recipient || !chatRoom) return null;
 
@@ -54,7 +54,7 @@ const ChatList = ({ chats, currentUser, chatClickHandler }: ChatListProps) => {
         </div>
       </TwButton>
     );
-  });
+  }) as unknown as JSX.Element;
 };
 
 export default ChatList;
