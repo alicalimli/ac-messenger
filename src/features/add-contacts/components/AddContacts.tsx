@@ -50,6 +50,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
 
       {users
         .filter((user: User) => user.user_id !== userInfo.user_id)
+        .filter((user: User) => !userInfo.contacts.includes(user.user_id))
         .map((user: User, i: number) => (
           <TwButton
             variant="transparent"
