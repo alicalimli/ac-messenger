@@ -37,7 +37,7 @@ const ProfileEditForm = ({ email, setShowModal }) => {
   }, [username, password]);
 
   return (
-    <form onSubmit={handleChangeInfo} className="flex flex-col gap-2 w-96">
+    <form onSubmit={handleChangeInfo} className="flex flex-col gap-2 w-64">
       <h2 className="text-black dark:text-white text-xl text-center">
         Edit Information
       </h2>
@@ -52,6 +52,7 @@ const ProfileEditForm = ({ email, setShowModal }) => {
       <InputForm
         label="Username"
         type="text"
+        isSmall={true}
         state={username}
         setState={setUsername}
         stateFocus={usernameFocus}
@@ -63,13 +64,14 @@ const ProfileEditForm = ({ email, setShowModal }) => {
       <InputForm
         label="Current Password"
         type="password"
+        isSmall={true}
         state={password}
         setState={setPassword}
         placeHolder="*********"
       />
       <TwButton
-        isDisabled={validUsername && !pendingMsg ? false : true}
-        addClass="mt-4"
+        disabled={validUsername && !pendingMsg ? false : true}
+        className="mt-2"
       >
         {pendingMsg ? pendingMsg : "Save"}
       </TwButton>

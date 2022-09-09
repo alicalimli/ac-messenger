@@ -10,6 +10,7 @@ interface InputFormProps {
   instruction?: string;
   ref?: LegacyRef<HTMLInputElement> | undefined;
   isValid?: boolean;
+  isSmall?: boolean;
   stateFocus?: boolean;
   setStateFocus?: (state: boolean) => void;
 }
@@ -21,6 +22,7 @@ const InputForm = ({
   placeholder,
   ref = null,
   isValid,
+  isSmall,
   state,
   setState,
   stateFocus,
@@ -61,7 +63,9 @@ const InputForm = ({
       </div>
 
       <input
-        className={`text-lg bg-transparent p-2 px-4 flex items-center rounded-xl outline-none border duration-200 text-black dark:text-white ${
+        className={`text-lg bg-transparent ${
+          isSmall ? "p-1" : "p-2"
+        } px-2 flex items-center rounded-xl outline-none border duration-200 text-black dark:text-white ${
           !isValid && state
             ? instruction && "border-red-500"
             : "border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main"
