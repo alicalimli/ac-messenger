@@ -37,6 +37,6 @@ export const UsersData: User[] = [
     bio: "Artist",
     location: "Earth",
     contacts: [],
-    inbox: [""],
+    inbox: [],
   },
 ];

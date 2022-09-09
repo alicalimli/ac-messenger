@@ -42,9 +42,12 @@ const AddContactModal = ({
 
     // Delay a bit to show loading msg
     setTimeout(() => {
-      currentUserData?.inbox.push(chatRoomId);
-      recipientData?.inbox.push(chatRoomId);
-      ChatsData?.push(ChatRoomData);
+      if (!currentUserData || !recipientData) return;
+      currentUserData.inbox.push(chatRoomId);
+      recipientData.inbox.push(chatRoomId);
+      currentUserData.contacts.push(recipientData.user_id);
+      recipientData.contacts.push(currentUserData.user_id);
+      ChatsData.push(ChatRoomData);
       setShowModal(false);
       setIsBtnDisabled(false);
       setToastMsg("Contact added successfuly.");
