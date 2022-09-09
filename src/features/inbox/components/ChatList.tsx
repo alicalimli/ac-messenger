@@ -32,6 +32,7 @@ const ChatList = ({ chats, currentUser, chatClickHandler }: ChatListProps) => {
     if (!recipient || !chatRoom) return <></>;
     return (
       <TwButton
+        variant="transparent"
         onClick={(e: React.MouseEvent) => chatClickHandler(e, chatRoom)}
         key={i}
         className={`w-full p-2 ${
