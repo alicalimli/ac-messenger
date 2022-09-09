@@ -19,20 +19,24 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   const users: User[] = UsersData;
   // const users: any = useGetUsers();
   const [userInfo, setUserInfo] = useContext(UserContext);
-  const [otherUser, setOtherUser] = useState<User>();
+  const [recipient, setRecipient] = useState<User>();
   const [showModal, setShowModal] = useState<boolean>(false);
   console.log(users);
 
-  const contactClickHandler = (otherUser: User) => {
+  const contactClickHandler = (recipient: User) => {
     setShowModal(true);
-    setOtherUser(otherUser);
+    setRecipient(recipient);
   };
 
   return (
     <section className="flex flex-col items-center p-4 px-8">
       <Modal setShowModal={setShowModal}>
         {(showModal as boolean) && (
-          <AddContactModal setShowModal={setShowModal} otherUser={otherUser} />
+          <AddContactModal
+            setShowModal={setShowModal}
+            currentUser={userInfo}
+            recipient={recipient}
+          />
         )}
       </Modal>
 
