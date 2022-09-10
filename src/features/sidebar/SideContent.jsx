@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ChatsContainer } from "/src/features/inbox/components";
-import { ProfileContainer } from "/src/features/profile/components";
-import { AddContacts } from "/src/features/add-contacts/components";
+import { ChatsContainer } from "/src/features/inbox";
+import { ProfileContainer } from "/src/features/profile";
+import { AddContacts } from "/src/features/add-contacts";
 import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
 
 const SideContent = ({ sidebarContent, setSideBarContent }) => {

@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { VARIANTS_MANAGER } from "../../setup/variants-manager";
+import { VARIANTS_MANAGER } from "setup/variants-manager";
 
 interface ModalProps {
   children: JSX.Element | boolean;

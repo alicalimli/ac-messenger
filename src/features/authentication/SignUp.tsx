@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { useAuth } from "../hooks";
-import { InputForm, TwButton } from "../../../../src/components";
+import useAuth from "./useAuth";
+import { InputForm, TwButton } from "components";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;

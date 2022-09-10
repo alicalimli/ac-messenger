@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { SignIn, SignUp } from "../../features/authentication/components";
-import { VARIANTS_MANAGER } from "../../setup/variants-manager";
+import { SignIn, SignUp } from "features/authentication";
+import { VARIANTS_MANAGER } from "setup/variants-manager";
 
 interface AuthenticationProps {
   setKeepSignedIn: any;

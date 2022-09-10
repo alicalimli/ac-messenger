@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useEditInfo } from "../hooks";
+import { useEditInfo } from "./useEditInfo";
 
 import { TwButton, InputForm } from "/src/components";
 

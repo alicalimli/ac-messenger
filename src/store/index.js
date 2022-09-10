@@ -13,21 +13,21 @@ const userInitialState = {
   inbox: [],
 };
 
-export const userSlice = createSlice(() => {
-  name: "user";
+export const userSlice = createSlice({
+  name: "user",
   initialState: {
     value: {
-      userInitialState;
-    }
-  }
+      userInitialState,
+    },
+  },
   reducers: {
     login: (state, action) => {
       state.value = action.payload;
-    };
-  }
+    },
+  },
 });
 
-export const { login } = userSlice.action;
+export const { login } = userSlice.actions;
 
 export const store = configureStore({
   reducer: {

@@ -3,8 +3,8 @@ import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState, useRef, useContext } from "react";
 
-import { Sidebar, SideContent } from "/src/features/sidebar/components";
-import { ChatBox } from "../../features/conversation/components";
+import { Sidebar, SideContent } from "/src/features/sidebar";
+import { ChatBox } from "/src/features/conversation";
 
 import { CurrentChatContext } from "/src/setup/app-context-manager";
 import { VARIANTS_MANAGER } from "/src/setup/variants-manager";

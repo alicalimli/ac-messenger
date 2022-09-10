@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import { TwButton } from "/src/components";
-import { useConnect } from "../hooks";
+import useConnect from "./useConnect";
 
 import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";

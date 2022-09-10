@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { VARIANTS_MANAGER } from "../../setup/variants-manager";
+import { VARIANTS_MANAGER } from "setup/variants-manager";
 
 interface ErrorMsgProps {
   img: any;

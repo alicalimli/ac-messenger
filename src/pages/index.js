@@ -1,4 +1,4 @@
-import Authentication from "./authentication/Authentication";
-import Home from "./home/Home";
+import Authentication from "./Authentication";
+import Home from "./Home";
 
 export { Authentication, Home };

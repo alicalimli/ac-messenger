@@ -1,5 +1,5 @@
 import { TwButton } from "components";
-import { useAddContact } from "../hooks";
+import useAddContact from "./useAddContact";
 import Chat from "interfaces/chats";
 import { UsersData, ChatsData } from "localdatas";
 
