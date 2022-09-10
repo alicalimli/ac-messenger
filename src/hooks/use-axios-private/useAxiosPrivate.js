@@ -1,14 +1,15 @@
 import { useEffect, useContext } from "react";
 
 import { axiosPrivate } from "/src/api/axios";
-import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
+import { UserTokenContext } from "/src/setup/app-context-manager";
+import { useSelector } from "react-redux";
 
 import { useRefreshToken } from "/src/hooks";
 
 const useAxiosPrivate = () => {
   const refreshToken = useRefreshToken();
   const [userToken, setUserToken] = useContext(UserTokenContext);
-  const [userInfo, setUserInfo] = useContext(UserContext);
+  const user = useSelector((state) => state.user.value);
 
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
@@ -46,7 +47,7 @@ const useAxiosPrivate = () => {
       axiosPrivate.interceptors.request.eject(requestIntercept);
       axiosPrivate.interceptors.response.eject(responseIntercept);
     };
-  }, [userInfo, refreshToken]);
+  }, [user, refreshToken]);
 
   return axiosPrivate;
 };

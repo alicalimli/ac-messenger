@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 
 import {
   ToastMsgContext,
-  UserContext,
   UserTokenContext,
 } from "/src/setup/app-context-manager";
 
@@ -10,21 +9,24 @@ import { GoMention } from "react-icons/go";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 
+import { useSelector } from "react-redux";
+
 import ProfileEditForm from "./ProfileEditForm";
 
 import { Modal, TwTooltip, TwButton } from "/src/components";
 
 const ProfileContainer = ({ setSideBarContent }) => {
-  const [userInfo, setUserInfo] = useContext(UserContext);
   const [toastMsg, setToastMsg] = useContext(ToastMsgContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
+
+  const user = useSelector((state) => state.user.value);
 
   const [showModal, setShowModal] = useState(false);
 
   const infoButtons = [
-    { icon: HiOutlineMail, text: userInfo.email },
-    { icon: GoMention, text: userInfo.username },
-    { icon: HiOutlineLocationMarker, text: userInfo.location },
+    { icon: HiOutlineMail, text: user.email },
+    { icon: GoMention, text: user.username },
+    { icon: HiOutlineLocationMarker, text: user.location },
   ];
 
   const copyToClipboard = (text) => {
@@ -37,7 +39,7 @@ const ProfileContainer = ({ setSideBarContent }) => {
     <div className=" flex flex-col">
       <Modal setShowModal={setShowModal}>
         {showModal && (
-          <ProfileEditForm email={userInfo.email} setShowModal={setShowModal} />
+          <ProfileEditForm email={user.email} setShowModal={setShowModal} />
         )}
       </Modal>
 
@@ -53,15 +55,13 @@ const ProfileContainer = ({ setSideBarContent }) => {
         <div className="flex flex-col items-center text-center p-4 px-8">
           <img
             className="bg-cover bg-center bg-transparent mb-2 w-24 h-24 rounded-full shadow-md"
-            alt={`${userInfo.username}'s profile picture`}
-            src={userInfo.profile}
+            alt={`${user.username}'s profile picture`}
+            src={user.profile}
           />
           <h2 className="text-lg text-black dark:text-white">
-            {userInfo.username}
+            {user.username}
           </h2>
-          <p className="text-muted-light dark:text-muted-dark">
-            {userInfo.bio}
-          </p>
+          <p className="text-muted-light dark:text-muted-dark">{user.bio}</p>
         </div>
       </div>
 

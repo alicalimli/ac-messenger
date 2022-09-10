@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import {
   DarkmodeContext,
   ToastMsgContext,
-  UserContext,
   UserTokenContext,
 } from "./setup/app-context-manager";
 
@@ -22,25 +21,25 @@ const App = () => {
   const [toastMsg, setToastMsg] = useContext(ToastMsgContext);
   const [darkmode, setDarkmode] = useContext(DarkmodeContext);
 
-  const userInfo = useSelector((state: any) => state.user.value);
+  const user = useSelector((state: any) => state.user.value);
 
-  const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
-  const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");
+  // const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
+  // const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");
   const [keepSignedIn, setKeepSignedIn] = useLocalStorage(
     "keepSignedIn",
     false
   );
 
   // Saves and clears userData when user leaves the site.
-  window.onbeforeunload = () => {
-    if (keepSignedIn) {
-      setSavedUserToken(userToken);
-      setSavedUserInfo(userInfo);
-    } else {
-      setSavedUserToken("");
-      setSavedUserInfo(null);
-    }
-  };
+  // window.onbeforeunload = () => {
+  //   if (keepSignedIn) {
+  //     setSavedUserToken(userToken);
+  //     setSavedUserInfo(userInfo);
+  //   } else {
+  //     setSavedUserToken("");
+  //     setSavedUserInfo(null);
+  //   }
+  // };
 
   // useEffect(() => {
   //   if (keepSignedIn) {
@@ -70,14 +69,14 @@ const App = () => {
           )}
         </AnimatePresence>
 
-        {userInfo.username ? (
+        {user.username ? (
           <motion.div
             className="flex"
             animate={{ opacity: 1, x: 0, y: 0 }}
             initial={{ opacity: 0 }}
             exit={{ opacity: 0 }}
           >
-            {/* <Home /> */}
+            <Home />
           </motion.div>
         ) : (
           <Authentication

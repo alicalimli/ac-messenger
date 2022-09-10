@@ -3,7 +3,7 @@ import { ToastMsgContext } from "/src/setup/app-context-manager";
 import { UserContext, UserTokenContext } from "/src/setup/app-context-manager";
 
 import axios from "/src/api/axios";
-const ADD_CONTACT_URL = '/chat/update'
+const ADD_CONTACT_URL = "/chat/update";
 
 const useAddContact = (otherUser) => {
   const [userInfo, setUserInfo] = useContext(UserContext);
@@ -12,34 +12,30 @@ const useAddContact = (otherUser) => {
   const addContact = async () => {
     try {
       const addContactData = {
-      	   "sender_id": +userInfo.user_id,
-          "recepient_id": +otherUser.id,
-          "msg": "string",
-          "timestamp": "string",
-          "read": true
-      }
+        sender_id: +userInfo.user_id,
+        recepient_id: +otherUser.id,
+        msg: "string",
+        timestamp: "string",
+        read: true,
+      };
 
-          let formData = new FormData();
+      let formData = new FormData();
       formData.append("sender_id", +userInfo.user_id);
       formData.append("recepient_id", +otherUser.id);
       formData.append("msg", "string");
       formData.append("timestamp", "string");
       formData.append("read", true);
 
-      const response = await axios.post(
-        ADD_CONTACT_URL,
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(response)
+      const response = await axios.post(ADD_CONTACT_URL, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response);
 
       setToastMsg("Contact added.");
     } catch (error) {
-   		console.error(error);
+      console.error(error);
     }
   };
   return { addContact };

@@ -1,16 +1,11 @@
 import axios from "/src/api/axios";
 import { useContext } from "react";
-import {
-  UserRefreshContext,
-  UserContext,
-} from "/src/setup/app-context-manager";
+import { UserRefreshContext } from "/src/setup/app-context-manager";
 
 const REFRESH_TOKEN_URL = "/auth/refresh";
 
 const useRefreshToken = () => {
   const { userRefresh, setUserRefresh } = useContext(UserRefreshContext);
-  const [userInfo, setUserInfo] = useContext(UserContext);
-
   const refreshToken = async (email, password) => {
     try {
       // Request login from the API

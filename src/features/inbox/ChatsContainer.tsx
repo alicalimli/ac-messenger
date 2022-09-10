@@ -2,15 +2,16 @@ import { useContext, useRef } from "react";
 import { ErrorMsg } from "components";
 import { inbox_empty } from "assets/images";
 
-import { CurrentChatContext, UserContext } from "setup/app-context-manager";
+import { CurrentChatContext } from "setup/app-context-manager";
 import ChatList from "./ChatList";
 import Chat from "interfaces/chats";
+import { useSelector } from "react-redux";
 
 const ChatsContainer = () => {
   const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
-  const [userInfo, setUserInfo] = useContext(UserContext);
+  const user = useSelector((state: any) => state.user.value);
 
-  const chats = userInfo.inbox;
+  const chats = user.inbox;
 
   const chatListRef = useRef<Chat>();
 
@@ -31,7 +32,7 @@ const ChatsContainer = () => {
         {chats.length ? (
           <ChatList
             chats={chats}
-            currentUser={userInfo}
+            currentUser={user}
             chatClickHandler={chatClickHandler}
           />
         ) : (

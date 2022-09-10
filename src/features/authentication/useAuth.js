@@ -54,11 +54,11 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
 
       console.log(UsersData);
 
-      const user = UsersData.find(
+      const UserData = UsersData.find(
         (user) => user.email === email && user.password === pass
       );
 
-      if (!user)
+      if (!UserData)
         throw new Error(
           "Authentication Failed, username or password you have entered is incorrect."
         );
@@ -66,7 +66,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
       // For bypassing authentication
       // Delay the login for 500ms to show pending msg
       setTimeout(() => {
-        dispatch(login(user));
+        dispatch(login(UserData));
         setPendingMsg("");
       }, 500);
 

@@ -1,15 +1,15 @@
 import { useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-import { UserContext } from "/src/setup/app-context-manager";
+import { useSelector } from "react-redux";
 
 const Messages = ({ messages, latestMsgRef }) => {
-  const [userInfo, setUserInfo] = useContext(UserContext);
+  const user = useSelector((state) => state.user.value);
+
   return messages.map((currentMsg, i) => (
     <div
       key={currentMsg + i}
       className={`group gap-2 py-1 flex ${
-        currentMsg.username === userInfo.email ? "flex-row-reverse" : ""
+        currentMsg.username === user.email ? "flex-row-reverse" : ""
       }`}
     >
       <motion.button
@@ -19,7 +19,7 @@ const Messages = ({ messages, latestMsgRef }) => {
         className={`
               peer flex rounded-full p-1.5 px-3 w-fit
               ${
-                currentMsg.username === userInfo.email
+                currentMsg.username === user.email
                   ? "focus:bg-primary-tinted  bg-primary-main text-white rounded-br-sm"
                   : "bg-white text-black rounded-bl-sm"
               }

@@ -1,15 +1,16 @@
 import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "/src/features/authentication";
 
 import {
-  UserContext,
-  UserTokenContext,
   CurrentChatContext,
+  UserTokenContext,
 } from "/src/setup/app-context-manager";
 
 import { useLocalStorage } from "/src/hooks";
 
 const useSignOut = (key, initialValue) => {
-  const [userInfo, setUserInfo] = useContext(UserContext);
+  const dispatch = useDispatch();
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
 
@@ -21,9 +22,8 @@ const useSignOut = (key, initialValue) => {
   );
 
   const signOut = () => {
-    setUserInfo(null);
+    dispatch(logout());
     setUserToken("");
-
     setSavedUserInfo(null);
     setSavedUserToken("");
     setCurrentChat(null);
