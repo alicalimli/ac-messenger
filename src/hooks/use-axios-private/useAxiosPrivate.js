@@ -3,7 +3,7 @@ import { useEffect, useContext } from "react";
 import { axiosPrivate } from "/src/api/axios";
 import { UserTokenContext, UserContext } from "/src/setup/app-context-manager";
 
-import { useRefreshToken } from "../";
+import { useRefreshToken } from "/src/hooks";
 
 const useAxiosPrivate = () => {
   const refreshToken = useRefreshToken();
