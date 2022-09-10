@@ -1,6 +1,7 @@
 import { StrictMode, useContext, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSelector } from "react-redux";
 
 import {
   DarkmodeContext,
@@ -17,10 +18,11 @@ import { useLocalStorage } from "./hooks";
 const App = () => {
   const [pendingMsg, setPendingMsg] = useState("");
 
-  const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const [toastMsg, setToastMsg] = useContext(ToastMsgContext);
   const [darkmode, setDarkmode] = useContext(DarkmodeContext);
+
+  const userInfo = useSelector((state: any) => state.user.value);
 
   const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
   const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");
@@ -40,12 +42,12 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-    if (keepSignedIn) {
-      setUserToken(savedUserToken);
-      setUserInfo(savedUserInfo);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (keepSignedIn) {
+  //     setUserToken(savedUserToken);
+  //     setUserInfo(savedUserInfo);
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (darkmode) {
@@ -68,14 +70,14 @@ const App = () => {
           )}
         </AnimatePresence>
 
-        {userInfo ? (
+        {userInfo.username ? (
           <motion.div
             className="flex"
             animate={{ opacity: 1, x: 0, y: 0 }}
             initial={{ opacity: 0 }}
             exit={{ opacity: 0 }}
           >
-            <Home />
+            {/* <Home /> */}
           </motion.div>
         ) : (
           <Authentication

@@ -1,9 +1,10 @@
 import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "./user";
 
 import { UsersData } from "/src/localdatas";
 
 import {
-  UserContext,
   UserRefreshContext,
   UserTokenContext,
 } from "/src/setup/app-context-manager";
@@ -17,9 +18,9 @@ const GETUSER_URL = "/users/me";
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
 const useAuth = (setPendingMsg, setErrorMsg) => {
-  const [userInfo, setUserInfo] = useContext(UserContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const { userRefresh, setUserRefresh } = useContext(UserRefreshContext);
+  const dispatch = useDispatch();
 
   const generateToken = useGenerateToken();
 
@@ -65,7 +66,7 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
       // For bypassing authentication
       // Delay the login for 500ms to show pending msg
       setTimeout(() => {
-        setUserInfo(Object.assign({}, user));
+        dispatch(login(user));
         setPendingMsg("");
       }, 500);
 
