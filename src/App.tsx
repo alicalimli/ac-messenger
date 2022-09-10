@@ -3,7 +3,6 @@ import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
 import {
-  AppContextProvider,
   DarkmodeContext,
   ToastMsgContext,
   UserContext,
@@ -15,7 +14,7 @@ import { Home } from "./pages";
 import { Toast } from "./components";
 import { useLocalStorage } from "./hooks";
 
-const Main = () => {
+const App = () => {
   const [pendingMsg, setPendingMsg] = useState("");
 
   const [userInfo, setUserInfo] = useContext(UserContext);
@@ -88,14 +87,6 @@ const Main = () => {
         )}
       </BrowserRouter>
     </StrictMode>
-  );
-};
-
-const App = () => {
-  return (
-    <AppContextProvider>
-      <Main />
-    </AppContextProvider>
   );
 };
 
