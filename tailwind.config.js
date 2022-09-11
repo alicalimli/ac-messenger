@@ -1,24 +1,23 @@
 module.exports = {
   content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
-  darkMode:'class',
+  darkMode: "class",
   theme: {
     extend: {
-      colors:{
+      colors: {
         primary: {
           main: "#686be6",
           shaded: "#5e60cf",
           tinted: "#777ae9",
         },
         muted: {
-          light:'#212529bf',
+          light: "#212529bf",
           dark: "#aaa",
         },
         bgmain: {
-          dark: "#0F172A"
-        }
-      }
+          dark: "#0F172A",
+        },
+      },
     },
   },
   plugins: [require("tailwind-scrollbar-hide")],
 };
-
