@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import { TwButton } from "components";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Modal } from "components";
-import { useGetUsers } from "hooks";
 import { useSelector } from "react-redux";
 import User from "interfaces/users";
 
@@ -18,7 +17,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   // Will update the type later on
   const users: User[] = UsersData;
   // const users: any = useGetUsers();
-  const user = useSelector((state: any) => state.user.value);
+  const currentUser = useSelector((state: any) => state.user.value);
 
   const [recipient, setRecipient] = useState<User>();
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -35,7 +34,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
         {(showModal as boolean) && (
           <AddContactModal
             setShowModal={setShowModal}
-            currentUser={user}
+            currentUser={currentUser}
             recipient={recipient}
           />
         )}
@@ -50,8 +49,8 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
       </TwButton>
 
       {users
-        .filter((user: User) => user.user_id !== user.user_id)
-        .filter((user: User) => !user.contacts.includes(user.user_id))
+        .filter((user: User) => user.user_id !== currentUser.user_id)
+        .filter((user: User) => !user.contacts.includes(currentUser.user_id))
         .map((user: User, i: number) => (
           <TwButton
             variant="transparent"
