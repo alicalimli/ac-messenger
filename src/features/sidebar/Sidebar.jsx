@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import {
   BiLogOut,
   BiUser,
@@ -9,10 +8,11 @@ import {
 import { FiSettings } from "react-icons/fi";
 import { RiContactsLine } from "react-icons/ri";
 
-import { DarkmodeContext } from "/src/setup/app-context-manager";
-
 import { TwTooltip, TwButton } from "/src/components";
 import { useSignOut } from "/src/hooks";
+
+import { useDispatch, useSelector } from "react-redux";
+import { toggleDarkmode } from "./theme";
 
 const SIDEBAR_PAGE_BUTTONS = [
   { name: "chats", icon: BiMessageSquareDetail },
@@ -22,14 +22,16 @@ const SIDEBAR_PAGE_BUTTONS = [
 ];
 
 const Sidebar = ({ setSideBarContent }) => {
-  const [darkmode, setDarkmode] = useContext(DarkmodeContext);
-
+  const darkmode = useSelector((state) => state.theme.value);
+  const dispatch = useDispatch();
   const signOut = useSignOut();
 
   const changeSideContent = (sideContentName) => {
     sideContentName = sideContentName.replace(" ", "");
     setSideBarContent(sideContentName);
   };
+
+  const darkmodeClickHandler = () => dispatch(toggleDarkmode());
 
   return (
     <nav className="relative hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 justify-center">
@@ -54,7 +56,7 @@ const Sidebar = ({ setSideBarContent }) => {
         <TwButton
           variant="transparent"
           className="relative group z-10"
-          onClick={() => setDarkmode(!darkmode)}
+          onClick={darkmodeClickHandler}
         >
           {darkmode ? (
             <BiSun className="text-muted-light dark:text-muted-dark text-2xl" />

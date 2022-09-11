@@ -19,7 +19,8 @@ const App = () => {
 
   const [userToken, setUserToken] = useContext(UserTokenContext);
   const [toastMsg, setToastMsg] = useContext(ToastMsgContext);
-  const [darkmode, setDarkmode] = useContext(DarkmodeContext);
+
+  const darkmode = useSelector((state: any) => state.theme.value.darkmode);
 
   const user = useSelector((state: any) => state.user.value);
 
