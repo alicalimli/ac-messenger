@@ -1,6 +1,4 @@
-import { useContext, useState } from "react";
-
-import { UserTokenContext } from "/src/setup/app-context-manager";
+import { useState } from "react";
 
 import { GoMention } from "react-icons/go";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -14,8 +12,6 @@ import { Modal, TwTooltip, TwButton } from "/src/components";
 import { createToast } from "/src/toast";
 
 const ProfileContainer = ({ setSideBarContent }) => {
-  const [userToken, setUserToken] = useContext(UserTokenContext);
-
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user.value);
