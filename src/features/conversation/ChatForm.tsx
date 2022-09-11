@@ -1,54 +1,37 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 import { BiMicrophone } from "react-icons/bi";
 import { MdSend } from "react-icons/md";
 import { RiImageAddLine } from "react-icons/ri";
 import { VscSmiley } from "react-icons/vsc";
 
-import { TwButton } from "/src/components";
+import { TwButton } from "components";
 
-const ChatForm = ({ ws, wsConnect, inboxHash, messages, setMessages }) => {
+interface ChatFormProps {
+  setMessages: any;
+}
+
+const ChatForm = ({ setMessages }: ChatFormProps) => {
   const [message, setMessage] = useState("");
 
-  const sendMessage = (event) => {
+  const sendMessage = (event: React.FormEvent) => {
     event.preventDefault();
+    console.log("ss");
 
     if (!message) return;
 
-    setMessage("");
-
-    if (ws != null && message.length) {
-      if (ws.readyState == 3) {
-        wsConnect();
-        console.log("Reconnect");
-      }
-
-      if (ws.readyState == 1) {
-        let data = { msg: message };
-        ws.send(JSON.stringify(data));
-        console.log("Message sent");
-      }
-    }
-    if (ws == null && message.length) {
-      console.log("Connection to inbox is required");
-      console.log("Connection to inbox is required");
-    }
-    ws.onmessage = function (e) {
-      try {
-        let data = JSON.parse(e.data);
-        // if data sent is a text
-        if (data["type"] == "txt") {
-          const { uname: username, msg } = data;
-
-          const friend = setMessages((messages) => [
-            ...messages,
-            { username, msg },
-          ]);
-        }
-      } catch (error) {
-        console.error(error);
-      }
+    const userMessage = {
+      username: "chately",
+      message,
+      time: "12:00",
     };
+
+    setMessages((state: any) => {
+      const messagesArray = [...state, userMessage];
+      console.log(messagesArray);
+      return messagesArray;
+    });
+    setMessage("");
 
     // const timeOptions = {
     //   hour: "numeric",
@@ -90,7 +73,10 @@ const ChatForm = ({ ws, wsConnect, inboxHash, messages, setMessages }) => {
         onChange={(e) => setMessage(e.target.value)}
         onBlur={(e) => setMessage(e.target.value)}
       />
-      <TwButton addClass="rounded-full ml-auto h-full p-4 flex items-center justify-center">
+      <TwButton
+        type="submit"
+        className="rounded-full ml-auto h-full p-4 flex items-center justify-center"
+      >
         <MdSend className={`text-white text-2xl`} />
       </TwButton>
     </form>

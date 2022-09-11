@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import { TwButton } from "/src/components";
-import useConnect from "./useConnect";
 
 import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";
@@ -15,9 +14,23 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
   const conversationContainer = useRef("");
   const latestMsg = useRef("");
 
-  const { messages, setMessages, ws, wsConnect } = useConnect(
-    currentChat.inbox_hash
-  );
+  const [messages, setMessages] = useState([
+    {
+      username: "ali",
+      message: "Hey",
+      time: "10:22",
+    },
+    {
+      username: "ali",
+      message: "Hello",
+      time: "10:22",
+    },
+    {
+      username: "ali",
+      message: "Test",
+      time: "10:22",
+    },
+  ]);
 
   const scrollDown = () => {
     latestMsg.current.scrollIntoView({ behavior: "smooth" });
@@ -39,14 +52,10 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
     latestMsg.current.scrollIntoView();
   }, [messages, latestMsg.current]);
 
-  useEffect(() => {
-    wsConnect();
-  }, [currentChat]);
-
   return (
     <section className="flex h-full w-full">
       <div className="w-full flex flex-col gap-4">
-        <ChatHeader currentChat={currentChat} setCurrentChat={setCurrentChat} />
+        <ChatHeader />
 
         <main
           ref={conversationContainer}
@@ -55,7 +64,7 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
           <Messages messages={messages} latestMsgRef={latestMsg} />
         </main>
 
-        <div className="relative w-full flex items-center relative gap-2 p-4 pt-0">
+        <div className="w-full flex items-center relative gap-2 p-4 pt-0">
           <AnimatePresence>
             {showArrowDown && (
               <motion.div
@@ -74,13 +83,7 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
             )}
           </AnimatePresence>
 
-          <ChatForm
-            ws={ws}
-            wsConnect={wsConnect}
-            inboxHash={currentChat.inbox_hash}
-            messages={messages}
-            setMessages={setMessages}
-          />
+          <ChatForm messages={messages} setMessages={setMessages} />
         </div>
       </div>
     </section>

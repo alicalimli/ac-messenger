@@ -1,14 +1,9 @@
-import React from "react";
-
-import { AnimatePresence, motion } from "framer-motion";
-import { useState, useRef, useContext } from "react";
+import { useState, useContext } from "react";
 
 import { Sidebar, SideContent } from "/src/features/sidebar";
 import { ChatBox } from "/src/features/conversation";
 
 import { CurrentChatContext } from "/src/setup/app-context-manager";
-import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
-
 import { ErrorMsg } from "/src/components";
 
 import { start_messaging_img } from "/src/assets/images/";
@@ -29,7 +24,7 @@ const Home = () => {
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
       />
-      {currentChat ? (
+      {!currentChat ? (
         <div className="h-screen w-screen absolute z-10 bg-muted-light/10 dark:bg-black duration-300 md:relative md:flex items-center justify-center">
           <ChatBox currentChat={currentChat} setCurrentChat={setCurrentChat} />
         </div>

@@ -1,15 +1,20 @@
-import { useEffect, useContext } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { Ref } from "react";
 import { useSelector } from "react-redux";
 
-const Messages = ({ messages, latestMsgRef }) => {
-  const user = useSelector((state) => state.user.value);
+interface MessagesProps {
+  messages: any;
+  latestMsgRef: Ref<HTMLButtonElement> | undefined;
+}
 
-  return messages.map((currentMsg, i) => (
+const Messages = ({ messages, latestMsgRef }: MessagesProps) => {
+  const user = useSelector((state: any) => state.user.value);
+
+  return messages.map((currentMsg: any, i: number) => (
     <div
       key={currentMsg + i}
       className={`group gap-2 py-1 flex ${
-        currentMsg.username === user.email ? "flex-row-reverse" : ""
+        currentMsg.username === user.username ? "flex-row-reverse" : ""
       }`}
     >
       <motion.button
@@ -19,13 +24,13 @@ const Messages = ({ messages, latestMsgRef }) => {
         className={`
               peer flex rounded-full p-1.5 px-3 w-fit
               ${
-                currentMsg.username === user.email
+                currentMsg.username === user.username
                   ? "focus:bg-primary-tinted  bg-primary-main text-white rounded-br-sm"
                   : "bg-white text-black rounded-bl-sm"
               }
             `}
       >
-        <p className="text-md">{currentMsg.msg}</p>
+        <p className="text-md">{currentMsg.message}</p>
       </motion.button>
       <div className="opacity-0 peer-focus:opacity-100 group-hover:opacity-100 duration-300">
         <time className="ml-auto text-sm text-slate-500">{"12:33"}</time>
