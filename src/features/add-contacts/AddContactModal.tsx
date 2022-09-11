@@ -1,6 +1,4 @@
 import { TwButton } from "components";
-import Chat from "interfaces/chats";
-import { UsersData, ChatsData } from "localdatas";
 
 import User from "interfaces/users";
 import { useState } from "react";
@@ -25,34 +23,9 @@ const AddContactModal = ({
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
   const addContactBtnHandler = () => {
-    setIsBtnDisabled(true);
-
-    const currentUserData = UsersData.find(
-      (user) => user.user_id === currentUser?.user_id
-    );
-    const recipientData = UsersData.find(
-      (user) => user.user_id === recipient?.user_id
-    );
-    const chatRoomId = `${currentUser?.user_id}-${recipient?.user_id}`;
-    const ChatRoomData: Chat = {
-      chat_room_id: chatRoomId,
-      messages: [{ message: "blah", time: "test" }],
-      last_message: "test",
-      active_chat: false,
-    };
-
-    // Delay a bit to show loading msg
-    setTimeout(() => {
-      if (!currentUserData || !recipientData) return;
-      currentUserData.inbox.push(chatRoomId);
-      recipientData.inbox.push(chatRoomId);
-      currentUserData.contacts.push(recipientData.user_id);
-      recipientData.contacts.push(currentUserData.user_id);
-      ChatsData.push(ChatRoomData);
-      setShowModal(false);
-      setIsBtnDisabled(false);
-      dispatch(createToast("Contact added successfuly."));
-    }, 1000);
+    setShowModal(false);
+    setIsBtnDisabled(false);
+    dispatch(createToast("Contact added successfuly."));
   };
 
   const cancelBtnHandler = () => setShowModal(false);
