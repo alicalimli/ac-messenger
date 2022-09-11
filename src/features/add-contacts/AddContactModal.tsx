@@ -1,11 +1,11 @@
 import { TwButton } from "components";
-import useAddContact from "./useAddContact";
 import Chat from "interfaces/chats";
 import { UsersData, ChatsData } from "localdatas";
 
 import User from "interfaces/users";
-import { useContext, useState } from "react";
-import { ToastMsgContext } from "setup/app-context-manager";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createToast } from "toast";
 
 interface AddContactModalProps {
   setShowModal: (state: boolean) => void;
@@ -20,8 +20,9 @@ const AddContactModal = ({
 }: AddContactModalProps) => {
   // const { addContact } = useAddContact(recipient);
 
+  const dispatch = useDispatch();
+
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
-  const [toastMsg, setToastMsg] = useContext(ToastMsgContext);
 
   const addContactBtnHandler = () => {
     setIsBtnDisabled(true);
@@ -50,7 +51,7 @@ const AddContactModal = ({
       ChatsData.push(ChatRoomData);
       setShowModal(false);
       setIsBtnDisabled(false);
-      setToastMsg("Contact added successfuly.");
+      dispatch(createToast("Contact added successfuly."));
     }, 1000);
   };
 

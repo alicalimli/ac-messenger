@@ -3,11 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
-import {
-  DarkmodeContext,
-  ToastMsgContext,
-  UserTokenContext,
-} from "./setup/app-context-manager";
+import { UserTokenContext } from "./setup/app-context-manager";
 
 import { Authentication } from "./pages";
 import { Home } from "./pages";
@@ -18,7 +14,7 @@ const App = () => {
   const [pendingMsg, setPendingMsg] = useState("");
 
   const [userToken, setUserToken] = useContext(UserTokenContext);
-  const [toastMsg, setToastMsg] = useContext(ToastMsgContext);
+  const toastMsg = useSelector((state: any) => state.toast.value.message);
 
   const darkmode = useSelector((state: any) => state.theme.value.darkmode);
 
@@ -65,9 +61,7 @@ const App = () => {
           {pendingMsg && <Toast type="loading" msg={pendingMsg} />}
 
           {/* Notification Toast */}
-          {toastMsg && (
-            <Toast msg={toastMsg} durationMS={3000} setMsg={setToastMsg} />
-          )}
+          {toastMsg && <Toast durationMS={3000} msg={toastMsg} />}
         </AnimatePresence>
 
         {user.username ? (

@@ -1,23 +1,22 @@
 import { useContext, useState } from "react";
 
-import {
-  ToastMsgContext,
-  UserTokenContext,
-} from "/src/setup/app-context-manager";
+import { UserTokenContext } from "/src/setup/app-context-manager";
 
 import { GoMention } from "react-icons/go";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ProfileEditForm from "./ProfileEditForm";
 
 import { Modal, TwTooltip, TwButton } from "/src/components";
+import { createToast } from "/src/toast";
 
 const ProfileContainer = ({ setSideBarContent }) => {
-  const [toastMsg, setToastMsg] = useContext(ToastMsgContext);
   const [userToken, setUserToken] = useContext(UserTokenContext);
+
+  const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user.value);
 
@@ -32,7 +31,7 @@ const ProfileContainer = ({ setSideBarContent }) => {
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
 
-    setToastMsg(`Copied ${text}.`);
+    dispatch(createToast(`Copied ${text}.`));
   };
 
   return (
