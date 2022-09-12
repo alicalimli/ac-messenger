@@ -4,11 +4,6 @@ import { UsersData } from "localdatas";
 
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
-interface useAuth {
-  setPendingMsg: (state: string) => void;
-  setErrorMsg: (state: string) => void;
-}
-
 type setMessageType = (state: string) => void;
 
 const useAuth = (
