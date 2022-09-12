@@ -1,25 +1,28 @@
-import { useEffect, useState } from "react";
-
-import { TwButton, InputForm } from "/src/components";
+import React, { useEffect, useState } from "react";
+import { TwButton, InputForm } from "components";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 
-const ProfileEditForm = ({ email, setShowModal }) => {
+interface ProfileEditFormProps {
+  email: string;
+  setShowModal: (state: boolean) => void;
+}
+
+const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
   const [username, setUsername] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [pendingMsg, setPendingMsg] = useState("");
   const [validUsername, setValidUsername] = useState(false);
   const [usernameFocus, setUsernameFocus] = useState(false);
 
   const [password, setPassword] = useState("");
 
-  const { editInfo, errorMsg, setErrorMsg, pendingMsg } = useEditInfo();
-
-  const handleChangeInfo = async (e) => {
+  const handleChangeInfo = async (e: React.FormEvent) => {
     try {
       e.preventDefault();
 
       if (!validUsername) return;
 
-      await editInfo(email, username, password);
       setShowModal(false);
     } catch (error) {
       console.error(error);
@@ -32,7 +35,7 @@ const ProfileEditForm = ({ email, setShowModal }) => {
   }, [username]);
 
   useEffect(() => {
-    setErrorMsg("");
+    // setErrorMsg("");
   }, [username, password]);
 
   return (
@@ -56,7 +59,7 @@ const ProfileEditForm = ({ email, setShowModal }) => {
         setState={setUsername}
         stateFocus={usernameFocus}
         setStateFocus={setUsernameFocus}
-        placeHolder="e.g example123"
+        placeholder="e.g example123"
         isValid={validUsername}
         instruction="Must be 4 to 24 characters and begins with a letter. Hyphen and underscore are allowed"
       />
@@ -66,7 +69,7 @@ const ProfileEditForm = ({ email, setShowModal }) => {
         isSmall={true}
         state={password}
         setState={setPassword}
-        placeHolder="*********"
+        placeholder="*********"
       />
       <TwButton
         disabled={validUsername && !pendingMsg ? false : true}
