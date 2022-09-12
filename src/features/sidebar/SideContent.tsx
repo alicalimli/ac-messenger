@@ -1,10 +1,18 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ChatsContainer } from "/src/features/inbox";
-import { ProfileContainer } from "/src/features/profile";
-import { AddContacts } from "/src/features/add-contacts";
-import { VARIANTS_MANAGER } from "/src/setup/variants-manager";
+import { ChatsContainer } from "features/inbox";
+import { ProfileContainer } from "features/profile";
+import { AddContacts } from "features/add-contacts";
+import { VARIANTS_MANAGER } from "setup/variants-manager";
 
-const SideContent = ({ sidebarContent, setSideBarContent }) => {
+interface SideContentProps {
+  sidebarContent: string;
+  setSideBarContent: (state: string) => void;
+}
+
+const SideContent = ({
+  sidebarContent,
+  setSideBarContent,
+}: SideContentProps) => {
   return (
     <section className="relative border-r border-muted-light/10 dark:border-muted-dark/10 w-full md:w-32 md:min-w-[24rem] overflow-x-hidden">
       <AnimatePresence>
