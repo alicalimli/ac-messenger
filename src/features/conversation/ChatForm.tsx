@@ -38,7 +38,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
   return (
     <form
       onSubmit={sendMessage}
-      className="relative w-full flex items-center gap-1 bg-white dark:bg-bgmain-dark rounded-full duration-300"
+      className="relative w-full flex px-2 items-center gap-1 bg-white dark:bg-bgmain-dark rounded-full duration-300"
     >
       <div className="flex p-2">
         <button
@@ -72,7 +72,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
       />
       <TwButton
         type="submit"
-        className="rounded-full ml-auto h-full p-4 flex items-center justify-center"
+        className="rounded-full relative ml-auto h-full p-4 px-2 flex items-center justify-center"
       >
         <MdSend className={`text-white text-2xl`} />
       </TwButton>
