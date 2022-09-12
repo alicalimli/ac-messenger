@@ -8,13 +8,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ProfileEditForm from "./ProfileEditForm";
 
-import { Modal, TwTooltip, TwButton } from "/src/components";
-import { createToast } from "/src/toast";
+import { Modal, TwTooltip, TwButton } from "components";
+import { createToast } from "toast";
 
-const ProfileContainer = ({ setSideBarContent }) => {
+interface ProfileContainerProps {
+  setSideBarContent: (state: string) => void;
+}
+
+const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.user.value);
+  const user = useSelector((state: any) => state.user.value);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -24,7 +28,7 @@ const ProfileContainer = ({ setSideBarContent }) => {
     { icon: HiOutlineLocationMarker, text: user.location },
   ];
 
-  const copyToClipboard = (text) => {
+  const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
 
     dispatch(createToast(`Copied ${text}.`));

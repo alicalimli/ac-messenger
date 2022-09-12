@@ -1,17 +1,12 @@
 import { useReducer, useEffect } from "react";
 
-enum ActionKind {
-  right = "right",
-  left = "left",
-  Top = "top",
-  Bottom = "bottom",
+type ActionTypes = "top" | "left" | "bottom" | "right";
+
+interface ActionType {
+  type: ActionTypes;
 }
 
-interface Action {
-  type: ActionKind;
-}
-
-function reducer(state: string, action: Action): string {
+function reducer(state: string, action: ActionType): string {
   switch (action.type) {
     case "right":
       return "-right-4 top-1/2 translate-x-full -translate-y-1/2";
@@ -28,7 +23,7 @@ function reducer(state: string, action: Action): string {
 
 interface TwTooltipProps {
   tip: string;
-  position: ActionKind;
+  position: ActionTypes;
   className?: string;
 }
 
