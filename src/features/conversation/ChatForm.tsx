@@ -6,9 +6,10 @@ import { RiImageAddLine } from "react-icons/ri";
 import { VscSmiley } from "react-icons/vsc";
 
 import { TwButton } from "components";
+import { Message } from "interfaces";
 
 interface ChatFormProps {
-  setMessages: any;
+  setMessages: (state: (state: Message[]) => void) => void;
 }
 
 const ChatForm = ({ setMessages }: ChatFormProps) => {
@@ -26,11 +27,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
       time: "12:00",
     };
 
-    setMessages((state: any) => {
-      const messagesArray = [...state, userMessage];
-      console.log(messagesArray);
-      return messagesArray;
-    });
+    setMessages((state: Message[]): Message[] => [...state, userMessage]);
     setMessage("");
 
     // const timeOptions = {
