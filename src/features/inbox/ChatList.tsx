@@ -1,8 +1,7 @@
 import { TwButton } from "components";
 import { UsersData, ChatsData } from "localdatas";
-import User from "interfaces/users";
 import React from "react";
-import Chat from "interfaces/chats";
+import { User, Chat } from "interfaces";
 
 interface ChatListProps {
   chats: string[];

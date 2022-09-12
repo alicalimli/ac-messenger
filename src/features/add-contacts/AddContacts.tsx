@@ -3,7 +3,7 @@ import { TwButton } from "components";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Modal } from "components";
 import { useSelector } from "react-redux";
-import User from "interfaces/user";
+import { User } from "interfaces";
 
 import { UsersData } from "localdatas";
 

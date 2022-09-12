@@ -4,7 +4,7 @@ import { inbox_empty } from "assets/images";
 
 import { CurrentChatContext } from "setup/app-context-manager";
 import ChatList from "./ChatList";
-import Chat from "interfaces/chats";
+import { Chat } from "interfaces";
 import { useSelector } from "react-redux";
 
 const ChatsContainer = () => {

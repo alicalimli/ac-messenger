@@ -1,6 +1,6 @@
 import { TwButton } from "components";
 
-import User from "interfaces/users";
+import { User } from "interfaces";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createToast } from "toast";
