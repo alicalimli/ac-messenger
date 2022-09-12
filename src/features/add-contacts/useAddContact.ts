@@ -1,5 +1,5 @@
-import Chat from "interfaces/chats";
-import User from "interfaces/users";
+import { Chat } from "interfaces";
+import User from "interfaces/user";
 import { ChatsData, UsersData } from "localdatas";
 import { createToast } from "toast";
 
@@ -15,7 +15,7 @@ const useAddContact = () => {
       const chatRoomId = `${currentUser?.user_id}-${recipient?.user_id}`;
       const ChatRoomData: Chat = {
         chat_room_id: chatRoomId,
-        messages: [{ message: "blah", time: "test" }],
+        messages: [{ username: "ali", message: "blah", time: "test" }],
         last_message: "test",
         active_chat: false,
       };

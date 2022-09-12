@@ -1,9 +1,9 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { TwButton } from "components";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Modal } from "components";
 import { useSelector } from "react-redux";
-import User from "interfaces/users";
+import User from "interfaces/user";
 
 import { UsersData } from "localdatas";
 
