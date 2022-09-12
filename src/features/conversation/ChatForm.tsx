@@ -9,7 +9,7 @@ import { TwButton } from "components";
 import { Message } from "interfaces";
 
 interface ChatFormProps {
-  setMessages: (state: (state: Message[]) => void) => void;
+  setMessages: (state: Message[] | any) => void;
 }
 
 const ChatForm = ({ setMessages }: ChatFormProps) => {

@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
-import { Ref } from "react";
 import { useSelector } from "react-redux";
 
 interface MessagesProps {
   messages: any;
-  latestMsgRef: Ref<HTMLButtonElement> | undefined;
+  latestMsgRef: React.Ref<HTMLButtonElement>;
 }
 
 const Messages = ({ messages, latestMsgRef }: MessagesProps) => {

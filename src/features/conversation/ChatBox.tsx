@@ -1,18 +1,23 @@
-import { useEffect, useRef, useState } from "react";
+import { SyntheticEvent, useEffect, useRef, useState } from "react";
 
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
-import { TwButton } from "/src/components";
+import { TwButton } from "components";
 
 import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
 
-const ChatBox = ({ currentChat, setCurrentChat }) => {
+interface ChatBoxProps {
+  currentChat: string;
+  setCurrentChat: (state: string) => void;
+}
+
+const ChatBox = ({ currentChat, setCurrentChat }: ChatBoxProps) => {
   const [showArrowDown, setShowArrowDown] = useState(false);
 
-  const conversationContainer = useRef("");
-  const latestMsg = useRef("");
+  const conversationContainer = useRef<HTMLDivElement>(null);
+  const latestMsg = useRef<HTMLButtonElement>(null);
 
   const [messages, setMessages] = useState([
     {
@@ -33,19 +38,17 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
   ]);
 
   const scrollDown = () => {
-    latestMsg.current.scrollIntoView({ behavior: "smooth" });
+    latestMsg?.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  if (conversationContainer.current) {
-    conversationContainer.current.addEventListener("scroll", (event) => {
-      const target = event.target;
-      if (target.scrollHeight - target.scrollTop > target.clientHeight + 300) {
-        setShowArrowDown(true);
-      } else {
-        setShowArrowDown(false);
-      }
-    });
-  }
+  const chatBoxScrollHandler = (event: SyntheticEvent) => {
+    const target = event.currentTarget;
+    if (target.scrollHeight - target.scrollTop > target.clientHeight + 300) {
+      setShowArrowDown(true);
+    } else {
+      setShowArrowDown(false);
+    }
+  };
 
   useEffect(() => {
     if (!latestMsg.current) return;
@@ -59,6 +62,7 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
 
         <main
           ref={conversationContainer}
+          onScroll={chatBoxScrollHandler}
           className="relative flex flex-col overflow-scroll scrollbar-hide px-4"
         >
           <Messages messages={messages} latestMsgRef={latestMsg} />
@@ -73,17 +77,14 @@ const ChatBox = ({ currentChat, setCurrentChat }) => {
                 exit={{ opacity: 0, x: -50 }}
                 className="absolute -top-3/4 left-1/2 z-10"
               >
-                <TwButton
-                  clickHandler={scrollDown}
-                  addClass="rounded-full px-2"
-                >
+                <TwButton onClick={scrollDown} className="rounded-full px-2">
                   <AiOutlineArrowDown className="text-xl text-white " />
                 </TwButton>
               </motion.div>
             )}
           </AnimatePresence>
 
-          <ChatForm messages={messages} setMessages={setMessages} />
+          <ChatForm setMessages={setMessages} />
         </div>
       </div>
     </section>
