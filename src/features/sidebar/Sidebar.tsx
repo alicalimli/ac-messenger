@@ -8,8 +8,8 @@ import {
 import { FiSettings } from "react-icons/fi";
 import { RiContactsLine } from "react-icons/ri";
 
-import { TwTooltip, TwButton } from "/src/components";
-import { useSignOut } from "/src/hooks";
+import { TwTooltip, TwButton } from "components";
+import { useSignOut } from "hooks";
 
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDarkmode } from "./theme";
@@ -21,12 +21,16 @@ const SIDEBAR_PAGE_BUTTONS = [
   { name: "settings", icon: FiSettings },
 ];
 
-const Sidebar = ({ setSideBarContent }) => {
-  const darkmode = useSelector((state) => state.theme.value);
+interface SidebarProps {
+  setSideBarContent: (state: string) => void;
+}
+
+const Sidebar = ({ setSideBarContent }: SidebarProps) => {
+  const darkmode = useSelector((state: any) => state.theme.value);
   const dispatch = useDispatch();
   const signOut = useSignOut();
 
-  const changeSideContent = (sideContentName) => {
+  const changeSideContent = (sideContentName: string) => {
     sideContentName = sideContentName.replace(" ", "");
     setSideBarContent(sideContentName);
   };
