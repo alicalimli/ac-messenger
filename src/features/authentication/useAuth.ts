@@ -1,13 +1,23 @@
 import { useDispatch } from "react-redux";
 import { login } from "./user";
-import { UsersData } from "/src/localdatas";
+import { UsersData } from "localdatas";
 
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
-const useAuth = (setPendingMsg, setErrorMsg) => {
+interface useAuth {
+  setPendingMsg: (state: string) => void;
+  setErrorMsg: (state: string) => void;
+}
+
+type setMessageType = (state: string) => void;
+
+const useAuth = (
+  setPendingMsg: setMessageType,
+  setErrorMsg: setMessageType
+) => {
   const dispatch = useDispatch();
 
-  const signInUser = async (email, pass) => {
+  const signInUser = async (email: string, pass: string) => {
     try {
       setErrorMsg("");
       setPendingMsg("generating token");
@@ -28,18 +38,22 @@ const useAuth = (setPendingMsg, setErrorMsg) => {
         dispatch(login(UserData));
         setPendingMsg("");
       }, 500);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       setErrorMsg(error.message);
       setPendingMsg("");
     }
   };
 
-  const signUpUser = async (email, username, password) => {
+  const signUpUser = async (
+    email: string,
+    username: string,
+    password: string
+  ) => {
     try {
       setErrorMsg("");
       throw new Error("Creating user is not available");
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       setErrorMsg(error.message);
       setPendingMsg("");
