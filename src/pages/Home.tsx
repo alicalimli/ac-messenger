@@ -1,25 +1,20 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 
-import { Sidebar, SideContent } from "/src/features/sidebar";
-import { ChatBox } from "/src/features/conversation";
+import { Sidebar, SideContent } from "features/sidebar";
+import { ChatBox } from "features/conversation";
 
-import { CurrentChatContext } from "/src/setup/app-context-manager";
-import { ErrorMsg } from "/src/components";
+import { ErrorMsg } from "components";
 
-import { start_messaging_img } from "/src/assets/images/";
+import { start_messaging_img } from "assets/images/";
 
 const Home = () => {
   const defaultSideBarContent = "chats";
+  const [currentChat, setCurrentChat] = useState("");
   const [sidebarContent, setSideBarContent] = useState(defaultSideBarContent);
-
-  const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
 
   return (
     <div className="flex w-full min-h-screen">
-      <Sidebar
-        sidebarContent={sidebarContent}
-        setSideBarContent={setSideBarContent}
-      />
+      <Sidebar setSideBarContent={setSideBarContent} />
       <SideContent
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
