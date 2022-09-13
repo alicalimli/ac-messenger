@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import { removeToast } from "toast";
+import { removeToast } from "toastSlice";
 
 let toastTimeout: ReturnType<typeof setTimeout>;
 

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProfileEditForm from "./ProfileEditForm";
 
 import { Modal, TwTooltip, TwButton } from "components";
-import { createToast } from "toast";
+import { createToast } from "toastSlice";
 
 interface ProfileContainerProps {
   setSideBarContent: (state: string) => void;

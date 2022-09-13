@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { userReducer } from "features/authentication";
 import { themeReducer } from "features/sidebar";
-import toastReducer from "toast";
+import toastReducer from "toastSlice";
 
 export const store = configureStore({
   reducer: {

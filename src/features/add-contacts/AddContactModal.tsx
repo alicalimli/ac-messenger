@@ -3,7 +3,7 @@ import { TwButton } from "components";
 import { User } from "interfaces";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createToast } from "toast";
+import { createToast } from "toastSlice";
 
 interface AddContactModalProps {
   setShowModal: (state: boolean) => void;

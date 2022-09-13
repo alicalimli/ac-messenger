@@ -1,7 +1,7 @@
 import { Chat } from "interfaces";
 import User from "interfaces/user";
 import { ChatsData, UsersData } from "localdatas";
-import { createToast } from "toast";
+import { createToast } from "toastSlice";
 
 const useAddContact = () => {
   const addContact = (currentUser: User, recipient: User) => {
