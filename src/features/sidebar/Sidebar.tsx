@@ -12,7 +12,7 @@ import { TwTooltip, TwButton } from "components";
 import { useSignOut } from "hooks";
 
 import { useDispatch, useSelector } from "react-redux";
-import { toggleDarkmode } from "./theme";
+import { toggleDarkmode } from "./themeSlice";
 
 const SIDEBAR_PAGE_BUTTONS = [
   { name: "chats", icon: BiMessageSquareDetail },

@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const toastInitialState = { message: "" };
+type initialState = {
+  message: string;
+};
+
+const initialState = { message: "" };
 
 const toastSlice = createSlice({
   name: "toast",
   initialState: {
-    value: {
-      toastInitialState,
-    },
+    value: initialState,
   },
   reducers: {
     createToast: (state, actions) => {

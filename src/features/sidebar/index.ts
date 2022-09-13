@@ -1,6 +1,6 @@
 import Sidebar from "./Sidebar";
 import SideContent from "./SideContent";
-import themeSlice from "./theme";
-import { toggleDarkmode } from "./theme";
+import themeSlice from "./themeSlice";
+import { toggleDarkmode } from "./themeSlice";
 
 export { Sidebar, SideContent, themeSlice as themeReducer, toggleDarkmode };
