@@ -24,10 +24,12 @@ export const VARIANTS_MANAGER = {
   },
   "pop-in": {
     opacity: 1,
+    y: "0",
     scale: 1,
   },
   "pop-out": {
-    opacity: 0,
-    scale: 0,
+    opacity: 0.5,
+    y: "-20%",
+    scale: 0.5,
   },
 };

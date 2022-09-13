@@ -28,7 +28,7 @@ const Modal = ({ children, setShowModal }: ModalProps) => {
           initial="fade-out"
           animate="fade-in"
           exit="fade-out"
-          className="bg-black/10 dark:bg-white/10 w-screen h-screen absolute top-0 left-0 z-20 flex justify-center items-center"
+          className="bg-black/5 dark:bg-white/5 w-screen h-screen absolute top-0 left-0 z-20 flex justify-center items-center"
         >
           <motion.div
             variants={VARIANTS_MANAGER}
