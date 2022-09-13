@@ -11,7 +11,7 @@ import { RiContactsLine } from "react-icons/ri";
 import { TwTooltip, TwButton } from "components";
 import { useSignOut } from "hooks";
 
-import { useAppDispatch, useAppSelector } from "app";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { toggleDarkmode } from "./themeSlice";
 
 const SIDEBAR_PAGE_BUTTONS = [

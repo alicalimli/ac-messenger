@@ -1,4 +1,4 @@
-import { useAppDispatch } from "app";
+import { useAppDispatch } from "app/hooks";
 import { logout } from "features/authentication";
 import { useLocalStorage } from "hooks";
 

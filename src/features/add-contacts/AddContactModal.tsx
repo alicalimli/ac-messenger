@@ -2,7 +2,7 @@ import { TwButton } from "components";
 
 import { User } from "interfaces";
 import { useState } from "react";
-import { useAppDispatch } from "app";
+import { useAppDispatch } from "app/hooks";
 import { createToast } from "toastSlice";
 
 interface AddContactModalProps {

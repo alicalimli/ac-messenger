@@ -1,12 +1,11 @@
 import { StrictMode, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { useAppSelector } from "app";
+import { useAppSelector } from "app/hooks";
 
-import { Authentication } from "./pages";
-import { Home } from "./pages";
-import { Toast } from "./components";
-import { useLocalStorage } from "./hooks";
+import { Authentication, Home } from "pages";
+import { Toast } from "components";
+import { useLocalStorage } from "hooks";
 
 const App = () => {
   const [pendingMsg, setPendingMsg] = useState("");

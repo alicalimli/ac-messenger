@@ -3,7 +3,7 @@ import { userReducer } from "features/authentication";
 import { themeReducer } from "features/sidebar";
 import toastReducer from "toastSlice";
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     user: userReducer,
     theme: themeReducer,
@@ -13,3 +13,5 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export default store;

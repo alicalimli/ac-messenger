@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TwButton } from "components";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Modal } from "components";
-import { useAppSelector } from "app";
+import { useAppSelector } from "app/hooks";
 import { User } from "interfaces";
 
 import { UsersData } from "localdatas";

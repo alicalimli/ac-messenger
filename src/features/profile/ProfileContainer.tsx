@@ -4,7 +4,7 @@ import { GoMention } from "react-icons/go";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 
-import { useAppDispatch, useAppSelector } from "app";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 
 import ProfileEditForm from "./ProfileEditForm";
 

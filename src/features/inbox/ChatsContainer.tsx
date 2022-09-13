@@ -4,7 +4,7 @@ import { inbox_empty } from "assets/images";
 
 import ChatList from "./ChatList";
 import { Chat } from "interfaces";
-import { useAppSelector } from "app";
+import { useAppSelector } from "app/hooks";
 
 const ChatsContainer = () => {
   // const [currentChat, setCurrentChat] = useContext(CurrentChatContext);

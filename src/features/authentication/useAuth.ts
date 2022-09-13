@@ -1,4 +1,4 @@
-import { useAppDispatch } from "app";
+import { useAppDispatch } from "app/hooks";
 import { login } from "./userSlice";
 import { UsersData } from "localdatas";
 
