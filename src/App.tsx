@@ -1,9 +1,7 @@
-import { StrictMode, useContext, useEffect, useState } from "react";
+import { StrictMode, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSelector } from "react-redux";
-
-import { UserTokenContext } from "./setup/app-context-manager";
 
 import { Authentication } from "./pages";
 import { Home } from "./pages";
@@ -13,7 +11,6 @@ import { useLocalStorage } from "./hooks";
 const App = () => {
   const [pendingMsg, setPendingMsg] = useState("");
 
-  const [userToken, setUserToken] = useContext(UserTokenContext);
   const toastMsg = useSelector((state: any) => state.toast.value.message);
 
   const darkmode = useSelector((state: any) => state.theme.value.darkmode);

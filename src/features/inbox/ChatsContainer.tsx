@@ -1,14 +1,13 @@
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { ErrorMsg } from "components";
 import { inbox_empty } from "assets/images";
 
-import { CurrentChatContext } from "setup/app-context-manager";
 import ChatList from "./ChatList";
 import { Chat } from "interfaces";
 import { useSelector } from "react-redux";
 
 const ChatsContainer = () => {
-  const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
+  // const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
   const user = useSelector((state: any) => state.user.value);
 
   const chats = user.inbox;
@@ -22,7 +21,7 @@ const ChatsContainer = () => {
 
     Object.assign(chat, { active_chat: true });
     chatListRef.current = chat;
-    setCurrentChat(chat);
+    // setCurrentChat(chat);
   };
 
   return (
