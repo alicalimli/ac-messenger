@@ -11,7 +11,7 @@ import { RiContactsLine } from "react-icons/ri";
 import { TwTooltip, TwButton } from "components";
 import { useSignOut } from "hooks";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "app";
 import { toggleDarkmode } from "./themeSlice";
 
 const SIDEBAR_PAGE_BUTTONS = [
@@ -26,8 +26,8 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ setSideBarContent }: SidebarProps) => {
-  const darkmode = useSelector((state: any) => state.theme.value);
-  const dispatch = useDispatch();
+  const darkmode = useAppSelector((state: any) => state.theme.value);
+  const dispatch = useAppDispatch();
   const signOut = useSignOut();
 
   const changeSideContent = (sideContentName: string) => {

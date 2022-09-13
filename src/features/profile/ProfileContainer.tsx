@@ -4,7 +4,7 @@ import { GoMention } from "react-icons/go";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "app";
 
 import ProfileEditForm from "./ProfileEditForm";
 
@@ -16,9 +16,9 @@ interface ProfileContainerProps {
 }
 
 const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const user = useSelector((state: any) => state.user.value);
+  const user = useAppSelector((state: any) => state.user.value);
 
   const [showModal, setShowModal] = useState(false);
 

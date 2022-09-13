@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TwButton } from "components";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Modal } from "components";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "app";
 import { User } from "interfaces";
 
 import { UsersData } from "localdatas";
@@ -17,7 +17,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   // Will update the type later on
   const users: User[] = UsersData;
   // const users: any = useGetUsers();
-  const currentUser = useSelector((state: any) => state.user.value);
+  const currentUser = useAppSelector((state: any) => state.user.value);
 
   const [recipient, setRecipient] = useState<User>();
   const [showModal, setShowModal] = useState<boolean>(false);

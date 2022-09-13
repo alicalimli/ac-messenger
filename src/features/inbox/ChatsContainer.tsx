@@ -4,11 +4,11 @@ import { inbox_empty } from "assets/images";
 
 import ChatList from "./ChatList";
 import { Chat } from "interfaces";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "app";
 
 const ChatsContainer = () => {
   // const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
-  const user = useSelector((state: any) => state.user.value);
+  const user = useAppSelector((state: any) => state.user.value);
 
   const chats = user.inbox;
 

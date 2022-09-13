@@ -1,7 +1,7 @@
 import { StrictMode, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "app";
 
 import { Authentication } from "./pages";
 import { Home } from "./pages";
@@ -11,11 +11,11 @@ import { useLocalStorage } from "./hooks";
 const App = () => {
   const [pendingMsg, setPendingMsg] = useState("");
 
-  const toastMsg = useSelector((state: any) => state.toast.value.message);
+  const toastMsg = useAppSelector((state: any) => state.toast.value.message);
 
-  const darkmode = useSelector((state: any) => state.theme.value.darkmode);
+  const darkmode = useAppSelector((state: any) => state.theme.value.darkmode);
 
-  const user = useSelector((state: any) => state.user.value);
+  const user = useAppSelector((state: any) => state.user.value);
 
   // const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
   // const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");

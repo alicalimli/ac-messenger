@@ -1,9 +1,9 @@
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "app";
 import { logout } from "features/authentication";
 import { useLocalStorage } from "hooks";
 
 const useSignOut = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
   const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");

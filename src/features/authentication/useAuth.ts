@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "app";
 import { login } from "./userSlice";
 import { UsersData } from "localdatas";
 
@@ -10,7 +10,7 @@ const useAuth = (
   setPendingMsg: setMessageType,
   setErrorMsg: setMessageType
 ) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const signInUser = async (email: string, pass: string) => {
     try {

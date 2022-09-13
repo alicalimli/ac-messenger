@@ -2,7 +2,7 @@ import { TwButton } from "components";
 
 import { User } from "interfaces";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "app";
 import { createToast } from "toastSlice";
 
 interface AddContactModalProps {
@@ -18,7 +18,7 @@ const AddContactModal = ({
 }: AddContactModalProps) => {
   // const { addContact } = useAddContact(recipient);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
