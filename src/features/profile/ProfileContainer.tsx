@@ -10,6 +10,8 @@ import ProfileEditForm from "./ProfileEditForm";
 
 import { Modal, TwTooltip, TwButton } from "components";
 import { createToast } from "toastSlice";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "services/firebase";
 
 interface ProfileContainerProps {
   setSideBarContent: (state: string) => void;
@@ -18,14 +20,14 @@ interface ProfileContainerProps {
 const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector((state: any) => state.user.value);
+  const [user] = useAuthState(auth);
 
   const [showModal, setShowModal] = useState(false);
 
   const infoButtons = [
-    { icon: HiOutlineMail, text: user.email },
-    { icon: GoMention, text: user.username },
-    { icon: HiOutlineLocationMarker, text: user.location },
+    { icon: HiOutlineMail, text: user?.email },
+    { icon: GoMention, text: user?.displayName },
+    { icon: HiOutlineLocationMarker, text: "Earth" },
   ];
 
   const copyToClipboard = (text: string) => {
@@ -38,7 +40,10 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
     <div className=" flex flex-col">
       <Modal setShowModal={setShowModal}>
         {showModal && (
-          <ProfileEditForm email={user.email} setShowModal={setShowModal} />
+          <ProfileEditForm
+            email={user?.email as string}
+            setShowModal={setShowModal}
+          />
         )}
       </Modal>
 
@@ -54,13 +59,13 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
         <div className="flex flex-col items-center text-center p-4 px-8">
           <img
             className="bg-cover bg-center bg-transparent mb-2 w-24 h-24 rounded-full shadow-md"
-            alt={`${user.username}'s profile picture`}
-            src={user.profile}
+            alt={`${user?.displayName}'s profile picture`}
+            src={user?.photoURL || ""}
           />
           <h2 className="text-lg text-black dark:text-white">
-            {user.username}
+            {user?.displayName}
           </h2>
-          <p className="text-muted-light dark:text-muted-dark">{user.bio}</p>
+          <p className="text-muted-light dark:text-muted-dark">{user?.bio}</p>
         </div>
       </div>
 
@@ -72,8 +77,8 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
               <TwButton
                 variant="transparent"
                 className="relative group"
-                onClick={() => copyToClipboard(obj.text)}
-                key={obj.text + i}
+                onClick={() => copyToClipboard(obj.text as string)}
+                key={(obj.text as string) + i}
               >
                 <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
                 {obj.text}

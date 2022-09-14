@@ -6,40 +6,24 @@ import { useAppSelector } from "app/hooks";
 import { Authentication, Home } from "pages";
 import { Toast } from "components";
 import { useLocalStorage } from "hooks";
+import { auth } from "services/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const App = () => {
+  const [user] = useAuthState(auth);
+
   const [pendingMsg, setPendingMsg] = useState("");
 
   const toastMsg = useAppSelector((state: any) => state.toast.value.message);
 
   const darkmode = useAppSelector((state: any) => state.theme.value.darkmode);
 
-  const user = useAppSelector((state: any) => state.user.value);
+  // const user = useAppSelector((state: any) => state.user.value);
 
-  // const [savedUserInfo, setSavedUserInfo] = useLocalStorage("userInfo", null);
-  // const [savedUserToken, setSavedUserToken] = useLocalStorage("userToken", "");
   const [keepSignedIn, setKeepSignedIn] = useLocalStorage(
     "keepSignedIn",
     false
   );
-
-  // Saves and clears userData when user leaves the site.
-  // window.onbeforeunload = () => {
-  //   if (keepSignedIn) {
-  //     setSavedUserToken(userToken);
-  //     setSavedUserInfo(userInfo);
-  //   } else {
-  //     setSavedUserToken("");
-  //     setSavedUserInfo(null);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (keepSignedIn) {
-  //     setUserToken(savedUserToken);
-  //     setUserInfo(savedUserInfo);
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (darkmode) {
@@ -60,7 +44,7 @@ const App = () => {
           {toastMsg && <Toast durationMS={3000} msg={toastMsg} />}
         </AnimatePresence>
 
-        {user.username ? (
+        {user ? (
           <motion.div
             className="flex"
             animate={{ opacity: 1, x: 0, y: 0 }}

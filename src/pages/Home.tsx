@@ -27,7 +27,7 @@ const Home = () => {
         <ErrorMsg
           className="hidden md:flex"
           img={start_messaging_img}
-          msg="Start Messaging with ACMessenger"
+          msg="Start Messaging with Chately"
           subMsg="Select a chat in your inbox to start messaging."
         />
       )}
