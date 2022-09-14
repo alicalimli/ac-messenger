@@ -5,9 +5,9 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          main: "#686be6",
-          shaded: "#5e60cf",
-          tinted: "#777ae9",
+          main: "#3B82F6",
+          shaded: "#4f8ff7",
+          tinted: "#3575dd",
         },
         muted: {
           light: "#212529bf",
