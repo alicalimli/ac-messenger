@@ -1,4 +1,4 @@
-# Chately
+# ACMessenger
 
 \*_A messaging web-application_
 

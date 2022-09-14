@@ -1,6 +1,8 @@
 import { useAppDispatch } from "app/hooks";
 import { logout } from "features/authentication";
 import { useLocalStorage } from "hooks";
+import { signOut } from "firebase/auth";
+import { auth } from "services/firebase";
 
 const useSignOut = () => {
   const dispatch = useAppDispatch();
@@ -12,14 +14,15 @@ const useSignOut = () => {
     false
   );
 
-  const signOut = () => {
+  const signOutUser = async () => {
     dispatch(logout());
+    await signOut(auth);
     setSavedUserInfo(null);
     setSavedUserToken("");
     setKeepSignedIn(false);
   };
 
-  return signOut;
+  return signOutUser;
 };
 
 export default useSignOut;

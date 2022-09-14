@@ -28,7 +28,7 @@ interface SidebarProps {
 const Sidebar = ({ setSideBarContent }: SidebarProps) => {
   const darkmode = useAppSelector((state: any) => state.theme.value);
   const dispatch = useAppDispatch();
-  const signOut = useSignOut();
+  const signOutUser = useSignOut();
 
   const changeSideContent = (sideContentName: string) => {
     sideContentName = sideContentName.replace(" ", "");
@@ -73,7 +73,7 @@ const Sidebar = ({ setSideBarContent }: SidebarProps) => {
         <TwButton
           variant="transparent"
           className="relative group z-10"
-          onClick={signOut}
+          onClick={signOutUser}
         >
           <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl" />
           <TwTooltip tip="logout" position="right" />
