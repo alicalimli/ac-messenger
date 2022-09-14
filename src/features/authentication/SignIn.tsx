@@ -3,6 +3,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 
 import useAuth from "./useAuth";
 import { InputForm, TwButton } from "components";
+import useSignInWithGoogle from "./useSignInWithGoogle";
 
 interface SignInProps {
   setPendingMsg: (state: string) => void;
@@ -25,6 +26,8 @@ const SignIn = ({
   const [errorMsg, setErrorMsg] = useState<string>("");
 
   const { signInUser } = useAuth(setPendingMsg, setErrorMsg);
+
+  const signInWithGoogle = useSignInWithGoogle();
 
   const handleLogin = (e: React.FormEvent) => {
     try {
@@ -110,7 +113,12 @@ const SignIn = ({
       <p className="text-center">or</p>
 
       <div className="flex flex-col gap-2">
-        <TwButton type="button" className="justify-center" variant="outline">
+        <TwButton
+          type="button"
+          onClick={signInWithGoogle}
+          className="justify-center"
+          variant="outline"
+        >
           Sign In With Google
         </TwButton>
         <TwButton type="button" className="justify-center" variant="outline">
