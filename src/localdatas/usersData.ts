@@ -5,8 +5,8 @@ const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:A
 export const UsersData: User[] = [
   {
     user_id: 1,
-    username: "admin_chately",
-    email: "admin@chately.io",
+    username: "admin",
+    email: "admin@gmail.com",
     profile: DEFAULT_PROFILE_IMAGE,
     password: "test1234",
     status: true,
@@ -29,8 +29,8 @@ export const UsersData: User[] = [
   },
   {
     user_id: 3,
-    username: "chately",
-    email: "chately@gmail.com",
+    username: "kai",
+    email: "kai@gmail.com",
     profile: DEFAULT_PROFILE_IMAGE,
     password: "test1234",
     status: true,
