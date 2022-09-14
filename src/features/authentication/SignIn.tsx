@@ -44,7 +44,7 @@ const SignIn = ({
     <form onSubmit={handleLogin} className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
         <label className="text-2xl font-semibold text-center text-black dark:text-white">
-          Sign in to Chately
+          Sign in to your account
         </label>
         <label className="text-sm text-center text-muted-light mb-4 text-black dark:text-muted-dark">
           Enter your credentials
@@ -93,7 +93,7 @@ const SignIn = ({
       </TwButton>
 
       <TwButton type="submit" disabled={pendingMsg as unknown as boolean}>
-        Sign In
+        Sign in
       </TwButton>
 
       <p className="text-muted-light text-sm text-black dark:text-muted-dark">
@@ -106,6 +106,17 @@ const SignIn = ({
           Sign up
         </button>
       </p>
+
+      <p className="text-center">or</p>
+
+      <div className="flex flex-col gap-2">
+        <TwButton type="button" className="justify-center" variant="outline">
+          Sign In With Google
+        </TwButton>
+        <TwButton type="button" className="justify-center" variant="outline">
+          Sign In With Twitter
+        </TwButton>
+      </div>
     </form>
   );
 };
