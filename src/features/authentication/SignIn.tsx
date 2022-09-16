@@ -110,18 +110,20 @@ const SignIn = ({
         </button>
       </p>
 
-      <p className="text-center">or</p>
-
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 mt-4">
         <TwButton
           type="button"
           onClick={signInWithGoogle}
-          className="justify-center"
-          variant="outline"
+          className="justify-center text-primary-main"
+          variant="transparent"
         >
           Sign In With Google
         </TwButton>
-        <TwButton type="button" className="justify-center" variant="outline">
+        <TwButton
+          type="button"
+          className="justify-center text-primary-main"
+          variant="transparent"
+        >
           Sign In With Twitter
         </TwButton>
       </div>
