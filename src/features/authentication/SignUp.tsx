@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import useAuth from "./useAuth";
 import { InputForm, TwButton } from "components";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const USER_REGEX = /^[A-z][A-z0-9-_ ]{3,17}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=).{8,24}$/;
 
@@ -102,7 +102,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
         setStateFocus={setDisplayNameFocus}
         placeholder="e.g example123"
         isValid={validDisplayName}
-        instruction="Must be 4 to 24 characters and begins with letter. Hyphen and underscore are allowed"
+        instruction="Must be 4 to 18 characters and begins with letter. Hyphen, Spaces and underscore are allowed"
       />
       <InputForm
         label="Password"

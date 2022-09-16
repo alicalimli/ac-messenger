@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TwButton, InputForm } from "components";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const USER_REGEX = /^[A-z][A-z0-9-_ ]{3,17}$/;
 
 interface ProfileEditFormProps {
   email: string;
@@ -61,7 +61,7 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
         setStateFocus={setUsernameFocus}
         placeholder="e.g example123"
         isValid={validUsername}
-        instruction="Must be 4 to 24 characters and begins with a letter. Hyphen and underscore are allowed"
+        instruction="Must be 4 to 18 characters and begins with letter. Hyphen, Spaces and underscore are allowed"
       />
       <InputForm
         label="Current Password"
