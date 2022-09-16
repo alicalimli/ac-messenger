@@ -4,6 +4,8 @@ import { AiOutlineCheck } from "react-icons/ai";
 import useAuth from "./useAuth";
 import { InputForm, TwButton } from "components";
 import useSignInWithGoogle from "./useSignInWithGoogle";
+import { useAppDispatch } from "app/hooks";
+import { loginWithGoogle } from "./userSlice";
 
 interface SignInProps {
   setPendingMsg: (state: string) => void;
@@ -28,6 +30,8 @@ const SignIn = ({
   const { signInUser } = useAuth(setPendingMsg, setErrorMsg);
 
   const signInWithGoogle = useSignInWithGoogle();
+
+  const dispatch = useAppDispatch();
 
   const handleLogin = (e: React.FormEvent) => {
     try {
@@ -113,7 +117,7 @@ const SignIn = ({
       <div className="flex flex-col gap-2 mt-4">
         <TwButton
           type="button"
-          onClick={signInWithGoogle}
+          onClick={() => dispatch(loginWithGoogle())}
           className="justify-center text-primary-tinted dark:text-primary-shaded"
           variant="transparent"
         >
