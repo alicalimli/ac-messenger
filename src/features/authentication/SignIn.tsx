@@ -3,7 +3,6 @@ import { AiOutlineCheck } from "react-icons/ai";
 
 import useAuth from "./useAuth";
 import { InputForm, TwButton } from "components";
-import useSignInWithGoogle from "./useSignInWithGoogle";
 import { useAppDispatch } from "app/hooks";
 import { loginWithGoogle } from "./userSlice";
 
@@ -28,8 +27,6 @@ const SignIn = ({
   const [errorMsg, setErrorMsg] = useState<string>("");
 
   const { signInUser } = useAuth(setPendingMsg, setErrorMsg);
-
-  const signInWithGoogle = useSignInWithGoogle();
 
   const dispatch = useAppDispatch();
 
