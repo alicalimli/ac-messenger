@@ -5,7 +5,7 @@ import { InputForm, TwButton } from "components";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[#$]).{8,24}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=).{8,24}$/;
 
 interface SignUpProps {
   setPendingMsg: (state: string) => void;
@@ -19,7 +19,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
   const [emailFocus, setEmailFocus] = useState(false);
 
   const [displayName, setDisplayName] = useState("");
-  const [validdisplayName, setValidDisplayName] = useState(false);
+  const [validDisplayName, setValidDisplayName] = useState(false);
   const [displayNameFocus, setDisplayNameFocus] = useState(false);
 
   const [password, setPassword] = useState("");
@@ -38,7 +38,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
     try {
       e.preventDefault();
 
-      if (!validEmail || !validdisplayName || !validPassword)
+      if (!validEmail || !validDisplayName || !validPassword)
         throw new Error("Invalid Entry.");
 
       signUpUser(email, displayName, password);
@@ -101,8 +101,8 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
         stateFocus={displayNameFocus}
         setStateFocus={setDisplayNameFocus}
         placeholder="e.g example123"
-        isValid={validdisplayName}
-        instruction="Must be 4 to 24 characters and begins with a letter. Hyphen and underscore are allowed"
+        isValid={validDisplayName}
+        instruction="Must be 4 to 24 characters and begins with letter. Hyphen and underscore are allowed"
       />
       <InputForm
         label="Password"
@@ -113,7 +113,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
         setStateFocus={setPasswordFocus}
         placeholder="*********"
         isValid={validPassword}
-        instruction="8-24 characters and must include upper and lower case characters.Numbers and Dollar or Hashtag sign are required."
+        instruction="8 to 24 characters and must include upper and lower case characters."
       />
       <InputForm
         label="Confirm Password"
@@ -129,7 +129,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
       <TwButton
         type="submit"
         disabled={
-          !validEmail || !validUsername || !validConfirmPwd || pendingMsg
+          !validEmail || !validDisplayName || !validConfirmPwd || pendingMsg
             ? true
             : false
         }
