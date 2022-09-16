@@ -18,9 +18,9 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
   const [validEmail, setValidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
 
-  const [username, setUsername] = useState("");
-  const [validUsername, setValidUsername] = useState(false);
-  const [usernameFocus, setUsernameFocus] = useState(false);
+  const [displayName, setDisplayName] = useState("");
+  const [validdisplayName, setValidDisplayName] = useState(false);
+  const [displayNameFocus, setDisplayNameFocus] = useState(false);
 
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
@@ -32,18 +32,16 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
 
   const [errorMsg, setErrorMsg] = useState("");
 
-  const usernameRef = useRef<HTMLInputElement | null>(null);
-
   const { signUpUser } = useAuth(setPendingMsg, setErrorMsg);
 
   const handleSignUp = async (e: React.FormEvent) => {
     try {
       e.preventDefault();
 
-      if (!validEmail || !validUsername || !validPassword)
+      if (!validEmail || !validdisplayName || !validPassword)
         throw new Error("Invalid Entry.");
 
-      signUpUser(email, username, password);
+      signUpUser(email, displayName, password);
     } catch (error: any) {
       setErrorMsg(error.message);
       setPendingMsg("");
@@ -51,15 +49,15 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
     }
   };
 
-  useEffect(() => setErrorMsg(""), [email, username, password]);
+  useEffect(() => setErrorMsg(""), [email, displayName, password]);
 
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
   }, [email]);
 
   useEffect(() => {
-    setValidUsername(USER_REGEX.test(username));
-  }, [username]);
+    setValidDisplayName(USER_REGEX.test(displayName));
+  }, [displayName]);
 
   useEffect(() => {
     setValidPassword(PWD_REGEX.test(password));
@@ -70,11 +68,11 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
     <form onSubmit={handleSignUp} className="flex flex-col gap-4">
       {" "}
       <div className="flex flex-col gap-1">
-        <label className="text-2xl font-semibold text-center text-black dark:text-white">
-          Sign up
+        <label className="text-3xl font-semibold text-center text-black dark:text-white">
+          Create account
         </label>
         <label className="text-sm text-muted-light dark:text-muted-dark text-center mb-4">
-          Fill in the form
+          Fill up the form
         </label>
       </div>
       <p
@@ -91,20 +89,19 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
         setState={setEmail}
         stateFocus={emailFocus}
         setStateFocus={setEmailFocus}
-        ref={usernameRef}
         placeholder="e.g example@email.com"
         isValid={validEmail}
         instruction="Should be a valid email."
       />
       <InputForm
-        label="Username"
+        label="Display Name"
         type="text"
-        state={username}
-        setState={setUsername}
-        stateFocus={usernameFocus}
-        setStateFocus={setUsernameFocus}
+        state={displayName}
+        setState={setDisplayName}
+        stateFocus={displayNameFocus}
+        setStateFocus={setDisplayNameFocus}
         placeholder="e.g example123"
-        isValid={validUsername}
+        isValid={validdisplayName}
         instruction="Must be 4 to 24 characters and begins with a letter. Hyphen and underscore are allowed"
       />
       <InputForm
@@ -144,7 +141,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
         <button
           type="button"
           onClick={() => setIsSigningIn(true)}
-          className="text-primary-main cursor-pointer hover:text-primary-tinted duration-300 font-semibold"
+          className="text-primary-shaded cursor-pointer hover:text-primary-tinted duration-300 font-semibold"
         >
           Login
         </button>
