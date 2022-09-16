@@ -46,8 +46,8 @@ const SignIn = ({
   return (
     <form onSubmit={handleLogin} className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
-        <label className="text-2xl font-semibold text-center text-black dark:text-white">
-          Sign in to your account
+        <label className="text-3xl font-semibold text-center text-black dark:text-white">
+          ACMessenger
         </label>
         <label className="text-sm text-center text-muted-light mb-4 text-black dark:text-muted-dark">
           Enter your credentials
@@ -114,14 +114,14 @@ const SignIn = ({
         <TwButton
           type="button"
           onClick={signInWithGoogle}
-          className="justify-center text-primary-main"
+          className="justify-center text-primary-tinted dark:text-primary-shaded"
           variant="transparent"
         >
           Sign In With Google
         </TwButton>
         <TwButton
           type="button"
-          className="justify-center text-primary-main"
+          className="justify-center text-primary-tinted dark:text-primary-shaded"
           variant="transparent"
         >
           Sign In With Twitter
