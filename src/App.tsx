@@ -43,12 +43,12 @@ const App = () => {
       if (!userDocData) {
         setDoc(userDocRef, {
           uid: user.uid,
-          display_name: user.displayName,
+          displayName: user.displayName,
           email: user.email,
           bio: "A Bio.",
-          active: false,
+          status: "off",
           location: "Earth",
-          photo_url: user.photoURL,
+          photoURL: user.photoURL,
         });
       }
     });

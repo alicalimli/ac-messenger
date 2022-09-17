@@ -1,12 +1,9 @@
 export default interface User {
-  user_id: number;
-  username: string;
+  uid: number;
+  displayName: string;
   email: string;
-  profile: string;
-  password?: string;
-  status: boolean;
+  photoURL: string;
   bio: string;
   location: string;
-  contacts: number[];
-  inbox: string[];
+  status: string;
 }

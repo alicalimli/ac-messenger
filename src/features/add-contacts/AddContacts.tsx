@@ -1,33 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TwButton } from "components";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Modal } from "components";
 import { useAppSelector } from "app/hooks";
 import { User } from "interfaces";
 
-import { UsersData } from "localdatas";
-
 import AddContactModal from "./AddContactModal";
 import { getUserState } from "features/authentication/userSlice";
+import { db } from "services/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 interface AddContactsProps {
   setSideBarContent: (state: string) => void;
 }
 
 const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
-  // Will update the type later on
-  const users: User[] = UsersData;
-  // const users: any = useGetUsers();
+  const [users, setUsers] = useState<User[] | any>([]);
+  const usersColRef = collection(db, "users");
+
+  const getUsers = async () => {
+    const data = await getDocs(usersColRef);
+
+    setUsers(
+      data.docs.map((doc) => {
+        return { ...doc.data() };
+      })
+    );
+    console.log(users);
+  };
+
   const currentUser = useAppSelector(getUserState);
 
   const [recipient, setRecipient] = useState<User>();
   const [showModal, setShowModal] = useState<boolean>(false);
-  console.log(users);
 
   const contactClickHandler = (recipient: User) => {
     setShowModal(true);
     setRecipient(recipient);
   };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <section className="flex flex-col items-center p-4 px-8">
@@ -49,25 +63,22 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
         <AiOutlineArrowLeft className="text-lg" /> Add Contacts
       </TwButton>
 
-      {users
-        .filter((user: User) => user.user_id !== currentUser.user_id)
-        .filter((user: User) => !user.contacts.includes(currentUser.user_id))
-        .map((user: User, i: number) => (
-          <TwButton
-            variant="transparent"
-            key={i}
-            onClick={() => contactClickHandler(user)}
-            className="w-full flex gap-4"
-          >
-            <div className="relative bg-transparent h-12 w-12">
-              {user.status && (
-                <div className="bg-green-500 p-1.5 rounded-full absolute right-1 bottom-0"></div>
-              )}
-              <img src={user.profile} className="w-full rounded-full" />
-            </div>
-            {user.username}
-          </TwButton>
-        ))}
+      {users.map((user: User, i: number) => (
+        <TwButton
+          variant="transparent"
+          key={i}
+          onClick={() => contactClickHandler(user)}
+          className="w-full flex gap-4"
+        >
+          <div className="relative bg-transparent h-12 w-12">
+            {user.status === "on" && (
+              <div className="bg-green-500 p-1.5 rounded-full absolute right-1 bottom-0"></div>
+            )}
+            <img src={user.photoURL} className="w-full rounded-full" />
+          </div>
+          {user.displayName}
+        </TwButton>
+      ))}
     </section>
   );
 };
