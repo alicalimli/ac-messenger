@@ -4,7 +4,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import useAuth from "./useAuth";
 import { InputForm, TwButton } from "components";
 import { useAppDispatch } from "app/hooks";
-import { loginWithGoogle } from "./userSlice";
+import { login, loginWithGoogle } from "./userSlice";
 
 interface SignInProps {
   setPendingMsg: (state: string) => void;
@@ -30,11 +30,11 @@ const SignIn = ({
 
   const dispatch = useAppDispatch();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     try {
       e.preventDefault();
 
-      signInUser(email, password);
+      dispatch(login({ email, password }));
     } catch (error: any) {
       setErrorMsg(error.message);
     }
