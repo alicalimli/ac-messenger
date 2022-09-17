@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { InputForm, TwButton } from "components";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { createAccount, getUserState } from "./userSlice";
+import { getPendingMsg, makePendingMsg } from "toastSlice";
 
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
@@ -11,12 +12,10 @@ const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=).{8,24}$/;
 
 interface SignUpProps {
-  setPendingMsg: (state: string) => void;
   setIsSigningIn: (state: boolean) => void;
-  pendingMsg: string;
 }
 
-const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
+const SignUp = ({ setIsSigningIn }: SignUpProps) => {
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
@@ -35,8 +34,11 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
 
   const [errorMsg, setErrorMsg] = useState("");
 
-  const { user, status, error } = useAppSelector(getUserState);
+  const { status, error } = useAppSelector(getUserState);
+
   const dispatch = useAppDispatch();
+
+  const pendingMsg = useAppSelector(getPendingMsg);
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,14 +71,14 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
   useEffect(() => {
     if (status === "pending") {
       setErrorMsg("");
-      setPendingMsg("Signing up...");
+      dispatch(makePendingMsg("Signing up..."));
     } else if (status === "failed") {
-      setPendingMsg("");
+      dispatch(makePendingMsg(""));
       setErrorMsg(error);
     }
 
     return () => {
-      setPendingMsg("");
+      dispatch(makePendingMsg(""));
     };
   }, [status, error]);
 

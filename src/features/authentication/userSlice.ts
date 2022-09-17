@@ -36,7 +36,6 @@ export const createAccount = createAsyncThunk(
 );
 
 export const login = createAsyncThunk("user/login", async (loginInfo: any) => {
-  console.log("blah");
   signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password);
 });
 

@@ -10,17 +10,15 @@ import { auth, db } from "services/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { getPendingMsg, getToastMsg } from "toastSlice";
 
 const App = () => {
   const [user] = useAuthState(auth);
 
-  const [pendingMsg, setPendingMsg] = useState("");
-
-  const toastMsg = useAppSelector((state: any) => state.toast.value.message);
+  const pendingMsg = useAppSelector(getPendingMsg);
+  const toastMsg = useAppSelector(getToastMsg);
 
   const darkmode = useAppSelector((state: any) => state.theme.value.darkmode);
-
-  // const user = useAppSelector((state: any) => state.user.value);
 
   const [keepSignedIn, setKeepSignedIn] = useLocalStorage(
     "keepSignedIn",
@@ -82,8 +80,6 @@ const App = () => {
           <Authentication
             keepSignedIn={keepSignedIn}
             setKeepSignedIn={setKeepSignedIn}
-            setPendingMsg={setPendingMsg}
-            pendingMsg={pendingMsg}
           />
         )}
       </BrowserRouter>

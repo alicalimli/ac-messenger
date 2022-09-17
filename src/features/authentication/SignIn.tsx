@@ -4,21 +4,18 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { InputForm, TwButton } from "components";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { getUserState, login, loginWithGoogle } from "./userSlice";
+import { getPendingMsg, makePendingMsg } from "toastSlice";
 
 interface SignInProps {
-  setPendingMsg: (state: string) => void;
   setIsSigningIn: (state: boolean) => void;
   setKeepSignedIn: (state: boolean) => void;
   keepSignedIn: Boolean;
-  pendingMsg: String;
 }
 
 const SignIn = ({
-  setPendingMsg,
   setIsSigningIn,
   setKeepSignedIn,
   keepSignedIn,
-  pendingMsg,
 }: SignInProps) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -26,6 +23,8 @@ const SignIn = ({
   const [errorMsg, setErrorMsg] = useState<string>("");
 
   const { status, error } = useAppSelector(getUserState);
+  const pendingMsg = useAppSelector(getPendingMsg);
+
   const dispatch = useAppDispatch();
 
   const handleLogin = (e: React.FormEvent) => {
@@ -42,14 +41,15 @@ const SignIn = ({
     console.log(status);
     if (status === "pending") {
       setErrorMsg("");
-      setPendingMsg("Signing in...");
+      dispatch(makePendingMsg("Signing in..."));
     } else if (status === "failed") {
-      setPendingMsg("");
+      dispatch(makePendingMsg(""));
+      console.log(error);
       setErrorMsg(error);
     }
 
     return () => {
-      setPendingMsg("");
+      dispatch(makePendingMsg(""));
     };
   }, [status, error]);
 
@@ -105,7 +105,10 @@ const SignIn = ({
         Keep me signed in
       </TwButton>
 
-      <TwButton type="submit" disabled={pendingMsg as unknown as boolean}>
+      <TwButton
+        type="submit"
+        disabled={pendingMsg.length as unknown as boolean}
+      >
         Sign in
       </TwButton>
 

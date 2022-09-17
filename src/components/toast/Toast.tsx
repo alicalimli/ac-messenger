@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "app/hooks";
 import { removeToast } from "toastSlice";
 
 let toastTimeout: ReturnType<typeof setTimeout>;
@@ -15,7 +15,7 @@ interface ToastProps {
 }
 
 const Toast = ({ type, durationMS, msg }: ToastProps): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const removeMsg = () => {
     clearTimeout(toastTimeout);
     toastTimeout = setTimeout(() => dispatch(removeToast()), durationMS);

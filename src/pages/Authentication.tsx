@@ -7,15 +7,11 @@ import { VARIANTS_MANAGER } from "setup/variants-manager";
 interface AuthenticationProps {
   setKeepSignedIn: any;
   keepSignedIn: Boolean;
-  setPendingMsg: any;
-  pendingMsg: String;
 }
 
 const Authentication = ({
   setKeepSignedIn,
   keepSignedIn,
-  setPendingMsg,
-  pendingMsg,
 }: AuthenticationProps) => {
   const [isSigningIn, setIsSigningIn] = useState(true);
 
@@ -36,9 +32,7 @@ const Authentication = ({
               <SignIn
                 setKeepSignedIn={setKeepSignedIn}
                 setIsSigningIn={setIsSigningIn}
-                setPendingMsg={setPendingMsg}
                 keepSignedIn={keepSignedIn}
-                pendingMsg={pendingMsg}
               />
             </motion.div>
           )}
@@ -51,11 +45,7 @@ const Authentication = ({
               animate="slide-in"
               exit="slide-from-right"
             >
-              <SignUp
-                setPendingMsg={setPendingMsg}
-                setIsSigningIn={setIsSigningIn}
-                pendingMsg={pendingMsg}
-              />
+              <SignUp setIsSigningIn={setIsSigningIn} />
             </motion.div>
           )}
         </AnimatePresence>

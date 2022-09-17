@@ -4,23 +4,28 @@ type initialState = {
   message: string;
 };
 
-const initialState = { message: "" };
+const initialState = { message: "", pendingMsg: "" };
 
 const toastSlice = createSlice({
   name: "toast",
-  initialState: {
-    value: initialState,
-  },
+  initialState,
   reducers: {
     createToast: (state, actions) => {
-      state.value.message = actions.payload;
+      state.message = actions.payload;
     },
     removeToast: (state) => {
-      state.value.message = "";
+      state.message = "";
+    },
+    makePendingMsg: (state, action) => {
+      state.pendingMsg = action.payload;
     },
   },
 });
 
-export const { createToast, removeToast } = toastSlice.actions;
+export const getToastMsg = (state: any) => state.toast.message;
+
+export const getPendingMsg = (state: any) => state.toast.pendingMsg;
+
+export const { createToast, removeToast, makePendingMsg } = toastSlice.actions;
 
 export default toastSlice.reducer;
