@@ -6,8 +6,10 @@ import { useAppSelector } from "app/hooks";
 import { Authentication, Home } from "pages";
 import { Toast } from "components";
 import { useLocalStorage } from "hooks";
-import { auth } from "services/firebase";
+import { auth, db } from "services/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const App = () => {
   const [user] = useAuthState(auth);
@@ -32,6 +34,29 @@ const App = () => {
       document.documentElement.classList.remove("dark");
     }
   }, [darkmode]);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, async (user) => {
+      if (!user) return;
+
+      const userDocRef = doc(db, "users", user.uid);
+      const userDocData = (await getDoc(userDocRef)).data();
+
+      if (!userDocData) {
+        setDoc(userDocRef, {
+          uid: user.uid,
+          display_name: user.displayName,
+          email: user.email,
+          bio: "A Bio.",
+          active: false,
+          location: "Earth",
+          photo_url: user.photoURL,
+        });
+      }
+    });
+
+    return unsub;
+  }, []);
 
   return (
     <StrictMode>
