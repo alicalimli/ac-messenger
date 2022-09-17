@@ -5,10 +5,11 @@ import { inbox_empty } from "assets/images";
 import ChatList from "./ChatList";
 import { Chat } from "interfaces";
 import { useAppSelector } from "app/hooks";
+import { getUserState } from "features/authentication/userSlice";
 
 const ChatsContainer = () => {
   // const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
-  const user = useAppSelector((state: any) => state.user.value);
+  const user = useAppSelector(getUserState);
 
   const chats = user.inbox;
 

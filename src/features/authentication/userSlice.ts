@@ -7,19 +7,21 @@ import {
 import { User } from "interfaces";
 import { auth, googleAuthProvider } from "services/firebase";
 
-const initialState = {};
+const initialState = {
+  user: {},
+  status: "idle",
+  error: "",
+};
 
 export const userSlice = createSlice({
   name: "user",
-  initialState: {
-    value: initialState,
-  },
+  initialState,
   reducers: {
     login: (state, action: PayloadAction<User>) => {
-      state.value = action.payload;
+      state.user = action.payload;
     },
     logout: (state) => {
-      state.value = initialState;
+      state.user = initialState;
     },
     loginWithGoogle: () => {
       signInWithPopup(auth, googleAuthProvider);
@@ -42,6 +44,8 @@ export const userSlice = createSlice({
     },
   },
 });
+
+export const getUserState = (state: any) => state.user;
 
 export const { login, logout, loginWithGoogle, createAccount } =
   userSlice.actions;

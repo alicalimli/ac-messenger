@@ -8,6 +8,7 @@ import { User } from "interfaces";
 import { UsersData } from "localdatas";
 
 import AddContactModal from "./AddContactModal";
+import { getUserState } from "features/authentication/userSlice";
 
 interface AddContactsProps {
   setSideBarContent: (state: string) => void;
@@ -17,7 +18,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   // Will update the type later on
   const users: User[] = UsersData;
   // const users: any = useGetUsers();
-  const currentUser = useAppSelector((state: any) => state.user.value);
+  const currentUser = useAppSelector(getUserState);
 
   const [recipient, setRecipient] = useState<User>();
   const [showModal, setShowModal] = useState<boolean>(false);
