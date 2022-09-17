@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 
-import useAuth from "./useAuth";
 import { InputForm, TwButton } from "components";
-import { useAppDispatch } from "app/hooks";
-import { login, loginWithGoogle } from "./userSlice";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { getUserState, login, loginWithGoogle } from "./userSlice";
 
 interface SignInProps {
   setPendingMsg: (state: string) => void;
   setIsSigningIn: (state: boolean) => void;
   setKeepSignedIn: (state: boolean) => void;
-  keepSignedIn: boolean;
-  pendingMsg: string;
+  keepSignedIn: Boolean;
+  pendingMsg: String;
 }
 
 const SignIn = ({
@@ -26,23 +25,33 @@ const SignIn = ({
 
   const [errorMsg, setErrorMsg] = useState<string>("");
 
-  const { signInUser } = useAuth(setPendingMsg, setErrorMsg);
-
+  const { status, error } = useAppSelector(getUserState);
   const dispatch = useAppDispatch();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    try {
-      e.preventDefault();
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
 
-      dispatch(login({ email, password }));
-    } catch (error: any) {
-      setErrorMsg(error.message);
-    }
+    dispatch(login({ email, password }));
   };
 
   useEffect(() => {
     setErrorMsg("");
   }, [email, password]);
+
+  useEffect(() => {
+    console.log(status);
+    if (status === "pending") {
+      setErrorMsg("");
+      setPendingMsg("Signing in...");
+    } else if (status === "failed") {
+      setPendingMsg("");
+      setErrorMsg(error);
+    }
+
+    return () => {
+      setPendingMsg("");
+    };
+  }, [status, error]);
 
   return (
     <form onSubmit={handleLogin} className="flex flex-col gap-4">
