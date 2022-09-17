@@ -45,7 +45,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const getUserState = (state: any) => state.user;
+export const getUserState = (state: any) => state;
 
 export const { login, logout, loginWithGoogle, createAccount } =
   userSlice.actions;

@@ -9,7 +9,7 @@ import { getUserState } from "features/authentication/userSlice";
 
 const ChatsContainer = () => {
   // const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
-  const user = useAppSelector(getUserState);
+  const { user } = useAppSelector(getUserState);
 
   const chats = user.inbox;
 

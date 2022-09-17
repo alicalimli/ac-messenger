@@ -1,6 +1,6 @@
 import { getUserState } from "features/authentication/userSlice";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "app/hooks";
 
 interface MessagesProps {
   messages: any;
@@ -8,7 +8,7 @@ interface MessagesProps {
 }
 
 const Messages = ({ messages, latestMsgRef }: MessagesProps) => {
-  const user = useSelector(getUserState);
+  const { user } = useAppSelector(getUserState);
 
   return messages.map((currentMsg: any, i: number) => (
     <div
