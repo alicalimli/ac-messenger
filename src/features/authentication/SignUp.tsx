@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import { InputForm, TwButton } from "components";
-import { useAppDispatch } from "app/hooks";
-import { createAccount } from "./userSlice";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { createAccount, getUserState } from "./userSlice";
 
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
@@ -35,28 +35,20 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
 
   const [errorMsg, setErrorMsg] = useState("");
 
+  const { user, status, error } = useAppSelector(getUserState);
   const dispatch = useAppDispatch();
 
   const handleSignUp = async (e: React.FormEvent) => {
-    try {
-      e.preventDefault();
+    e.preventDefault();
 
-      if (!validEmail || !validDisplayName || !validPassword)
-        throw new Error("Invalid Entry.");
-
-      dispatch(
-        createAccount({
-          email,
-          password,
-          displayName,
-          photoURL: DEFAULT_PROFILE_IMAGE,
-        })
-      );
-    } catch (error: any) {
-      setErrorMsg(error.message);
-      setPendingMsg("");
-      console.error(error);
-    }
+    dispatch(
+      createAccount({
+        email,
+        password,
+        displayName,
+        photoURL: DEFAULT_PROFILE_IMAGE,
+      })
+    );
   };
 
   useEffect(() => setErrorMsg(""), [email, displayName, password]);
@@ -73,6 +65,20 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
     setValidPassword(PWD_REGEX.test(password));
     setValidConfirmPwd(password === confirmPwd);
   }, [password, confirmPwd]);
+
+  useEffect(() => {
+    if (status === "pending") {
+      setErrorMsg("");
+      setPendingMsg("Signing up...");
+    } else if (status === "failed") {
+      setPendingMsg("");
+      setErrorMsg(error);
+    }
+
+    return () => {
+      setPendingMsg("");
+    };
+  }, [status, error]);
 
   return (
     <form onSubmit={handleSignUp} className="flex flex-col gap-4">

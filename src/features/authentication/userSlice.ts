@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
@@ -9,9 +9,31 @@ import { auth, googleAuthProvider } from "services/firebase";
 
 const initialState = {
   user: {},
-  status: "idle",
-  error: "",
+  status: "idle", // 'idle' | 'pending' | 'succeeded' | 'failed'
+  error: <any>"",
 };
+
+export const createAccount = createAsyncThunk(
+  "user/createAccount",
+  async (signUpInfo: any) => {
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        signUpInfo.email,
+        signUpInfo.password
+      );
+
+      if (!auth.currentUser) return;
+
+      updateProfile(auth.currentUser, {
+        displayName: signUpInfo.displayName,
+        photoURL: signUpInfo.photoURL,
+      });
+    } catch (error: any) {
+      return error.message;
+    }
+  }
+);
 
 export const userSlice = createSlice({
   name: "user",
@@ -26,28 +48,23 @@ export const userSlice = createSlice({
     loginWithGoogle: () => {
       signInWithPopup(auth, googleAuthProvider);
     },
-    createAccount: (_state, action) => {
-      createUserWithEmailAndPassword(
-        auth,
-        action.payload.email,
-        action.payload.password
-      );
-
-      // NEEDS TO USER TUNK FOR THIS TO WORK
-
-      if (!auth.currentUser) return;
-
-      updateProfile(auth.currentUser, {
-        displayName: action.payload.displayName,
-        photoURL: action.payload.profileURL,
-      });
-    },
+  },
+  extraReducers(builder) {
+    builder.addCase(createAccount.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(createAccount.fulfilled, (state) => {
+      state.status = "succeeded";
+    });
+    builder.addCase(createAccount.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
+    });
   },
 });
 
-export const getUserState = (state: any) => state;
+export const getUserState = (state: any) => state.user;
 
-export const { login, logout, loginWithGoogle, createAccount } =
-  userSlice.actions;
+export const { login, logout, loginWithGoogle } = userSlice.actions;
 
 export default userSlice.reducer;
