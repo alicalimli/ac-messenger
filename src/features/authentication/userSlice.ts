@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { signInWithPopup } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  updateProfile,
+} from "firebase/auth";
 import { User } from "interfaces";
 import { auth, googleAuthProvider } from "services/firebase";
 
@@ -20,9 +24,26 @@ export const userSlice = createSlice({
     loginWithGoogle: () => {
       signInWithPopup(auth, googleAuthProvider);
     },
+    createAccount: (_state, action) => {
+      createUserWithEmailAndPassword(
+        auth,
+        action.payload.email,
+        action.payload.password
+      );
+
+      // NEEDS TO USER TUNK FOR THIS TO WORK
+
+      if (!auth.currentUser) return;
+
+      updateProfile(auth.currentUser, {
+        displayName: action.payload.displayName,
+        photoURL: action.payload.profileURL,
+      });
+    },
   },
 });
 
-export const { login, logout, loginWithGoogle } = userSlice.actions;
+export const { login, logout, loginWithGoogle, createAccount } =
+  userSlice.actions;
 
 export default userSlice.reducer;

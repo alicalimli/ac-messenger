@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import useAuth from "./useAuth";
 import { InputForm, TwButton } from "components";
+import { useAppDispatch } from "app/hooks";
+import { createAccount } from "./userSlice";
+
+const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
 const USER_REGEX = /^[A-z][A-z0-9-_ ]{3,17}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -32,7 +35,7 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
 
   const [errorMsg, setErrorMsg] = useState("");
 
-  const { signUpUser } = useAuth(setPendingMsg, setErrorMsg);
+  const dispatch = useAppDispatch();
 
   const handleSignUp = async (e: React.FormEvent) => {
     try {
@@ -41,7 +44,14 @@ const SignUp = ({ setPendingMsg, setIsSigningIn, pendingMsg }: SignUpProps) => {
       if (!validEmail || !validDisplayName || !validPassword)
         throw new Error("Invalid Entry.");
 
-      signUpUser(email, displayName, password);
+      dispatch(
+        createAccount({
+          email,
+          password,
+          displayName,
+          photoURL: DEFAULT_PROFILE_IMAGE,
+        })
+      );
     } catch (error: any) {
       setErrorMsg(error.message);
       setPendingMsg("");
