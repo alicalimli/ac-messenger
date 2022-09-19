@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 import { InputForm, TwButton } from "components";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { createAccount, getUserState } from "./userSlice";
+import { useAppSelector } from "app/hooks";
 import { getPendingMsg, makePendingMsg } from "toastSlice";
+import { auth } from "services/firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useDispatch } from "react-redux";
 
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
@@ -34,23 +36,27 @@ const SignUp = ({ setIsSigningIn }: SignUpProps) => {
 
   const [errorMsg, setErrorMsg] = useState("");
 
-  const { status, error } = useAppSelector(getUserState);
-
-  const dispatch = useAppDispatch();
-
   const pendingMsg = useAppSelector(getPendingMsg);
+  const dispatch = useDispatch();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    dispatch(
-      createAccount({
-        email,
-        password,
-        displayName,
-        photoURL: DEFAULT_PROFILE_IMAGE,
+    dispatch(makePendingMsg("Signing up..."));
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        if (!auth.currentUser) return;
+        updateProfile(auth.currentUser, {
+          displayName: displayName,
+          photoURL: DEFAULT_PROFILE_IMAGE,
+        });
+        dispatch(makePendingMsg(""));
       })
-    );
+      .catch((error: any) => {
+        dispatch(makePendingMsg(""));
+        setErrorMsg(error.message);
+      });
   };
 
   useEffect(() => setErrorMsg(""), [email, displayName, password]);
@@ -67,20 +73,6 @@ const SignUp = ({ setIsSigningIn }: SignUpProps) => {
     setValidPassword(PWD_REGEX.test(password));
     setValidConfirmPwd(password === confirmPwd);
   }, [password, confirmPwd]);
-
-  useEffect(() => {
-    if (status === "pending") {
-      setErrorMsg("");
-      dispatch(makePendingMsg("Signing up..."));
-    } else if (status === "failed") {
-      dispatch(makePendingMsg(""));
-      setErrorMsg(error);
-    }
-
-    return () => {
-      dispatch(makePendingMsg(""));
-    };
-  }, [status, error]);
 
   return (
     <form onSubmit={handleSignUp} className="flex flex-col gap-4">
