@@ -9,10 +9,10 @@ import { FiSettings } from "react-icons/fi";
 import { RiContactsLine } from "react-icons/ri";
 
 import { TwTooltip, TwButton } from "components";
-import { useSignOut } from "hooks";
 
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { toggleDarkmode } from "./themeSlice";
+import { logout } from "features/authentication";
 
 const SIDEBAR_PAGE_BUTTONS = [
   { name: "chats", icon: BiMessageSquareDetail },
@@ -28,7 +28,6 @@ interface SidebarProps {
 const Sidebar = ({ setSideBarContent }: SidebarProps) => {
   const darkmode = useAppSelector((state: any) => state.theme.value);
   const dispatch = useAppDispatch();
-  const signOutUser = useSignOut();
 
   const changeSideContent = (sideContentName: string) => {
     sideContentName = sideContentName.replace(" ", "");
@@ -36,6 +35,10 @@ const Sidebar = ({ setSideBarContent }: SidebarProps) => {
   };
 
   const darkmodeClickHandler = () => dispatch(toggleDarkmode());
+
+  const handleSignOut = () => {
+    dispatch(logout());
+  };
 
   return (
     <nav className="relative hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 justify-center">
@@ -73,7 +76,7 @@ const Sidebar = ({ setSideBarContent }: SidebarProps) => {
         <TwButton
           variant="transparent"
           className="relative group z-10"
-          onClick={signOutUser}
+          onClick={handleSignOut}
         >
           <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl" />
           <TwTooltip tip="logout" position="right" />
