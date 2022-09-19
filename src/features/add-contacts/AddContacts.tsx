@@ -8,7 +8,7 @@ import { User } from "interfaces";
 import AddContactModal from "./AddContactModal";
 import { getUserState } from "features/authentication/userSlice";
 import { db } from "services/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 interface AddContactsProps {
   setSideBarContent: (state: string) => void;
@@ -16,9 +16,15 @@ interface AddContactsProps {
 
 const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   const [users, setUsers] = useState<User[] | any>([]);
-  const usersColRef = collection(db, "users");
+
+  const { user: currentUser } = useAppSelector(getUserState);
 
   const getUsers = async () => {
+    const usersColRef = query(
+      collection(db, "users"),
+      where("uid", "!=", currentUser.uid)
+    );
+
     const data = await getDocs(usersColRef);
 
     setUsers(
@@ -26,11 +32,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
         return { ...doc.data() };
       })
     );
-    console.log(users);
   };
-
-  const currentUser = useAppSelector(getUserState);
-
   const [recipient, setRecipient] = useState<User>();
   const [showModal, setShowModal] = useState<boolean>(false);
 
