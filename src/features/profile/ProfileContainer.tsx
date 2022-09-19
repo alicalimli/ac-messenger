@@ -4,7 +4,7 @@ import { GoMention } from "react-icons/go";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 
-import { useAppDispatch } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 
 import ProfileEditForm from "./ProfileEditForm";
 
@@ -12,6 +12,7 @@ import { Modal, TwTooltip, TwButton } from "components";
 import { createToast } from "toastSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "services/firebase";
+import { getUserState } from "features/authentication/userSlice";
 
 interface ProfileContainerProps {
   setSideBarContent: (state: string) => void;
@@ -20,7 +21,7 @@ interface ProfileContainerProps {
 const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
   const dispatch = useAppDispatch();
 
-  const [user] = useAuthState(auth);
+  const { user } = useAppSelector(getUserState);
 
   const [showModal, setShowModal] = useState(false);
 

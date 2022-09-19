@@ -1,7 +1,7 @@
 import { StrictMode, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 
 import { Authentication, Home } from "pages";
 import { Toast } from "components";
@@ -11,14 +11,16 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { getPendingMsg, getToastMsg } from "toastSlice";
+import { login } from "features/authentication";
 
 const App = () => {
   const [user] = useAuthState(auth);
 
   const pendingMsg = useAppSelector(getPendingMsg);
   const toastMsg = useAppSelector(getToastMsg);
-
   const darkmode = useAppSelector((state: any) => state.theme.value.darkmode);
+
+  const dispatch = useAppDispatch();
 
   const [keepSignedIn, setKeepSignedIn] = useLocalStorage(
     "keepSignedIn",
@@ -50,6 +52,8 @@ const App = () => {
           location: "Earth",
           photoURL: user.photoURL,
         });
+      } else {
+        dispatch(login(userDocData));
       }
     });
 
