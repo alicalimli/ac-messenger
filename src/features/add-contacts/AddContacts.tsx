@@ -65,22 +65,26 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
         <AiOutlineArrowLeft className="text-lg" /> Add Contacts
       </TwButton>
 
-      {users.map((user: User, i: number) => (
-        <TwButton
-          variant="transparent"
-          key={i}
-          onClick={() => contactClickHandler(user)}
-          className="w-full flex gap-4"
-        >
-          <div className="relative bg-transparent h-12 w-12">
-            {user.status === "on" && (
-              <div className="bg-green-500 p-1.5 rounded-full absolute right-1 bottom-0"></div>
-            )}
-            <img src={user.photoURL} className="w-full rounded-full" />
-          </div>
-          {user.displayName}
-        </TwButton>
-      ))}
+      {users.length ? (
+        users.map((user: User, i: number) => (
+          <TwButton
+            variant="transparent"
+            key={i}
+            onClick={() => contactClickHandler(user)}
+            className="w-full flex gap-4"
+          >
+            <div className="relative bg-transparent h-12 w-12">
+              {user.status === "on" && (
+                <div className="bg-green-500 p-1.5 rounded-full absolute right-1 bottom-0"></div>
+              )}
+              <img src={user.photoURL} className="w-full rounded-full" />
+            </div>
+            {user.displayName}
+          </TwButton>
+        ))
+      ) : (
+        <h1>loading..</h1>
+      )}
     </section>
   );
 };
