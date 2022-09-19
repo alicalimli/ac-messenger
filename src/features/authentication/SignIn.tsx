@@ -5,8 +5,8 @@ import { InputForm, TwButton } from "components";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { loginWithGoogle } from "./userSlice";
 import { getPendingMsg, makePendingMsg } from "toastSlice";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "services/firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, googleAuthProvider } from "services/firebase";
 
 interface SignInProps {
   setIsSigningIn: (state: boolean) => void;
@@ -31,6 +31,18 @@ const SignIn = ({
     dispatch(makePendingMsg("Signing In..."));
 
     signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        dispatch(makePendingMsg(""));
+      })
+      .catch((error) => {
+        dispatch(makePendingMsg(""));
+        setErrorMsg(error.message);
+      });
+  };
+
+  const handleGoogleLogin = () => {
+    dispatch(makePendingMsg("Signing In With Google..."));
+    signInWithPopup(auth, googleAuthProvider)
       .then(() => {
         dispatch(makePendingMsg(""));
       })
@@ -96,10 +108,7 @@ const SignIn = ({
         Keep me signed in
       </TwButton>
 
-      <TwButton
-        type="submit"
-        disabled={pendingMsg.length as unknown as boolean}
-      >
+      <TwButton type="submit" disabled={pendingMsg as boolean}>
         Sign in
       </TwButton>
 
@@ -117,7 +126,8 @@ const SignIn = ({
       <div className="flex flex-col gap-2 mt-4">
         <TwButton
           type="button"
-          onClick={() => dispatch(loginWithGoogle())}
+          onClick={handleGoogleLogin}
+          disabled={pendingMsg as boolean}
           className="justify-center text-primary-tinted dark:text-primary-shaded"
           variant="transparent"
         >
