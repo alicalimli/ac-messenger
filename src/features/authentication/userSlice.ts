@@ -35,15 +35,6 @@ export const createAccount = createAsyncThunk(
   }
 );
 
-export const login = createAsyncThunk("user/login", async (loginInfo: any) => {
-  try {
-    signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password);
-  } catch (error: any) {
-    console.log(error.message);
-    return error.message;
-  }
-});
-
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -56,25 +47,16 @@ export const userSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addMatcher(
-      isAnyOf(createAccount.pending, login.pending),
-      (state) => {
-        state.status = "pending";
-      }
-    );
-    builder.addMatcher(
-      isAnyOf(createAccount.fulfilled, login.fulfilled),
-      (state) => {
-        state.status = "succeeded";
-      }
-    );
-    builder.addMatcher(
-      isAnyOf(createAccount.rejected, login.rejected),
-      (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      }
-    );
+    builder.addMatcher(isAnyOf(createAccount.pending), (state) => {
+      state.status = "pending";
+    });
+    builder.addMatcher(isAnyOf(createAccount.fulfilled), (state) => {
+      state.status = "succeeded";
+    });
+    builder.addMatcher(isAnyOf(createAccount.rejected), (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
+    });
   },
 });
 
