@@ -13,9 +13,7 @@ const ErrorMsg = ({ img, msg, subMsg, className }: ErrorMsgProps) => {
     <motion.div
       className={`${className} flex flex-col gap-4 items-center justify-center w-full p-4`}
       variants={VARIANTS_MANAGER}
-      initial="pop-out"
-      animate="pop-in"
-      exit="pop-out"
+      animate="fade-in"
     >
       <img src={img} className="w-full md:w-96" />
       <div className="flex flex-col gap-2 text-center">

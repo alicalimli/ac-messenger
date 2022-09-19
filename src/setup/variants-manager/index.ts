@@ -13,12 +13,12 @@ export const VARIANTS_MANAGER = {
     transition: MASS_TRANSITION,
   },
   "slide-from-left": {
-    x: "-50%",
+    x: "-30%",
     opacity: 0,
     transition: MASS_TRANSITION,
   },
   "slide-from-right": {
-    x: "50%",
+    x: "30%",
     opacity: 0,
     transition: MASS_TRANSITION,
   },
