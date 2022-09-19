@@ -7,7 +7,7 @@ import { getPendingMsg, makePendingMsg } from "toastSlice";
 
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
-const USER_REGEX = /^[A-z][A-z0-9-_ ]{3,17}$/;
+const USER_REGEX = /^[A-z][A-z0-9-_ ]{2,17}$/;
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=).{8,24}$/;
 
@@ -120,7 +120,7 @@ const SignUp = ({ setIsSigningIn }: SignUpProps) => {
         setStateFocus={setDisplayNameFocus}
         placeholder="e.g example123"
         isValid={validDisplayName}
-        instruction="Must be 4 to 18 characters and begins with letter. Hyphen, Spaces and underscore are allowed"
+        instruction="Maximum of 18 Letters. Hyphen, Spaces and underscore are allowed"
       />
       <InputForm
         label="Password"
