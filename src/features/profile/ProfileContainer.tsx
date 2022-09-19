@@ -10,8 +10,6 @@ import ProfileEditForm from "./ProfileEditForm";
 
 import { Modal, TwTooltip, TwButton } from "components";
 import { createToast } from "toastSlice";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "services/firebase";
 import { getUserState } from "features/authentication/userSlice";
 
 interface ProfileContainerProps {
@@ -26,9 +24,11 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
   const [showModal, setShowModal] = useState(false);
 
   const infoButtons = [
-    { icon: HiOutlineMail, text: user?.email },
-    { icon: GoMention, text: user?.displayName },
-    { icon: HiOutlineLocationMarker, text: "Earth" },
+    { icon: HiOutlineMail, text: user?.email || "fetching email..." },
+    {
+      icon: HiOutlineLocationMarker,
+      text: user?.location || "fetching location...",
+    },
   ];
 
   const copyToClipboard = (text: string) => {
@@ -64,9 +64,11 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
             src={user?.photoURL || ""}
           />
           <h2 className="text-lg text-black dark:text-white">
-            {user?.displayName}
+            {user?.displayName || "fetching display name..."}
           </h2>
-          <p className="text-muted-light dark:text-muted-dark">{user?.bio}</p>
+          <p className="text-muted-light dark:text-muted-dark">
+            {user?.bio || "fetching bio..."}
+          </p>
         </div>
       </div>
 
