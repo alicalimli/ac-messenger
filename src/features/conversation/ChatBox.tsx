@@ -19,25 +19,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const conversationContainer = useRef<HTMLDivElement>(null);
   const latestMsg = useRef<HTMLButtonElement>(null);
 
-  const [messages, setMessages] = useState([
-    {
-      username: "ali",
-      message: "Hey",
-      time: "10:22",
-    },
-    {
-      username: "ali",
-      message: "Hello",
-      time: "10:22",
-    },
-    {
-      username: "ali",
-      message: "Test",
-      time: "10:22",
-    },
-  ]);
-
-  console.log(recipient);
+  const [messages, setMessages] = useState<[]>([]);
 
   const scrollDown = () => {
     latestMsg?.current?.scrollIntoView({ behavior: "smooth" });
