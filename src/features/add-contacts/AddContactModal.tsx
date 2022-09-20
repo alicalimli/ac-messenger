@@ -4,6 +4,7 @@ import { User } from "interfaces";
 import { useState } from "react";
 import { useAppDispatch } from "app/hooks";
 import { createToast } from "toastSlice";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 
 interface AddContactModalProps {
   setShowModal: (state: boolean) => void;
@@ -35,11 +36,11 @@ const AddContactModal = ({
       <div className="flex flex-col items-center text-center px-8">
         <img
           className="bg-cover bg-center bg-transparent mb-2 w-16 h-16 rounded-full shadow-md"
-          alt={`${recipient?.username}'s profile picture`}
-          src={recipient?.profile}
+          alt={`${recipient?.displayName}'s profile picture`}
+          src={recipient?.photoURL}
         />
         <h2 className="text-lg text-black dark:text-white">
-          {recipient?.username}
+          {recipient?.displayName}
         </h2>
         <p className="text-muted-light dark:text-muted-dark">
           Front-end Developer
