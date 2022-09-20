@@ -7,13 +7,13 @@ import { TwButton } from "components";
 import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
+import { User } from "interfaces";
 
 interface ChatBoxProps {
-  currentChat: string;
-  setCurrentChat: (state: string) => void;
+  recipient: User;
 }
 
-const ChatBox = ({ currentChat, setCurrentChat }: ChatBoxProps) => {
+const ChatBox = ({ recipient }: ChatBoxProps) => {
   const [showArrowDown, setShowArrowDown] = useState(false);
 
   const conversationContainer = useRef<HTMLDivElement>(null);
@@ -37,6 +37,8 @@ const ChatBox = ({ currentChat, setCurrentChat }: ChatBoxProps) => {
     },
   ]);
 
+  console.log(recipient);
+
   const scrollDown = () => {
     latestMsg?.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -58,7 +60,7 @@ const ChatBox = ({ currentChat, setCurrentChat }: ChatBoxProps) => {
   return (
     <section className="flex h-full w-full">
       <div className="w-full flex flex-col gap-4">
-        <ChatHeader />
+        <ChatHeader recipient={recipient} />
 
         <main
           ref={conversationContainer}

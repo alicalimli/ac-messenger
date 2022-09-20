@@ -4,16 +4,14 @@ import { User, Chat } from "interfaces";
 
 interface ChatListProps {
   chats: any;
-  chatClickHandler: (e: React.MouseEvent, chat: Chat) => void;
+  chatClickHandler: (e: React.MouseEvent, recipient: User) => void;
 }
 
 const ChatList = ({ chats, chatClickHandler }: ChatListProps) => {
   return chats.map((chat: any, i: number) => (
     <TwButton
       variant="transparent"
-      onClick={(e: React.MouseEvent) =>
-        chatClickHandler(e, "" as unknown as Chat)
-      }
+      onClick={(e: React.MouseEvent) => chatClickHandler(e, chat[1].userInfo)}
       key={i}
       className={`w-full p-2 ${
         false && "bg-muted-light/5 dark:bg-muted-dark/10 "

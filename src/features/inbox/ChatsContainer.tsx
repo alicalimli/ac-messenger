@@ -3,12 +3,12 @@ import { ErrorMsg } from "components";
 import { inbox_empty } from "assets/images";
 
 import ChatList from "./ChatList";
-import { Chat } from "interfaces";
+import { Chat, User } from "interfaces";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { getUserState } from "features/authentication/userSlice";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "services/firebase";
-import { changeUser } from "./chatReducer";
+import { changeChat } from "./chatReducer";
 
 const ChatsContainer = () => {
   const { user: currentUser } = useAppSelector(getUserState);
@@ -17,8 +17,8 @@ const ChatsContainer = () => {
 
   const chatListRef = useRef<Chat>();
 
-  const chatClickHandler = (e: React.MouseEvent, chat: Chat) => {
-    dispatch(changeUser);
+  const chatClickHandler = (e: React.MouseEvent, recipient: User) => {
+    dispatch(changeChat(recipient));
     // if (chatListRef.current) {
     //   chatListRef.current.active_chat = false;
     // }

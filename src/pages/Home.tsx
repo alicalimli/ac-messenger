@@ -13,7 +13,7 @@ const Home = () => {
   const defaultSideBarContent = "chats";
   const [sidebarContent, setSideBarContent] = useState(defaultSideBarContent);
 
-  const { user: recipient } = useAppSelector(getChatState);
+  const { recipient } = useAppSelector(getChatState);
 
   return (
     <div className="flex w-full min-h-screen">
@@ -22,9 +22,9 @@ const Home = () => {
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
       />
-      {!recipient ? (
+      {recipient.uid ? (
         <div className="h-screen w-screen absolute z-10 bg-muted-light/10 dark:bg-black duration-300 md:relative md:flex items-center justify-center">
-          <ChatBox />
+          <ChatBox recipient={recipient} />
         </div>
       ) : (
         <ErrorMsg
