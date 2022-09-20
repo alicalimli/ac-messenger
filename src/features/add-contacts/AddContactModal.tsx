@@ -4,7 +4,14 @@ import { User } from "interfaces";
 import { useState } from "react";
 import { useAppDispatch } from "app/hooks";
 import { createToast } from "toastSlice";
-import { HiOutlineLocationMarker } from "react-icons/hi";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
+import { db } from "services/firebase";
 
 interface AddContactModalProps {
   setShowModal: (state: boolean) => void;
@@ -17,16 +24,48 @@ const AddContactModal = ({
   currentUser,
   recipient,
 }: AddContactModalProps) => {
-  // const { addContact } = useAddContact(recipient);
-
   const dispatch = useAppDispatch();
 
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
-  const addContactBtnHandler = () => {
-    setShowModal(false);
-    setIsBtnDisabled(false);
-    dispatch(createToast("Contact added successfuly."));
+  const addContactBtnHandler = async () => {
+    try {
+      if (!currentUser || !recipient) return;
+
+      const combinedId =
+        currentUser.uid > recipient.uid
+          ? currentUser.uid + recipient.uid
+          : recipient.uid + currentUser.uid;
+
+      const chatDocRef = doc(db, "chats", combinedId.toString());
+      const userChatDocRef = doc(db, "userChats", currentUser.uid.toString());
+      const recipientChatDocRef = doc(
+        db,
+        "userChats",
+        recipient.uid.toString()
+      );
+      const chatDocData = await getDoc(chatDocRef);
+
+      if (!chatDocData.exists()) {
+        await setDoc(chatDocRef, { messages: [] });
+
+        await setDoc(userChatDocRef, {
+          [combinedId + ".userInfo"]: recipient,
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+
+        await setDoc(recipientChatDocRef, {
+          [combinedId + ".userInfo"]: currentUser,
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+      }
+
+      setShowModal(false);
+      setIsBtnDisabled(false);
+      dispatch(createToast("Contact added successfuly."));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const cancelBtnHandler = () => setShowModal(false);
