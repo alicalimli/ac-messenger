@@ -14,7 +14,7 @@ import { getPendingMsg, getToastMsg } from "toastSlice";
 import { login } from "features/authentication";
 
 const App = () => {
-  const [user] = useAuthState(auth);
+  const [currentUser] = useAuthState(auth);
 
   const pendingMsg = useAppSelector(getPendingMsg);
   const toastMsg = useAppSelector(getToastMsg);
@@ -40,9 +40,15 @@ const App = () => {
       if (!user) return;
 
       const userDocRef = doc(db, "users", user.uid);
-      const userDocData = (await getDoc(userDocRef)).data();
+      const userDocData = await getDoc(userDocRef);
+      const userChatsDocRef = doc(db, "userChats", user.uid);
+      const userChatsDocData = await getDoc(userChatsDocRef);
 
-      if (!userDocData) {
+      if (!userChatsDocData?.exists()) {
+        setDoc(userChatsDocRef, {});
+      }
+
+      if (!userDocData?.exists()) {
         setDoc(userDocRef, {
           uid: user.uid,
           displayName: user.displayName,
@@ -53,7 +59,7 @@ const App = () => {
           photoURL: user.photoURL,
         });
       } else {
-        dispatch(login(userDocData));
+        dispatch(login(userDocData.data()));
       }
     });
 
@@ -71,7 +77,7 @@ const App = () => {
           {toastMsg && <Toast durationMS={3000} msg={toastMsg} />}
         </AnimatePresence>
 
-        {user ? (
+        {currentUser ? (
           <motion.div
             className="flex"
             animate={{ opacity: 1, x: 0, y: 0 }}

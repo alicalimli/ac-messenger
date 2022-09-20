@@ -4,7 +4,13 @@ import { User } from "interfaces";
 import { useState } from "react";
 import { useAppDispatch } from "app/hooks";
 import { createToast } from "toastSlice";
-import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "services/firebase";
 
 interface AddContactModalProps {
@@ -43,14 +49,14 @@ const AddContactModal = ({
       const chatDocData = await getDoc(chatDocRef);
 
       if (!chatDocData.exists()) {
-        await setDoc(chatDocRef, { messages: [] });
+        // await setDoc(chatDocRef, { messages: [] });
 
-        await setDoc(userChatDocRef, {
+        await updateDoc(userChatDocRef, {
           [combinedId + ".userInfo"]: recipient,
           [combinedId + ".date"]: serverTimestamp(),
         });
 
-        await setDoc(recipientChatDocRef, {
+        await updateDoc(recipientChatDocRef, {
           [combinedId + ".userInfo"]: currentUser,
           [combinedId + ".date"]: serverTimestamp(),
         });
