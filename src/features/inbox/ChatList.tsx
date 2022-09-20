@@ -3,7 +3,7 @@ import React from "react";
 import { User, Chat } from "interfaces";
 
 interface ChatListProps {
-  chats: string[];
+  chats: any;
   chatClickHandler: (e: React.MouseEvent, chat: Chat) => void;
 }
 
@@ -16,7 +16,7 @@ const ChatList = ({ chats, chatClickHandler }: ChatListProps) => {
       }
       key={i}
       className={`w-full p-2 ${
-        true && "bg-muted-light/5 dark:bg-muted-dark/10 "
+        false && "bg-muted-light/5 dark:bg-muted-dark/10 "
       }`}
     >
       <div className="relative bg-transparent h-16 w-16">

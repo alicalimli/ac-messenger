@@ -43,9 +43,12 @@ const ChatsContainer = () => {
   return (
     <div className=" p-4 flex flex-col gap-4">
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
-      <div>
-        {chats?.length ? (
-          <ChatList chats={chats} chatClickHandler={chatClickHandler} />
+      <div className="flex flex-col gap-1">
+        {Object.entries(chats).length ? (
+          <ChatList
+            chats={Object.entries(chats)}
+            chatClickHandler={chatClickHandler}
+          />
         ) : (
           <ErrorMsg
             img={inbox_empty}
