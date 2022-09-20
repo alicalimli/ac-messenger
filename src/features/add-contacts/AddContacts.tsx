@@ -17,6 +17,10 @@ interface AddContactsProps {
 const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   const [users, setUsers] = useState<User[] | any>([]);
 
+  const [searchVal, setSearchVal] = useState<string>("");
+
+  const searchChangeHandler = (e) => setSearchVal(e.target.value);
+
   const { user: currentUser } = useAppSelector(getUserState);
 
   const getUsers = async () => {
@@ -64,6 +68,19 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
       >
         <AiOutlineArrowLeft className="text-lg" /> Add Contacts
       </TwButton>
+
+      <form className="w-full p-2 p-4">
+        <label htmlFor="search-input">
+          <input
+            type="text"
+            id="search-input"
+            value={searchVal}
+            onChange={searchChangeHandler}
+            placeholder="Search"
+            className="p-2 px-4 w-full rounded-full text-black dark:text-white bg-muted-light/10 dark:bg-primary-shaded/30"
+          />
+        </label>
+      </form>
 
       {users.length ? (
         users.map((user: User, i: number) => (
