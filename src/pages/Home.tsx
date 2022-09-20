@@ -6,11 +6,14 @@ import { ChatBox } from "features/conversation";
 import { ErrorMsg } from "components";
 
 import { start_messaging_img } from "assets/images/";
+import { useAppSelector } from "app/hooks";
+import { getChatState } from "features/inbox/chatReducer";
 
 const Home = () => {
   const defaultSideBarContent = "chats";
-  const [currentChat, setCurrentChat] = useState("");
   const [sidebarContent, setSideBarContent] = useState(defaultSideBarContent);
+
+  const { user: recipient } = useAppSelector(getChatState);
 
   return (
     <div className="flex w-full min-h-screen">
@@ -19,15 +22,15 @@ const Home = () => {
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
       />
-      {!currentChat ? (
+      {!recipient ? (
         <div className="h-screen w-screen absolute z-10 bg-muted-light/10 dark:bg-black duration-300 md:relative md:flex items-center justify-center">
-          <ChatBox currentChat={currentChat} setCurrentChat={setCurrentChat} />
+          <ChatBox />
         </div>
       ) : (
         <ErrorMsg
           className="hidden md:flex"
           img={start_messaging_img}
-          msg="Start Messaging with Chately"
+          msg="Start Messaging with ACMessenger"
           subMsg="Select a chat in your inbox to start messaging."
         />
       )}

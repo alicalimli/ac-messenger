@@ -4,26 +4,26 @@ import { inbox_empty } from "assets/images";
 
 import ChatList from "./ChatList";
 import { Chat } from "interfaces";
-import { useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { getUserState } from "features/authentication/userSlice";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "services/firebase";
+import { changeUser } from "./chatReducer";
 
 const ChatsContainer = () => {
-  // const [currentChat, setCurrentChat] = useContext(CurrentChatContext);
   const { user: currentUser } = useAppSelector(getUserState);
   const [chats, setChats] = useState<any>([]);
+  const dispatch = useAppDispatch();
 
   const chatListRef = useRef<Chat>();
 
   const chatClickHandler = (e: React.MouseEvent, chat: Chat) => {
-    if (chatListRef.current) {
-      chatListRef.current.active_chat = false;
-    }
-
-    Object.assign(chat, { active_chat: true });
-    chatListRef.current = chat;
-    // setCurrentChat(chat);
+    dispatch(changeUser);
+    // if (chatListRef.current) {
+    //   chatListRef.current.active_chat = false;
+    // }
+    // Object.assign(chat, { active_chat: true });
+    // chatListRef.current = chat;
   };
 
   useEffect(() => {
