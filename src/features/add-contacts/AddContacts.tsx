@@ -24,6 +24,8 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   const { user: currentUser } = useAppSelector(getUserState);
 
   const getUsers = async () => {
+    if (!currentUser) return;
+
     const usersColRef = query(
       collection(db, "users"),
       where("uid", "!=", currentUser.uid)
