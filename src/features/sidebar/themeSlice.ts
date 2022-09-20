@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type InitialState = {
+type InitialStateType = {
   darkmode: boolean;
 };
 
-const initialState = { darkmode: false };
+const initialState: InitialStateType = { darkmode: false };
 
 const themeSlice = createSlice({
   name: "theme",
@@ -17,6 +17,8 @@ const themeSlice = createSlice({
     },
   },
 });
+
+export const getThemeState = (state: any) => state.theme;
 
 export const { toggleDarkmode } = themeSlice.actions;
 

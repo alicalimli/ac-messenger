@@ -13,7 +13,7 @@ interface ChatFormProps {
 }
 
 const ChatForm = ({ setMessages }: ChatFormProps) => {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState<string>("");
 
   const sendMessage = (event: React.FormEvent) => {
     event.preventDefault();

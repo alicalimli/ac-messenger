@@ -1,8 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { signOut } from "firebase/auth";
+import { User } from "interfaces";
 import { auth } from "services/firebase";
 
-const initialState = {
+type InitialStateType = {
+  user: User | {};
+};
+
+const initialState: InitialStateType = {
   user: {},
 };
 

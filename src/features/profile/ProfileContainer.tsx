@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { GoMention } from "react-icons/go";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 

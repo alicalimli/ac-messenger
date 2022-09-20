@@ -15,7 +15,7 @@ interface AddContactsProps {
 }
 
 const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
-  const [users, setUsers] = useState<User[] | any>([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   const [searchVal, setSearchVal] = useState<string>("");
 
@@ -34,7 +34,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
     setUsers(
       data.docs.map((doc) => {
         return { ...doc.data() };
-      })
+      }) as User[]
     );
   };
   const [recipient, setRecipient] = useState<User>();
@@ -58,7 +58,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
       setUsers(
         data.docs.map((doc) => {
           return { ...doc.data() };
-        })
+        }) as User[]
       );
     } else {
       getUsers();
