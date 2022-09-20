@@ -4,23 +4,19 @@ import { User } from "interfaces";
 import { useState } from "react";
 import { useAppDispatch } from "app/hooks";
 import { createToast } from "toastSlice";
-import {
-  doc,
-  getDoc,
-  getDocs,
-  serverTimestamp,
-  setDoc,
-} from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from "services/firebase";
 
 interface AddContactModalProps {
   setShowModal: (state: boolean) => void;
+  setSearchVal: (state: string) => void;
   currentUser: User | undefined;
   recipient: User | undefined;
 }
 
 const AddContactModal = ({
   setShowModal,
+  setSearchVal,
   currentUser,
   recipient,
 }: AddContactModalProps) => {
@@ -61,6 +57,7 @@ const AddContactModal = ({
       }
 
       setShowModal(false);
+      setSearchVal("");
       setIsBtnDisabled(false);
       dispatch(createToast("Contact added successfuly."));
     } catch (error) {

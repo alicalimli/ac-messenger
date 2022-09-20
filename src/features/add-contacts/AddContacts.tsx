@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TwButton } from "components";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Modal } from "components";
@@ -19,7 +19,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
 
   const [searchVal, setSearchVal] = useState<string>("");
 
-  const searchChangeHandler = (e) => setSearchVal(e.target.value);
+  const searchChangeHandler = (e: any) => setSearchVal(e.target.value);
 
   const { user: currentUser } = useAppSelector(getUserState);
 
@@ -79,6 +79,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
         {(showModal as boolean) && (
           <AddContactModal
             setShowModal={setShowModal}
+            setSearchVal={setSearchVal}
             currentUser={currentUser}
             recipient={recipient}
           />
