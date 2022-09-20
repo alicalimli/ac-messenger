@@ -49,7 +49,8 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
     if (searchVal) {
       const usersColRef = query(
         collection(db, "users"),
-        where("displayName", ">=", searchVal)
+        where("displayName", ">=", searchVal),
+        where("displayName", "<=", searchVal + "\uf8ff")
       );
 
       const data = await getDocs(usersColRef);
@@ -100,7 +101,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
             value={searchVal}
             onChange={searchChangeHandler}
             placeholder="Search"
-            className="p-2 px-4 w-full rounded-full text-black dark:text-white bg-muted-light/10 dark:bg-primary-shaded/30"
+            className="p-2 px-4 w-full rounded-full text-black dark:text-white bg-muted-light/10 dark:bg-slate-700"
           />
         </label>
       </form>
