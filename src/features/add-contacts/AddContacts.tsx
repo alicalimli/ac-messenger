@@ -45,6 +45,29 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
     setRecipient(recipient);
   };
 
+  const searchUser = async () => {
+    if (searchVal) {
+      const usersColRef = query(
+        collection(db, "users"),
+        where("displayName", ">=", searchVal)
+      );
+
+      const data = await getDocs(usersColRef);
+
+      setUsers(
+        data.docs.map((doc) => {
+          return { ...doc.data() };
+        })
+      );
+    } else {
+      getUsers();
+    }
+  };
+
+  useEffect(() => {
+    searchUser();
+  }, [searchVal]);
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -69,7 +92,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
         <AiOutlineArrowLeft className="text-lg" /> Add Contacts
       </TwButton>
 
-      <form className="w-full p-2 p-4">
+      <form className="w-full p-2 p-4" autoComplete="off">
         <label htmlFor="search-input">
           <input
             type="text"
