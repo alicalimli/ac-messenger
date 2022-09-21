@@ -9,14 +9,23 @@ import { TwButton } from "components";
 import { Message } from "interfaces";
 import { useAppSelector } from "app/hooks";
 import { getChatState } from "features/inbox/chatReducer";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  setDoc,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "services/firebase";
+import { getUserState } from "features/authentication/userSlice";
+import { v4 as uuid } from "uuid";
 
 interface ChatFormProps {
   setMessages: (state: Message[] | any) => void;
 }
 
 const ChatForm = ({ setMessages }: ChatFormProps) => {
+  const { user: currentUser } = useAppSelector(getUserState);
   const [message, setMessage] = useState<string>("");
   const [image, setImage] = useState<File>();
 
@@ -28,6 +37,14 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
       if (!image) {
         console.log(chatId);
         const userChatDocRef = doc(db, "chats", chatId);
+        await updateDoc(userChatDocRef, {
+          messages: arrayUnion({
+            id: uuid,
+            message: "",
+            senderId: currentUser.uid,
+            date: Timestamp.now(),
+          }),
+        });
       }
     } catch (error) {
       console.error(error);
