@@ -12,13 +12,13 @@ const ChatList = ({ chats, chatClickHandler }: ChatListProps) => {
     <TwButton
       variant="transparent"
       onClick={(e: React.MouseEvent) => chatClickHandler(e, chat[1].userInfo)}
-      key={i}
+      key={chat[0]}
       className={`w-full p-2 ${
         false && "bg-muted-light/5 dark:bg-muted-dark/10 "
       }`}
     >
-      <div className="relative bg-transparent h-16 w-16">
-        <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
+      <div className="relative bg-transparent h-14 w-14">
+        <div className="bg-green-500 p-2 rounded-full absolute right-0 bottom-0"></div>
         <img src={chat[1].userInfo.photoURL} className="w-full rounded-full" />
       </div>
       <div className="flex flex-col items-start">
