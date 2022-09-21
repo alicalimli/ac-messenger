@@ -9,7 +9,7 @@ import { TwButton } from "components";
 import { Message } from "interfaces";
 import { useAppSelector } from "app/hooks";
 import { getChatState } from "features/inbox/chatReducer";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "services/firebase";
 
 interface ChatFormProps {
@@ -26,13 +26,11 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
     try {
       event.preventDefault();
       if (!image) {
+        console.log(chatId);
         const userChatDocRef = doc(db, "chats", chatId);
-        // await updateDoc(userChatDocRef, {
-
-        // })
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

@@ -18,16 +18,14 @@ export const chatSlice = createSlice({
     changeChat: (state, action) => {
       if (!auth.currentUser || !action.payload) return;
 
-      const currentUser: any = auth.currentUser.uid;
-      const recipient = action.payload.uid;
+      const currentUser: any = auth.currentUser;
+      const recipient = action.payload;
 
       state.recipient = action.payload;
       state.chatId =
         currentUser.uid > recipient.uid
           ? currentUser.uid + recipient.uid
           : recipient.uid + currentUser.uid;
-
-      console.log(state.recipient);
     },
   },
 });
