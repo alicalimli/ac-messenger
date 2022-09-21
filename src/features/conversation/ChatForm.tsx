@@ -7,6 +7,10 @@ import { VscSmiley } from "react-icons/vsc";
 
 import { TwButton } from "components";
 import { Message } from "interfaces";
+import { useAppSelector } from "app/hooks";
+import { getChatState } from "features/inbox/chatReducer";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "services/firebase";
 
 interface ChatFormProps {
   setMessages: (state: Message[] | any) => void;
@@ -16,10 +20,17 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
   const [message, setMessage] = useState<string>("");
   const [image, setImage] = useState<File>();
 
+  const { chatId } = useAppSelector(getChatState);
+
   const sendMessage = async (event: React.FormEvent) => {
     try {
       event.preventDefault();
-      if (!message) return;
+      if (!image) {
+        const userChatDocRef = doc(db, "chats", chatId);
+        // await updateDoc(userChatDocRef, {
+
+        // })
+      }
     } catch (error) {
       console.log(error);
     }
