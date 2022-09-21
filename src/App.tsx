@@ -59,7 +59,7 @@ const App = () => {
           photoURL: user.photoURL,
         });
       } else {
-        dispatch(login(userDocData.data()));
+        dispatch(login({ ...userDocData.data() }));
       }
     });
 
