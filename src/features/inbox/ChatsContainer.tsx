@@ -32,14 +32,13 @@ const ChatsContainer = () => {
     const userChatsDocRef = doc(db, "userChats", currentUser.uid);
     const unsub = onSnapshot(userChatsDocRef, async (doc) => {
       setChats({ ...doc.data() });
-      console.log(doc.data());
       console.log(chats);
     });
 
     return () => {
       unsub();
     };
-  }, [currentUser]);
+  }, [currentUser.uid]);
   return (
     <div className=" p-4 flex flex-col gap-4">
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>

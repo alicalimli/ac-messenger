@@ -12,7 +12,7 @@ const ChatList = ({ chats, chatClickHandler }: ChatListProps) => {
     <TwButton
       variant="transparent"
       onClick={(e: React.MouseEvent) => chatClickHandler(e, chat[1].userInfo)}
-      key={chat[0]}
+      key={chat[1].lastMessage.date}
       className={`w-full p-2 ${
         false && "bg-muted-light/5 dark:bg-muted-dark/10 "
       }`}
