@@ -32,7 +32,6 @@ const ChatsContainer = () => {
     const userChatsDocRef = doc(db, "userChats", currentUser.uid);
     const unsub = onSnapshot(userChatsDocRef, async (doc) => {
       setChats({ ...doc.data() });
-      console.log(chats);
     });
 
     return () => {
