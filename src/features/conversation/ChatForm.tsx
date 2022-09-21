@@ -16,9 +16,10 @@ import {
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
-import { db } from "services/firebase";
+import { db, storage } from "services/firebase";
 import { getUserState } from "features/authentication/userSlice";
 import { v4 as uuid } from "uuid";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 interface ChatFormProps {
   setMessages: (state: Message[] | any) => void;
@@ -31,20 +32,46 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
 
   const { chatId } = useAppSelector(getChatState);
 
-  const sendMessage = async (event: React.FormEvent) => {
+  const sendMessage = async (downloadURL?: string) => {
+    const userChatDocRef = doc(db, "chats", chatId);
+    await updateDoc(userChatDocRef, {
+      messages: arrayUnion({
+        id: uuid(),
+        message: "",
+        senderId: currentUser.uid,
+        date: Timestamp.now(),
+        img: downloadURL || "",
+      }),
+    });
+  };
+
+  const handleFormSubmit = async (event: React.FormEvent) => {
     try {
+      console.log("blah");
       event.preventDefault();
-      if (!image) {
-        console.log(chatId);
-        const userChatDocRef = doc(db, "chats", chatId);
-        await updateDoc(userChatDocRef, {
-          messages: arrayUnion({
-            id: uuid,
-            message: "",
-            senderId: currentUser.uid,
-            date: Timestamp.now(),
-          }),
-        });
+      if (image) {
+        const storageRef = ref(storage, uuid());
+
+        const uploadTask = uploadBytesResumable(storageRef, image);
+
+        uploadTask.on(
+          "state_changed",
+          (snapshot: any) => {
+            console.log(snapshot);
+          },
+          (error: any) => {
+            console.error(error);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(
+              async (downloadURL) => {
+                sendMessage(downloadURL);
+              }
+            );
+          }
+        );
+      } else {
+        sendMessage();
       }
     } catch (error) {
       console.error(error);
@@ -55,7 +82,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
 
   return (
     <form
-      onSubmit={sendMessage}
+      onSubmit={handleFormSubmit}
       className="relative w-full flex px-2 items-center gap-1 bg-white dark:bg-bgmain-dark rounded-full duration-300"
     >
       <div className="flex p-2">
