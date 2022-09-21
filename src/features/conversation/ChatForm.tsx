@@ -68,7 +68,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
     try {
       event.preventDefault();
       if (image) {
-        const storageRef = ref(storage, uuid());
+        const storageRef = ref(storage, "images/" + uuid());
 
         const uploadTask = uploadBytesResumable(storageRef, image);
 
@@ -96,7 +96,9 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
     }
   };
 
-  const handleFileChange = (e: any) => setImage(e.target.value);
+  const handleImageChange = (e: any) => {
+    setImage(e.target.files[0]);
+  };
 
   return (
     <form
@@ -124,7 +126,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
             type="file"
             id="image-input"
             className="hidden"
-            onChange={handleFileChange}
+            onChange={handleImageChange}
           />
           <RiImageAddLine className="text-2xl" />
         </label>
