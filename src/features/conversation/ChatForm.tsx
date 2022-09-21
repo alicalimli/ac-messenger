@@ -14,27 +14,19 @@ interface ChatFormProps {
 
 const ChatForm = ({ setMessages }: ChatFormProps) => {
   const [message, setMessage] = useState<string>("");
+  const [image, setImage] = useState<File>();
 
-  const sendMessage = (event: React.FormEvent) => {
-    event.preventDefault();
-    console.log("ss");
-
-    if (!message) return;
-
-    const userMessage = {
-      username: "chately",
-      message,
-      time: "12:00",
-    };
-
-    setMessages((state: Message[]): Message[] => [...state, userMessage]);
-    setMessage("");
-
-    // const timeOptions = {
-    //   hour: "numeric",
-    //   minute: "numeric",
-    // };
+  const sendMessage = async (event: React.FormEvent) => {
+    try {
+      event.preventDefault();
+      if (!message) return;
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  const handleFileChange = (e: any) => setImage(e.target.value);
+
   return (
     <form
       onSubmit={sendMessage}
@@ -53,12 +45,18 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
         >
           <BiMicrophone className="text-2xl" />
         </button>
-        <button
-          type="button"
-          className="text-muted-light dark:text-muted-dark/50 p-2"
+        <label
+          htmlFor="image-input"
+          className="text-muted-light dark:text-muted-dark/50 p-2 cursor-pointer"
         >
+          <input
+            type="file"
+            id="image-input"
+            className="hidden"
+            onChange={handleFileChange}
+          />
           <RiImageAddLine className="text-2xl" />
-        </button>
+        </label>
       </div>
 
       <input
@@ -72,6 +70,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
       />
       <TwButton
         type="submit"
+        disabled={!message as unknown as boolean}
         className="rounded-full relative ml-auto h-full p-4 px-2 flex items-center justify-center"
       >
         <MdSend className={`text-white text-2xl`} />
