@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Sidebar, SideContent } from "features/sidebar";
 import { ChatBox } from "features/conversation";
@@ -13,7 +13,7 @@ const Home = () => {
   const defaultSideBarContent = "chats";
   const [sidebarContent, setSideBarContent] = useState(defaultSideBarContent);
 
-  const { recipient } = useAppSelector(getChatState);
+  const { chatId, recipient } = useAppSelector(getChatState);
 
   return (
     <div className="flex w-full min-h-screen">
@@ -22,7 +22,7 @@ const Home = () => {
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
       />
-      {recipient.uid ? (
+      {chatId ? (
         <div className="h-screen w-screen absolute z-10 bg-muted-light/10 dark:bg-black duration-300 md:relative md:flex items-center justify-center">
           <ChatBox recipient={recipient} />
         </div>

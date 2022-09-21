@@ -27,11 +27,15 @@ export const chatSlice = createSlice({
           ? currentUser.uid + recipient.uid
           : recipient.uid + currentUser.uid;
     },
+    resetChat: (state) => {
+      state.chatId = "";
+      state.recipient = {};
+    },
   },
 });
 
 export const getChatState = (state: any) => state.chat;
 
-export const { changeChat } = chatSlice.actions;
+export const { changeChat, resetChat } = chatSlice.actions;
 
 export default chatSlice.reducer;

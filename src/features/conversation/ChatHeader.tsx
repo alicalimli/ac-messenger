@@ -2,6 +2,8 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import { TwButton } from "components";
 import { User } from "interfaces";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { getChatState, resetChat } from "features/inbox/chatReducer";
 
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
@@ -10,8 +12,11 @@ interface ChatHeaderProps {
 }
 
 const ChatHeader = ({ recipient }: ChatHeaderProps) => {
+  const dispatch = useAppDispatch();
+  const { chatId } = useAppSelector(getChatState);
+
   const handleBackBtn = () => {
-    // setCurrentChat(null);
+    dispatch(resetChat());
   };
 
   return (

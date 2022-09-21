@@ -44,6 +44,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
     if (!latestMsg.current) return;
     latestMsg.current.scrollIntoView();
   }, [messages, latestMsg.current]);
+
   useEffect(() => {
     const userChatDocRef = doc(db, "chats", chatId);
 
