@@ -28,11 +28,14 @@ interface ChatFormProps {
 const ChatForm = ({ setMessages }: ChatFormProps) => {
   const { user: currentUser } = useAppSelector(getUserState);
   const [message, setMessage] = useState<string>("");
-  const [image, setImage] = useState<File>();
+  const [image, setImage] = useState<any>();
 
   const { chatId } = useAppSelector(getChatState);
 
   const sendMessage = async (downloadURL?: string) => {
+    setImage(null);
+    setMessage("");
+
     const userChatDocRef = doc(db, "chats", chatId);
     await updateDoc(userChatDocRef, {
       messages: arrayUnion({
@@ -47,7 +50,6 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
 
   const handleFormSubmit = async (event: React.FormEvent) => {
     try {
-      console.log("blah");
       event.preventDefault();
       if (image) {
         const storageRef = ref(storage, uuid());
