@@ -8,6 +8,10 @@ import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
 import { User } from "interfaces";
+import { useAppSelector } from "app/hooks";
+import { getChatState } from "features/inbox/chatReducer";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "services/firebase";
 
 interface ChatBoxProps {
   recipient: User;
@@ -20,6 +24,8 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const latestMsg = useRef<HTMLButtonElement>(null);
 
   const [messages, setMessages] = useState<[]>([]);
+
+  const { chatId, userInfo } = useAppSelector(getChatState);
 
   const scrollDown = () => {
     latestMsg?.current?.scrollIntoView({ behavior: "smooth" });
@@ -38,6 +44,17 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
     if (!latestMsg.current) return;
     latestMsg.current.scrollIntoView();
   }, [messages, latestMsg.current]);
+  useEffect(() => {
+    const userChatDocRef = doc(db, "chats", chatId);
+
+    const unsub = onSnapshot(userChatDocRef, (doc) => {
+      doc.exists() && setMessages(doc.data().messages);
+    });
+
+    return () => {
+      unsub();
+    };
+  }, [chatId]);
 
   return (
     <section className="flex h-full w-full">
