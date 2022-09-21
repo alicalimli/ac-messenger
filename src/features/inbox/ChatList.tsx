@@ -9,7 +9,7 @@ interface ChatListProps {
 
 const ChatList = ({ chats, chatClickHandler }: ChatListProps) => {
   return chats
-    .sort((a: any, b: any) => a[1].date - b[2].date)
+    .sort((a: any, b: any) => b[1].lastMessage.date - a[2].lastMessage.date)
     .map((chat: any, i: number) => (
       <TwButton
         variant="transparent"
