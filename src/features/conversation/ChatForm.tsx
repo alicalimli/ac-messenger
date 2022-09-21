@@ -37,7 +37,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
     await updateDoc(userChatDocRef, {
       messages: arrayUnion({
         id: uuid(),
-        message: "",
+        message,
         senderId: currentUser.uid,
         date: Timestamp.now(),
         img: downloadURL || "",
