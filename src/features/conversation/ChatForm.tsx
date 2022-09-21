@@ -12,6 +12,7 @@ import { getChatState } from "features/inbox/chatReducer";
 import {
   arrayUnion,
   doc,
+  serverTimestamp,
   setDoc,
   Timestamp,
   updateDoc,
@@ -30,14 +31,14 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
   const [message, setMessage] = useState<string>("");
   const [image, setImage] = useState<any>();
 
-  const { chatId } = useAppSelector(getChatState);
+  const { chatId, recipient } = useAppSelector(getChatState);
 
   const sendMessage = async (downloadURL?: string) => {
     setImage(null);
     setMessage("");
 
-    const userChatDocRef = doc(db, "chats", chatId);
-    await updateDoc(userChatDocRef, {
+    const chatDocRef = doc(db, "chats", chatId);
+    await updateDoc(chatDocRef, {
       messages: arrayUnion({
         id: uuid(),
         message,
@@ -45,6 +46,21 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
         date: Timestamp.now(),
         img: downloadURL || "",
       }),
+    });
+
+    const userChatDocRef = doc(db, "userChats", currentUser.uid);
+    const recipientChatDocRef = doc(db, "userChats", recipient.uid);
+    await updateDoc(userChatDocRef, {
+      [chatId + ".lastMessage"]: {
+        message,
+        date: serverTimestamp(),
+      },
+    });
+    await updateDoc(recipientChatDocRef, {
+      [chatId + ".lastMessage"]: {
+        message,
+        date: serverTimestamp(),
+      },
     });
   };
 

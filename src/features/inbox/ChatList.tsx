@@ -26,7 +26,7 @@ const ChatList = ({ chats, chatClickHandler }: ChatListProps) => {
           {chat[1].userInfo.displayName}
         </h2>
         <p className="text-sm text-muted-light dark:text-muted-dark">
-          {chat[1].userInfo.last_message}
+          {chat[1].lastMessage?.message || ""}
         </p>
       </div>
     </TwButton>
