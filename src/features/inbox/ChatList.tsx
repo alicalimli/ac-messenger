@@ -9,7 +9,7 @@ interface ChatListProps {
 
 const ChatList = ({ chats, chatClickHandler }: ChatListProps) => {
   return chats
-    .sort((a: any, b: any) => b[1].lastMessage.date - a[2].lastMessage.date)
+    .sort((a: any, b: any) => b[1].lastMessage.date - a[1].lastMessage.date)
     .map((chat: any, i: number) => (
       <TwButton
         variant="transparent"
@@ -19,10 +19,11 @@ const ChatList = ({ chats, chatClickHandler }: ChatListProps) => {
           false && "bg-muted-light/5 dark:bg-muted-dark/10 "
         }`}
       >
+        {console.log(chat[1])}
         <div className="relative bg-transparent h-14 w-14">
           <div className="bg-green-500 p-2 rounded-full absolute right-0 bottom-0"></div>
           <img
-            src={chat[1].userInfo.photoURL}
+            src={chat[1].userInfo.photoURL || ""}
             className="w-full rounded-full"
           />
         </div>

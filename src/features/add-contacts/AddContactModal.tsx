@@ -50,10 +50,12 @@ const AddContactModal = ({
         console.log(currentUser.uid);
         await updateDoc(userChatDocRef, {
           [combinedId + ".userInfo"]: recipient,
+          [combinedId + ".lastMessage"]: serverTimestamp(),
         });
 
         await updateDoc(recipientChatDocRef, {
           [combinedId + ".userInfo"]: currentUser,
+          [combinedId + ".lastMessage"]: serverTimestamp(),
         });
       }
 
