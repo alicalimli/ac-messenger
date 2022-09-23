@@ -4,7 +4,12 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { InputForm, TwButton } from "components";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { makePendingMsg } from "toastSlice";
-import { clearErrorMsg, getUserState, googleLogin, login } from "./userSlice";
+import {
+  clearUserStateErr,
+  getUserState,
+  googleLogin,
+  login,
+} from "./userSlice";
 
 interface SignInProps {
   setIsSigningIn: (state: boolean) => void;
@@ -34,7 +39,7 @@ const SignIn = ({
   };
 
   useEffect(() => {
-    dispatch(clearErrorMsg());
+    dispatch(clearUserStateErr());
   }, [email, password]);
 
   useEffect(() => {

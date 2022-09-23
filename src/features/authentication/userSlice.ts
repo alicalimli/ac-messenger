@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
 import { User } from "interfaces";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleAuthProvider } from "services/firebase";
@@ -13,6 +18,13 @@ type InitialStateType = {
 type loginParamsType = {
   email: string;
   password: string;
+};
+
+type signUpInfoType = {
+  email: string;
+  password: string;
+  displayName: string;
+  photoURL: string;
 };
 
 const initialState: InitialStateType = {
@@ -40,6 +52,29 @@ export const googleLogin = createAsyncThunk("user/googleLogin", async () => {
   }
 });
 
+export const signUp = createAsyncThunk(
+  "user/googleLogin",
+  async (signUpInfo: signUpInfoType) => {
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        signUpInfo.email,
+        signUpInfo.password
+      );
+
+      if (!auth.currentUser) return;
+
+      await updateProfile(auth.currentUser, {
+        displayName: signUpInfo.displayName,
+        photoURL: signUpInfo.photoURL,
+      });
+      console.log(auth.currentUser);
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -48,22 +83,25 @@ export const userSlice = createSlice({
       state.user = initialState;
       signOut(auth);
     },
-    clearErrorMsg: (state) => {
+    clearUserStateErr: (state) => {
       state.errorMsg = "";
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(isAnyOf(login.pending, googleLogin.pending), (state) => {
-      state.status = "pending";
-    });
     builder.addMatcher(
-      isAnyOf(login.fulfilled, googleLogin.fulfilled),
+      isAnyOf(login.fulfilled, googleLogin.fulfilled, signUp.fulfilled),
       (state) => {
         state.status = "successful";
       }
     );
     builder.addMatcher(
-      isAnyOf(login.rejected, googleLogin.rejected),
+      isAnyOf(login.pending, googleLogin.pending, signUp.pending),
+      (state) => {
+        state.status = "pending";
+      }
+    );
+    builder.addMatcher(
+      isAnyOf(login.rejected, googleLogin.rejected, signUp.rejected),
       (state, action) => {
         state.status = "failed";
         state.errorMsg = action.error.message || "";
@@ -74,6 +112,6 @@ export const userSlice = createSlice({
 
 export const getUserState = (state: any) => state.user;
 
-export const { logout, clearErrorMsg } = userSlice.actions;
+export const { logout, clearUserStateErr } = userSlice.actions;
 
 export default userSlice.reducer;

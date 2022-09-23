@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 import { InputForm, TwButton } from "components";
 import { useAppSelector } from "app/hooks";
 import { getPendingMsg, makePendingMsg } from "toastSlice";
-import { auth } from "services/firebase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "app/hooks";
+import { clearUserStateErr, getUserState, signUp } from "./userSlice";
 
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
@@ -34,32 +33,30 @@ const SignUp = ({ setIsSigningIn }: SignUpProps) => {
   const [validConfirmPwd, setValidConfirmPwd] = useState(false);
   const [confirmPwdFocus, setConfirmPwdFocus] = useState(false);
 
-  const [errorMsg, setErrorMsg] = useState("");
+  const { status, errorMsg } = useAppSelector(getUserState);
 
   const pendingMsg = useAppSelector(getPendingMsg);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    dispatch(makePendingMsg("Signing up..."));
-
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        if (!auth.currentUser) return;
-        updateProfile(auth.currentUser, {
-          displayName: displayName,
-          photoURL: DEFAULT_PROFILE_IMAGE,
-        });
-        dispatch(makePendingMsg(""));
-      })
-      .catch((error: any) => {
-        dispatch(makePendingMsg(""));
-        setErrorMsg(error.message);
-      });
+    dispatch(
+      signUp({ email, password, displayName, photoURL: DEFAULT_PROFILE_IMAGE })
+    );
   };
 
-  useEffect(() => setErrorMsg(""), [email, displayName, password]);
+  useEffect(() => {
+    dispatch(clearUserStateErr());
+  }, [email, displayName, password]);
+
+  useEffect(() => {
+    status === "pending" && dispatch(makePendingMsg("Signing up..."));
+
+    return () => {
+      dispatch(makePendingMsg(""));
+    };
+  }, [status]);
 
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
