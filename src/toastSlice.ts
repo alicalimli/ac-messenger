@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type initialState = {
   message: string;
@@ -16,7 +16,7 @@ const toastSlice = createSlice({
     removeToast: (state) => {
       state.message = "";
     },
-    makePendingMsg: (state, action) => {
+    makePendingMsg: (state, action: PayloadAction<string>) => {
       state.pendingMsg = action.payload;
     },
   },

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "interfaces";
 import { auth } from "services/firebase";
 
@@ -15,7 +15,7 @@ export const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
-    changeChat: (state:any, action:any) => {
+    changeChat: (state, action: PayloadAction<User> ) => {
       if (!auth.currentUser || !action.payload) return;
 
       const currentUser: any = auth.currentUser;
@@ -27,7 +27,7 @@ export const chatSlice = createSlice({
           ? currentUser.uid + recipient.uid
           : recipient.uid + currentUser.uid;
     },
-    resetChat: (state:any) => {
+    resetChat: (state) => {
       state.chatId = "";
       state.recipient = {};
     },
