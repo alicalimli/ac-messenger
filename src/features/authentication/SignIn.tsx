@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { getPendingMsg, makePendingMsg } from "toastSlice";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleAuthProvider } from "services/firebase";
+import { clearErrorMsg, getUserState, login } from "./userSlice";
 
 interface SignInProps {
   setIsSigningIn: (state: boolean) => void;
@@ -20,23 +21,15 @@ const SignIn = ({
 }: SignInProps) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [errorMsg, setErrorMsg] = useState<string>("");
 
-  const pendingMsg = useAppSelector(getPendingMsg);
+  const pendingToastMsg = useAppSelector(getPendingMsg);
+  const { status, errorMsg } = useAppSelector(getUserState);
   const dispatch = useAppDispatch();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(makePendingMsg("Signing In..."));
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        dispatch(makePendingMsg(""));
-      })
-      .catch((error) => {
-        dispatch(makePendingMsg(""));
-        setErrorMsg(error.message);
-      });
+    dispatch(login({ email, password }));
   };
 
   const handleGoogleLogin = () => {
@@ -47,13 +40,21 @@ const SignIn = ({
       })
       .catch((error) => {
         dispatch(makePendingMsg(""));
-        setErrorMsg(error.message);
+        // setErrorMsg(error.message);
       });
   };
 
   useEffect(() => {
-    setErrorMsg("");
+    dispatch(clearErrorMsg());
   }, [email, password]);
+
+  useEffect(() => {
+    status === "pending" && dispatch(makePendingMsg("Signing in..."));
+    
+    return () => {
+      dispatch(makePendingMsg(""));
+    };
+  }, [status]);
 
   return (
     <form onSubmit={handleLogin} className="flex flex-col gap-4">
@@ -107,7 +108,7 @@ const SignIn = ({
         Keep me signed in
       </TwButton>
 
-      <TwButton type="submit" disabled={pendingMsg as boolean}>
+      <TwButton type="submit" disabled={status === "pending" && true}>
         Sign in
       </TwButton>
 
@@ -126,7 +127,7 @@ const SignIn = ({
         <TwButton
           type="button"
           onClick={handleGoogleLogin}
-          disabled={pendingMsg as boolean}
+          disabled={status === "pending" && true}
           className="justify-center text-primary-tinted dark:text-primary-shaded"
           variant="transparent"
         >

@@ -59,8 +59,6 @@ const App = () => {
           location: "Earth",
           photoURL: user.photoURL,
         });
-      } else {
-        dispatch(login({ ...userDocData.data() }));
       }
     });
 
