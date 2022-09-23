@@ -15,10 +15,10 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    login: (state, action) => {
+    login: (state:any, action: any) => {
       state.user = action.payload;
     },
-    logout: (state) => {
+    logout: (state:any) => {
       state.user = initialState;
       signOut(auth);
     },

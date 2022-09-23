@@ -1,11 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {configureStore} from '@reduxjs/toolkit'
 import { userReducer } from "features/authentication";
 import chatReducer from "features/inbox/chatReducer";
 import { themeReducer } from "features/sidebar";
 import toastReducer from "toastSlice";
 
 const store = configureStore({
-  reducer: {
+
+reducer: {
     user: userReducer,
     theme: themeReducer,
     toast: toastReducer,

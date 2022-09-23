@@ -12,6 +12,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { getPendingMsg, getToastMsg } from "toastSlice";
 import { login } from "features/authentication";
+import { User } from "interfaces";
 
 const App = () => {
   const [currentUser] = useAuthState(auth);
@@ -36,7 +37,7 @@ const App = () => {
   }, [darkmode]);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (user) => {
+    const unsub = onAuthStateChanged(auth, async (user: User) => {
       if (!user) return;
 
       const userDocRef = doc(db, "users", user.uid);
