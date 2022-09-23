@@ -1,5 +1,9 @@
+import { Timestamp } from "firebase/firestore";
+
 export default interface Message {
-  username: string;
+  id: string;
+  senderId: string;
   message: string;
-  time: string;
+  date: Timestamp;
+  img?: string;
 }

@@ -1,16 +1,17 @@
 import { getUserState } from "features/authentication/userSlice";
 import { motion } from "framer-motion";
 import { useAppSelector } from "app/hooks";
+import { Message } from "interfaces";
 
 interface MessagesProps {
-  messages: any;
+  messages: Message[];
   latestMsgRef: React.Ref<HTMLButtonElement>;
 }
 
 const Messages = ({ messages, latestMsgRef }: MessagesProps) => {
   const { user: currentUser } = useAppSelector(getUserState);
 
-  return messages.map((currentMsg: any, i: number) => (
+  return messages.map((currentMsg: Message, i: number) => (
     <div
       key={currentMsg.message + i}
       className={`group gap-2 py-1 flex ${

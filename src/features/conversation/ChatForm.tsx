@@ -29,7 +29,7 @@ interface ChatFormProps {
 const ChatForm = ({ setMessages }: ChatFormProps) => {
   const { user: currentUser } = useAppSelector(getUserState);
   const [message, setMessage] = useState<string>("");
-  const [image, setImage] = useState<any>();
+  const [image, setImage] = useState<File | null>(null);
 
   const { chatId, recipient } = useAppSelector(getChatState);
 

@@ -37,7 +37,7 @@ const App = () => {
   }, [darkmode]);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (user: User) => {
+    const unsub = onAuthStateChanged(auth, async (user: any) => {
       if (!user) return;
 
       const userDocRef = doc(db, "users", user.uid);
