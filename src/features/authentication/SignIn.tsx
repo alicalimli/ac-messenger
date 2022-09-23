@@ -3,9 +3,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 
 import { InputForm, TwButton } from "components";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { getPendingMsg, makePendingMsg } from "toastSlice";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { auth, googleAuthProvider } from "services/firebase";
+import { makePendingMsg } from "toastSlice";
 import { clearErrorMsg, getUserState, googleLogin, login } from "./userSlice";
 
 interface SignInProps {

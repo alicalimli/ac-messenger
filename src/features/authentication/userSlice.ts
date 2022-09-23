@@ -1,9 +1,4 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  isAnyOf,
-  PayloadAction,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { User } from "interfaces";
 import { signInWithPopup } from "firebase/auth";
@@ -58,15 +53,12 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(
-      isAnyOf(login.pending, googleLogin.pending),
-      (state, action) => {
-        state.status = "pending";
-      }
-    );
+    builder.addMatcher(isAnyOf(login.pending, googleLogin.pending), (state) => {
+      state.status = "pending";
+    });
     builder.addMatcher(
       isAnyOf(login.fulfilled, googleLogin.fulfilled),
-      (state, action) => {
+      (state) => {
         state.status = "successful";
       }
     );
