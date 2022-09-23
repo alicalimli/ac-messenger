@@ -1,7 +1,13 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  isAnyOf,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { User } from "interfaces";
-import { auth } from "services/firebase";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleAuthProvider } from "services/firebase";
 
 type InitialStateType = {
   user: User | {};
@@ -31,6 +37,14 @@ export const login = createAsyncThunk(
   }
 );
 
+export const googleLogin = createAsyncThunk("user/googleLogin", async () => {
+  try {
+    await signInWithPopup(auth, googleAuthProvider);
+  } catch (error) {
+    throw error;
+  }
+});
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -44,16 +58,25 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(login.pending, (state, action) => {
-      state.status = "pending";
-    });
-    builder.addCase(login.fulfilled, (state, action) => {
-      state.status = "successful";
-    });
-    builder.addCase(login.rejected, (state, action) => {
-      state.status = "failed";
-      state.errorMsg = action.error.message || "";
-    });
+    builder.addMatcher(
+      isAnyOf(login.pending, googleLogin.pending),
+      (state, action) => {
+        state.status = "pending";
+      }
+    );
+    builder.addMatcher(
+      isAnyOf(login.fulfilled, googleLogin.fulfilled),
+      (state, action) => {
+        state.status = "successful";
+      }
+    );
+    builder.addMatcher(
+      isAnyOf(login.rejected, googleLogin.rejected),
+      (state, action) => {
+        state.status = "failed";
+        state.errorMsg = action.error.message || "";
+      }
+    );
   },
 });
 

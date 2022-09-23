@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { getPendingMsg, makePendingMsg } from "toastSlice";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleAuthProvider } from "services/firebase";
-import { clearErrorMsg, getUserState, login } from "./userSlice";
+import { clearErrorMsg, getUserState, googleLogin, login } from "./userSlice";
 
 interface SignInProps {
   setIsSigningIn: (state: boolean) => void;
@@ -22,7 +22,6 @@ const SignIn = ({
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const pendingToastMsg = useAppSelector(getPendingMsg);
   const { status, errorMsg } = useAppSelector(getUserState);
   const dispatch = useAppDispatch();
 
@@ -33,15 +32,7 @@ const SignIn = ({
   };
 
   const handleGoogleLogin = () => {
-    dispatch(makePendingMsg("Signing In With Google..."));
-    signInWithPopup(auth, googleAuthProvider)
-      .then(() => {
-        dispatch(makePendingMsg(""));
-      })
-      .catch((error) => {
-        dispatch(makePendingMsg(""));
-        // setErrorMsg(error.message);
-      });
+    dispatch(googleLogin());
   };
 
   useEffect(() => {
@@ -50,7 +41,7 @@ const SignIn = ({
 
   useEffect(() => {
     status === "pending" && dispatch(makePendingMsg("Signing in..."));
-    
+
     return () => {
       dispatch(makePendingMsg(""));
     };
