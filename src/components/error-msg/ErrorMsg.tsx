@@ -4,7 +4,7 @@ import { VARIANTS_MANAGER } from "setup/variants-manager";
 interface ErrorMsgProps {
   img: any;
   msg: String;
-  subMsg: String;
+  subMsg?: String;
   className?: string;
 }
 

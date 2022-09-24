@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { TwButton } from "components";
+import { ErrorMsg, TwButton } from "components";
+import { no_results } from "assets/images";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Modal } from "components";
 import { useAppSelector } from "app/hooks";
@@ -134,7 +135,9 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
 
       {isPending && <h1>Fetching users...</h1>}
 
-      {!users.length && searchVal.length !== 0 && <h1>no results</h1>}
+      {!users.length && searchVal.length !== 0 && (
+        <ErrorMsg img={no_results} msg="no results found." />
+      )}
     </section>
   );
 };
