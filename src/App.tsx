@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useState } from "react";
+import { StrictMode, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "app/hooks";
@@ -8,8 +8,7 @@ import { Toast } from "components";
 import { useLocalStorage } from "hooks";
 import { auth, db } from "services/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { getPendingMsg, getToastMsg } from "toastSlice";
 import { login } from "features/authentication";
 import { User } from "interfaces";
@@ -50,7 +49,6 @@ const App = () => {
 
     return () => {
       unsub();
-      console.log(authUser);
     };
   }, [authUser]);
 

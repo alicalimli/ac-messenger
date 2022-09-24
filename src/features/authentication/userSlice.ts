@@ -8,7 +8,7 @@ import {
 import { User } from "interfaces";
 import { signInWithPopup } from "firebase/auth";
 import { auth, db, googleAuthProvider } from "services/firebase";
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 type InitialStateType = {
   user: User | {};
