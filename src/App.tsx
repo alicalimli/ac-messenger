@@ -9,13 +9,15 @@ import { useLocalStorage } from "hooks";
 import { auth, db } from "services/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 import { getPendingMsg, getToastMsg } from "toastSlice";
 import { login } from "features/authentication";
 import { User } from "interfaces";
+import { getUserState } from "features/authentication/userSlice";
 
 const App = () => {
-  const [currentUser] = useAuthState(auth);
+  const [authUser] = useAuthState(auth);
+  const { user: currentUser } = useAppSelector(getUserState);
 
   const pendingMsg = useAppSelector(getPendingMsg);
   const toastMsg = useAppSelector(getToastMsg);
@@ -37,33 +39,20 @@ const App = () => {
   }, [darkmode]);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (user: any) => {
-      if (!user) return;
+    if (!authUser) return;
+    const userDocRef = doc(db, "users", authUser.uid);
 
-      const userDocRef = doc(db, "users", user.uid);
-      const userDocData = await getDoc(userDocRef);
-      const userChatsDocRef = doc(db, "userChats", user.uid);
-      const userChatsDocData = await getDoc(userChatsDocRef);
-
-      if (!userChatsDocData?.exists()) {
-        setDoc(userChatsDocRef, {});
-      }
-
-      if (!userDocData?.exists()) {
-        setDoc(userDocRef, {
-          uid: user.uid,
-          displayName: user.displayName,
-          email: user.email,
-          bio: "A Bio.",
-          status: "off",
-          location: "Earth",
-          photoURL: user.photoURL,
-        });
-      }
+    const unsub = onSnapshot(userDocRef, async (snapshot) => {
+      console.log("dispatched");
+      console.log(snapshot.data());
+      dispatch(login(snapshot.data()));
     });
 
-    return unsub;
-  }, []);
+    return () => {
+      unsub();
+      console.log(authUser);
+    };
+  }, [authUser]);
 
   return (
     <StrictMode>
@@ -76,7 +65,7 @@ const App = () => {
           {toastMsg && <Toast durationMS={3000} msg={toastMsg} />}
         </AnimatePresence>
 
-        {currentUser ? (
+        {authUser && Object.entries(currentUser).length ? (
           <motion.div
             className="flex"
             animate={{ opacity: 1, x: 0, y: 0 }}

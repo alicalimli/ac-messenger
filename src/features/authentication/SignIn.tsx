@@ -8,7 +8,7 @@ import {
   clearUserStateErr,
   getUserState,
   googleLogin,
-  login,
+  emailLogin,
 } from "./userSlice";
 
 interface SignInProps {
@@ -31,7 +31,7 @@ const SignIn = ({
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    dispatch(login({ email, password }));
+    dispatch(emailLogin({ email, password }));
   };
 
   const handleGoogleLogin = () => {
