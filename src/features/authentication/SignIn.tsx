@@ -102,8 +102,11 @@ const SignIn = ({
         Keep me signed in
       </TwButton>
 
-      <TwButton type="submit" disabled={status === "pending" && true}>
-        Sign in
+      <TwButton
+        type="submit"
+        disabled={!email || !password || (status === "pending" && true)}
+      >
+        {status === "pending" ? "Signing in..." : "Sign in"}
       </TwButton>
 
       <p className="text-muted-light text-sm text-black dark:text-muted-dark">

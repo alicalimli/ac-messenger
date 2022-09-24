@@ -141,7 +141,7 @@ const SignUp = ({ setIsSigningIn }: SignUpProps) => {
             : false
         }
       >
-        Sign Up
+        {status === "pending" ? "Signing up..." : "Sign up"}
       </TwButton>
       <p className="text-muted-light dark:text-muted-dark text-sm">
         Already have an account?{" "}
