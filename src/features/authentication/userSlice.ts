@@ -15,7 +15,7 @@ type InitialStateType = {
   errorMsg: string;
 };
 
-type loginParamsType = {
+type loginInfoType = {
   email: string;
   password: string;
 };
@@ -35,9 +35,13 @@ const initialState: InitialStateType = {
 
 export const login = createAsyncThunk(
   "user/login",
-  async (userCred: loginParamsType) => {
+  async (loginInfo: loginInfoType) => {
     try {
-      await signInWithEmailAndPassword(auth, userCred.email, userCred.password);
+      await signInWithEmailAndPassword(
+        auth,
+        loginInfo.email,
+        loginInfo.password
+      );
     } catch (error) {
       throw error;
     }
