@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { TwButton } from "components";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Modal } from "components";
@@ -16,15 +16,20 @@ interface AddContactsProps {
 
 const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   const [users, setUsers] = useState<User[]>([]);
+  const [recipient, setRecipient] = useState<User>();
 
   const [searchVal, setSearchVal] = useState<string>("");
-
-  const searchChangeHandler = (e: any) => setSearchVal(e.target.value);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { user: currentUser } = useAppSelector(getUserState);
 
+  const searchChangeHandler = (e: any) => setSearchVal(e.target.value);
+
   const getUsers = async () => {
     if (!currentUser) return;
+
+    setLoading(true);
 
     const usersColRef = query(
       collection(db, "users"),
@@ -38,9 +43,9 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
         return { ...doc.data() };
       }) as User[]
     );
+
+    setLoading(false);
   };
-  const [recipient, setRecipient] = useState<User>();
-  const [showModal, setShowModal] = useState<boolean>(false);
 
   const contactClickHandler = (recipient: User) => {
     setShowModal(true);
@@ -127,7 +132,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
           </TwButton>
         ))}
 
-      {users.length === 0 && searchVal.length === 0 && <h1>Loading...</h1>}
+      {loading && <h1>Loading...</h1>}
 
       {!users.length && searchVal.length !== 0 && <h1>no results</h1>}
     </section>
