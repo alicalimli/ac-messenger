@@ -47,7 +47,6 @@ const AddContactModal = ({
       if (!chatDocData.exists()) {
         await setDoc(chatDocRef, { messages: [] });
 
-        console.log(currentUser.uid);
         await updateDoc(userChatDocRef, {
           [combinedId + ".userInfo"]: recipient,
           [combinedId + ".lastMessage"]: serverTimestamp(),

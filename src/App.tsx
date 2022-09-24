@@ -42,8 +42,7 @@ const App = () => {
     const userDocRef = doc(db, "users", authUser.uid);
 
     const unsub = onSnapshot(userDocRef, async (snapshot) => {
-      console.log("dispatched");
-      console.log(snapshot.data());
+      if (!snapshot.exists()) return;
       dispatch(login(snapshot.data()));
     });
 
@@ -63,7 +62,7 @@ const App = () => {
           {toastMsg && <Toast durationMS={3000} msg={toastMsg} />}
         </AnimatePresence>
 
-        {authUser && Object.entries(currentUser).length ? (
+        {currentUser.uid ? (
           <motion.div
             className="flex"
             animate={{ opacity: 1, x: 0, y: 0 }}

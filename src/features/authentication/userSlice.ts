@@ -8,7 +8,7 @@ import {
 import { User } from "interfaces";
 import { signInWithPopup } from "firebase/auth";
 import { auth, db, googleAuthProvider } from "services/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 type InitialStateType = {
   user: User | {};
@@ -34,23 +34,29 @@ const initialState: InitialStateType = {
   errorMsg: "",
 };
 
-const setUserInfoDoc = async (userInfo?: any) => {
+const setUserInfoDoc = async () => {
   if (!auth.currentUser) return;
 
   const userDocRef = doc(db, "users", auth.currentUser.uid);
+  const userDocData = await getDoc(userDocRef);
   const userChatsDocRef = doc(db, "userChats", auth.currentUser.uid);
+  const userChatsDocData = await getDoc(userChatsDocRef);
 
-  await setDoc(userDocRef, {
-    uid: auth.currentUser.uid,
-    photoURL: auth.currentUser.photoURL,
-    displayName: auth.currentUser.displayName,
-    email: auth.currentUser.email,
-    bio: "A Bio.",
-    status: "off",
-    location: "Earth",
-  });
+  if (!userDocData.exists()) {
+    setDoc(userDocRef, {
+      uid: auth.currentUser.uid,
+      photoURL: auth.currentUser.photoURL,
+      displayName: auth.currentUser.displayName,
+      email: auth.currentUser.email,
+      bio: "A Bio.",
+      status: "off",
+      location: "Earth",
+    });
+  }
 
-  await setDoc(userChatsDocRef, {});
+  if (!userChatsDocData.exists()) {
+    setDoc(userChatsDocRef, {});
+  }
 };
 
 export const emailLogin = createAsyncThunk(
@@ -112,6 +118,7 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.user = initialState;
       signOut(auth);
+      console.log(state.user);
     },
     clearUserStateErr: (state) => {
       state.errorMsg = "";
