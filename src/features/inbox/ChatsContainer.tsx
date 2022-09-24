@@ -19,11 +19,6 @@ const ChatsContainer = () => {
 
   const chatClickHandler = (e: React.MouseEvent, recipient: User) => {
     dispatch(changeChat(recipient));
-    // if (chatListRef.current) {
-    //   chatListRef.current.active_chat = false;
-    // }
-    // Object.assign(chat, { active_chat: true });
-    // chatListRef.current = chat;
   };
 
   useEffect(() => {

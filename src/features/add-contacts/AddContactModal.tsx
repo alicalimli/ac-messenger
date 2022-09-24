@@ -12,6 +12,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "services/firebase";
+import { changeChat } from "features/inbox/chatReducer";
 
 interface AddContactModalProps {
   setShowModal: (state: boolean) => void;
@@ -61,6 +62,8 @@ const AddContactModal = ({
       setShowModal(false);
       setSearchVal("");
       setIsBtnDisabled(false);
+
+      dispatch(changeChat(recipient));
       dispatch(createToast("Contact added successfuly."));
     } catch (error) {
       console.log(error);
