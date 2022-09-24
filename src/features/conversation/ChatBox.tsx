@@ -2,7 +2,7 @@ import { SyntheticEvent, useEffect, useRef, useState } from "react";
 
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
-import { TwButton } from "components";
+import { ErrorMsg, TwButton } from "components";
 
 import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";
@@ -12,6 +12,7 @@ import { useAppSelector } from "app/hooks";
 import { getChatState } from "features/inbox/chatReducer";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "services/firebase";
+import { start_chatting } from "assets/images";
 
 interface ChatBoxProps {
   recipient: User;
@@ -67,7 +68,16 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
           onScroll={chatBoxScrollHandler}
           className="relative flex flex-col overflow-scroll scrollbar-hide px-4"
         >
-          <Messages messages={messages} latestMsgRef={latestMsg} />
+          {!messages.length ? (
+            <ErrorMsg
+              className="w-44 sm:w-64 mb-5 self-center justify-self-center"
+              img={start_chatting}
+              msg="Your conversation is empty."
+              subMsg="start chatting below"
+            />
+          ) : (
+            <Messages messages={messages} latestMsgRef={latestMsg} />
+          )}
         </main>
 
         <div className="w-full flex items-center relative gap-2 p-4 pt-0">

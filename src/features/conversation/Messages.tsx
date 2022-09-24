@@ -58,7 +58,7 @@ const Messages = ({ messages, latestMsgRef }: MessagesProps) => {
         </div>
       </div>
     </div>
-  ));
+  )) as unknown as JSX.Element;
 };
 
 export default Messages;

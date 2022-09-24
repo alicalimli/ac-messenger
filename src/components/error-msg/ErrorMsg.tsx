@@ -17,7 +17,7 @@ const ErrorMsg = ({ img, msg, subMsg, className }: ErrorMsgProps) => {
     >
       <img src={img} className="w-full md:w-96" />
       <div className="flex flex-col gap-2 text-center">
-        <h1 className="text-black dark:text-white text-2xl max-w-md ">{msg}</h1>
+        <h1 className="text-black dark:text-white text-xl max-w-md ">{msg}</h1>
         <p className="text-muted-light dark:text-muted-dark text-sm ">
           {subMsg}
         </p>
