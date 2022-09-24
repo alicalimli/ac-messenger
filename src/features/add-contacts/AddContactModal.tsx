@@ -29,11 +29,13 @@ const AddContactModal = ({
 }: AddContactModalProps) => {
   const dispatch = useAppDispatch();
 
-  const [isBtnDisabled, setIsBtnDisabled] = useState(false);
+  const [isPending, setIsPending] = useState<boolean>(false);
 
   const addContactBtnHandler = async () => {
     try {
       if (!currentUser || !recipient) return;
+
+      setIsPending(true);
 
       const combinedId =
         currentUser.uid > recipient.uid
@@ -61,7 +63,7 @@ const AddContactModal = ({
 
       setShowModal(false);
       setSearchVal("");
-      setIsBtnDisabled(false);
+      setIsPending(false);
 
       dispatch(changeChat(recipient));
       dispatch(createToast("Contact added successfuly."));
@@ -90,15 +92,15 @@ const AddContactModal = ({
       <div className="flex flex-col gap-2">
         <TwButton
           onClick={addContactBtnHandler}
-          disabled={isBtnDisabled}
+          disabled={isPending}
           className="w-full flex justify-center py-1"
         >
-          {isBtnDisabled ? "Adding..." : "Add Contact"}
+          {isPending ? "Adding..." : "Add Contact"}
         </TwButton>
         <TwButton
           variant="transparent"
           onClick={cancelBtnHandler}
-          disabled={isBtnDisabled}
+          disabled={isPending}
           className="w-full flex justify-center border border-muted-light/50 dark:border-muted-dark/50 py-1"
         >
           Cancel
