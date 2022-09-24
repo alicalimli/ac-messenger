@@ -96,7 +96,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
         <AiOutlineArrowLeft className="text-lg" /> Add Contacts
       </TwButton>
 
-      <form className="w-full p-2 p-4" autoComplete="off">
+      <form className="w-full p-4" autoComplete="off">
         <label htmlFor="search-input">
           <input
             type="text"
@@ -109,7 +109,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
         </label>
       </form>
 
-      {users.length ? (
+      {users.length !== 0 &&
         users.map((user: User, i: number) => (
           <TwButton
             variant="transparent"
@@ -125,10 +125,11 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
             </div>
             {user.displayName}
           </TwButton>
-        ))
-      ) : (
-        <h1>loading..</h1>
-      )}
+        ))}
+
+      {users.length === 0 && searchVal.length === 0 && <h1>Loading...</h1>}
+
+      {!users.length && searchVal.length !== 0 && <h1>no results</h1>}
     </section>
   );
 };
