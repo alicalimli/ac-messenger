@@ -20,7 +20,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
 
   const [searchVal, setSearchVal] = useState<string>("");
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isPending, setIsPending] = useState<boolean>(false);
 
   const { user: currentUser } = useAppSelector(getUserState);
 
@@ -29,7 +29,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   const getUsers = async () => {
     if (!currentUser) return;
 
-    setLoading(true);
+    setIsPending(true);
 
     const usersColRef = query(
       collection(db, "users"),
@@ -44,7 +44,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
       }) as User[]
     );
 
-    setLoading(false);
+    setIsPending(false);
   };
 
   const contactClickHandler = (recipient: User) => {
@@ -132,7 +132,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
           </TwButton>
         ))}
 
-      {loading && <h1>Loading...</h1>}
+      {isPending && <h1>Fetching users...</h1>}
 
       {!users.length && searchVal.length !== 0 && <h1>no results</h1>}
     </section>
