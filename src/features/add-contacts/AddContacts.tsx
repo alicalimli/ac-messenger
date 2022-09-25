@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ErrorMsg, TwButton } from "components";
+import { ErrorMsg, LoadingSpinner, TwButton } from "components";
 import { no_results } from "assets/images";
 import { AiOutlineArrowLeft, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Modal } from "components";
@@ -133,12 +133,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
           </TwButton>
         ))}
 
-      {isPending && (
-        <div className="flex items-center gap-2 ">
-          <AiOutlineLoading3Quarters className="animate-spin text-3xl text-primary-main" />
-          <p className="text-black dark:text-white">Fetching users...</p>
-        </div>
-      )}
+      {isPending && <LoadingSpinner msg="fetching users..." />}
 
       {!users.length && searchVal.length !== 0 && (
         <ErrorMsg img={no_results} msg="no results found." />

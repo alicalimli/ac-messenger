@@ -2,7 +2,7 @@ import { SyntheticEvent, useEffect, useRef, useState } from "react";
 
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
-import { ErrorMsg, TwButton } from "components";
+import { ErrorMsg, LoadingSpinner, TwButton } from "components";
 
 import Messages from "./Messages";
 import ChatHeader from "./ChatHeader";
@@ -69,7 +69,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
         <ChatHeader recipient={recipient} />
 
         <div className="flex flex-grow items-center justify-center">
-          {isPending && <h1 className="text-3xl">Loading</h1>}
+          {isPending && <LoadingSpinner msg="fetching messages..." />}
 
           {!messages.length && !isPending && (
             <ErrorMsg

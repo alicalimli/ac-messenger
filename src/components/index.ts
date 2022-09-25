@@ -4,5 +4,14 @@ import Modal from "./modal/Modal";
 import TwButton from "./tw-button/TwButton";
 import TwTooltip from "./tw-tooltip/TwTooltip";
 import ErrorMsg from "./error-msg/ErrorMsg";
+import LoadingSpinner from "./loading-spinner/LoadingSpinner";
 
-export { InputForm, Toast, Modal, TwButton, ErrorMsg, TwTooltip };
+export {
+  InputForm,
+  Toast,
+  Modal,
+  TwButton,
+  ErrorMsg,
+  TwTooltip,
+  LoadingSpinner,
+};
