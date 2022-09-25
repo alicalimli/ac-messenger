@@ -50,13 +50,13 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
 
     const userChatDocRef = doc(db, "userChats", currentUser.uid);
     const recipientChatDocRef = doc(db, "userChats", recipient.uid);
-    await updateDoc(userChatDocRef, {
+    updateDoc(userChatDocRef, {
       [chatId + ".lastMessage"]: {
         message,
         date: serverTimestamp(),
       },
     });
-    await updateDoc(recipientChatDocRef, {
+    updateDoc(recipientChatDocRef, {
       [chatId + ".lastMessage"]: {
         message,
         date: serverTimestamp(),
