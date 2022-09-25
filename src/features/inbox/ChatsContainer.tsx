@@ -37,7 +37,7 @@ const ChatsContainer = () => {
     <div className=" p-4 flex flex-col gap-4">
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
       <div className="flex flex-col gap-1">
-        {Object.entries(chats).length ? (
+        {Object.entries(chats).length !== 0 ? (
           Object.entries(chats)
             .sort(
               (a: any, b: any) => b[1].lastMessage.date - a[1].lastMessage.date

@@ -3,6 +3,7 @@ import React from "react";
 import { User, Chat } from "interfaces";
 import { getChatState } from "./chatReducer";
 import { useAppSelector } from "app/hooks";
+import { useFormatDate } from "hooks";
 
 interface ChatListProps {
   chat: any;
@@ -11,6 +12,8 @@ interface ChatListProps {
 
 const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
   const { chatId } = useAppSelector(getChatState);
+
+  const formattedDate = useFormatDate(chat[1].lastMessage.date.toDate());
 
   return (
     <TwButton
@@ -31,9 +34,14 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
         <h2 className="text-xl text-black dark:text-white">
           {chat[1].userInfo.displayName}
         </h2>
-        <p className="text-sm text-muted-light dark:text-muted-dark">
-          {chat[1].lastMessage?.message || ""}
-        </p>
+        <div>
+          <p className="text-sm text-muted-light dark:text-muted-dark">
+            {chat[1].lastMessage?.message || ""}
+          </p>
+          <time className="text-sm text-muted-light dark:text-muted-dark">
+            {formattedDate}
+          </time>
+        </div>
       </div>
     </TwButton>
   );
