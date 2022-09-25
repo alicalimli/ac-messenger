@@ -49,6 +49,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
 
   useEffect(() => {
     setIsPending(true);
+    setMessages([]);
 
     const userChatDocRef = doc(db, "chats", chatId);
 
