@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { isSameDay, isSameWeek, isSameYear, format, addDays } from "date-fns";
 
-const useGetUsers = (date: Date) => {
+const useFormatDate = (date: Date) => {
   const [formattedDate, setFormattedDate] = useState<string>();
 
   useEffect(() => {
@@ -21,4 +21,4 @@ const useGetUsers = (date: Date) => {
   return formattedDate;
 };
 
-export default useGetUsers;
+export default useFormatDate;
