@@ -4,7 +4,7 @@ import { AiOutlineArrowDown } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import { ErrorMsg, LoadingSpinner, TwButton } from "components";
 
-import MessageBox from "./Message";
+import MessageBox from "./MessageBox";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
 import { Message, User } from "interfaces";
