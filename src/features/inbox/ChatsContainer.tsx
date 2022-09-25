@@ -38,10 +38,17 @@ const ChatsContainer = () => {
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
       <div className="flex flex-col gap-1">
         {Object.entries(chats).length ? (
-          <ChatList
-            chats={Object.entries(chats)}
-            chatClickHandler={chatClickHandler}
-          />
+          Object.entries(chats)
+            .sort(
+              (a: any, b: any) => b[1].lastMessage.date - a[1].lastMessage.date
+            )
+            .map((chat: any, i: number) => (
+              <ChatList
+                key={chat[0]}
+                chat={chat}
+                chatClickHandler={chatClickHandler}
+              />
+            ))
         ) : (
           <ErrorMsg
             img={inbox_empty}
