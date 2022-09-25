@@ -25,6 +25,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const latestMsg = useRef<HTMLButtonElement>(null);
 
   const [messages, setMessages] = useState<[]>([]);
+  const [isPending, setIsPending] = useState<boolean>(false);
 
   const { chatId, userInfo } = useAppSelector(getChatState);
 
@@ -47,10 +48,14 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   }, [messages, latestMsg.current]);
 
   useEffect(() => {
+    setIsPending(true);
+
     const userChatDocRef = doc(db, "chats", chatId);
 
     const unsub = onSnapshot(userChatDocRef, (doc) => {
       doc.exists() && setMessages(doc.data().messages);
+
+      setIsPending(false);
     });
 
     return () => {
@@ -63,22 +68,28 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
       <div className="w-full flex flex-col gap-4">
         <ChatHeader recipient={recipient} />
 
-        <main
-          ref={conversationContainer}
-          onScroll={chatBoxScrollHandler}
-          className="relative flex flex-col overflow-scroll scrollbar-hide px-4"
-        >
-          {!messages.length ? (
+        <div className="flex flex-grow items-center justify-center">
+          {isPending && <h1 className="text-3xl">Loading</h1>}
+
+          {!messages.length && !isPending && (
             <ErrorMsg
               className="w-44 sm:w-64 mb-5 self-center justify-self-center"
               img={start_chatting}
               msg="Your conversation is empty."
               subMsg="start chatting below"
             />
-          ) : (
-            <Messages messages={messages} latestMsgRef={latestMsg} />
           )}
-        </main>
+        </div>
+
+        {messages.length !== 0 && (
+          <main
+            ref={conversationContainer}
+            onScroll={chatBoxScrollHandler}
+            className="relative flex flex-col overflow-scroll scrollbar-hide px-4"
+          >
+            <Messages messages={messages} latestMsgRef={latestMsg} />
+          </main>
+        )}
 
         <div className="w-full flex items-center relative gap-2 p-4 pt-0">
           <AnimatePresence>
