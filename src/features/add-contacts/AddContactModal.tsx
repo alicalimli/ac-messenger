@@ -64,6 +64,7 @@ const AddContactModal = ({
             message: "contacted user.",
             date: serverTimestamp(),
           },
+          [combinedId + ".seen"]: false,
         });
       }
 

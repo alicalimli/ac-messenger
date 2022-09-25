@@ -6,12 +6,19 @@ import ChatList from "./ChatList";
 import { Chat, User } from "interfaces";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { getUserState } from "features/authentication/userSlice";
-import { doc, onSnapshot } from "firebase/firestore";
+import {
+  doc,
+  onSnapshot,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "services/firebase";
-import { changeChat } from "./chatReducer";
+import { changeChat, getChatState } from "./chatReducer";
 
 const ChatsContainer = () => {
   const { user: currentUser } = useAppSelector(getUserState);
+  const { chatId } = useAppSelector(getChatState);
+
   const [chats, setChats] = useState<any>([]);
   const dispatch = useAppDispatch();
 
@@ -19,6 +26,11 @@ const ChatsContainer = () => {
 
   const chatClickHandler = (e: React.MouseEvent, recipient: User) => {
     dispatch(changeChat(recipient));
+
+    const userChatDocRef = doc(db, "userChats", currentUser.uid);
+    updateDoc(userChatDocRef, {
+      [chatId + ".seen"]: true,
+    });
   };
 
   useEffect(() => {

@@ -40,7 +40,11 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
       </div>
 
       <div className="flex flex-col gap-1 items-end ml-auto ">
-        <div className="p-1.5 w-fit bg-red-600 rounded-full"></div>
+        <div
+          className={`${
+            !chat[1].seen ? "p-1.5 w-fit bg-red-600 rounded-full" : ""
+          }`}
+        ></div>
         <time className="text-sm text-muted-light dark:text-muted-dark">
           {formattedDate}
         </time>
