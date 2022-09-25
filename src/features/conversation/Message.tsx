@@ -3,17 +3,16 @@ import { motion } from "framer-motion";
 import { useAppSelector } from "app/hooks";
 import { Message } from "interfaces";
 
-interface MessagesProps {
-  messages: Message[];
+interface MessageBoxProps {
+  currentMsg: Message;
   latestMsgRef: React.Ref<HTMLButtonElement>;
 }
 
-const Messages = ({ messages, latestMsgRef }: MessagesProps) => {
+const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
   const { user: currentUser } = useAppSelector(getUserState);
 
-  return messages.map((currentMsg: Message, i: number) => (
+  return (
     <div
-      key={currentMsg.message + i}
       className={`group gap-2 py-1 flex ${
         currentMsg.senderId === currentUser.uid ? "flex-row-reverse" : ""
       }`}
@@ -58,7 +57,7 @@ const Messages = ({ messages, latestMsgRef }: MessagesProps) => {
         </div>
       </div>
     </div>
-  )) as unknown as JSX.Element;
+  );
 };
 
-export default Messages;
+export default MessageBox;

@@ -4,10 +4,10 @@ import { AiOutlineArrowDown } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import { ErrorMsg, LoadingSpinner, TwButton } from "components";
 
-import Messages from "./Messages";
+import MessageBox from "./Message";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
-import { User } from "interfaces";
+import { Message, User } from "interfaces";
 import { useAppSelector } from "app/hooks";
 import { getChatState } from "features/inbox/chatReducer";
 import { doc, onSnapshot } from "firebase/firestore";
@@ -88,7 +88,13 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
             onScroll={chatBoxScrollHandler}
             className="relative flex flex-col overflow-scroll scrollbar-hide px-4"
           >
-            <Messages messages={messages} latestMsgRef={latestMsg} />
+            {messages.map((currentMsg: Message) => (
+              <MessageBox
+                key={currentMsg.id}
+                currentMsg={currentMsg}
+                latestMsgRef={latestMsg}
+              />
+            ))}
           </main>
         )}
 
