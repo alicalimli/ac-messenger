@@ -2,7 +2,7 @@ import { getUserState } from "features/authentication/userSlice";
 import { motion } from "framer-motion";
 import { useAppSelector } from "app/hooks";
 import { Message } from "interfaces";
-import { isSameDay, isSameWeek, isSameYear, format, addDays } from "date-fns";
+import { useFormatDate } from "hooks";
 
 interface MessageBoxProps {
   currentMsg: Message;
@@ -10,25 +10,9 @@ interface MessageBoxProps {
 }
 
 const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
-  let messageDate = "";
-
-  if (currentMsg.date) {
-    const date = currentMsg.date.toDate();
-
-    if (isSameDay(date, new Date())) {
-      messageDate = format(date, "h:mmbbb");
-    } else if (isSameWeek(date, new Date())) {
-      messageDate = format(date, "iii h:mmbbb");
-    } else if (isSameYear(date, new Date())) {
-      messageDate = format(date, "LLL dd");
-    } else {
-      messageDate = format(date, "LLL dd yyy");
-    }
-
-    console.log(isSameWeek(date, new Date()));
-  }
-
   const { user: currentUser } = useAppSelector(getUserState);
+
+  const formattedDate = useFormatDate(currentMsg.date.toDate());
 
   return (
     <div
@@ -70,7 +54,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
           </motion.button>
           <div className="opacity-0 peer-focus:opacity-100 group-hover:opacity-100 duration-300">
             <time className="ml-auto text-sm text-slate-500">
-              {messageDate}
+              {formattedDate}
             </time>
           </div>
         </div>
