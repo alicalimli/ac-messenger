@@ -110,13 +110,19 @@ const AddContactModal = ({
         </p>
       </div>
       <div className="flex flex-col gap-2">
-        <TwButton
-          onClick={addContactBtnHandler}
-          disabled={isPending}
-          className="w-full flex justify-center py-1"
-        >
-          {isPending ? "Adding..." : "Add Contact"}
-        </TwButton>
+        {currentUser?.contacts.find(
+          (contactId) => contactId === recipient?.uid
+        ) ? (
+          <h1 className="text-green-500 text-center">Already in contact.</h1>
+        ) : (
+          <TwButton
+            onClick={addContactBtnHandler}
+            disabled={isPending}
+            className="w-full flex justify-center py-1"
+          >
+            {isPending ? "Adding..." : "Add Contact"}
+          </TwButton>
+        )}
         <TwButton
           variant="transparent"
           onClick={cancelBtnHandler}
