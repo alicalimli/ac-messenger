@@ -1,17 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ErrorMsg } from "components";
 import { inbox_empty } from "assets/images";
 
 import ChatList from "./ChatList";
-import { Chat, User } from "interfaces";
+import { User } from "interfaces";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { getUserState } from "features/authentication/userSlice";
-import {
-  doc,
-  onSnapshot,
-  serverTimestamp,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "services/firebase";
 import { changeChat, getChatState } from "./chatReducer";
 

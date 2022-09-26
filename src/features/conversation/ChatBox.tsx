@@ -28,7 +28,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const [messages, setMessages] = useState<[]>([]);
   const [isPending, setIsPending] = useState<boolean>(false);
 
-  const { chatId, userInfo } = useAppSelector(getChatState);
+  const { chatId } = useAppSelector(getChatState);
   const { user: currentUser } = useAppSelector(getUserState);
 
   const scrollDown = () => {
