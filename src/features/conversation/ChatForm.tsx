@@ -48,6 +48,8 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
       }),
     });
 
+    // To fix i used temporary timestamp now since servertimestamp is somewhat being delayed therefore causing my app to crash it should be server timestamp
+
     const userChatDocRef = doc(db, "userChats", currentUser.uid);
     const recipientChatDocRef = doc(db, "userChats", recipient.uid);
     await updateDoc(userChatDocRef, {

@@ -22,15 +22,8 @@ const ChatsContainer = () => {
   const [chats, setChats] = useState<any>([]);
   const dispatch = useAppDispatch();
 
-  const chatListRef = useRef<Chat>();
-
   const chatClickHandler = (e: React.MouseEvent, recipient: User) => {
     dispatch(changeChat(recipient));
-
-    const userChatDocRef = doc(db, "userChats", currentUser.uid);
-    updateDoc(userChatDocRef, {
-      [chatId + ".seen"]: true,
-    });
   };
 
   useEffect(() => {

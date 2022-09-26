@@ -10,9 +10,10 @@ import ChatForm from "./ChatForm";
 import { Message, User } from "interfaces";
 import { useAppSelector } from "app/hooks";
 import { getChatState } from "features/inbox/chatReducer";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "services/firebase";
 import { start_chatting } from "assets/images";
+import { getUserState } from "features/authentication/userSlice";
 
 interface ChatBoxProps {
   recipient: User;
@@ -28,6 +29,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const [isPending, setIsPending] = useState<boolean>(false);
 
   const { chatId, userInfo } = useAppSelector(getChatState);
+  const { user: currentUser } = useAppSelector(getUserState);
 
   const scrollDown = () => {
     latestMsg?.current?.scrollIntoView({ behavior: "smooth" });
@@ -51,9 +53,15 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
     setIsPending(true);
     setMessages([]);
 
-    const userChatDocRef = doc(db, "chats", chatId);
+    const conversationDocRef = doc(db, "chats", chatId);
+    const userChatDocRef = doc(db, "userChats", currentUser.uid);
 
-    const unsub = onSnapshot(userChatDocRef, (doc) => {
+    // Seen the conversation
+    updateDoc(userChatDocRef, {
+      [chatId + ".seen"]: true,
+    });
+
+    const unsub = onSnapshot(conversationDocRef, (doc) => {
       doc.exists() && setMessages(doc.data().messages);
 
       setIsPending(false);

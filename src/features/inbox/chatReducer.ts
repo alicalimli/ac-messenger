@@ -15,7 +15,7 @@ export const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
-    changeChat: (state, action: PayloadAction<User> ) => {
+    changeChat: (state, action: PayloadAction<User>) => {
       if (!auth.currentUser || !action.payload) return;
 
       const currentUser: any = auth.currentUser;
@@ -26,6 +26,8 @@ export const chatSlice = createSlice({
         currentUser.uid > recipient.uid
           ? currentUser.uid + recipient.uid
           : recipient.uid + currentUser.uid;
+
+      console.log(state.chatId);
     },
     resetChat: (state) => {
       state.chatId = "";
