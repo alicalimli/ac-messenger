@@ -65,6 +65,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
         message,
         date: Timestamp.now(),
       },
+      // If recipient is not viewing their conversation show unread style
       [chatId + ".seen"]: recipientChatDocData?.[chatId].active ? true : false,
     });
   };
