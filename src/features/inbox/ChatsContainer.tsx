@@ -36,6 +36,15 @@ const ChatsContainer = () => {
   return (
     <div className=" p-4 flex flex-col gap-4">
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
+      <div className="flex gap-2 items-center text-black dark:text-white px-4 border-b  border-muted-light/10 dark:border-muted-dark/10 pb-4">
+        <div className="bg-transparent h-12 w-12">
+          {currentUser.status === "on" && (
+            <div className="bg-green-500 p-1.5 rounded-full absolute right-1 bottom-0"></div>
+          )}
+          <img src={currentUser.photoURL} className="w-full rounded-full" />
+        </div>
+        {currentUser.displayName}
+      </div>
       <div className="flex flex-col gap-1">
         {Object.entries(chats).length !== 0 ? (
           Object.entries(chats)
