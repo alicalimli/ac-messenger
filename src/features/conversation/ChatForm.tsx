@@ -12,6 +12,7 @@ import { getChatState } from "features/inbox/chatReducer";
 import {
   arrayUnion,
   doc,
+  getDoc,
   serverTimestamp,
   setDoc,
   Timestamp,
@@ -52,6 +53,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
 
     const userChatDocRef = doc(db, "userChats", currentUser.uid);
     const recipientChatDocRef = doc(db, "userChats", recipient.uid);
+    const recipientChatDocData = (await getDoc(recipientChatDocRef)).data();
     await updateDoc(userChatDocRef, {
       [chatId + ".lastMessage"]: {
         message,
@@ -63,7 +65,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
         message,
         date: Timestamp.now(),
       },
-      [chatId + ".seen"]: false,
+      [chatId + ".seen"]: recipientChatDocData?.[chatId].active ? true : false,
     });
   };
 

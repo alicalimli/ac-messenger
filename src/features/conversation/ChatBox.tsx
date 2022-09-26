@@ -59,6 +59,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
     // Seen the conversation
     updateDoc(userChatDocRef, {
       [chatId + ".seen"]: true,
+      [chatId + ".active"]: true,
     });
 
     const unsub = onSnapshot(conversationDocRef, (doc) => {
@@ -68,6 +69,9 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
     });
 
     return () => {
+      updateDoc(userChatDocRef, {
+        [chatId + ".active"]: false,
+      });
       unsub();
     };
   }, [chatId]);
