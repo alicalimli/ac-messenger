@@ -51,6 +51,7 @@ const setUserInfoDoc = async () => {
       bio: "A Bio.",
       status: "off",
       location: "Earth",
+      contacts: [],
     });
   }
 

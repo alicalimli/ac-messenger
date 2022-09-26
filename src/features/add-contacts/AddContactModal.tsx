@@ -44,7 +44,7 @@ const AddContactModal = ({
           : recipient.uid + currentUser.uid;
 
       const userDocRef = doc(db, "users", currentUser.uid.toString());
-      const recipientDocRef = doc(db, "chats", recipient.uid.toString());
+      const recipientDocRef = doc(db, "users", recipient.uid.toString());
 
       const chatDocRef = doc(db, "chats", String(combinedId));
       const chatDocData = await getDoc(chatDocRef);
