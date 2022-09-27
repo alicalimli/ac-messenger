@@ -44,7 +44,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
 
   const { chatId, recipient } = useAppSelector(getChatState);
 
-  const sendMessage = async (downloadURL?: string) => {
+  const sendMessage = async (imgURL?: string) => {
     setImage(null);
     setMessage("");
 
@@ -55,7 +55,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
         message,
         senderId: currentUser.uid,
         date: Timestamp.now(),
-        img: downloadURL || "",
+        img: imgURL || "",
       }),
     });
 
@@ -128,11 +128,16 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
     });
   };
 
-  const handleCancelImageSend = () => {
+  const closeImageModal = () => {
     setShowModal(false);
     setImage(null);
     setImageUrl("");
     imageInputRef.current.value = "";
+  };
+
+  const handleSendImage = () => {
+    sendMessage(imageUrl);
+    closeImageModal();
   };
 
   return (
@@ -145,8 +150,10 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
           <div className="flex flex-col gap-2">
             <img src={imageUrl} className="w-64 rounded-xl" />
             <div className="flex gap-2">
-              <TwButton variant="contained">Send</TwButton>
-              <TwButton onClick={handleCancelImageSend} variant="transparent">
+              <TwButton onClick={handleSendImage} variant="contained">
+                Send
+              </TwButton>
+              <TwButton onClick={closeImageModal} variant="transparent">
                 Cancel
               </TwButton>
             </div>
