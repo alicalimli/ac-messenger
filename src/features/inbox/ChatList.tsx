@@ -20,10 +20,9 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
       variant="transparent"
       onClick={(e: React.MouseEvent) => chatClickHandler(e, chat[1].userInfo)}
       className={`w-full p-2 ${
-        !chat[1].seen || chat[0] === chatId
-          ? "bg-muted-light/5 dark:bg-muted-dark/10 "
-          : ""
-      }`}
+        !chat[1].seen && "bg-muted-light/5 dark:bg-muted-dark/10"
+      }  ${chat[0] === chatId && "bg-muted-light/10 dark:bg-muted-dark/20"}
+     `}
     >
       <div className="relative bg-transparent h-14 w-14">
         <div className="bg-green-500 p-2 rounded-full absolute right-0 bottom-0"></div>
