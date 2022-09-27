@@ -45,19 +45,30 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
   const { chatId, recipient } = useAppSelector(getChatState);
 
   const sendMessage = async (imgURL?: string) => {
-    setImage(null);
-    setMessage("");
-
     const chatDocRef = doc(db, "chats", chatId);
-    await updateDoc(chatDocRef, {
-      messages: arrayUnion({
-        id: uuid(),
-        message,
-        senderId: currentUser.uid,
-        date: Timestamp.now(),
-        img: imgURL || "",
-      }),
-    });
+
+    if (imgURL) {
+      await updateDoc(chatDocRef, {
+        messages: arrayUnion({
+          id: uuid(),
+          message: "",
+          senderId: currentUser.uid,
+          date: Timestamp.now(),
+          img: imgURL,
+        }),
+      });
+    } else {
+      setMessage("");
+      await updateDoc(chatDocRef, {
+        messages: arrayUnion({
+          id: uuid(),
+          message,
+          senderId: currentUser.uid,
+          date: Timestamp.now(),
+          img: "",
+        }),
+      });
+    }
 
     // To fix i used temporary timestamp now since servertimestamp is somewhat being delayed therefore causing my app to crash it should be server timestamp
 
