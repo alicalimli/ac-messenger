@@ -6,11 +6,17 @@ import { VARIANTS_MANAGER } from "setup/variants-manager";
 
 interface ModalProps {
   children: JSX.Element | boolean;
-  setShowModal: (state: boolean) => void;
   className?: string;
+  isHidingModal?: boolean;
+  setShowModal: (state: boolean) => void;
 }
 
-const Modal = ({ className, children, setShowModal }: ModalProps) => {
+const Modal = ({
+  className,
+  children,
+  isHidingModal = true,
+  setShowModal,
+}: ModalProps) => {
   const modalParentRef = useRef<HTMLDivElement>(null);
 
   const handleParentClick = (e: React.MouseEvent) => {
@@ -23,7 +29,7 @@ const Modal = ({ className, children, setShowModal }: ModalProps) => {
     <AnimatePresence>
       {children && (
         <motion.div
-          onClick={handleParentClick}
+          onClick={isHidingModal ? handleParentClick : undefined}
           ref={modalParentRef}
           variants={VARIANTS_MANAGER}
           initial="fade-out"
