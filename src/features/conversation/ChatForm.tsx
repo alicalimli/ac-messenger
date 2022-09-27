@@ -22,6 +22,7 @@ import { db, storage } from "services/firebase";
 import { getUserState } from "features/authentication/userSlice";
 import { v4 as uuid } from "uuid";
 import {
+  deleteObject,
   getDownloadURL,
   ref,
   uploadBytes,
@@ -38,7 +39,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
   const [image, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | any>("");
   const [showModal, setShowModal] = useState<boolean>(false);
-  // const [imageStorageName, setImageStorageName] = useState<string>('')
+  const [imageStorageName, setImageStorageName] = useState<string>("");
 
   const imageInputRef = useRef<any>(null);
 
@@ -130,7 +131,11 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
 
     if (!imageUpload) return;
 
-    const imageRef = ref(storage, `images/${imageUpload.name + uuid()}`);
+    const imageName = `images/${imageUpload.name + uuid()}`;
+    const imageRef = ref(storage, imageName);
+
+    setImageStorageName(imageName);
+
     await uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         setImageUrl(url);
@@ -140,10 +145,14 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
   };
 
   const closeImageModal = () => {
+    const imageRef = ref(storage, imageStorageName);
+    imageInputRef.current.value = "";
+
+    deleteObject(imageRef);
+    setImageStorageName("");
     setShowModal(false);
     setImage(null);
     setImageUrl("");
-    imageInputRef.current.value = "";
   };
 
   const handleSendImage = () => {
