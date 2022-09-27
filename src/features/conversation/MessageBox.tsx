@@ -32,16 +32,17 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
           />
         )}
 
-        <div
-          className={`flex gap-2 ${
-            currentMsg.senderId === currentUser.uid ? "flex-row-reverse" : ""
-          }`}
-        >
-          <motion.button
-            animate={{ scale: 1, opacity: 1 }}
-            initial={{ scale: 0, opacity: 0 }}
-            ref={latestMsgRef}
-            className={`
+        {currentMsg.message && (
+          <div
+            className={`flex gap-2 ${
+              currentMsg.senderId === currentUser.uid ? "flex-row-reverse" : ""
+            }`}
+          >
+            <motion.button
+              animate={{ scale: 1, opacity: 1 }}
+              initial={{ scale: 0, opacity: 0 }}
+              ref={latestMsgRef}
+              className={`
               peer flex rounded-full p-1.5 px-3 w-fit
               ${
                 currentMsg.senderId === currentUser.uid
@@ -49,15 +50,18 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
                   : "bg-white text-black rounded-bl-sm"
               }
             `}
-          >
-            <p className="text-md">{currentMsg.message}</p>
-          </motion.button>
-          <div className="opacity-0 peer-focus:opacity-100 group-hover:opacity-100 duration-300">
-            <time className="ml-auto text-sm text-slate-500">
-              {formattedDate}
-            </time>
+            >
+              {currentMsg.message && (
+                <p className="text-md">{currentMsg.message}</p>
+              )}
+            </motion.button>
+            <div className="opacity-0 peer-focus:opacity-100 group-hover:opacity-100 duration-300">
+              <time className="ml-auto text-sm text-slate-500">
+                {formattedDate}
+              </time>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
