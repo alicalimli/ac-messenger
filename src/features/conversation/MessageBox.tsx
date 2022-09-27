@@ -4,7 +4,7 @@ import { useAppSelector } from "app/hooks";
 import { Message } from "interfaces";
 import { useFormatDate } from "hooks";
 import { useState } from "react";
-import Shared from "components/shared";
+import { SharedLayout } from "components";
 
 interface MessageBoxProps {
   currentMsg: Message;
@@ -43,7 +43,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
           ""
         )}
 
-        <Shared
+        <SharedLayout
           isExpanded={isExpanded}
           onClick={() => {
             setIsExpanded(false);
@@ -58,7 +58,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
           ) : (
             ""
           )}
-        </Shared>
+        </SharedLayout>
 
         {currentMsg.message && (
           <div

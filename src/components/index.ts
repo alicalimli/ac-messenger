@@ -5,6 +5,7 @@ import TwButton from "./tw-button/TwButton";
 import TwTooltip from "./tw-tooltip/TwTooltip";
 import ErrorMsg from "./error-msg/ErrorMsg";
 import LoadingSpinner from "./loading-spinner/LoadingSpinner";
+import SharedLayout from "./shared-layout/SharedLayout";
 
 export {
   InputForm,
@@ -14,4 +15,5 @@ export {
   ErrorMsg,
   TwTooltip,
   LoadingSpinner,
+  SharedLayout,
 };

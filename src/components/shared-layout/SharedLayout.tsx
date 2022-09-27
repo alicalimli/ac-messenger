@@ -1,13 +1,13 @@
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 
-interface sharedProps {
+interface SharedLayoutProps {
   isExpanded: boolean;
   children: any;
   onClick: any;
 }
 
-const Shared = ({ isExpanded, children, onClick }: sharedProps) => {
+const SharedLayout = ({ isExpanded, children, onClick }: SharedLayoutProps) => {
   return createPortal(
     <motion.div
       onClick={onClick}
@@ -22,4 +22,4 @@ const Shared = ({ isExpanded, children, onClick }: sharedProps) => {
   );
 };
 
-export default Shared;
+export default SharedLayout;
