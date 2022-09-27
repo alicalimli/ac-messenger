@@ -144,11 +144,13 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
     });
   };
 
-  const closeImageModal = () => {
-    const imageRef = ref(storage, imageStorageName);
-    imageInputRef.current.value = "";
+  const closeImageModal = (deleteStorageImage?: boolean) => {
+    if (deleteStorageImage) {
+      const imageRef = ref(storage, imageStorageName);
+      deleteObject(imageRef);
+    }
 
-    deleteObject(imageRef);
+    imageInputRef.current.value = "";
     setImageStorageName("");
     setShowModal(false);
     setImage(null);
@@ -182,7 +184,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
                 Send
               </TwButton>
               <TwButton
-                onClick={closeImageModal}
+                onClick={() => closeImageModal(true)}
                 className="justify-center py-1"
                 variant="outline"
               >
