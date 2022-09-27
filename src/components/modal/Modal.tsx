@@ -7,9 +7,10 @@ import { VARIANTS_MANAGER } from "setup/variants-manager";
 interface ModalProps {
   children: JSX.Element | boolean;
   setShowModal: (state: boolean) => void;
+  className?: string;
 }
 
-const Modal = ({ children, setShowModal }: ModalProps) => {
+const Modal = ({ className, children, setShowModal }: ModalProps) => {
   const modalParentRef = useRef<HTMLDivElement>(null);
 
   const handleParentClick = (e: React.MouseEvent) => {
@@ -35,7 +36,7 @@ const Modal = ({ children, setShowModal }: ModalProps) => {
             initial="pop-out"
             animate="pop-in"
             exit="pop-out"
-            className="bg-white text-black dark:bg-bgmain-dark dark:text-white flex items-center justify-center z-10 shadow-md p-4 px-8 rounded-xl"
+            className={`${className} bg-white text-black dark:bg-bgmain-dark dark:text-white flex items-center justify-center z-10 shadow-md p-4 px-8 rounded-xl`}
           >
             {" "}
             {children}{" "}

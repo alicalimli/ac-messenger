@@ -156,15 +156,23 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
       onSubmit={handleFormSubmit}
       className="relative w-full flex px-2 items-center gap-1 bg-white dark:bg-bgmain-dark rounded-full duration-300"
     >
-      <Modal setShowModal={setShowModal}>
+      <Modal className="p-2 px-2" setShowModal={setShowModal}>
         {showModal && (
           <div className="flex flex-col gap-2">
             <img src={imageUrl} className="w-64 rounded-xl" />
-            <div className="flex gap-2">
-              <TwButton onClick={handleSendImage} variant="contained">
+            <div className="flex flex-col gap-1 ">
+              <TwButton
+                onClick={handleSendImage}
+                className="py-1"
+                variant="contained"
+              >
                 Send
               </TwButton>
-              <TwButton onClick={closeImageModal} variant="transparent">
+              <TwButton
+                onClick={closeImageModal}
+                className="justify-center py-1"
+                variant="outline"
+              >
                 Cancel
               </TwButton>
             </div>
