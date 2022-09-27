@@ -2,7 +2,7 @@ import { SyntheticEvent, useEffect, useRef, useState } from "react";
 
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
-import { ErrorMsg, LoadingSpinner, TwButton } from "components";
+import { ErrorMsg, LoadingSpinner, Modal, TwButton } from "components";
 
 import MessageBox from "./MessageBox";
 import ChatHeader from "./ChatHeader";

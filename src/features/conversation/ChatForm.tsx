@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { BiMicrophone } from "react-icons/bi";
 import { MdSend } from "react-icons/md";
 import { RiImageAddLine } from "react-icons/ri";
 import { VscSmiley } from "react-icons/vsc";
 
-import { TwButton } from "components";
+import { Modal, TwButton } from "components";
 import { Message } from "interfaces";
 import { useAppSelector } from "app/hooks";
 import { getChatState } from "features/inbox/chatReducer";
@@ -21,7 +21,12 @@ import {
 import { db, storage } from "services/firebase";
 import { getUserState } from "features/authentication/userSlice";
 import { v4 as uuid } from "uuid";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+} from "firebase/storage";
 
 interface ChatFormProps {
   setMessages: (state: Message[] | any) => void;
@@ -31,6 +36,11 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
   const { user: currentUser } = useAppSelector(getUserState);
   const [message, setMessage] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | any>("");
+  const [showModal, setShowModal] = useState<boolean>(false);
+  // const [imageStorageName, setImageStorageName] = useState<string>('')
+
+  const imageInputRef = useRef<any>(null);
 
   const { chatId, recipient } = useAppSelector(getChatState);
 
@@ -102,8 +112,27 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
     }
   };
 
-  const handleImageChange = (e: any) => {
-    setImage(e.target.files[0]);
+  const handleImageChange = async (e: any) => {
+    const imageUpload = e.target.files[0];
+
+    setImage(imageUpload);
+
+    if (!imageUpload) return;
+
+    const imageRef = ref(storage, `images/${imageUpload.name + uuid()}`);
+    await uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImageUrl(url);
+        setShowModal(true);
+      });
+    });
+  };
+
+  const handleCancelImageSend = () => {
+    setShowModal(false);
+    setImage(null);
+    setImageUrl("");
+    imageInputRef.current.value = "";
   };
 
   return (
@@ -111,6 +140,19 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
       onSubmit={handleFormSubmit}
       className="relative w-full flex px-2 items-center gap-1 bg-white dark:bg-bgmain-dark rounded-full duration-300"
     >
+      <Modal setShowModal={setShowModal}>
+        {showModal && (
+          <div className="flex flex-col gap-2">
+            <img src={imageUrl} className="w-64 rounded-xl" />
+            <div className="flex gap-2">
+              <TwButton variant="contained">Send</TwButton>
+              <TwButton onClick={handleCancelImageSend} variant="transparent">
+                Cancel
+              </TwButton>
+            </div>
+          </div>
+        )}
+      </Modal>
       <div className="flex p-2">
         <button
           type="button"
@@ -130,6 +172,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
         >
           <input
             type="file"
+            ref={imageInputRef}
             id="image-input"
             className="hidden"
             onChange={handleImageChange}
