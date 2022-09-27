@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { useAppSelector } from "app/hooks";
 import { Message } from "interfaces";
 import { useFormatDate } from "hooks";
+import { useState } from "react";
+import Shared from "components/shared";
 
 interface MessageBoxProps {
   currentMsg: Message;
@@ -10,6 +12,7 @@ interface MessageBoxProps {
 }
 
 const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
+  const [isExpanded, setIsExpanded] = useState(false);
   const { user: currentUser } = useAppSelector(getUserState);
 
   const formattedDate = useFormatDate(currentMsg.date.toDate());
@@ -25,12 +28,37 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
           currentMsg.senderId === currentUser.uid ? "items-end" : "items-start"
         }`}
       >
-        {currentMsg.img && (
-          <img
+        {currentMsg.img ? (
+          <motion.img
             src={currentMsg.img}
-            className="w-64 bg-muted-dark/10 rounded-xl"
+            layoutId={`${currentMsg.id}`}
+            onClick={() => {
+              setIsExpanded(true);
+            }}
+            className={`${
+              isExpanded && "invisible"
+            } w-64 bg-muted-dark/10 rounded-xl cursor-pointer`}
           />
+        ) : (
+          ""
         )}
+
+        <Shared
+          isExpanded={isExpanded}
+          onClick={() => {
+            setIsExpanded(false);
+          }}
+        >
+          {currentMsg.img && isExpanded ? (
+            <motion.img
+              src={currentMsg.img}
+              layoutId={`${currentMsg.id}`}
+              className="w-96 cursor-pointer  bg-muted-dark/10 rounded-xl"
+            />
+          ) : (
+            ""
+          )}
+        </Shared>
 
         {currentMsg.message && (
           <div

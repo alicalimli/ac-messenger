@@ -21,7 +21,6 @@ interface ChatBoxProps {
 
 const ChatBox = ({ recipient }: ChatBoxProps) => {
   const [showArrowDown, setShowArrowDown] = useState(false);
-
   const conversationContainer = useRef<HTMLDivElement>(null);
   const latestMsg = useRef<HTMLButtonElement>(null);
 
@@ -100,7 +99,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
             onScroll={chatBoxScrollHandler}
             className="relative flex flex-col overflow-scroll scrollbar-hide px-4"
           >
-            {messages.map((currentMsg: Message) => (
+            {messages.map((currentMsg: Message, i: any) => (
               <MessageBox
                 key={currentMsg.id}
                 currentMsg={currentMsg}
