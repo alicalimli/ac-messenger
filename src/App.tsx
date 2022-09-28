@@ -57,7 +57,6 @@ const App = () => {
         status: "offline",
       });
       unsub();
-      return false;
     };
 
     return () => {

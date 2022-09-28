@@ -1,9 +1,11 @@
 import { TwButton } from "components";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { User, Chat } from "interfaces";
 import { getChatState } from "./chatReducer";
 import { useAppSelector } from "app/hooks";
 import { useFormatDate } from "hooks";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "services/firebase";
 
 interface ChatListProps {
   chat: any;
@@ -12,8 +14,23 @@ interface ChatListProps {
 
 const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
   const { chatId } = useAppSelector(getChatState);
+  const [online, setOnline] = useState<boolean>(false);
 
   const formattedDate = useFormatDate(chat[1].lastMessage.date.toDate());
+
+  const getUserStatus = async (uid: string) => {
+    try {
+      const userDocRef = doc(db, "users", uid);
+      const userDocData = (await getDoc(userDocRef)).data();
+      setOnline(userDocData?.status === "online" ? true : false);
+    } catch (error: any) {
+      console.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getUserStatus(chat[1].userInfo.uid);
+  }, []);
 
   return (
     <TwButton
@@ -25,7 +42,11 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
      `}
     >
       <div className="relative bg-transparent h-14 w-14">
-        <div className="bg-green-500 p-2 rounded-full absolute right-0 bottom-0"></div>
+        <div
+          className={`${
+            online ? "bg-green-500 " : "bg-red-500 "
+          }p-2 rounded-full absolute right-0 bottom-0`}
+        ></div>
         <img
           src={chat[1].userInfo.photoURL || ""}
           className="w-full rounded-full"
