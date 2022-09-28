@@ -1,11 +1,9 @@
 import { TwButton } from "components";
-import React, { useEffect, useState } from "react";
-import { User, Chat } from "interfaces";
+import React from "react";
+import { User } from "interfaces";
 import { getChatState } from "./chatReducer";
 import { useAppSelector } from "app/hooks";
 import { useFormatDate } from "hooks";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "services/firebase";
 
 interface ChatListProps {
   chat: any;
@@ -14,23 +12,7 @@ interface ChatListProps {
 
 const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
   const { chatId } = useAppSelector(getChatState);
-  const [online, setOnline] = useState<boolean>(false);
-
   const formattedDate = useFormatDate(chat[1].lastMessage.date.toDate());
-
-  const getUserStatus = async (uid: string) => {
-    try {
-      const userDocRef = doc(db, "users", uid);
-      const userDocData = (await getDoc(userDocRef)).data();
-      setOnline(userDocData?.status === "online" ? true : false);
-    } catch (error: any) {
-      console.error(error.message);
-    }
-  };
-
-  useEffect(() => {
-    getUserStatus(chat[1].userInfo.uid);
-  }, []);
 
   return (
     <TwButton

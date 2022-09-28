@@ -2,7 +2,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "services/firebase";
 
-const getUserStatus = (uid: string) => {
+const useGetUserStatus = (uid: string) => {
   const [online, setOnline] = useState<boolean>(false);
 
   const getUserStatus = async () => {
@@ -17,8 +17,8 @@ const getUserStatus = (uid: string) => {
 
   useEffect(() => {
     getUserStatus();
-  }, []);
+  }, [uid]);
   return online;
 };
 
-export default getUserStatus;
+export default useGetUserStatus;
