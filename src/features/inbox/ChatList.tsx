@@ -40,20 +40,27 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
         <h2 className="text-xl text-black dark:text-white">
           {chat[1].userInfo.displayName}
         </h2>
-        <p className="text-sm text-muted-light dark:text-muted-dark">
-          {chat[1].lastMessage?.message || ""}
-        </p>
+        <div className="flex gap-2">
+          <p
+            className={`${
+              !chat[1].seen && "font-bold"
+            } text-sm text-muted-light dark:text-muted-dark`}
+          >
+            {chat[1].lastMessage?.message || ""}
+          </p>
+          <span>•</span>
+          <time className={`text-sm text-muted-light dark:text-muted-dark`}>
+            {formattedDate}
+          </time>
+        </div>
       </div>
 
       <div className="flex flex-col gap-1 items-end ml-auto ">
         <div
           className={`${
-            !chat[1].seen ? "p-1.5 w-fit bg-primary-main rounded-full" : ""
+            !chat[1].seen ? "p-1 w-fit bg-primary-main rounded-full" : ""
           }`}
         ></div>
-        <time className="text-sm text-muted-light dark:text-muted-dark">
-          {formattedDate}
-        </time>
       </div>
     </TwButton>
   );
