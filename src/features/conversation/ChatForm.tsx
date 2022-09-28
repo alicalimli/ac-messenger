@@ -78,13 +78,13 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
     const recipientChatDocData = (await getDoc(recipientChatDocRef)).data();
     await updateDoc(userChatDocRef, {
       [chatId + ".lastMessage"]: {
-        message,
+        message: !imgURL ? `You: ${message}` : "You: sent a picture.",
         date: Timestamp.now(),
       },
     });
     await updateDoc(recipientChatDocRef, {
       [chatId + ".lastMessage"]: {
-        message,
+        message: !imgURL ? message : "sent a picture.",
         date: Timestamp.now(),
       },
       // If recipient is not viewing their conversation show unread style
