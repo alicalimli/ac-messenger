@@ -13,6 +13,7 @@ import {
   arrayUnion,
   doc,
   getDoc,
+  increment,
   serverTimestamp,
   setDoc,
   Timestamp,
@@ -88,7 +89,11 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
         date: Timestamp.now(),
       },
       // If recipient is not viewing their conversation show unread style
-      [chatId + ".seen"]: recipientChatDocData?.[chatId].active ? true : false,
+      [chatId + ".unread"]: recipientChatDocData?.[chatId].active
+        ? false
+        : true,
+      [chatId + ".unreadMsgCount"]:
+        !recipientChatDocData?.[chatId].active && increment(1),
     });
   };
 

@@ -55,9 +55,11 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
     const conversationDocRef = doc(db, "chats", chatId);
     const userChatDocRef = doc(db, "userChats", currentUser.uid);
 
+    // handle number of unread messages
     // Seen the conversation
     updateDoc(userChatDocRef, {
-      [chatId + ".seen"]: true,
+      [chatId + ".unread"]: false,
+      [chatId + ".unreadMsgCount"]: 0,
       [chatId + ".active"]: true,
     });
 

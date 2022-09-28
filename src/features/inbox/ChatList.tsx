@@ -21,7 +21,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
       variant="transparent"
       onClick={(e: React.MouseEvent) => chatClickHandler(e, chat[1].userInfo)}
       className={`w-full p-2 ${
-        !chat[1].seen && "bg-muted-light/5 dark:bg-muted-dark/10"
+        chat[1].unread && "bg-muted-light/5 dark:bg-muted-dark/10"
       }  ${chat[0] === chatId && "bg-muted-light/10 dark:bg-muted-dark/20"}
      `}
     >
@@ -43,25 +43,33 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
         <div className="flex gap-2">
           <p
             className={`${
-              !chat[1].seen && "font-bold"
-            } text-sm text-muted-light dark:text-muted-dark`}
+              chat[1].unread
+                ? "font-bold dark:text-white"
+                : "dark:text-muted-dark"
+            } text-sm text-muted-light `}
           >
             {chat[1].lastMessage?.message || ""}
           </p>
           <span>•</span>
-          <time className={`text-sm text-muted-light dark:text-muted-dark`}>
+          <time
+            className={`${
+              chat[1].unread
+                ? "font-bold dark:text-white"
+                : "dark:text-muted-dark"
+            } text-sm text-muted-light `}
+          >
             {formattedDate}
           </time>
         </div>
       </div>
 
-      <div className="flex flex-col gap-1 items-end ml-auto ">
-        <div
-          className={`${
-            !chat[1].seen ? "p-1 w-fit bg-primary-main rounded-full" : ""
-          }`}
-        ></div>
-      </div>
+      {chat[1].unread && (
+        <div className="flex flex-col gap-1 items-end ml-auto ">
+          <div className="w-6 py-0.5 text-center text-white bg-primary-main rounded-full">
+            <p className="text-sm">{chat[1].unreadMsgCount}</p>
+          </div>
+        </div>
+      )}
     </TwButton>
   );
 };
