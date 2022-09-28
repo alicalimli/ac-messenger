@@ -29,7 +29,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
         <div
           className={`${
             online ? "bg-green-500 " : "bg-red-500 "
-          }p-2 rounded-full absolute right-0 bottom-0`}
+          }p-1.5 rounded-full absolute right-0 bottom-0`}
         ></div>
         <img
           src={chat[1].userInfo.photoURL || ""}

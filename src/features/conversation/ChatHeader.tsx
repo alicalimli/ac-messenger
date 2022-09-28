@@ -36,7 +36,7 @@ const ChatHeader = ({ recipient }: ChatHeaderProps) => {
           <div
             className={`${
               online ? "bg-green-500 " : "bg-red-500 "
-            }p-2 rounded-full absolute right-1 bottom-0 `}
+            }p-1.5 rounded-full absolute right-1 bottom-0 `}
           ></div>
           <img
             src={recipient.photoURL || DEFAULT_PROFILE_IMAGE}
