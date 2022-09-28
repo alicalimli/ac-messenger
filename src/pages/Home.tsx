@@ -8,6 +8,7 @@ import { ErrorMsg } from "components";
 import { start_messaging_img } from "assets/images/";
 import { useAppSelector } from "app/hooks";
 import { getChatState } from "features/inbox/chatReducer";
+import { getUserState } from "features/authentication/userSlice";
 
 const Home = () => {
   const defaultSideBarContent = "chats";
