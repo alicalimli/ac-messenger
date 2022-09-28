@@ -3,7 +3,7 @@ import React from "react";
 import { User } from "interfaces";
 import { getChatState } from "./chatReducer";
 import { useAppSelector } from "app/hooks";
-import { useFormatDate } from "hooks";
+import { useFormatDate, useGetUserStatus } from "hooks";
 
 interface ChatListProps {
   chat: any;
@@ -12,6 +12,8 @@ interface ChatListProps {
 
 const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
   const { chatId } = useAppSelector(getChatState);
+  const online = useGetUserStatus(chat[1].userInfo.uid);
+
   const formattedDate = useFormatDate(chat[1].lastMessage.date.toDate());
 
   return (
