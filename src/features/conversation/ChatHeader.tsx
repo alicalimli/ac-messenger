@@ -4,6 +4,7 @@ import { TwButton } from "components";
 import { User } from "interfaces";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { getChatState, resetChat } from "features/inbox/chatReducer";
+import { useGetUserStatus } from "hooks";
 
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
@@ -12,8 +13,10 @@ interface ChatHeaderProps {
 }
 
 const ChatHeader = ({ recipient }: ChatHeaderProps) => {
-  const dispatch = useAppDispatch();
   const { chatId } = useAppSelector(getChatState);
+  const online = useGetUserStatus(recipient.uid.toString());
+
+  const dispatch = useAppDispatch();
 
   const handleBackBtn = () => {
     dispatch(resetChat());
@@ -30,7 +33,11 @@ const ChatHeader = ({ recipient }: ChatHeaderProps) => {
       </TwButton>
       <div className="flex items-center gap-4">
         <div className="relative bg-transparent h-16 w-16">
-          <div className="bg-green-500 p-2 rounded-full absolute right-1 bottom-0"></div>
+          <div
+            className={`${
+              online ? "bg-green-500 " : "bg-red-500 "
+            }p-2 rounded-full absolute right-1 bottom-0 `}
+          ></div>
           <img
             src={recipient.photoURL || DEFAULT_PROFILE_IMAGE}
             className="w-full rounded-full"
@@ -41,7 +48,7 @@ const ChatHeader = ({ recipient }: ChatHeaderProps) => {
             {recipient.displayName}
           </h2>
           <p className="text-sm text-muted-light dark:text-muted-dark">
-            online
+            {online ? "online" : "offline"}
           </p>
         </div>
       </div>

@@ -33,8 +33,8 @@ const AddContactModal = ({
 
       await addContact(currentUser, recipient);
 
-      setShowModal(false);
       setSearchVal("");
+      setShowModal(false);
       setIsPending(false);
 
       dispatch(changeChat(recipient));
