@@ -4,15 +4,6 @@ import { User } from "interfaces";
 import { useState } from "react";
 import { useAppDispatch } from "app/hooks";
 import { createToast } from "toastSlice";
-import {
-  arrayUnion,
-  doc,
-  getDoc,
-  serverTimestamp,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
-import { db } from "services/firebase";
 import { changeChat } from "features/inbox/chatReducer";
 import useAddContact from "./useAddContact";
 

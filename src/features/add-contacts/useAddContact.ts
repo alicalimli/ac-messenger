@@ -7,7 +7,6 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { User } from "interfaces";
-import { useEffect, useState } from "react";
 import { db } from "services/firebase";
 
 const useAddContact = () => {
