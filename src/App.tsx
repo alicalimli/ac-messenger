@@ -39,6 +39,7 @@ const App = () => {
 
   useEffect(() => {
     if (!authUser) return;
+
     const userDocRef = doc(db, "users", authUser.uid);
 
     const unsub = onSnapshot(userDocRef, async (snapshot) => {
@@ -46,15 +47,23 @@ const App = () => {
       updateDoc(userDocRef, {
         status: "online",
       });
+      console.log("updated");
 
       dispatch(login(snapshot.data()));
     });
+
+    window.onbeforeunload = () => {
+      updateDoc(userDocRef, {
+        status: "offline",
+      });
+      unsub();
+      return false;
+    };
 
     return () => {
       updateDoc(userDocRef, {
         status: "offline",
       });
-      console.log("unsubbed");
       unsub();
     };
   }, [authUser]);
