@@ -8,7 +8,7 @@ import { SharedLayout } from "components";
 
 interface MessageBoxProps {
   currentMsg: Message;
-  latestMsgRef: React.Ref<HTMLButtonElement>;
+  latestMsgRef: React.Ref<HTMLButtonElement> | any;
 }
 
 const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
@@ -32,6 +32,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
           <motion.img
             src={currentMsg.img}
             layoutId={`${currentMsg.id}`}
+            ref={latestMsgRef}
             onClick={() => {
               setIsExpanded(true);
             }}
