@@ -4,9 +4,7 @@ import { BiMicrophone } from "react-icons/bi";
 import { MdSend } from "react-icons/md";
 import { RiImageAddLine } from "react-icons/ri";
 import { VscSmiley } from "react-icons/vsc";
-
 import { Modal, TwButton } from "components";
-import { Message } from "interfaces";
 import { storage } from "services/firebase";
 import { v4 as uuid } from "uuid";
 import {
@@ -17,22 +15,20 @@ import {
 } from "firebase/storage";
 import useSendMessage from "./useSendMessage";
 
-interface ChatFormProps {
-  setMessages: (state: Message[] | any) => void;
-}
-
-const ChatForm = ({ setMessages }: ChatFormProps) => {
+const ChatForm = () => {
   const [message, setMessage] = useState<string>("");
-  const [image, setImage] = useState<File | null>(null);
   const [imageURL, setImageURL] = useState<string | any>("");
   const [showModal, setShowModal] = useState<boolean>(false);
   const [imageStorageName, setImageStorageName] = useState<string>("");
 
   const { sendMessage, sendImage } = useSendMessage();
+
   const imageInputRef = useRef<any>(null);
 
   const handleFormSubmit = async (event: React.FormEvent) => {
     try {
+      event.preventDefault();
+      setMessage("");
       sendMessage(message);
     } catch (error) {
       console.error(error);
@@ -43,8 +39,6 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
     setShowModal(true);
 
     const imageUpload = e.target.files[0];
-
-    setImage(imageUpload);
 
     if (!imageUpload) return;
 
@@ -69,7 +63,6 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
     imageInputRef.current.value = "";
     setImageStorageName("");
     setShowModal(false);
-    setImage(null);
     setImageURL("");
   };
 
