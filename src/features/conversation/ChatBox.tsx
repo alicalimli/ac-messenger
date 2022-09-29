@@ -127,7 +127,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
             )}
           </AnimatePresence>
 
-          <ChatForm setMessages={setMessages} />
+          <ChatForm />
         </div>
       </div>
     </section>
