@@ -25,11 +25,11 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
       }  ${chat[0] === chatId && "bg-muted-light/10 dark:bg-muted-dark/20"}
      `}
     >
-      <div className="relative bg-transparent h-14 w-14">
+      <div className="relative bg-transparent h-14 w-14 shrink-0">
         <div
           className={`${
             online && "bg-green-500 "
-          }p-1.5 rounded-full absolute right-0 bottom-  0`}
+          }p-1.5 rounded-full absolute right-0 bottom-0`}
         ></div>
         <img
           src={chat[1].userInfo.photoURL || ""}
@@ -41,15 +41,17 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
           {chat[1].userInfo.displayName}
         </h2>
         <div
-          className={`flex gap-1 ${
+          className={` flex gap-1 ${
             chat[1].unread
               ? "font-bold dark:text-white"
               : "dark:text-muted-dark"
           } text-sm text-muted-light `}
         >
-          <p>{chat[1].lastMessage?.message || ""}</p>
+          <p className="whitespace-nowrap text-ellipsis overflow-hidden">
+            {chat[1].lastMessage?.message || ""}
+          </p>
           <span>•</span>
-          <time>{formattedDate}</time>
+          <time className="">{formattedDate}</time>
         </div>
       </div>
 
