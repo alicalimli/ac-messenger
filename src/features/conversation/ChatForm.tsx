@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { BiMicrophone } from "react-icons/bi";
 import { MdSend } from "react-icons/md";
@@ -7,27 +7,13 @@ import { VscSmiley } from "react-icons/vsc";
 
 import { Modal, TwButton } from "components";
 import { Message } from "interfaces";
-import { useAppSelector } from "app/hooks";
-import { getChatState } from "features/inbox/chatReducer";
-import {
-  arrayUnion,
-  doc,
-  getDoc,
-  increment,
-  serverTimestamp,
-  setDoc,
-  Timestamp,
-  updateDoc,
-} from "firebase/firestore";
-import { db, storage } from "services/firebase";
-import { getUserState } from "features/authentication/userSlice";
+import { storage } from "services/firebase";
 import { v4 as uuid } from "uuid";
 import {
   deleteObject,
   getDownloadURL,
   ref,
   uploadBytes,
-  uploadBytesResumable,
 } from "firebase/storage";
 import useSendMessage from "./useSendMessage";
 
