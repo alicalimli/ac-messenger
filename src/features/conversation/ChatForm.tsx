@@ -35,7 +35,6 @@ interface ChatFormProps {
 }
 
 const ChatForm = ({ setMessages }: ChatFormProps) => {
-  const { user: currentUser } = useAppSelector(getUserState);
   const [message, setMessage] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | any>("");
@@ -43,59 +42,6 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
   const [imageStorageName, setImageStorageName] = useState<string>("");
 
   const imageInputRef = useRef<any>(null);
-
-  const { chatId, recipient } = useAppSelector(getChatState);
-
-  const sendMessage = async (imgURL?: string) => {
-    const chatDocRef = doc(db, "chats", chatId);
-
-    if (imgURL) {
-      await updateDoc(chatDocRef, {
-        messages: arrayUnion({
-          id: uuid(),
-          message: "",
-          senderId: currentUser.uid,
-          date: Timestamp.now(),
-          img: imgURL,
-        }),
-      });
-    } else {
-      setMessage("");
-      await updateDoc(chatDocRef, {
-        messages: arrayUnion({
-          id: uuid(),
-          message,
-          senderId: currentUser.uid,
-          date: Timestamp.now(),
-          img: "",
-        }),
-      });
-    }
-
-    // To fix i used temporary timestamp now since servertimestamp is somewhat being delayed therefore causing my app to crash it should be server timestamp
-
-    const userChatDocRef = doc(db, "userChats", currentUser.uid);
-    const recipientChatDocRef = doc(db, "userChats", recipient.uid);
-    const recipientChatDocData = (await getDoc(recipientChatDocRef)).data();
-    await updateDoc(userChatDocRef, {
-      [chatId + ".lastMessage"]: {
-        message: !imgURL ? `You: ${message}` : "You: sent a picture.",
-        date: Timestamp.now(),
-      },
-    });
-    await updateDoc(recipientChatDocRef, {
-      [chatId + ".lastMessage"]: {
-        message: !imgURL ? message : "sent a picture.",
-        date: Timestamp.now(),
-      },
-      // If recipient is not viewing their conversation show unread style
-      [chatId + ".unread"]: recipientChatDocData?.[chatId].active
-        ? false
-        : true,
-      [chatId + ".unreadMsgCount"]:
-        !recipientChatDocData?.[chatId].active && increment(1),
-    });
-  };
 
   const handleFormSubmit = async (event: React.FormEvent) => {
     try {
@@ -122,7 +68,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
           }
         );
       } else {
-        sendMessage();
+        sendMessage(message);
       }
     } catch (error) {
       console.error(error);
