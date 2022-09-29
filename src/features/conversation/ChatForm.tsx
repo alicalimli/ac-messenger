@@ -29,6 +29,7 @@ import {
   uploadBytes,
   uploadBytesResumable,
 } from "firebase/storage";
+import useSendMessage from "./useSendMessage";
 
 interface ChatFormProps {
   setMessages: (state: Message[] | any) => void;
@@ -37,45 +38,24 @@ interface ChatFormProps {
 const ChatForm = ({ setMessages }: ChatFormProps) => {
   const [message, setMessage] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | any>("");
+  const [imageURL, setImageURL] = useState<string | any>("");
   const [showModal, setShowModal] = useState<boolean>(false);
   const [imageStorageName, setImageStorageName] = useState<string>("");
 
+  const { sendMessage, sendImage } = useSendMessage();
   const imageInputRef = useRef<any>(null);
 
   const handleFormSubmit = async (event: React.FormEvent) => {
     try {
-      event.preventDefault();
-      if (image) {
-        const storageRef = ref(storage, "images/" + uuid());
-
-        const uploadTask = uploadBytesResumable(storageRef, image);
-
-        uploadTask.on(
-          "state_changed",
-          (snapshot: any) => {
-            console.log(snapshot);
-          },
-          (error: any) => {
-            console.error(error);
-          },
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then(
-              async (downloadURL) => {
-                sendMessage(downloadURL);
-              }
-            );
-          }
-        );
-      } else {
-        sendMessage(message);
-      }
+      sendMessage(message);
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleImageChange = async (e: any) => {
+    setShowModal(true);
+
     const imageUpload = e.target.files[0];
 
     setImage(imageUpload);
@@ -89,8 +69,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
 
     await uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        setImageUrl(url);
-        setShowModal(true);
+        setImageURL(url);
       });
     });
   };
@@ -105,11 +84,11 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
     setImageStorageName("");
     setShowModal(false);
     setImage(null);
-    setImageUrl("");
+    setImageURL("");
   };
 
   const handleSendImage = () => {
-    sendMessage(imageUrl);
+    sendImage(imageURL);
     closeImageModal();
   };
 
@@ -125,7 +104,7 @@ const ChatForm = ({ setMessages }: ChatFormProps) => {
       >
         {showModal && (
           <div className="flex flex-col gap-2">
-            <img src={imageUrl} className="w-64 rounded-xl" />
+            <img src={imageURL} className="w-64 rounded-xl" />
             <div className="flex flex-col gap-1 ">
               <TwButton
                 onClick={handleSendImage}
