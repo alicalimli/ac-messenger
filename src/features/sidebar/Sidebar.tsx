@@ -41,48 +41,69 @@ const Sidebar = ({ setSideBarContent }: SidebarProps) => {
   };
 
   return (
-    <nav className="relative hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 justify-center">
-      <div className="flex flex-col gap-2 items-center">
-        {SIDEBAR_PAGE_BUTTONS.map((obj) => {
-          const Icon = obj.icon;
-          return (
-            <TwButton
-              variant="transparent"
-              className="relative group z-10"
-              key={obj.name}
-              onClick={() => changeSideContent(obj.name)}
-            >
-              <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
-              <TwTooltip tip={obj.name} position="right" />
-            </TwButton>
-          );
-        })}
-      </div>
+    <>
+      <nav className="relative hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 justify-center">
+        <div className="flex flex-col gap-2 items-center">
+          {SIDEBAR_PAGE_BUTTONS.map((obj) => {
+            const Icon = obj.icon;
+            return (
+              <TwButton
+                variant="transparent"
+                className="relative group z-10"
+                key={obj.name}
+                onClick={() => changeSideContent(obj.name)}
+              >
+                <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
+                <TwTooltip tip={obj.name} position="right" />
+              </TwButton>
+            );
+          })}
+        </div>
 
-      <div className="absolute bottom-4 flex flex-col gap-1">
-        <TwButton
-          variant="transparent"
-          className="relative group z-10"
-          onClick={darkmodeClickHandler}
-        >
-          {darkmode ? (
-            <BiSun className="text-muted-light dark:text-muted-dark text-2xl" />
-          ) : (
-            <BiMoon className="text-muted-light dark:text-muted-dark text-2xl" />
-          )}
-          <TwTooltip tip="toggle darkmode" position="right"></TwTooltip>
-        </TwButton>
+        <div className="absolute bottom-4 flex flex-col gap-1">
+          <TwButton
+            variant="transparent"
+            className="relative group z-10"
+            onClick={darkmodeClickHandler}
+          >
+            {darkmode ? (
+              <BiSun className="text-muted-light dark:text-muted-dark text-2xl" />
+            ) : (
+              <BiMoon className="text-muted-light dark:text-muted-dark text-2xl" />
+            )}
+            <TwTooltip tip="toggle darkmode" position="right"></TwTooltip>
+          </TwButton>
 
-        <TwButton
-          variant="transparent"
-          className="relative group z-10"
-          onClick={handleSignOut}
-        >
-          <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl" />
-          <TwTooltip tip="logout" position="right" />
-        </TwButton>
-      </div>
-    </nav>
+          <TwButton
+            variant="transparent"
+            className="relative group z-10"
+            onClick={handleSignOut}
+          >
+            <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl" />
+            <TwTooltip tip="logout" position="right" />
+          </TwButton>
+        </div>
+      </nav>
+
+      <nav className="absolute bottom-0 p-2 w-full bg-muted-light/5 dark:bg-muted-dark/5 md:hidden  gap-4 justify-center">
+        <div className="flex gap-2 justify-center">
+          {SIDEBAR_PAGE_BUTTONS.map((obj) => {
+            const Icon = obj.icon;
+            return (
+              <TwButton
+                variant="transparent"
+                className="relative group z-10"
+                key={obj.name}
+                onClick={() => changeSideContent(obj.name)}
+              >
+                <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
+                <TwTooltip tip={obj.name} position="top" />
+              </TwButton>
+            );
+          })}
+        </div>
+      </nav>
+    </>
   );
 };
 
