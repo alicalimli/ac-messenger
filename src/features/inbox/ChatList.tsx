@@ -28,8 +28,8 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
       <div className="relative bg-transparent h-14 w-14">
         <div
           className={`${
-            online ? "bg-green-500 " : "bg-red-500 "
-          }p-1.5 rounded-full absolute right-0 bottom-0`}
+            online && "bg-green-500 "
+          }p-1.5 rounded-full absolute right-0 bottom-  0`}
         ></div>
         <img
           src={chat[1].userInfo.photoURL || ""}
@@ -40,33 +40,23 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
         <h2 className="text-xl text-black dark:text-white">
           {chat[1].userInfo.displayName}
         </h2>
-        <div className="flex gap-2">
-          <p
-            className={`${
-              chat[1].unread
-                ? "font-bold dark:text-white"
-                : "dark:text-muted-dark"
-            } text-sm text-muted-light `}
-          >
-            {chat[1].lastMessage?.message || ""}
-          </p>
+        <div
+          className={`flex gap-1 ${
+            chat[1].unread
+              ? "font-bold dark:text-white"
+              : "dark:text-muted-dark"
+          } text-sm text-muted-light `}
+        >
+          <p>{chat[1].lastMessage?.message || ""}</p>
           <span>•</span>
-          <time
-            className={`${
-              chat[1].unread
-                ? "font-bold dark:text-white"
-                : "dark:text-muted-dark"
-            } text-sm text-muted-light `}
-          >
-            {formattedDate}
-          </time>
+          <time>{formattedDate}</time>
         </div>
       </div>
 
       {chat[1].unread && (
         <div className="flex flex-col gap-1 items-end ml-auto ">
-          <div className="w-6 py-0.5 text-center text-white bg-primary-main rounded-full">
-            <p className="text-sm">{chat[1].unreadMsgCount}</p>
+          <div className="w-5 p-0.5 text-center text-white bg-primary-main rounded-full">
+            <p className="text-xs">{chat[1].unreadMsgCount}</p>
           </div>
         </div>
       )}

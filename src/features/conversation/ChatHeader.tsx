@@ -35,7 +35,7 @@ const ChatHeader = ({ recipient }: ChatHeaderProps) => {
         <div className="relative bg-transparent h-16 w-16">
           <div
             className={`${
-              online ? "bg-green-500 " : "bg-red-500 "
+              online && "bg-green-500 "
             }p-1.5 rounded-full absolute right-1 bottom-0 `}
           ></div>
           <img
