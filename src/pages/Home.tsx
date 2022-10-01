@@ -9,6 +9,9 @@ import { start_messaging_img } from "assets/images/";
 import { useAppSelector } from "app/hooks";
 import { getChatState } from "features/inbox/chatReducer";
 
+import { AnimatePresence, motion } from "framer-motion";
+import { VARIANTS_MANAGER } from "setup/variants-manager";
+
 const Home = () => {
   const defaultSideBarContent = "chats";
   const [sidebarContent, setSideBarContent] = useState(defaultSideBarContent);
@@ -16,24 +19,33 @@ const Home = () => {
   const { chatId, recipient } = useAppSelector(getChatState);
 
   return (
-    <div className="flex w-full min-h-screen">
+    <div className="flex w-full min-h-screen overflow-hidden">
       <Sidebar setSideBarContent={setSideBarContent} />
       <SideContent
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
       />
-      {chatId ? (
-        <div className="h-screen w-screen absolute z-10 bg-muted-light/10 dark:bg-black duration-300 md:relative md:flex items-center justify-center">
-          <ChatBox recipient={recipient} />
-        </div>
-      ) : (
-        <ErrorMsg
-          className="hidden md:flex"
-          img={start_messaging_img}
-          msg="Start Messaging with ACMessenger"
-          subMsg="Select a chat in your inbox to start messaging."
-        />
-      )}
+      <AnimatePresence>
+        {chatId ? (
+          <motion.div
+            variants={VARIANTS_MANAGER}
+            initial="slide-from-right"
+            animate="slide-in"
+            key="chatbox"
+            exit="slide-from-right"
+            className="h-screen w-screen absolute z-10 md:relative md:flex items-center justify-center"
+          >
+            <ChatBox recipient={recipient} />
+          </motion.div>
+        ) : (
+          <ErrorMsg
+            className="hidden md:flex"
+            img={start_messaging_img}
+            msg="Start Messaging with ACMessenger"
+            subMsg="Select a chat in your inbox to start messaging."
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };

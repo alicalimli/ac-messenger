@@ -36,39 +36,51 @@ const ChatForm = () => {
   };
 
   const handleImageChange = async (e: any) => {
-    setShowModal(true);
+    try {
+      setShowModal(true);
 
-    const imageUpload = e.target.files[0];
+      const imageUpload = e.target.files[0];
 
-    if (!imageUpload) return;
+      if (!imageUpload) return;
 
-    const imageName = `images/${imageUpload.name + uuid()}`;
-    const imageRef = ref(storage, imageName);
+      const imageName = `images/${imageUpload.name + uuid()}`;
+      const imageRef = ref(storage, imageName);
 
-    setImageStorageName(imageName);
+      setImageStorageName(imageName);
 
-    await uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        setImageURL(url);
+      await uploadBytes(imageRef, imageUpload).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          setImageURL(url);
+        });
       });
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const closeImageModal = (deleteStorageImage?: boolean) => {
-    if (deleteStorageImage) {
-      const imageRef = ref(storage, imageStorageName);
-      deleteObject(imageRef);
-    }
+    try {
+      if (deleteStorageImage) {
+        const imageRef = ref(storage, imageStorageName);
+        deleteObject(imageRef);
+      }
 
-    imageInputRef.current.value = "";
-    setImageStorageName("");
-    setShowModal(false);
-    setImageURL("");
+      imageInputRef.current.value = "";
+      setImageStorageName("");
+      setShowModal(false);
+      setImageURL("");
+    } catch (error) {
+      throw error;
+    }
   };
 
   const handleSendImage = () => {
-    sendImage(imageURL);
-    closeImageModal();
+    try {
+      sendImage(imageURL);
+      closeImageModal();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
