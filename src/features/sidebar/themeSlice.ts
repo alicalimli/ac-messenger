@@ -8,12 +8,10 @@ const initialState: InitialStateType = { darkmode: false };
 
 const themeSlice = createSlice({
   name: "theme",
-  initialState: {
-    value: initialState,
-  },
+  initialState,
   reducers: {
     toggleDarkmode: (state) => {
-      state.value.darkmode = !state.value.darkmode;
+      state.darkmode = !state.darkmode;
     },
   },
 });

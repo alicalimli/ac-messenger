@@ -13,6 +13,7 @@ import { getPendingMsg, getToastMsg } from "toastSlice";
 import { login } from "features/authentication";
 import { User } from "interfaces";
 import { getUserState } from "features/authentication/userSlice";
+import { getThemeState } from "features/sidebar/themeSlice";
 
 const App = () => {
   const [authUser] = useAuthState(auth);
@@ -20,7 +21,7 @@ const App = () => {
 
   const pendingMsg = useAppSelector(getPendingMsg);
   const toastMsg = useAppSelector(getToastMsg);
-  const darkmode = useAppSelector((state: any) => state.theme.value.darkmode);
+  const { darkmode } = useAppSelector(getThemeState);
 
   const dispatch = useAppDispatch();
 

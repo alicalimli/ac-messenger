@@ -1,7 +1,10 @@
-import { useAppDispatch } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { TwButton } from "components";
 import { logout } from "features/authentication";
+import { toggleDarkmode } from "features/sidebar";
+import { getThemeState } from "features/sidebar/themeSlice";
 import { AiOutlineArrowLeft, AiOutlineLogout } from "react-icons/ai";
+import { HiOutlineMoon } from "react-icons/hi";
 
 interface SettingsContainerProps {
   setSideBarContent: (state: string) => void;
@@ -9,6 +12,7 @@ interface SettingsContainerProps {
 
 const SettingsContainer = ({ setSideBarContent }: SettingsContainerProps) => {
   const dispatch = useAppDispatch();
+  const { darkmode } = useAppSelector(getThemeState);
 
   return (
     <div className="flex-col justify-center gap-4 p-6 ">
@@ -24,6 +28,17 @@ const SettingsContainer = ({ setSideBarContent }: SettingsContainerProps) => {
       </div>
 
       <div className="p-4 flex flex-col gap-1">
+        <TwButton
+          variant="transparent"
+          className="relative group w-full"
+          onClick={() => dispatch(toggleDarkmode())}
+        >
+          <HiOutlineMoon className="text-muted-light dark:text-muted-dark text-2xl" />
+          HiOutlineMoon
+          <p className="text-muted-light dark:text-muted-dark ml-auto">
+            {darkmode ? "on" : "off"}
+          </p>
+        </TwButton>
         <TwButton
           variant="transparent"
           className="relative group w-full"
