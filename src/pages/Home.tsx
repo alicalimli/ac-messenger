@@ -25,27 +25,24 @@ const Home = () => {
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}
       />
-      <AnimatePresence>
-        {chatId ? (
-          <motion.div
-            variants={VARIANTS_MANAGER}
-            initial="slide-from-right"
-            animate="slide-in"
-            key="chatbox"
-            exit="slide-from-right"
-            className="h-screen w-screen absolute z-10 md:relative md:flex items-center justify-center"
-          >
-            <ChatBox recipient={recipient} />
-          </motion.div>
-        ) : (
-          <ErrorMsg
-            className="hidden md:flex"
-            img={start_messaging_img}
-            msg="Start Messaging with ACMessenger"
-            subMsg="Select a chat in your inbox to start messaging."
-          />
-        )}
-      </AnimatePresence>
+      {chatId ? (
+        <motion.div
+          variants={VARIANTS_MANAGER}
+          initial="slide-from-right"
+          animate="slide-in"
+          exit="slide-from-right"
+          className="h-screen w-screen absolute z-10 md:relative md:flex items-center justify-center"
+        >
+          <ChatBox recipient={recipient} />
+        </motion.div>
+      ) : (
+        <ErrorMsg
+          className="hidden md:flex"
+          img={start_messaging_img}
+          msg="Start Messaging with ACMessenger"
+          subMsg="Select a chat in your inbox to start messaging."
+        />
+      )}
     </div>
   );
 };
