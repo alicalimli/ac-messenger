@@ -23,7 +23,7 @@ const SettingsContainer = ({ setSideBarContent }: SettingsContainerProps) => {
         </TwButton>
       </div>
 
-      <div className="p-4">
+      <div className="p-4 flex flex-col gap-1">
         <TwButton
           variant="transparent"
           className="relative group w-full"

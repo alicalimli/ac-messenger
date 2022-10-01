@@ -82,7 +82,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   }, []);
 
   return (
-    <section className="flex flex-col items-center p-4 px-8">
+    <section className="flex flex-col items-center p-1 sm:p-4 ">
       <Modal setShowModal={setShowModal}>
         {(showModal as boolean) && (
           <AddContactModal
@@ -136,7 +136,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
       {isPending && <LoadingSpinner msg="fetching users..." />}
 
       {!users.length && searchVal.length !== 0 && (
-        <ErrorMsg img={no_results} msg="no results found." />
+        <ErrorMsg className="w-64" img={no_results} msg="no results found." />
       )}
     </section>
   );
