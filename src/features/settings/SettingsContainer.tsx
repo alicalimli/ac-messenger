@@ -34,7 +34,7 @@ const SettingsContainer = ({ setSideBarContent }: SettingsContainerProps) => {
           onClick={() => dispatch(toggleDarkmode())}
         >
           <HiOutlineMoon className="text-muted-light dark:text-muted-dark text-2xl" />
-          HiOutlineMoon
+          Darkmode
           <p className="text-muted-light dark:text-muted-dark ml-auto">
             {darkmode ? "on" : "off"}
           </p>
