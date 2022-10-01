@@ -68,8 +68,6 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
             }`}
           >
             <motion.button
-              animate={{ scale: 1, opacity: 1 }}
-              initial={{ scale: 0, opacity: 0 }}
               ref={latestMsgRef}
               className={`
               peer flex rounded-full p-1.5 px-3 w-fit
