@@ -82,7 +82,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   }, []);
 
   return (
-    <section className="flex flex-col items-center p-1 sm:p-4 ">
+    <section className="flex flex-col items-center p-1 py-4 sm:p-4 ">
       <Modal setShowModal={setShowModal}>
         {(showModal as boolean) && (
           <AddContactModal
