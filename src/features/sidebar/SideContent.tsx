@@ -3,6 +3,7 @@ import { ChatsContainer } from "features/inbox";
 import { ProfileContainer } from "features/profile";
 import { AddContacts } from "features/add-contacts";
 import { VARIANTS_MANAGER } from "setup/variants-manager";
+import SettingsContainer from "features/settings/SettingsContainer";
 
 interface SideContentProps {
   sidebarContent: string;
@@ -50,6 +51,18 @@ const SideContent = ({
             exit="slide-from-right"
           >
             <AddContacts setSideBarContent={setSideBarContent} />
+          </motion.div>
+        )}
+        {sidebarContent === "settings" && (
+          <motion.div
+            key="add-contacts"
+            className="absolute w-full h-full"
+            variants={VARIANTS_MANAGER}
+            initial="slide-from-left"
+            animate="slide-in"
+            exit="slide-from-right"
+          >
+            <SettingsContainer setSideBarContent={setSideBarContent} />
           </motion.div>
         )}
       </AnimatePresence>
