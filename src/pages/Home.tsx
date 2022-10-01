@@ -19,7 +19,7 @@ const Home = () => {
   const { chatId, recipient } = useAppSelector(getChatState);
 
   return (
-    <div className="flex w-full min-h-screen overflow-hidden">
+    <div className="absolute inset-0 flex w-screen overflow-hidden">
       <Sidebar setSideBarContent={setSideBarContent} />
       <SideContent
         sidebarContent={sidebarContent}
@@ -31,7 +31,7 @@ const Home = () => {
           initial="slide-from-right"
           animate="slide-in"
           exit="slide-from-right"
-          className="h-screen w-screen absolute z-10 md:relative md:flex items-center justify-center"
+          className="h-full w-screen absolute z-10 md:relative md:flex items-center justify-center"
         >
           <ChatBox recipient={recipient} />
         </motion.div>
