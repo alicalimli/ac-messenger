@@ -85,7 +85,7 @@ const Sidebar = ({ setSideBarContent }: SidebarProps) => {
         </div>
       </nav>
 
-      <nav className="absolute bottom-0 p-2 w-full bg-muted-light/5 dark:bg-muted-dark/5 md:hidden  gap-4 justify-center">
+      <nav className="mt-auto p-2 w-full bg-muted-light/5 dark:bg-muted-dark/5 md:hidden  gap-4 justify-center">
         <div className="flex gap-2 justify-center">
           {SIDEBAR_PAGE_BUTTONS.map((obj) => {
             const Icon = obj.icon;

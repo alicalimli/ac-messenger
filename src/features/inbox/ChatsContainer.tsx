@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ErrorMsg } from "components";
+import { ErrorMsg, TwButton } from "components";
 import { inbox_empty } from "assets/images";
 
 import ChatList from "./ChatList";
@@ -34,7 +34,7 @@ const ChatsContainer = () => {
     };
   }, [currentUser.uid]);
   return (
-    <div className=" p-4 flex flex-col gap-4">
+    <div className="p-4 flex flex-col gap-4 h-full">
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
       <div className="flex gap-2 items-center text-black dark:text-white px-4 border-b  border-muted-light/10 dark:border-muted-dark/10 pb-4">
         <div className="bg-transparent h-12 w-12">
@@ -45,7 +45,7 @@ const ChatsContainer = () => {
         </div>
         {currentUser.displayName}
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="relative flex flex-col overflow-scroll scrollbar-hide">
         {Object.entries(chats).length !== 0 ? (
           Object.entries(chats)
             .sort(
