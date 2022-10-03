@@ -82,7 +82,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   }, []);
 
   return (
-    <section className="flex flex-col items-center p-1 py-4 sm:p-4 ">
+    <section className="flex flex-col items-center p-1 py-4 sm:p-4 h-full">
       <Modal setShowModal={setShowModal}>
         {(showModal as boolean) && (
           <AddContactModal
@@ -115,29 +115,29 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
         </label>
       </form>
 
-      {users.length !== 0 &&
-        users.map((user: User, i: number) => (
-          <TwButton
-            variant="transparent"
-            key={i}
-            onClick={() => contactClickHandler(user)}
-            className="w-full flex gap-4"
-          >
-            <div className="relative bg-transparent h-12 w-12">
-              {user.status === "on" && (
-                <div className="bg-green-500 p-1.5 rounded-full absolute right-1 bottom-0"></div>
-              )}
-              <img src={user.photoURL} className="w-full rounded-full" />
-            </div>
-            {user.displayName}
-          </TwButton>
-        ))}
-
-      {isPending && <LoadingSpinner msg="fetching users..." />}
-
-      {!users.length && searchVal.length !== 0 && (
-        <ErrorMsg className="w-64" img={no_results} msg="no results found." />
-      )}
+      <div className="flex flex-col w-full gap-1 overflow-scroll scrollbar-hide">
+        {users.length !== 0 &&
+          users.map((user: User, i: number) => (
+            <TwButton
+              variant="transparent"
+              key={i}
+              onClick={() => contactClickHandler(user)}
+              className="w-full flex gap-4"
+            >
+              <div className="relative bg-transparent h-12 w-12">
+                {user.status === "on" && (
+                  <div className="bg-green-500 p-1.5 rounded-full absolute right-1 bottom-0"></div>
+                )}
+                <img src={user.photoURL} className="w-full rounded-full" />
+              </div>
+              {user.displayName}
+            </TwButton>
+          ))}
+        {isPending && <LoadingSpinner msg="fetching users..." />}
+        {!users.length && searchVal.length !== 0 && (
+          <ErrorMsg className="w-64" img={no_results} msg="no results found." />
+        )}
+      </div>
     </section>
   );
 };

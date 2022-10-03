@@ -29,6 +29,18 @@ const SideContent = ({
             <ChatsContainer />
           </motion.div>
         )}
+        {sidebarContent === "addcontacts" && (
+          <motion.div
+            key="add-contacts"
+            className="absolute w-full h-full overflow-hidden"
+            variants={VARIANTS_MANAGER}
+            initial="slide-from-left"
+            animate="slide-in"
+            exit="slide-from-right"
+          >
+            <AddContacts setSideBarContent={setSideBarContent} />
+          </motion.div>
+        )}
         {sidebarContent === "profile" && (
           <motion.div
             key="profile"
@@ -39,18 +51,6 @@ const SideContent = ({
             exit="slide-from-right"
           >
             <ProfileContainer setSideBarContent={setSideBarContent} />
-          </motion.div>
-        )}
-        {sidebarContent === "addcontacts" && (
-          <motion.div
-            key="add-contacts"
-            className="absolute w-full h-full"
-            variants={VARIANTS_MANAGER}
-            initial="slide-from-left"
-            animate="slide-in"
-            exit="slide-from-right"
-          >
-            <AddContacts setSideBarContent={setSideBarContent} />
           </motion.div>
         )}
         {sidebarContent === "settings" && (
