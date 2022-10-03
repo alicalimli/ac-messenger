@@ -30,6 +30,9 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const { chatId } = useAppSelector(getChatState);
   const { user: currentUser } = useAppSelector(getUserState);
 
+  const conversationDocRef = doc(db, "chats", chatId);
+  const userChatDocRef = doc(db, "userChats", currentUser.uid);
+
   const scrollDown = () => {
     latestMsg?.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -43,6 +46,16 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
     }
   };
 
+  const unreadMsg = async () => {
+    // handle number of unread messages
+    // Seen the conversation
+    await updateDoc(userChatDocRef, {
+      [chatId + ".unread"]: false,
+      [chatId + ".unreadMsgCount"]: 0,
+      [chatId + ".active"]: true,
+    });
+  };
+
   useEffect(() => {
     if (!latestMsg.current) return;
     latestMsg.current.scrollIntoView();
@@ -52,16 +65,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
     setIsPending(true);
     setMessages([]);
 
-    const conversationDocRef = doc(db, "chats", chatId);
-    const userChatDocRef = doc(db, "userChats", currentUser.uid);
-
-    // handle number of unread messages
-    // Seen the conversation
-    updateDoc(userChatDocRef, {
-      [chatId + ".unread"]: false,
-      [chatId + ".unreadMsgCount"]: 0,
-      [chatId + ".active"]: true,
-    });
+    unreadMsg();
 
     const unsub = onSnapshot(conversationDocRef, (doc) => {
       doc.exists() && setMessages(doc.data().messages);
