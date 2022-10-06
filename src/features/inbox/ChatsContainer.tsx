@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ErrorMsg, TwButton } from "components";
+import { ErrorMsg, LoadingSpinner, TwButton } from "components";
 import { inbox_empty } from "assets/images";
 
 import ChatList from "./ChatList";
@@ -13,6 +13,7 @@ import { changeChat, getChatState } from "./chatReducer";
 const ChatsContainer = () => {
   const { user: currentUser } = useAppSelector(getUserState);
   const { chatId } = useAppSelector(getChatState);
+  const [isPending, setIsPending] = useState<boolean>(false);
 
   const [chats, setChats] = useState<any>([]);
   const dispatch = useAppDispatch();
@@ -23,10 +24,12 @@ const ChatsContainer = () => {
 
   useEffect(() => {
     if (!currentUser.uid) return;
+    setIsPending(true);
 
     const userChatsDocRef = doc(db, "userChats", currentUser.uid);
     const unsub = onSnapshot(userChatsDocRef, async (doc) => {
       setChats({ ...doc.data() });
+      setIsPending(false);
     });
 
     return () => {
@@ -46,7 +49,7 @@ const ChatsContainer = () => {
         {currentUser.displayName}
       </div>
       <div className="relative flex flex-col overflow-scroll scrollbar-hide">
-        {Object.entries(chats).length !== 0 ? (
+        {Object.entries(chats).length !== 0 &&
           Object.entries(chats)
             .sort(
               (a: any, b: any) => b[1].lastMessage.date - a[1].lastMessage.date
@@ -57,14 +60,17 @@ const ChatsContainer = () => {
                 chat={chat}
                 chatClickHandler={chatClickHandler}
               />
-            ))
-        ) : (
+            ))}
+
+        {Object.entries(chats).length === 0 && !isPending && (
           <ErrorMsg
             img={inbox_empty}
             msg="Your inbox is empty"
             subMsg="Find a contact in AddContacts section."
           />
         )}
+
+        {isPending && <LoadingSpinner msg="Fetching chats..." />}
       </div>
     </div>
   );
