@@ -30,7 +30,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const { chatId } = useAppSelector(getChatState);
   const { user: currentUser } = useAppSelector(getUserState);
 
-  const conversationDocRef = doc(db, "chats", chatId);
+  const conversationDocRef = chatId && doc(db, "chats", chatId);
   const userChatDocRef = doc(db, "userChats", currentUser.uid);
 
   const scrollDown = () => {
@@ -62,6 +62,8 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   }, [messages, latestMsg.current]);
 
   useEffect(() => {
+    if (!chatId) return;
+
     setIsPending(true);
     setMessages([]);
 
@@ -131,7 +133,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
             )}
           </AnimatePresence>
 
-          <ChatForm />
+          {chatId && <ChatForm />}
         </div>
       </div>
     </section>
