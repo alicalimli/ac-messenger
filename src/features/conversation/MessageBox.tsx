@@ -5,6 +5,7 @@ import { Message } from "interfaces";
 import { useFormatDate } from "hooks";
 import { useState } from "react";
 import { SharedLayout } from "components";
+import { VARIANTS_MANAGER } from "setup/variants-manager";
 
 interface MessageBoxProps {
   currentMsg: Message;
@@ -68,6 +69,9 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
             }`}
           >
             <motion.button
+              variants={VARIANTS_MANAGER}
+              initial="fade-out"
+              animate="fade-in"
               ref={latestMsgRef}
               className={`
               peer flex rounded-full p-1.5 px-3 w-fit
