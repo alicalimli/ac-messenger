@@ -47,7 +47,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
               : "dark:text-muted-dark"
           } text-sm text-muted-light `}
         >
-          <p className="whitespace-nowrap text-ellipsis overflow-hidden">
+          <p className="whitespace-nowrap text-ellipsis overflow-hidden max-w-[10rem]">
             {chat[1].lastMessage?.message || ""}
           </p>
           <span>•</span>
