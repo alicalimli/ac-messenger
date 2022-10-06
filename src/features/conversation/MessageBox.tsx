@@ -5,6 +5,7 @@ import { Message } from "interfaces";
 import { useFormatDate } from "hooks";
 import { memo, useState } from "react";
 import { SharedLayout } from "components";
+import { VARIANTS_MANAGER } from "setup/variants-manager";
 
 interface MessageBoxProps {
   currentMsg: Message;
@@ -66,7 +67,10 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
               currentMsg.senderId === currentUser.uid ? "flex-row-reverse" : ""
             }`}
           >
-            <button
+            <motion.button
+              variants={VARIANTS_MANAGER}
+              initial="fade-out"
+              animate="fade-in"
               ref={latestMsgRef}
               className={`
               peer flex rounded-full p-1.5 px-3 w-fit
@@ -80,7 +84,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
               {currentMsg.message && (
                 <p className="text-md">{currentMsg.message}</p>
               )}
-            </button>
+            </motion.button>
             <div className="opacity-0 peer-focus:opacity-100 group-hover:opacity-100 duration-300">
               <time className="ml-auto text-sm text-slate-500">
                 {formattedDate}
