@@ -15,7 +15,7 @@ const SettingsContainer = ({ setSideBarContent }: SettingsContainerProps) => {
   const { darkmode } = useAppSelector(getThemeState);
 
   return (
-    <div className="flex-col justify-center gap-4 p-1 py-6">
+    <div className="flex-col justify-center gap-4 p-1 py-6 sm:p-6">
       <div className="border-b  border-muted-light/10 dark:border-muted-dark/10 pb-4">
         <TwButton
           variant="transparent"
