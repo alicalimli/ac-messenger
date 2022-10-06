@@ -23,7 +23,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
       variants={VARIANTS_MANAGER}
       initial="fade-out"
       animate="fade-in"
-      className={`group gap-2 py-1 flex ${
+      className={`group gap-2 py-1 flex  ${
         currentMsg.senderId === currentUser.uid ? "flex-row-reverse" : ""
       }`}
     >
@@ -42,7 +42,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
             }}
             className={`${
               isExpanded && "invisible"
-            } w-64 bg-muted-dark/10 rounded-xl cursor-pointer`}
+            }  sm:w-64 bg-muted-dark/10 rounded-xl cursor-pointer`}
           />
         ) : (
           ""
@@ -73,7 +73,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
             <button
               ref={latestMsgRef}
               className={`
-              peer flex rounded-full p-1.5 px-3 w-fit
+              peer flex rounded-3xl p-1.5 px-3 break-all text-md max-w-xs 
               ${
                 currentMsg.senderId === currentUser.uid
                   ? "focus:bg-primary-tinted  bg-primary-main text-white rounded-br-sm"
@@ -81,9 +81,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
               }
             `}
             >
-              {currentMsg.message && (
-                <p className="text-md">{currentMsg.message}</p>
-              )}
+              {currentMsg.message}
             </button>
             <div className="opacity-0 peer-focus:opacity-100 group-hover:opacity-100 duration-300">
               <time className="ml-auto text-sm text-slate-500">
