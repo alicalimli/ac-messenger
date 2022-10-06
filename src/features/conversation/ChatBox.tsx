@@ -49,7 +49,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const unreadMsg = async () => {
     // handle number of unread messages
     // Seen the conversation
-    await updateDoc(userChatDocRef, {
+    updateDoc(userChatDocRef, {
       [chatId + ".unread"]: false,
       [chatId + ".unreadMsgCount"]: 0,
       [chatId + ".active"]: true,

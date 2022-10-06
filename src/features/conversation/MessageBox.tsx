@@ -3,9 +3,8 @@ import { motion } from "framer-motion";
 import { useAppSelector } from "app/hooks";
 import { Message } from "interfaces";
 import { useFormatDate } from "hooks";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { SharedLayout } from "components";
-import { VARIANTS_MANAGER } from "setup/variants-manager";
 
 interface MessageBoxProps {
   currentMsg: Message;
@@ -45,33 +44,29 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
           ""
         )}
 
-        <SharedLayout
-          isExpanded={isExpanded}
-          onClick={() => {
-            setIsExpanded(false);
-          }}
-        >
-          {currentMsg.img && isExpanded ? (
-            <motion.img
-              src={currentMsg.img}
-              layoutId={`${currentMsg.id}`}
-              className="w-96 cursor-pointer  bg-muted-dark/10 rounded-xl"
-            />
-          ) : (
-            ""
-          )}
-        </SharedLayout>
-
+        {currentMsg.img && (
+          <SharedLayout
+            isExpanded={isExpanded}
+            onClick={() => {
+              setIsExpanded(false);
+            }}
+          >
+            {isExpanded && (
+              <motion.img
+                src={currentMsg.img}
+                layoutId={`${currentMsg.id}`}
+                className="w-96 cursor-pointer  bg-muted-dark/10 rounded-xl"
+              />
+            )}
+          </SharedLayout>
+        )}
         {currentMsg.message && (
           <div
             className={`flex gap-2 ${
               currentMsg.senderId === currentUser.uid ? "flex-row-reverse" : ""
             }`}
           >
-            <motion.button
-              variants={VARIANTS_MANAGER}
-              initial="fade-out"
-              animate="fade-in"
+            <button
               ref={latestMsgRef}
               className={`
               peer flex rounded-full p-1.5 px-3 w-fit
@@ -85,7 +80,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
               {currentMsg.message && (
                 <p className="text-md">{currentMsg.message}</p>
               )}
-            </motion.button>
+            </button>
             <div className="opacity-0 peer-focus:opacity-100 group-hover:opacity-100 duration-300">
               <time className="ml-auto text-sm text-slate-500">
                 {formattedDate}
@@ -98,4 +93,4 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
   );
 };
 
-export default MessageBox;
+export default memo(MessageBox);
