@@ -1,9 +1,11 @@
 import { TwButton } from "components";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { User } from "interfaces";
 import { getChatState } from "./chatReducer";
 import { useAppSelector } from "app/hooks";
 import { useFormatDate, useGetUserStatus } from "hooks";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "services/firebase";
 
 interface ChatListProps {
   chat: any;
@@ -11,10 +13,21 @@ interface ChatListProps {
 }
 
 const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
-  const { chatId } = useAppSelector(getChatState);
+  const [recipient, setRecipient] = useState<User>();
   const online = useGetUserStatus(chat[1].userInfo.uid);
-
+  const { chatId } = useAppSelector(getChatState);
   const formattedDate = useFormatDate(chat[1].lastMessage.date.toDate());
+
+  const getUserData = async (userId: string) => {
+    const recipientDocRef = doc(db, "users", userId);
+    const recipientData = (await getDoc(recipientDocRef)).data();
+    console.log(recipientData);
+    setRecipient({ ...recipientData } as User);
+  };
+
+  useEffect(() => {
+    getUserData(chat[1].userInfo.uid);
+  }, []);
 
   return (
     <TwButton
@@ -31,14 +44,11 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
             online && "bg-green-500 "
           }p-1.5 rounded-full absolute right-0 bottom-0`}
         ></div>
-        <img
-          src={chat[1].userInfo.photoURL || ""}
-          className="w-full rounded-full"
-        />
+        <img src={recipient?.photoURL || ""} className="w-full rounded-full" />
       </div>
       <div className="flex flex-col items-start">
         <h2 className="text-xl text-black dark:text-white">
-          {chat[1].userInfo.displayName}
+          {recipient?.displayName}
         </h2>
         <div
           className={` flex gap-1 ${
