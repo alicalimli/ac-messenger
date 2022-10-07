@@ -38,7 +38,6 @@ const ChatHeader = ({ recipient }: ChatHeaderProps) => {
               online && "bg-green-500 "
             }p-1.5 rounded-full absolute right-1 bottom-0 `}
           ></div>
-          {console.log(recipient.photoURL)}
           <img
             src={recipient.photoURL}
             className="object-cover rounded-[50%] h-16 w-16"

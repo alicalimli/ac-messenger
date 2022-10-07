@@ -29,7 +29,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
   return (
     <TwButton
       variant="transparent"
-      onClick={(e: React.MouseEvent) => chatClickHandler(e, chat[1].userInfo)}
+      onClick={(e: React.MouseEvent) => chatClickHandler(e, recipient as User)}
       className={`w-full p-2 ${
         chat[1].unread && "bg-muted-light/5 dark:bg-muted-dark/10"
       }  ${chat[0] === chatId && "bg-muted-light/10 dark:bg-muted-dark/20"}
