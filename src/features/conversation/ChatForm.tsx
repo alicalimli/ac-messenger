@@ -122,12 +122,7 @@ const ChatForm = () => {
         >
           <VscSmiley className="text-2xl" />
         </button>
-        <button
-          type="button"
-          className="text-muted-light dark:text-muted-dark/50 p-2"
-        >
-          <BiMicrophone className="text-2xl" />
-        </button>
+
         <label
           htmlFor="image-input"
           className="text-muted-light dark:text-muted-dark/50 p-2 cursor-pointer"
