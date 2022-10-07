@@ -80,6 +80,7 @@ export const editProfile = createAsyncThunk(
       await updateDoc(userDocRef, {
         displayName: editInfo.displayName,
         bio: editInfo.bio,
+        location: editInfo.location,
       });
     } catch (error) {
       throw error;

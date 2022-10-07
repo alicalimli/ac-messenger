@@ -16,9 +16,11 @@ const ProfileEditForm = ({
   setShowModal,
 }: ProfileEditFormProps) => {
   const [displayName, setDisplayName] = useState(currentUserInfo.displayName);
-  const [bio, setBio] = useState(currentUserInfo.bio);
   const [validDisplayName, setValidDisplayName] = useState(false);
   const [displayNameFocus, setDisplayNameFocus] = useState(false);
+
+  const [bio, setBio] = useState(currentUserInfo.bio);
+  const [location, setLocation] = useState(currentUserInfo.location);
 
   const [errorMsg, setErrorMsg] = useState("");
   const [pendingMsg, setPendingMsg] = useState("");
@@ -31,7 +33,7 @@ const ProfileEditForm = ({
 
       if (!validDisplayName) return;
 
-      await dispatch(editProfile({ displayName, bio }));
+      await dispatch(editProfile({ displayName, bio, location }));
       setShowModal(false);
     } catch (error) {
       console.error(error);
@@ -73,6 +75,15 @@ const ProfileEditForm = ({
         isSmall={true}
         state={bio}
         setState={setBio}
+        placeholder="e.g Developer"
+        maxLength={30}
+      />
+      <InputForm
+        label="Location"
+        type="text"
+        isSmall={true}
+        state={location}
+        setState={setLocation}
         placeholder="e.g Earth"
         maxLength={30}
       />
