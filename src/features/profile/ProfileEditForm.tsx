@@ -35,7 +35,6 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
 
   useEffect(() => {
     setValidDisplayName(USER_REGEX.test(displayName));
-    console.log(USER_REGEX.test(displayName));
   }, [displayName]);
 
   useEffect(() => {

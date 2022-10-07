@@ -147,7 +147,6 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.user = initialState;
       signOut(auth);
-      console.log(state.user);
     },
     clearUserStateErr: (state) => {
       state.errorMsg = "";

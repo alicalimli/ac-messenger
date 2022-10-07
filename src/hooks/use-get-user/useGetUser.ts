@@ -7,7 +7,6 @@ const useGetUser = () => {
     const recipientDocRef = doc(db, "users", userId);
     const recipientData = (await getDoc(recipientDocRef)).data();
 
-    console.log(recipientData);
     return recipientData as unknown as User;
   };
 

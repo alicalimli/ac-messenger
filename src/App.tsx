@@ -48,7 +48,6 @@ const App = () => {
       updateDoc(userDocRef, {
         status: "online",
       });
-      console.log("updated");
 
       dispatch(login(snapshot.data()));
     });
