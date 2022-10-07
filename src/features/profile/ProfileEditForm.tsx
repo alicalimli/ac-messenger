@@ -11,11 +11,11 @@ interface ProfileEditFormProps {
 }
 
 const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
-  const [username, setUsername] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [pendingMsg, setPendingMsg] = useState("");
-  const [validUsername, setValidUsername] = useState(false);
-  const [usernameFocus, setUsernameFocus] = useState(false);
+  const [validDisplayName, setValidDisplayName] = useState(false);
+  const [displayNameFocus, setDisplayNameFocus] = useState(false);
   const [password, setPassword] = useState("");
 
   const dispatch = useAppDispatch();
@@ -24,9 +24,9 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
     try {
       e.preventDefault();
 
-      if (!validUsername) return;
+      if (!validDisplayName) return;
 
-      await dispatch(editProfile({ displayName: username }));
+      await dispatch(editProfile({ displayName: displayName }));
       setShowModal(false);
     } catch (error) {
       console.error(error);
@@ -34,13 +34,13 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
   };
 
   useEffect(() => {
-    setValidUsername(USER_REGEX.test(username));
-    console.log(USER_REGEX.test(username));
-  }, [username]);
+    setValidDisplayName(USER_REGEX.test(displayName));
+    console.log(USER_REGEX.test(displayName));
+  }, [displayName]);
 
   useEffect(() => {
     // setErrorMsg("");
-  }, [username, password]);
+  }, [displayName, password]);
 
   return (
     <form onSubmit={handleChangeInfo} className="flex flex-col gap-2 w-64">
@@ -56,15 +56,15 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
       </p>
 
       <InputForm
-        label="Username"
+        label="Display Name"
         type="text"
         isSmall={true}
-        state={username}
-        setState={setUsername}
-        stateFocus={usernameFocus}
-        setStateFocus={setUsernameFocus}
+        state={displayName}
+        setState={setDisplayName}
+        stateFocus={displayNameFocus}
+        setStateFocus={setDisplayNameFocus}
         placeholder="e.g example123"
-        isValid={validUsername}
+        isValid={validDisplayName}
         instruction="3-18 Characters. Hyphen, Spaces and underscore are allowed"
       />
       <InputForm
@@ -76,7 +76,7 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
         placeholder="*********"
       />
       <TwButton
-        disabled={validUsername && !pendingMsg ? false : true}
+        disabled={validDisplayName && !pendingMsg ? false : true}
         className="mt-2"
         type="submit"
       >
