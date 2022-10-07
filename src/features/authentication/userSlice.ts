@@ -32,6 +32,7 @@ type editInfoType = {
   displayName?: string;
   bio?: string;
   location?: string;
+  photoURL?: string;
 };
 
 const initialState: InitialStateType = {
@@ -73,6 +74,18 @@ export const editProfile = createAsyncThunk(
       if (!auth.currentUser) return;
 
       const userDocRef = doc(db, "users", auth.currentUser.uid);
+
+      console.log("sss");
+      if (editInfo.photoURL) {
+        console.log("sss");
+        await updateProfile(auth.currentUser, {
+          photoURL: editInfo.photoURL,
+        });
+        await updateDoc(userDocRef, {
+          photoURL: editInfo.photoURL,
+        });
+        return;
+      }
 
       await updateProfile(auth.currentUser, {
         displayName: editInfo.displayName,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
@@ -9,7 +9,10 @@ import ProfileEditForm from "./ProfileEditForm";
 
 import { Modal, TwTooltip, TwButton } from "components";
 import { createToast } from "toastSlice";
-import { getUserState } from "features/authentication/userSlice";
+import { editProfile, getUserState } from "features/authentication/userSlice";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { storage } from "services/firebase";
+import { v4 as uuid } from "uuid";
 
 interface ProfileContainerProps {
   setSideBarContent: (state: string) => void;
@@ -17,6 +20,8 @@ interface ProfileContainerProps {
 
 const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
   const dispatch = useAppDispatch();
+
+  const imageInputRef = useRef<any>(null);
 
   const { user } = useAppSelector(getUserState);
 
@@ -34,6 +39,28 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
     navigator.clipboard.writeText(text);
 
     dispatch(createToast(`Copied ${text}.`));
+  };
+
+  const handleImageChange = async (e: any) => {
+    try {
+      const imageUpload = e.target.files[0];
+
+      if (!imageUpload) return;
+
+      const imageName = `images/${imageUpload.name + uuid()}`;
+      const imageRef = ref(storage, imageName);
+
+      await uploadBytes(imageRef, imageUpload).then((snapshot: any) => {
+        getDownloadURL(snapshot.ref).then((url: string) => {
+          dispatch(editProfile({ photoURL: url }));
+          imageInputRef.current.value = "";
+          dispatch(createToast("profile picture changed."));
+        });
+      });
+    } catch (error) {
+      imageInputRef.current.value = "";
+      dispatch(createToast("something went wrong."));
+    }
   };
 
   return (
@@ -54,9 +81,9 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
         </TwButton>
 
         <div className="flex flex-col items-center text-center p-4 px-8">
-          <div className="group relative flex items-center justify-center">
+          <div className=" mb-2 group relative flex items-center justify-center ">
             <img
-              className="bg-cover bg-center bg-transparent mb-2 w-24 h-24 rounded-full shadow-md"
+              className="bg-cover bg-center bg-white w-24 h-24 rounded-[50%] "
               alt={`${user?.displayName}'s profile picture`}
               src={user?.photoURL || ""}
             />
@@ -66,7 +93,9 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
             >
               <AiOutlineCamera />
               <input
+                ref={imageInputRef}
                 type="file"
+                onChange={handleImageChange}
                 id="photo-change"
                 className="invisible hidden"
               />
@@ -109,3 +138,6 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
 };
 
 export default ProfileContainer;
+function setImageStorageName(imageName: string) {
+  throw new Error("Function not implemented.");
+}
