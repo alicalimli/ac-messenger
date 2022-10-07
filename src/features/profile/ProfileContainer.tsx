@@ -95,6 +95,7 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
               <input
                 ref={imageInputRef}
                 type="file"
+                accept="image/*"
                 onChange={handleImageChange}
                 id="photo-change"
                 className="invisible hidden"

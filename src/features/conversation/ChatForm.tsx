@@ -135,6 +135,7 @@ const ChatForm = () => {
           <input
             type="file"
             ref={imageInputRef}
+            accept="image/*"
             id="image-input"
             className="hidden"
             onChange={handleImageChange}
