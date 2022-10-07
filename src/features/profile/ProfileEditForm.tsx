@@ -2,17 +2,21 @@ import React, { useEffect, useState } from "react";
 import { TwButton, InputForm } from "components";
 import { editProfile } from "features/authentication/userSlice";
 import { useAppDispatch } from "app/hooks";
+import { User } from "interfaces";
 
 const USER_REGEX = /^[A-z][A-z0-9-_ ]{2,17}$/;
 
 interface ProfileEditFormProps {
-  email: string;
+  currentUserInfo: User;
   setShowModal: (state: boolean) => void;
 }
 
-const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
-  const [displayName, setDisplayName] = useState("");
-  const [bio, setBio] = useState("");
+const ProfileEditForm = ({
+  currentUserInfo,
+  setShowModal,
+}: ProfileEditFormProps) => {
+  const [displayName, setDisplayName] = useState(currentUserInfo.displayName);
+  const [bio, setBio] = useState(currentUserInfo.bio);
   const [validDisplayName, setValidDisplayName] = useState(false);
   const [displayNameFocus, setDisplayNameFocus] = useState(false);
 

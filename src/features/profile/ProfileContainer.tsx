@@ -40,10 +40,7 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
     <div className=" flex flex-col">
       <Modal setShowModal={setShowModal}>
         {showModal && (
-          <ProfileEditForm
-            email={user?.email as string}
-            setShowModal={setShowModal}
-          />
+          <ProfileEditForm currentUserInfo={user} setShowModal={setShowModal} />
         )}
       </Modal>
 
