@@ -3,6 +3,7 @@ import { TwButton, InputForm } from "components";
 import { editProfile } from "features/authentication/userSlice";
 import { useAppDispatch } from "app/hooks";
 import { User } from "interfaces";
+import { createToast } from "toastSlice";
 
 const USER_REGEX = /^[A-z][A-z0-9-_ ]{2,17}$/;
 
@@ -22,8 +23,7 @@ const ProfileEditForm = ({
   const [bio, setBio] = useState(currentUserInfo.bio);
   const [location, setLocation] = useState(currentUserInfo.location);
 
-  const [errorMsg, setErrorMsg] = useState("");
-  const [pendingMsg, setPendingMsg] = useState("");
+  const [isPending, setIsPending] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -32,11 +32,17 @@ const ProfileEditForm = ({
       e.preventDefault();
 
       if (!validDisplayName) return;
+      setIsPending(true);
 
       await dispatch(editProfile({ displayName, bio, location }));
+
+      setIsPending(false);
       setShowModal(false);
+      dispatch(createToast("Profile sucessfully edited."));
     } catch (error) {
-      console.error(error);
+      setIsPending(false);
+      setShowModal(false);
+      dispatch(createToast("Something went wrong."));
     }
   };
 
@@ -49,13 +55,6 @@ const ProfileEditForm = ({
       <h2 className="text-black dark:text-white text-xl text-center">
         Edit Information
       </h2>
-      <p
-        className={`text-red-600 text-md text-center ${
-          errorMsg ? "visible block" : "absolute invisible"
-        }`}
-      >
-        {errorMsg}
-      </p>
 
       <InputForm
         label="Display Name"
@@ -88,11 +87,11 @@ const ProfileEditForm = ({
         maxLength={30}
       />
       <TwButton
-        disabled={validDisplayName && bio && !pendingMsg ? false : true}
+        disabled={validDisplayName && bio && !isPending ? false : true}
         className="mt-2"
         type="submit"
       >
-        {pendingMsg ? pendingMsg : "Save"}
+        {isPending ? "Saving..." : "Save"}
       </TwButton>
     </form>
   );
