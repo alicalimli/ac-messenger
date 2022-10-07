@@ -13,7 +13,7 @@ interface AddContactModalProps {
   setShowModal: (state: boolean) => void;
   setSearchVal: (state: string) => void;
   currentUser: User | undefined;
-  recipient: User | undefined;
+  recipient: User;
 }
 
 const AddContactModal = ({
@@ -22,11 +22,11 @@ const AddContactModal = ({
   currentUser,
   recipient,
 }: AddContactModalProps) => {
+  const [isPending, setIsPending] = useState(false);
+  const online = recipient && useGetUserStatus(recipient.uid.toString());
+
   const dispatch = useAppDispatch();
   const addContact = useAddContact();
-  const online = recipient && useGetUserStatus(recipient?.uid.toString());
-
-  const [isPending, setIsPending] = useState<boolean>(false);
 
   const addContactBtnHandler = async () => {
     try {
@@ -47,6 +47,10 @@ const AddContactModal = ({
     }
   };
 
+  const isContacted = (userID: any) => {
+    return currentUser?.contacts.find((contactId) => contactId === userID);
+  };
+
   const cancelBtnHandler = () => setShowModal(false);
 
   return (
@@ -54,24 +58,20 @@ const AddContactModal = ({
       <div className="flex flex-col items-center text-center px-8">
         <ProfilePicture
           isOnline={online || false}
-          photoURL={recipient?.photoURL}
+          photoURL={recipient.photoURL}
           size="small"
         />
 
         <h2 className="text-lg text-black dark:text-white">
-          {recipient?.displayName}
+          {recipient.displayName}
         </h2>
-        <p className="text-muted-light dark:text-muted-dark">
-          {recipient?.bio}
-        </p>
+        <p className="text-muted-light dark:text-muted-dark">{recipient.bio}</p>
         <p className="text-sm text-muted-light dark:text-muted-dark flex items-center gap-1">
-          <GoLocation /> {recipient?.location}
+          <GoLocation /> {recipient.location}
         </p>
       </div>
       <div className="flex flex-col gap-2">
-        {currentUser?.contacts.find(
-          (contactId) => contactId === recipient?.uid
-        ) ? (
+        {isContacted(recipient.uid) ? (
           <h1 className="text-green-500 text-center">Already in contact.</h1>
         ) : (
           <TwButton
