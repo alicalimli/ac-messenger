@@ -130,13 +130,6 @@ const SignIn = ({
         >
           Sign In With Google
         </TwButton>
-        <TwButton
-          type="button"
-          className="justify-center text-primary-tinted dark:text-primary-shaded"
-          variant="transparent"
-        >
-          Sign In With Twitter
-        </TwButton>
       </div>
     </form>
   );
