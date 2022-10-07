@@ -66,14 +66,6 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
         isValid={validDisplayName}
         instruction="3-18 Characters. Hyphen, Spaces and underscore are allowed"
       />
-      <InputForm
-        label="Current Password"
-        type="password"
-        isSmall={true}
-        state={password}
-        setState={setPassword}
-        placeholder="*********"
-      />
       <TwButton
         disabled={validDisplayName && !pendingMsg ? false : true}
         className="mt-2"
