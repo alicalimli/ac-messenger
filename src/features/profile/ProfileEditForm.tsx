@@ -52,7 +52,7 @@ const ProfileEditForm = ({
 
   return (
     <form onSubmit={handleChangeInfo} className="flex flex-col gap-2 w-64">
-      <h2 className="text-black dark:text-white text-xl text-center">
+      <h2 className="mb-4 text-black dark:text-white text-xl text-center">
         Edit Information
       </h2>
 
