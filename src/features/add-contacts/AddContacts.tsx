@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ErrorMsg, LoadingSpinner, TwButton } from "components";
+import { ErrorMsg, LoadingSpinner, ProfilePicture, TwButton } from "components";
 import { no_results } from "assets/images";
 import { AiOutlineArrowLeft, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Modal } from "components";
@@ -124,15 +124,11 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
               onClick={() => contactClickHandler(user)}
               className="w-full flex gap-4"
             >
-              <div className="relative bg-transparent">
-                {user.status === "on" && (
-                  <div className="bg-green-500 p-1.5 rounded-full absolute right-1 bottom-0"></div>
-                )}
-                <img
-                  src={user.photoURL}
-                  className="object-cover rounded-[50%]  h-12 w-12"
-                />
-              </div>
+              <ProfilePicture
+                isOnline={false}
+                photoURL={user.photoURL}
+                size="small"
+              />
               {user.displayName}
             </TwButton>
           ))}

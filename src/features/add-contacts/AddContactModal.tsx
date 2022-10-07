@@ -1,4 +1,4 @@
-import { TwButton } from "components";
+import { ProfilePicture, TwButton } from "components";
 
 import { User } from "interfaces";
 import { useState } from "react";
@@ -7,6 +7,7 @@ import { createToast } from "toastSlice";
 import { changeChat } from "features/inbox/chatReducer";
 import useAddContact from "./useAddContact";
 import { GoLocation } from "react-icons/go";
+import { useGetUserStatus } from "hooks";
 
 interface AddContactModalProps {
   setShowModal: (state: boolean) => void;
@@ -23,6 +24,7 @@ const AddContactModal = ({
 }: AddContactModalProps) => {
   const dispatch = useAppDispatch();
   const addContact = useAddContact();
+  const online = recipient && useGetUserStatus(recipient?.uid.toString());
 
   const [isPending, setIsPending] = useState<boolean>(false);
 
@@ -50,10 +52,10 @@ const AddContactModal = ({
   return (
     <div className="flex flex-col gap-4 py-2 w-44">
       <div className="flex flex-col items-center text-center px-8">
-        <img
-          className="object-cover mb-2 w-16 h-16 rounded-[50%] shadow-md"
-          alt={`${recipient?.displayName}'s profile picture`}
-          src={recipient?.photoURL}
+        <ProfilePicture
+          isOnline={online || false}
+          photoURL={recipient?.photoURL}
+          size="small"
         />
 
         <h2 className="text-lg text-black dark:text-white">

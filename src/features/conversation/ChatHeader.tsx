@@ -1,6 +1,6 @@
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
-import { TwButton } from "components";
+import { ProfilePicture, TwButton } from "components";
 import { User } from "interfaces";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { getChatState, resetChat } from "features/inbox/chatReducer";
@@ -32,17 +32,11 @@ const ChatHeader = ({ recipient }: ChatHeaderProps) => {
         <AiOutlineArrowLeft className="text-xl" />
       </TwButton>
       <div className="flex items-center gap-4">
-        <div className="relative bg-transparent">
-          <div
-            className={`${
-              online && "bg-green-500 "
-            }p-1.5 rounded-full absolute right-1 bottom-0 `}
-          ></div>
-          <img
-            src={recipient.photoURL}
-            className="object-cover rounded-[50%] h-16 w-16"
-          />
-        </div>
+        <ProfilePicture
+          isOnline={online}
+          photoURL={recipient?.photoURL}
+          size="small"
+        />
         <div className="flex flex-col gap-0">
           <h2 className="text-xl text-black dark:text-white">
             {recipient.displayName}
