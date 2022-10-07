@@ -61,7 +61,7 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
         setStateFocus={setUsernameFocus}
         placeholder="e.g example123"
         isValid={validUsername}
-        instruction="Maximum of 18 Letters. Hyphen, Spaces and underscore are allowed"
+        instruction="3-18 Characters. Hyphen, Spaces and underscore are allowed"
       />
       <InputForm
         label="Current Password"
