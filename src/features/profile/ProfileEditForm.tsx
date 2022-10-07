@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TwButton, InputForm } from "components";
+import { editProfile } from "features/authentication/userSlice";
+import { useAppDispatch } from "app/hooks";
 
 const USER_REGEX = /^[A-z][A-z0-9-_ ]{2,17}$/;
 
@@ -14,8 +16,9 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
   const [pendingMsg, setPendingMsg] = useState("");
   const [validUsername, setValidUsername] = useState(false);
   const [usernameFocus, setUsernameFocus] = useState(false);
-
   const [password, setPassword] = useState("");
+
+  const dispatch = useAppDispatch();
 
   const handleChangeInfo = async (e: React.FormEvent) => {
     try {
@@ -23,6 +26,7 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
 
       if (!validUsername) return;
 
+      await dispatch(editProfile({ displayName: username }));
       setShowModal(false);
     } catch (error) {
       console.error(error);
@@ -74,6 +78,7 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
       <TwButton
         disabled={validUsername && !pendingMsg ? false : true}
         className="mt-2"
+        type="submit"
       >
         {pendingMsg ? pendingMsg : "Save"}
       </TwButton>

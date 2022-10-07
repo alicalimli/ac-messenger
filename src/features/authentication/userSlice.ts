@@ -78,7 +78,7 @@ export const editProfile = createAsyncThunk(
         await updateProfile(auth.currentUser, {
           displayName: editInfo.displayName,
         });
-        updateDoc(userDocRef, {
+        await updateDoc(userDocRef, {
           displayName: editInfo.displayName,
         });
       }
@@ -181,7 +181,7 @@ export const userSlice = createSlice({
         emailLogin.rejected,
         googleLogin.rejected,
         signUp.rejected,
-        editProfile.fulfilled
+        editProfile.rejected
       ),
       (state, action) => {
         state.status = "failed";
