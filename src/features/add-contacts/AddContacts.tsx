@@ -124,11 +124,14 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
               onClick={() => contactClickHandler(user)}
               className="w-full flex gap-4"
             >
-              <div className="relative bg-transparent h-12 w-12">
+              <div className="relative bg-transparent">
                 {user.status === "on" && (
                   <div className="bg-green-500 p-1.5 rounded-full absolute right-1 bottom-0"></div>
                 )}
-                <img src={user.photoURL} className="w-full rounded-full" />
+                <img
+                  src={user.photoURL}
+                  className="object-cover rounded-[50%]  h-12 w-12"
+                />
               </div>
               {user.displayName}
             </TwButton>

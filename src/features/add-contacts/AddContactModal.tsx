@@ -6,6 +6,7 @@ import { useAppDispatch } from "app/hooks";
 import { createToast } from "toastSlice";
 import { changeChat } from "features/inbox/chatReducer";
 import useAddContact from "./useAddContact";
+import { GoLocation } from "react-icons/go";
 
 interface AddContactModalProps {
   setShowModal: (state: boolean) => void;
@@ -50,15 +51,19 @@ const AddContactModal = ({
     <div className="flex flex-col gap-4 py-2">
       <div className="flex flex-col items-center text-center px-8">
         <img
-          className="bg-cover bg-center bg-transparent mb-2 w-16 h-16 rounded-full shadow-md"
+          className="object-cover mb-2 w-16 h-16 rounded-[50%] shadow-md"
           alt={`${recipient?.displayName}'s profile picture`}
           src={recipient?.photoURL}
         />
+
         <h2 className="text-lg text-black dark:text-white">
           {recipient?.displayName}
         </h2>
         <p className="text-muted-light dark:text-muted-dark">
-          Front-end Developer
+          {recipient?.bio}
+        </p>
+        <p className="text-sm text-muted-light dark:text-muted-dark flex items-center gap-1">
+          <GoLocation /> {recipient?.location}
         </p>
       </div>
       <div className="flex flex-col gap-2">
