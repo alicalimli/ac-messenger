@@ -75,7 +75,7 @@ const App = () => {
           {pendingMsg && <Toast type="loading" msg={pendingMsg} />}
 
           {/* Notification Toast */}
-          {toastMsg && <Toast msg={toastMsg} />}
+          {toastMsg && <Toast durationMS={3000} msg={toastMsg} />}
         </AnimatePresence>
 
         {currentUser.uid ? (
