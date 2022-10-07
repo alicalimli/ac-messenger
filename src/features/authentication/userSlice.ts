@@ -74,14 +74,13 @@ export const editProfile = createAsyncThunk(
 
       const userDocRef = doc(db, "users", auth.currentUser.uid);
 
-      if (editInfo.displayName) {
-        await updateProfile(auth.currentUser, {
-          displayName: editInfo.displayName,
-        });
-        await updateDoc(userDocRef, {
-          displayName: editInfo.displayName,
-        });
-      }
+      await updateProfile(auth.currentUser, {
+        displayName: editInfo.displayName,
+      });
+      await updateDoc(userDocRef, {
+        displayName: editInfo.displayName,
+        bio: editInfo.bio,
+      });
     } catch (error) {
       throw error;
     }

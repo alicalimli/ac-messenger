@@ -27,7 +27,7 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
 
       if (!validDisplayName) return;
 
-      await dispatch(editProfile({ displayName: displayName }));
+      await dispatch(editProfile({ displayName, bio }));
       setShowModal(false);
     } catch (error) {
       console.error(error);
@@ -73,7 +73,7 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
         maxLength={30}
       />
       <TwButton
-        disabled={validDisplayName && !pendingMsg ? false : true}
+        disabled={validDisplayName && bio && !pendingMsg ? false : true}
         className="mt-2"
         type="submit"
       >
