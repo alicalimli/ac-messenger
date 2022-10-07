@@ -12,11 +12,11 @@ interface ProfileEditFormProps {
 
 const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
   const [displayName, setDisplayName] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-  const [pendingMsg, setPendingMsg] = useState("");
   const [validDisplayName, setValidDisplayName] = useState(false);
   const [displayNameFocus, setDisplayNameFocus] = useState(false);
-  const [password, setPassword] = useState("");
+
+  const [errorMsg, setErrorMsg] = useState("");
+  const [pendingMsg, setPendingMsg] = useState("");
 
   const dispatch = useAppDispatch();
 
@@ -36,10 +36,6 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
   useEffect(() => {
     setValidDisplayName(USER_REGEX.test(displayName));
   }, [displayName]);
-
-  useEffect(() => {
-    // setErrorMsg("");
-  }, [displayName, password]);
 
   return (
     <form onSubmit={handleChangeInfo} className="flex flex-col gap-2 w-64">
@@ -65,6 +61,14 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
         placeholder="e.g example123"
         isValid={validDisplayName}
         instruction="3-18 Characters. Hyphen, Spaces and underscore are allowed"
+      />
+      <InputForm
+        label="Bio"
+        type="text"
+        isSmall={true}
+        state={displayName}
+        setState={setDisplayName}
+        placeholder="e.g Earth"
       />
       <TwButton
         disabled={validDisplayName && !pendingMsg ? false : true}
