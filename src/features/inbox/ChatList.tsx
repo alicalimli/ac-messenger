@@ -3,9 +3,7 @@ import React, { useEffect, useState } from "react";
 import { User } from "interfaces";
 import { getChatState } from "./chatReducer";
 import { useAppSelector } from "app/hooks";
-import { useFormatDate, useGetUserStatus } from "hooks";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "services/firebase";
+import { useFormatDate, useGetUser, useGetUserStatus } from "hooks";
 
 interface ChatListProps {
   chat: any;
@@ -14,19 +12,18 @@ interface ChatListProps {
 
 const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
   const [recipient, setRecipient] = useState<User>();
-  const online = useGetUserStatus(chat[1].userInfo.uid);
-  const { chatId } = useAppSelector(getChatState);
-  const formattedDate = useFormatDate(chat[1].lastMessage.date.toDate());
 
-  const getUserData = async (userId: string) => {
-    const recipientDocRef = doc(db, "users", userId);
-    const recipientData = (await getDoc(recipientDocRef)).data();
-    console.log(recipientData);
-    setRecipient({ ...recipientData } as User);
-  };
+  const { chatId } = useAppSelector(getChatState);
+
+  const online = useGetUserStatus(chat[1].userInfo.uid);
+  const formattedDate = useFormatDate(chat[1].lastMessage.date.toDate());
+  const getUserInfo = useGetUser();
 
   useEffect(() => {
-    getUserData(chat[1].userInfo.uid);
+    const recipientUID = chat[1].userInfo.uid;
+    getUserInfo(recipientUID).then((recipientInfo) =>
+      setRecipient(recipientInfo)
+    );
   }, []);
 
   return (
