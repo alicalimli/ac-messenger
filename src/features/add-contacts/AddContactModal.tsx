@@ -48,7 +48,7 @@ const AddContactModal = ({
   const cancelBtnHandler = () => setShowModal(false);
 
   return (
-    <div className="flex flex-col gap-4 py-2">
+    <div className="flex flex-col gap-4 py-2 w-44">
       <div className="flex flex-col items-center text-center px-8">
         <img
           className="object-cover mb-2 w-16 h-16 rounded-[50%] shadow-md"
