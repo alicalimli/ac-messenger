@@ -12,6 +12,7 @@ interface InputFormProps {
   isValid?: boolean;
   isSmall?: boolean;
   stateFocus?: boolean;
+  maxLength?: number;
   setStateFocus?: (state: boolean) => void;
 }
 
@@ -27,6 +28,7 @@ const InputForm = ({
   setState,
   stateFocus,
   setStateFocus,
+  maxLength,
 }: InputFormProps) => {
   const [inputType, setInputType] = useState(type);
   const noSpaceLabel = label.replace(/\s+/g, "");
@@ -70,6 +72,8 @@ const InputForm = ({
             ? instruction && "border-red-500"
             : "border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main"
         }`}
+        minLength={1}
+        maxLength={maxLength}
         id={noSpaceLabel}
         autoComplete="off"
         type={inputType}

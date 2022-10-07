@@ -12,6 +12,7 @@ interface ProfileEditFormProps {
 
 const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
   const [displayName, setDisplayName] = useState("");
+  const [bio, setBio] = useState("");
   const [validDisplayName, setValidDisplayName] = useState(false);
   const [displayNameFocus, setDisplayNameFocus] = useState(false);
 
@@ -66,9 +67,10 @@ const ProfileEditForm = ({ email, setShowModal }: ProfileEditFormProps) => {
         label="Bio"
         type="text"
         isSmall={true}
-        state={displayName}
-        setState={setDisplayName}
+        state={bio}
+        setState={setBio}
         placeholder="e.g Earth"
+        maxLength={30}
       />
       <TwButton
         disabled={validDisplayName && !pendingMsg ? false : true}
