@@ -35,13 +35,16 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
       }  ${chat[0] === chatId && "bg-muted-light/10 dark:bg-muted-dark/20"}
      `}
     >
-      <div className="relative bg-transparent h-14 w-14 shrink-0">
+      <div className="relative bg-transparent shrink-0">
         <div
           className={`${
             online && "bg-green-500 "
           }p-1.5 rounded-full absolute right-0 bottom-0`}
         ></div>
-        <img src={recipient?.photoURL || ""} className="w-full rounded-full" />
+        <img
+          src={recipient?.photoURL || ""}
+          className=" object-cover rounded-[50%] h-14 w-14"
+        />
       </div>
       <div className="flex flex-col items-start">
         <h2 className="text-xl text-black dark:text-white">

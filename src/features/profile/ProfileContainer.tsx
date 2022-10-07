@@ -83,7 +83,7 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
         <div className="flex flex-col items-center text-center p-4 px-8">
           <div className=" mb-2 group relative flex items-center justify-center ">
             <img
-              className="bg-cover bg-center bg-white w-24 h-24 rounded-[50%] "
+              className="object-cover rounded-[50%] bg-white w-24 h-24 "
               alt={`${user?.displayName}'s profile picture`}
               src={user?.photoURL || ""}
             />

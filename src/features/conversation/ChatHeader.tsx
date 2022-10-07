@@ -32,15 +32,16 @@ const ChatHeader = ({ recipient }: ChatHeaderProps) => {
         <AiOutlineArrowLeft className="text-xl" />
       </TwButton>
       <div className="flex items-center gap-4">
-        <div className="relative bg-transparent h-16 w-16">
+        <div className="relative bg-transparent">
           <div
             className={`${
               online && "bg-green-500 "
             }p-1.5 rounded-full absolute right-1 bottom-0 `}
           ></div>
+          {console.log(recipient.photoURL)}
           <img
-            src={recipient.photoURL || DEFAULT_PROFILE_IMAGE}
-            className="w-full rounded-full"
+            src={recipient.photoURL}
+            className="object-cover rounded-[50%] h-16 w-16"
           />
         </div>
         <div className="flex flex-col gap-0">
