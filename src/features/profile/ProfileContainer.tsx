@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 
 import { useAppDispatch, useAppSelector } from "app/hooks";
@@ -54,11 +54,24 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
         </TwButton>
 
         <div className="flex flex-col items-center text-center p-4 px-8">
-          <img
-            className="bg-cover bg-center bg-transparent mb-2 w-24 h-24 rounded-full shadow-md"
-            alt={`${user?.displayName}'s profile picture`}
-            src={user?.photoURL || ""}
-          />
+          <div className="group relative flex items-center justify-center">
+            <img
+              className="bg-cover bg-center bg-transparent mb-2 w-24 h-24 rounded-full shadow-md"
+              alt={`${user?.displayName}'s profile picture`}
+              src={user?.photoURL || ""}
+            />
+            <label
+              htmlFor="photo-change"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-500 w-fit cursor-pointer invisible group-hover:visible"
+            >
+              <AiOutlineCamera />
+              <input
+                type="file"
+                id="photo-change"
+                className="invisible hidden"
+              />
+            </label>
+          </div>
           <h2 className="text-lg text-black dark:text-white">
             {user?.displayName || "fetching display name..."}
           </h2>
