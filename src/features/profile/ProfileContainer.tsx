@@ -13,6 +13,8 @@ import { editProfile, getUserState } from "features/authentication/userSlice";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "services/firebase";
 import { v4 as uuid } from "uuid";
+import { motion } from "framer-motion";
+import { VARIANTS_MANAGER } from "setup/variants-manager";
 
 interface ProfileContainerProps {
   setSideBarContent: (state: string) => void;
@@ -81,7 +83,7 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
         </TwButton>
 
         <div className="flex flex-col items-center text-center p-4 px-8">
-          <div className=" mb-2 group relative flex items-center justify-center ">
+          <div className="group mb-2 relative flex items-center justify-center rounded-[50%] overflow-hidden">
             <img
               className="object-cover rounded-[50%] bg-white w-24 h-24 "
               alt={`${user?.displayName}'s profile picture`}
@@ -89,9 +91,9 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
             />
             <label
               htmlFor="photo-change"
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-500 w-fit cursor-pointer invisible group-hover:visible"
+              className="flex justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/30 cursor-pointer invisible group-hover:visible w-full h-full"
             >
-              <AiOutlineCamera />
+              <AiOutlineCamera className="text-3xl" />
               <input
                 ref={imageInputRef}
                 type="file"
