@@ -8,7 +8,7 @@ import {
 import { User } from "interfaces";
 import { signInWithPopup } from "firebase/auth";
 import { auth, db, googleAuthProvider } from "services/firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 type InitialStateType = {
   user: User | {};
@@ -26,6 +26,12 @@ type signUpInfoType = {
   password: string;
   displayName: string;
   photoURL: string;
+};
+
+type editInfoType = {
+  displayName?: string;
+  bio?: string;
+  location?: string;
 };
 
 const initialState: InitialStateType = {
@@ -59,6 +65,28 @@ const setUserInfoDoc = async () => {
     setDoc(userChatsDocRef, {});
   }
 };
+
+export const editProfile = createAsyncThunk(
+  "user/editProfile",
+  async (editInfo: editInfoType) => {
+    try {
+      if (!auth.currentUser) return;
+
+      const userDocRef = doc(db, "users", auth.currentUser.uid);
+
+      if (editInfo.displayName) {
+        await updateProfile(auth.currentUser, {
+          displayName: editInfo.displayName,
+        });
+        updateDoc(userDocRef, {
+          displayName: editInfo.displayName,
+        });
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+);
 
 export const emailLogin = createAsyncThunk(
   "user/emailLogin",
@@ -127,19 +155,34 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addMatcher(
-      isAnyOf(emailLogin.fulfilled, googleLogin.fulfilled, signUp.fulfilled),
+      isAnyOf(
+        emailLogin.fulfilled,
+        googleLogin.fulfilled,
+        signUp.fulfilled,
+        editProfile.fulfilled
+      ),
       (state) => {
         state.status = "successful";
       }
     );
     builder.addMatcher(
-      isAnyOf(emailLogin.pending, googleLogin.pending, signUp.pending),
+      isAnyOf(
+        emailLogin.pending,
+        googleLogin.pending,
+        signUp.pending,
+        editProfile.pending
+      ),
       (state) => {
         state.status = "pending";
       }
     );
     builder.addMatcher(
-      isAnyOf(emailLogin.rejected, googleLogin.rejected, signUp.rejected),
+      isAnyOf(
+        emailLogin.rejected,
+        googleLogin.rejected,
+        signUp.rejected,
+        editProfile.fulfilled
+      ),
       (state, action) => {
         state.status = "failed";
         state.errorMsg = action.error.message || "";
