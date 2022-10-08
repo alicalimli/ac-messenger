@@ -43,25 +43,26 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
 
   return (
     <>
-      <nav className="relative hidden p-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 justify-center">
-        <div className="flex flex-col gap-2 items-center">
+      <nav className="relative hidden p-3 py-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 justify-center">
+        <div className="flex flex-col gap-1 items-center">
           {SIDEBAR_PAGE_BUTTONS.map((obj) => {
             const Icon = obj.icon;
             return (
               <TwButton
                 variant="transparent"
-                className={`relative group z-10`}
+                className={`${
+                  sidebarContent === obj.name &&
+                  "bg-muted-light/5 dark:bg-muted-dark/10"
+                }  relative group z-10 py-3 px-3`}
                 key={obj.name}
                 onClick={() => changeSideContent(obj.name)}
               >
                 <Icon
-                  className={`${
-                    sidebarContent === obj.name && "text-primary-main"
-                  }  text-muted-light dark:text-muted-dark text-2xl`}
+                  className={` text-muted-light dark:text-muted-dark text-2xl`}
                 />
                 <TwTooltip tip={obj.name} position="right" />
                 {sidebarContent === obj.name && (
-                  <div className="p-0.5 right-0 top-1/2 -translate-y-1/2 absolute bg-primary-main rounded-full" />
+                  <div className="p-0.5 h-10 w-1 -left-3 top-1/2 -translate-y-1/2 absolute bg-primary-main rounded-full" />
                 )}
               </TwButton>
             );
