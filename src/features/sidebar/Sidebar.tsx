@@ -52,7 +52,7 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
                 variant="transparent"
                 className={`${
                   sidebarContent === obj.name &&
-                  "bg-muted-light/5 dark:bg-muted-dark/10"
+                  "bg-muted-light/5 dark:bg-muted-dark/5"
                 }  relative group z-10 py-3 px-3`}
                 key={obj.name}
                 onClick={() => changeSideContent(obj.name)}
@@ -101,19 +101,20 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
             return (
               <TwButton
                 variant="transparent"
-                className={`relative group z-10 py-3 px-3`}
+                className={`${
+                  sidebarContent === obj.name &&
+                  "bg-muted-light/5 dark:bg-muted-dark/5"
+                }   relative group z-10 py-3 px-3`}
                 key={obj.name}
                 onClick={() => changeSideContent(obj.name)}
               >
                 {console.log(sidebarContent === obj.name)}
                 <Icon
-                  className={`${
-                    sidebarContent === obj.name && "text-primary-main"
-                  }  text-muted-light dark:text-muted-dark text-2xl`}
+                  className={` text-muted-light dark:text-muted-dark text-2xl`}
                 />
                 <TwTooltip tip={obj.name} position="top" />
                 {sidebarContent === obj.name && (
-                  <div className="p-0.5 top-0 left-1/2 -translate-x-1/2 absolute bg-primary-main rounded-full" />
+                  <div className="p-0.5 h-1 w-10 left-1/2 -bottom-2 -translate-x-1/2 absolute bg-primary-main rounded-full" />
                 )}
               </TwButton>
             );
