@@ -15,10 +15,10 @@ import { getThemeState, toggleDarkmode } from "./themeSlice";
 import { logout } from "features/authentication";
 
 const SIDEBAR_PAGE_BUTTONS = [
-  { name: "chats", icon: BiMessageSquareDetail },
-  { name: "add contacts", icon: RiContactsLine },
-  { name: "profile", icon: BiUser },
-  { name: "settings", icon: FiSettings },
+  { name: "chats", icon: BiMessageSquareDetail, content: "chats" },
+  { name: "add contacts", icon: RiContactsLine, content: "addcontacts" },
+  { name: "profile", icon: BiUser, content: "profile" },
+  { name: "settings", icon: FiSettings, content: "settings" },
 ];
 
 interface SidebarProps {
@@ -51,17 +51,17 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
               <TwButton
                 variant="transparent"
                 className={`${
-                  sidebarContent === obj.name &&
+                  sidebarContent === obj.content &&
                   "bg-muted-light/5 dark:bg-muted-dark/5"
                 }  relative group z-10 py-3 px-3`}
-                key={obj.name}
-                onClick={() => changeSideContent(obj.name)}
+                key={obj.content}
+                onClick={() => changeSideContent(obj.content)}
               >
                 <Icon
                   className={` text-muted-light dark:text-muted-dark text-2xl`}
                 />
-                <TwTooltip tip={obj.name} position="right" />
-                {sidebarContent === obj.name && (
+                <TwTooltip tip={obj.content} position="right" />
+                {sidebarContent === obj.content && (
                   <div className="p-0.5 h-10 w-1 -left-3 top-1/2 -translate-y-1/2 absolute bg-primary-main rounded-full" />
                 )}
               </TwButton>
@@ -102,18 +102,18 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
               <TwButton
                 variant="transparent"
                 className={`${
-                  sidebarContent === obj.name &&
+                  sidebarContent === obj.content &&
                   "bg-muted-light/5 dark:bg-muted-dark/5"
                 }   relative group z-10 py-3 px-3`}
-                key={obj.name}
-                onClick={() => changeSideContent(obj.name)}
+                key={obj.content}
+                onClick={() => changeSideContent(obj.content)}
               >
-                {console.log(sidebarContent === obj.name)}
+                {console.log(sidebarContent === obj.content)}
                 <Icon
                   className={` text-muted-light dark:text-muted-dark text-2xl`}
                 />
-                <TwTooltip tip={obj.name} position="top" />
-                {sidebarContent === obj.name && (
+                <TwTooltip tip={obj.content} position="top" />
+                {sidebarContent === obj.content && (
                   <div className="p-0.5 h-1 w-10 left-1/2 -bottom-2 -translate-x-1/2 absolute bg-primary-main rounded-full" />
                 )}
               </TwButton>
