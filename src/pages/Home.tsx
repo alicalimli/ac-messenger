@@ -20,7 +20,10 @@ const Home = () => {
 
   return (
     <div className="absolute inset-0 flex flex-col-reverse md:flex-row w-screen overflow-hidden">
-      <Sidebar setSideBarContent={setSideBarContent} />
+      <Sidebar
+        sidebarContent={sidebarContent}
+        setSideBarContent={setSideBarContent}
+      />
       <SideContent
         sidebarContent={sidebarContent}
         setSideBarContent={setSideBarContent}

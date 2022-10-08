@@ -22,10 +22,11 @@ const SIDEBAR_PAGE_BUTTONS = [
 ];
 
 interface SidebarProps {
+  sidebarContent: string;
   setSideBarContent: (state: string) => void;
 }
 
-const Sidebar = ({ setSideBarContent }: SidebarProps) => {
+const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
   const { darkmode } = useAppSelector(getThemeState);
   const dispatch = useAppDispatch();
 
@@ -49,12 +50,19 @@ const Sidebar = ({ setSideBarContent }: SidebarProps) => {
             return (
               <TwButton
                 variant="transparent"
-                className="relative group z-10"
+                className={`relative group z-10`}
                 key={obj.name}
                 onClick={() => changeSideContent(obj.name)}
               >
-                <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
+                <Icon
+                  className={`${
+                    sidebarContent === obj.name && "text-primary-main"
+                  }  text-muted-light dark:text-muted-dark text-2xl`}
+                />
                 <TwTooltip tip={obj.name} position="right" />
+                {sidebarContent === obj.name && (
+                  <div className="p-0.5 right-0 top-1/2 -translate-y-1/2 absolute bg-primary-main rounded-full" />
+                )}
               </TwButton>
             );
           })}
@@ -92,12 +100,20 @@ const Sidebar = ({ setSideBarContent }: SidebarProps) => {
             return (
               <TwButton
                 variant="transparent"
-                className="relative group z-10"
+                className={`relative group z-10 py-3`}
                 key={obj.name}
                 onClick={() => changeSideContent(obj.name)}
               >
-                <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
+                {console.log(sidebarContent === obj.name)}
+                <Icon
+                  className={`${
+                    sidebarContent === obj.name && "text-primary-main"
+                  }  text-muted-light dark:text-muted-dark text-2xl`}
+                />
                 <TwTooltip tip={obj.name} position="top" />
+                {sidebarContent === obj.name && (
+                  <div className="p-0.5 top-0 left-1/2 -translate-x-1/2 absolute bg-primary-main rounded-full" />
+                )}
               </TwButton>
             );
           })}
