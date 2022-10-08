@@ -11,7 +11,7 @@ const ProfilePicture = ({
   isOnline,
   size,
 }: ProfilePictureProps): JSX.Element => {
-  const getOnlineClass = () => isOnline && "bg-green-500";
+  const onlineClass = isOnline ? "bg-green-500" : "";
 
   const getSizeClass = (size: sizesType) => {
     switch (size) {
@@ -27,7 +27,7 @@ const ProfilePicture = ({
   return (
     <div className="relative bg-transparent shrink-0">
       <div
-        className={`${getOnlineClass} p-1.5 rounded-full absolute right-0 bottom-0`}
+        className={`${onlineClass} p-1.5 rounded-full absolute right-0 bottom-0`}
       ></div>
       <img
         src={photoURL || ""}
