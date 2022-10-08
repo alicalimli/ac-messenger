@@ -59,7 +59,7 @@ const AddContactModal = ({
         <ProfilePicture
           isOnline={online || false}
           photoURL={recipient.photoURL}
-          size="small"
+          size="large"
         />
 
         <h2 className="text-lg text-black dark:text-white">
