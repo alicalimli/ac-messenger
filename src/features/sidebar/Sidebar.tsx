@@ -72,7 +72,7 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
         <div className="absolute bottom-4 flex flex-col gap-1">
           <TwButton
             variant="transparent"
-            className="relative group z-10"
+            className="relative group z-10 py-3 px-3"
             onClick={darkmodeClickHandler}
           >
             {darkmode ? (
@@ -85,7 +85,7 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
 
           <TwButton
             variant="transparent"
-            className="relative group z-10"
+            className="relative group z-10 py-3 px-3"
             onClick={handleSignOut}
           >
             <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl" />
@@ -101,7 +101,7 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
             return (
               <TwButton
                 variant="transparent"
-                className={`relative group z-10 py-3`}
+                className={`relative group z-10 py-3 px-3`}
                 key={obj.name}
                 onClick={() => changeSideContent(obj.name)}
               >
