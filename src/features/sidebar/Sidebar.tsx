@@ -8,11 +8,12 @@ import {
 import { FiSettings } from "react-icons/fi";
 import { RiContactsLine } from "react-icons/ri";
 
-import { TwTooltip, TwButton } from "components";
+import { TwTooltip, TwButton, ProfilePicture } from "components";
 
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { getThemeState, toggleDarkmode } from "./themeSlice";
 import { logout } from "features/authentication";
+import { getUserState } from "features/authentication/userSlice";
 
 const SIDEBAR_PAGE_BUTTONS = [
   { name: "chats", icon: BiMessageSquareDetail, content: "chats" },
@@ -28,6 +29,7 @@ interface SidebarProps {
 
 const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
   const { darkmode } = useAppSelector(getThemeState);
+  const { user: currentUser } = useAppSelector(getUserState);
   const dispatch = useAppDispatch();
 
   const changeSideContent = (sideContentName: string) => {
@@ -43,7 +45,18 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
 
   return (
     <>
-      <nav className="relative hidden p-3 py-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 justify-center">
+      <nav className="relative hidden p-3 py-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 pt-10">
+        <button
+          onClick={() => changeSideContent("profile")}
+          className="flex justify-center gap-2 items-center text-black dark:text-white px-4 border-b  border-muted-light/10 
+      dark:border-muted-dark/10 pb-4"
+        >
+          <ProfilePicture
+            isOnline={false}
+            photoURL={currentUser?.photoURL}
+            size="small"
+          />
+        </button>
         <div className="flex flex-col gap-1 items-center">
           {SIDEBAR_PAGE_BUTTONS.map((obj) => {
             const Icon = obj.icon;

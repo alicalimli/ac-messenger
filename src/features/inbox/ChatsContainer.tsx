@@ -39,14 +39,6 @@ const ChatsContainer = () => {
   return (
     <div className="p-4 flex flex-col gap-4 h-full">
       <h1 className="text-black dark:text-white text-2xl">Chats</h1>
-      <div className="flex gap-2 items-center text-black dark:text-white px-4 border-b  border-muted-light/10 dark:border-muted-dark/10 pb-4">
-        <ProfilePicture
-          isOnline={false}
-          photoURL={currentUser?.photoURL}
-          size="small"
-        />
-        {currentUser.displayName}
-      </div>
       <div className="relative flex flex-col overflow-scroll scrollbar-hide">
         {Object.entries(chats).length !== 0 &&
           Object.entries(chats)
