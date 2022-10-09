@@ -38,7 +38,7 @@ const useAddContact = () => {
         });
 
         await updateDoc(userChatDocRef, {
-          [combinedId + ".userInfo"]: recipient,
+          [combinedId + ".userInfo"]: { uid: recipient.uid },
           [combinedId + ".lastMessage"]: {
             message: "contacted user.",
             date: serverTimestamp(),
@@ -46,7 +46,7 @@ const useAddContact = () => {
         });
 
         await updateDoc(recipientChatDocRef, {
-          [combinedId + ".userInfo"]: currentUser,
+          [combinedId + ".userInfo"]: { uid: currentUser.uid },
           [combinedId + ".lastMessage"]: {
             message: "contacted user.",
             date: serverTimestamp(),
