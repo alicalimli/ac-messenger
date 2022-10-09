@@ -121,7 +121,6 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
                 key={obj.content}
                 onClick={() => changeSideContent(obj.content)}
               >
-                {console.log(sidebarContent === obj.content)}
                 <Icon
                   className={` text-muted-light dark:text-muted-dark text-2xl`}
                 />

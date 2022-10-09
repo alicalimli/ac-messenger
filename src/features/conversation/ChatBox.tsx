@@ -10,7 +10,7 @@ import ChatForm from "./ChatForm";
 import { Message, User } from "interfaces";
 import { useAppSelector } from "app/hooks";
 import { getChatState } from "features/inbox/chatReducer";
-import { doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "services/firebase";
 import { start_chatting } from "assets/images";
 import { getUserState } from "features/authentication/userSlice";
@@ -49,6 +49,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const unreadMsg = async () => {
     // handle number of unread messages
     // Seen the conversation
+
     updateDoc(userChatDocRef, {
       [chatId + ".unread"]: false,
       [chatId + ".unreadMsgCount"]: 0,
