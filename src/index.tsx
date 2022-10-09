@@ -4,13 +4,16 @@ import App from "./App";
 import store from "app/store";
 
 import { Provider } from "react-redux";
+import ErrorBoundary from "ErrorBoundary";
 
 const root = document.getElementById("root") as HTMLElement;
 
 const AppMock = (): JSX.Element => {
   return (
     <Provider store={store}>
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
     </Provider>
   );
 };
