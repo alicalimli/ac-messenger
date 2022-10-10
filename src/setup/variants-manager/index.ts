@@ -32,4 +32,12 @@ export const VARIANTS_MANAGER = {
     y: "-20%",
     scale: 0.5,
   },
+  "toast-slide-down": {
+    y: 0,
+    x: "-50",
+  },
+  "toast-slide-up": {
+    y: "-100%",
+    x: "-50%",
+  },
 };
