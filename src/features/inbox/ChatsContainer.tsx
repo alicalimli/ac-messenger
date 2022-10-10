@@ -43,7 +43,8 @@ const ChatsContainer = () => {
         {Object.entries(chats).length !== 0 &&
           Object.entries(chats)
             .sort(
-              (a: any, b: any) => b[1].lastMessage.date - a[1].lastMessage.date
+              (a: any, b: any) =>
+                b[1].lastMessage?.date - a[1].lastMessage?.date
             )
             .map((chat: any, i: number) => (
               <ChatList

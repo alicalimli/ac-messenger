@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 
-import { BiMicrophone } from "react-icons/bi";
 import { MdSend } from "react-icons/md";
 import { RiImageAddLine } from "react-icons/ri";
 import { VscSmiley } from "react-icons/vsc";

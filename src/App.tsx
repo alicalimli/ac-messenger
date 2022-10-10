@@ -42,6 +42,15 @@ const App = () => {
     if (!authUser) return;
 
     const userDocRef = doc(db, "users", authUser.uid);
+    // const userChatRef = doc(db, "userChats", authUser.uid);
+
+    // const globalChatID = "lxTD4hU1UGHAAGA7nfqV";
+    // updateDoc(userChatRef, {
+    //   [globalChatID]: {
+    //     isGroup: true,
+    //     groupID: globalChatID,
+    //   },
+    // });
 
     const unsub = onSnapshot(userDocRef, async (snapshot) => {
       if (!snapshot.exists()) return;
