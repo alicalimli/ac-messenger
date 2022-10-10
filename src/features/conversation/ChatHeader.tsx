@@ -6,15 +6,13 @@ import { useAppDispatch, useAppSelector } from "hooks";
 import { getChatState, resetChat } from "features/inbox/chatReducer";
 import { useGetUserStatus } from "hooks";
 
-const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
-
 interface ChatHeaderProps {
   recipient: User;
 }
 
 const ChatHeader = ({ recipient }: ChatHeaderProps) => {
-  const { chatId } = useAppSelector(getChatState);
-  const online = useGetUserStatus(recipient.uid.toString());
+  const { chatId, isGroup } = useAppSelector(getChatState);
+  const online = isGroup ? false : useGetUserStatus(recipient.uid.toString());
 
   const dispatch = useAppDispatch();
 
@@ -39,7 +37,7 @@ const ChatHeader = ({ recipient }: ChatHeaderProps) => {
         />
         <div className="flex flex-col gap-0">
           <h2 className="text-xl text-black dark:text-white">
-            {recipient.displayName}
+            {isGroup ? recipient.groupName : recipient.displayName}
           </h2>
           <p className="text-sm text-muted-light dark:text-muted-dark">
             {online ? "online" : "offline"}
