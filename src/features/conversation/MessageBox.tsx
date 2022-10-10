@@ -1,6 +1,6 @@
 import { getUserState } from "features/authentication/userSlice";
 import { motion } from "framer-motion";
-import { useAppSelector } from "app/hooks";
+import { useAppSelector } from "hooks";
 import { Message } from "interfaces";
 import { useFormatDate } from "hooks";
 import { memo, useState } from "react";

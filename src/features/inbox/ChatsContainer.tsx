@@ -4,7 +4,7 @@ import { inbox_empty } from "assets/images";
 
 import ChatList from "./ChatList";
 import { User } from "interfaces";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { getUserState } from "features/authentication/userSlice";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "setup/firebase";

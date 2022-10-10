@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TwButton, InputForm } from "components";
 import { editProfile } from "features/authentication/userSlice";
-import { useAppDispatch } from "app/hooks";
+import { useAppDispatch } from "hooks";
 import { User } from "interfaces";
 import { createToast } from "toastSlice";
 

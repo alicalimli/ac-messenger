@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { useAppDispatch } from "app/hooks";
+import { useAppDispatch } from "hooks";
 import { removeToast } from "toastSlice";
 import { VARIANTS_MANAGER } from "setup/variants-manager";
 

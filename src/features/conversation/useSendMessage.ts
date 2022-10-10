@@ -1,4 +1,4 @@
-import { useAppSelector } from "app/hooks";
+import { useAppSelector } from "hooks";
 import { getUserState } from "features/authentication/userSlice";
 import { getChatState } from "features/inbox/chatReducer";
 import {

@@ -2,7 +2,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import { ProfilePicture, TwButton } from "components";
 import { User } from "interfaces";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { getChatState, resetChat } from "features/inbox/chatReducer";
 import { useGetUserStatus } from "hooks";
 

@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { TwButton } from "components";
 import { logout } from "features/authentication";
 import { toggleDarkmode } from "features/sidebar";

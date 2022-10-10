@@ -2,7 +2,7 @@ import { ProfilePicture, TwButton } from "components";
 import React, { useEffect, useState } from "react";
 import { User } from "interfaces";
 import { getChatState } from "./chatReducer";
-import { useAppSelector } from "app/hooks";
+import { useAppSelector } from "hooks";
 import { useFormatDate, useGetUser, useGetUserStatus } from "hooks";
 
 interface ChatListProps {

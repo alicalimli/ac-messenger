@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { ErrorMsg, LoadingSpinner, ProfilePicture, TwButton } from "components";
 import { no_results } from "assets/images";
-import { AiOutlineArrowLeft, AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Modal } from "components";
-import { useAppSelector } from "app/hooks";
+import { useAppSelector } from "hooks";
 import { User } from "interfaces";
 
 import AddContactModal from "./AddContactModal";

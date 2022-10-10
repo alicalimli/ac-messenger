@@ -8,7 +8,7 @@ import MessageBox from "./MessageBox";
 import ChatHeader from "./ChatHeader";
 import ChatForm from "./ChatForm";
 import { Message, User } from "interfaces";
-import { useAppSelector } from "app/hooks";
+import { useAppSelector } from "hooks";
 import { getChatState } from "features/inbox/chatReducer";
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "setup/firebase";

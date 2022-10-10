@@ -1,7 +1,7 @@
 import { StrictMode, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "hooks";
 
 import { Authentication, Home } from "pages";
 import { Toast } from "components";

@@ -2,7 +2,7 @@ import { ProfilePicture, TwButton } from "components";
 
 import { User } from "interfaces";
 import { useState } from "react";
-import { useAppDispatch } from "app/hooks";
+import { useAppDispatch } from "hooks";
 import { createToast } from "toastSlice";
 import { changeChat } from "features/inbox/chatReducer";
 import useAddContact from "./useAddContact";

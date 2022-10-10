@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 
 import { InputForm, TwButton } from "components";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { makePendingMsg } from "toastSlice";
 import {
   clearUserStateErr,

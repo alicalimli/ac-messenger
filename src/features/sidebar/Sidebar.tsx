@@ -10,7 +10,7 @@ import { RiContactsLine } from "react-icons/ri";
 
 import { TwTooltip, TwButton, ProfilePicture } from "components";
 
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { getThemeState, toggleDarkmode } from "./themeSlice";
 import { logout } from "features/authentication";
 import { getUserState } from "features/authentication/userSlice";

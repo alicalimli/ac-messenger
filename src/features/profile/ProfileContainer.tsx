@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "hooks";
 
 import ProfileEditForm from "./ProfileEditForm";
 

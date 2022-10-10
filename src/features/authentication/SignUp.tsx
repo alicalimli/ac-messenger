@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import { InputForm, TwButton } from "components";
-import { useAppSelector } from "app/hooks";
+import { useAppSelector, useAppDispatch } from "hooks";
 import { getPendingMsg, makePendingMsg } from "toastSlice";
-import { useAppDispatch } from "app/hooks";
 import { clearUserStateErr, getUserState, signUp } from "./userSlice";
 
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
