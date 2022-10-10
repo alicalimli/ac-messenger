@@ -49,6 +49,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const unreadMsg = async () => {
     // handle number of unread messages
     // Seen the conversation
+    if (isGroup) return;
 
     updateDoc(userChatDocRef, {
       [chatId + ".unread"]: false,
@@ -77,10 +78,12 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
     });
 
     return () => {
-      updateDoc(userChatDocRef, {
-        [chatId + ".active"]: false,
-      });
       unsub();
+
+      !isGroup &&
+        updateDoc(userChatDocRef, {
+          [chatId + ".active"]: false,
+        });
     };
   }, [chatId]);
 
