@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ErrorMsg, LoadingSpinner, ProfilePicture, TwButton } from "components";
+import { ErrorMsg, LoadingSpinner } from "components";
 import { inbox_empty } from "assets/images";
 
 import ChatList from "./ChatList";
@@ -18,8 +18,9 @@ const ChatsContainer = () => {
   const [chats, setChats] = useState<any>([]);
   const dispatch = useAppDispatch();
 
-  const chatClickHandler = (e: React.MouseEvent, recipient: User) => {
-    dispatch(changeChat(recipient));
+  const chatClickHandler = (recipient: User, isGroup: boolean) => {
+    console.log(recipient, isGroup);
+    dispatch(changeChat({ recipient, isGroup }));
   };
 
   useEffect(() => {

@@ -9,11 +9,12 @@ import { db } from "setup/firebase";
 
 interface ChatListProps {
   chat: any;
-  chatClickHandler: (e: React.MouseEvent, recipient: User) => void;
+  chatClickHandler: (recipient: User, isGroup: boolean) => void;
 }
 
 const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
   const [recipient, setRecipient] = useState<User | any>();
+  const [isGroup, setIsGroup] = useState(false);
 
   const { chatId } = useAppSelector(getChatState);
 
@@ -23,10 +24,27 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
 
   const getUserInfo = useGetUser();
 
+  const chatListClickHandler = () => {
+    if (isGroup) {
+      console.log(chat[1]);
+      const groupData = {
+        groupName: recipient.groupName,
+        groupID: recipient.groupID,
+        photoURL: recipient.photoURL,
+      };
+
+      chatClickHandler(groupData, isGroup);
+      return;
+    }
+
+    chatClickHandler(recipient as User, isGroup);
+  };
+
   useEffect(() => {
     if (chat[1].isGroup) {
+      setIsGroup(true);
       const groupChatDoc = doc(db, "userChats", chat[1].groupID);
-      const groupChatData = getDoc(groupChatDoc).then((doc) => {
+      getDoc(groupChatDoc).then((doc) => {
         setRecipient(doc.data());
       });
       return;
@@ -41,7 +59,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
   return (
     <TwButton
       variant="transparent"
-      onClick={(e: React.MouseEvent) => chatClickHandler(e, recipient as User)}
+      onClick={chatListClickHandler}
       className={`w-full p-2 ${
         chat[1].unread && "bg-muted-light/5 dark:bg-muted-dark/10"
       }  ${chat[0] === chatId && "bg-muted-light/10 dark:bg-muted-dark/20"}
@@ -54,7 +72,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
       />
       <div className="flex flex-col items-start">
         <h2 className="text-xl text-black dark:text-white">
-          {recipient?.displayName || recipient?.groupName}
+          {isGroup ? recipient?.groupName : recipient?.displayName}
         </h2>
         <div
           className={` flex gap-1 ${

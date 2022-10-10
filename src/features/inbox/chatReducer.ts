@@ -9,19 +9,30 @@ import { auth } from "setup/firebase";
 const initialState = {
   chatId: "",
   recipient: {},
+  isGroup: false,
 };
 
 export const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
-    changeChat: (state, action: PayloadAction<User>) => {
+    changeChat: (
+      state,
+      action: PayloadAction<{ recipient: User | any; isGroup: boolean }>
+    ) => {
       if (!auth.currentUser || !action.payload) return;
 
-      const currentUser: any = auth.currentUser;
-      const recipient = action.payload;
+      if (action.payload.isGroup) {
+        state.isGroup = action.payload.isGroup;
+        state.chatId = action.payload.recipient.groupID;
+        state.recipient = action.payload.recipient;
+        return;
+      }
 
-      state.recipient = action.payload;
+      const currentUser: any = auth.currentUser;
+      const recipient = action.payload.recipient;
+
+      state.recipient = action.payload.recipient;
       state.chatId =
         currentUser.uid > recipient.uid
           ? currentUser.uid + recipient.uid
