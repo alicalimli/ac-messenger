@@ -83,16 +83,18 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
 
   return (
     <section className="flex flex-col items-center p-1 py-4 sm:p-4 h-full">
-      <Modal setShowModal={setShowModal}>
-        {(showModal as boolean) && (recipient as unknown as boolean) && (
-          <AddContactModal
-            setShowModal={setShowModal}
-            setSearchVal={setSearchVal}
-            currentUser={currentUser}
-            recipient={recipient}
-          />
-        )}
-      </Modal>
+      {recipient && (
+        <Modal setShowModal={setShowModal}>
+          {(showModal as boolean) && (
+            <AddContactModal
+              setShowModal={setShowModal}
+              setSearchVal={setSearchVal}
+              currentUser={currentUser}
+              recipient={recipient}
+            />
+          )}
+        </Modal>
+      )}
 
       <TwButton
         variant="transparent"
@@ -132,7 +134,9 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
               {user.displayName}
             </TwButton>
           ))}
+
         {isPending && <LoadingSpinner msg="fetching users..." />}
+
         {!users.length && searchVal.length !== 0 && (
           <ErrorMsg className="w-64" img={no_results} msg="no results found." />
         )}

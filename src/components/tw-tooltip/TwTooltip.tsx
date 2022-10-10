@@ -6,7 +6,7 @@ interface ActionType {
   type: ActionTypes;
 }
 
-function reducer(state: string, action: ActionType): string {
+function reducer(_state: string, action: ActionType): string {
   switch (action.type) {
     case "right":
       return "-right-4 top-1/2 translate-x-full -translate-y-1/2";
