@@ -11,7 +11,7 @@ import { Message, User } from "interfaces";
 import { useAppSelector } from "app/hooks";
 import { getChatState } from "features/inbox/chatReducer";
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
-import { db } from "services/firebase";
+import { db } from "setup/firebase";
 import { start_chatting } from "assets/images";
 import { getUserState } from "features/authentication/userSlice";
 

@@ -9,7 +9,7 @@ import {
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
-import { db } from "services/firebase";
+import { db } from "setup/firebase";
 
 import { v4 as uuid } from "uuid";
 

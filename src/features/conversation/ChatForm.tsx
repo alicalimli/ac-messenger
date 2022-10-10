@@ -5,7 +5,7 @@ import { MdSend } from "react-icons/md";
 import { RiImageAddLine } from "react-icons/ri";
 import { VscSmiley } from "react-icons/vsc";
 import { Modal, TwButton } from "components";
-import { storage } from "services/firebase";
+import { storage } from "setup/firebase";
 import { v4 as uuid } from "uuid";
 import {
   deleteObject,

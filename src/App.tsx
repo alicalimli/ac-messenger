@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { Authentication, Home } from "pages";
 import { Toast } from "components";
 import { useLocalStorage } from "hooks";
-import { auth, db } from "services/firebase";
+import { auth, db } from "setup/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { getPendingMsg, getToastMsg } from "toastSlice";

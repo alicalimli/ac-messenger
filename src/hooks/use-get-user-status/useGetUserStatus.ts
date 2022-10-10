@@ -1,6 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "services/firebase";
+import { db } from "setup/firebase";
 
 const useGetUserStatus = (uid: string) => {
   const [online, setOnline] = useState<boolean>(false);

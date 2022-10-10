@@ -8,7 +8,7 @@ import { User } from "interfaces";
 
 import AddContactModal from "./AddContactModal";
 import { getUserState } from "features/authentication/userSlice";
-import { db } from "services/firebase";
+import { db } from "setup/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
 interface AddContactsProps {

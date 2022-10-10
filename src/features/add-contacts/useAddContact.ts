@@ -7,7 +7,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { User } from "interfaces";
-import { db } from "services/firebase";
+import { db } from "setup/firebase";
 
 const useAddContact = () => {
   const addContact = async (currentUser: User, recipient: User) => {

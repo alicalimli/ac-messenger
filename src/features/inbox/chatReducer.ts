@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "interfaces";
-import { auth } from "services/firebase";
+import { auth } from "setup/firebase";
 
 // type InitialStateType = {
 //   user: User | {};
