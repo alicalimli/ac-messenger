@@ -17,11 +17,9 @@ const useSendMessage = () => {
   const { user: currentUser } = useAppSelector(getUserState);
   const { chatId, recipient } = useAppSelector(getChatState);
 
-  const chatDocRef = doc(db, "chats", chatId);
-  const userChatDocRef = doc(db, "userChats", currentUser.uid);
-  const recipientChatDocRef = doc(db, "userChats", recipient.uid);
-
   const createLastMessage = async (message: string) => {
+    const userChatDocRef = doc(db, "userChats", currentUser.uid);
+    const recipientChatDocRef = doc(db, "userChats", recipient.uid);
     try {
       const recipientChatDocData = (await getDoc(recipientChatDocRef)).data();
 
@@ -51,6 +49,7 @@ const useSendMessage = () => {
   };
 
   const sendMessage = async (message: string) => {
+    const chatDocRef = doc(db, "chats", chatId);
     try {
       await updateDoc(chatDocRef, {
         messages: arrayUnion({

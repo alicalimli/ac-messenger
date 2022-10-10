@@ -27,7 +27,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const [messages, setMessages] = useState<[]>([]);
   const [isPending, setIsPending] = useState<boolean>(false);
 
-  const { chatId } = useAppSelector(getChatState);
+  const { chatId, isGroup } = useAppSelector(getChatState);
   const { user: currentUser } = useAppSelector(getUserState);
 
   const conversationDocRef = chatId && doc(db, "chats", chatId);
