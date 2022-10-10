@@ -4,7 +4,7 @@ import App from "./App";
 import store from "setup/store";
 
 import { Provider } from "react-redux";
-import ErrorBoundary from "ErrorBoundary";
+import ErrorBoundary from "pages/ErrorBoundary";
 
 const root = document.getElementById("root") as HTMLElement;
 
