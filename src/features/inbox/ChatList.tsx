@@ -27,7 +27,6 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
 
   const chatListClickHandler = () => {
     if (isGroup) {
-      console.log(chat[1]);
       const groupData = {
         groupName: recipient.groupName,
         groupID: recipient.groupID,

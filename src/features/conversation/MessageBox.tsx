@@ -1,11 +1,12 @@
 import { getUserState } from "features/authentication/userSlice";
 import { motion } from "framer-motion";
-import { useAppSelector } from "hooks";
-import { Message } from "interfaces";
+import { useAppSelector, useGetUser } from "hooks";
+import { Message, User } from "interfaces";
 import { useFormatDate } from "hooks";
-import { memo, useState } from "react";
-import { SharedLayout } from "components";
+import { memo, useEffect, useState } from "react";
+import { ProfilePicture, SharedLayout } from "components";
 import { VARIANTS_MANAGER } from "setup/variants-manager";
+import { getChatState } from "features/inbox/chatReducer";
 
 interface MessageBoxProps {
   currentMsg: Message;
@@ -14,9 +15,23 @@ interface MessageBoxProps {
 
 const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [senderData, setSenderData] = useState<User>();
+
   const { user: currentUser } = useAppSelector(getUserState);
+  const { isGroup } = useAppSelector(getChatState);
+
+  const getUserInfo = useGetUser();
 
   const formattedDate = useFormatDate(currentMsg.date.toDate());
+  const isCurrentUser = currentMsg.senderId === currentUser.uid;
+
+  useEffect(() => {
+    if (!isGroup) return;
+
+    getUserInfo(currentMsg.senderId).then((senderData) => {
+      setSenderData(senderData);
+    });
+  }, []);
 
   return (
     <motion.div
@@ -24,12 +39,12 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
       initial="fade-out"
       animate="fade-in"
       className={`group gap-2 py-1 flex  ${
-        currentMsg.senderId === currentUser.uid ? "flex-row-reverse" : ""
+        isCurrentUser ? "flex-row-reverse" : ""
       }`}
     >
       <div
         className={`flex flex-col gap-1 ${
-          currentMsg.senderId === currentUser.uid ? "items-end" : "items-start"
+          isCurrentUser ? "items-end" : "items-start"
         }`}
       >
         {currentMsg.img ? (
@@ -66,23 +81,34 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
         )}
         {currentMsg.message && (
           <div
-            className={`flex gap-2 ${
-              currentMsg.senderId === currentUser.uid ? "flex-row-reverse" : ""
+            className={`flex gap-2 items-end ${
+              isCurrentUser ? "flex-row-reverse" : ""
             }`}
           >
-            <button
-              ref={latestMsgRef}
-              className={`
-              peer flex rounded-3xl p-1.5 px-3 break-all text-md max-w-xs 
+            {isGroup && (
+              <ProfilePicture
+                size="small"
+                isOnline={false}
+                photoURL={senderData?.photoURL}
+              />
+            )}
+
+            <div>
+              <p className="text-xs">{senderData?.displayName}</p>
+              <button
+                ref={latestMsgRef}
+                className={`
+              peer flex rounded-3xl py-1.5 px-3 break-all text-md max-w-xs h-fit text-start
               ${
-                currentMsg.senderId === currentUser.uid
+                isCurrentUser
                   ? "focus:bg-primary-tinted  bg-primary-main text-white rounded-br-sm"
                   : "bg-white text-black rounded-bl-sm"
               }
             `}
-            >
-              {currentMsg.message}
-            </button>
+              >
+                {currentMsg.message}
+              </button>
+            </div>
             <div className="opacity-0 peer-focus:opacity-100 group-hover:opacity-100 duration-300">
               <time className="ml-auto text-sm text-slate-500">
                 {formattedDate}

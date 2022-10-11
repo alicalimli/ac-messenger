@@ -4,12 +4,14 @@ interface ProfilePictureProps {
   photoURL: string | undefined;
   isOnline: boolean;
   size: sizesType;
+  className?: string;
 }
 
 const ProfilePicture = ({
   photoURL,
   isOnline,
   size,
+  className,
 }: ProfilePictureProps): JSX.Element => {
   const onlineClass = isOnline ? "bg-green-500" : "";
 
@@ -25,7 +27,7 @@ const ProfilePicture = ({
   };
 
   return (
-    <div className="relative bg-transparent shrink-0">
+    <div className={`${className} relative bg-transparent shrink-0`}>
       <div
         className={`${onlineClass} p-1.5 rounded-full absolute right-0 bottom-0`}
       ></div>

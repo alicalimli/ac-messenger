@@ -73,7 +73,6 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
 
     const unsub = onSnapshot(conversationDocRef, (doc) => {
       doc.exists() && setMessages(doc.data().messages);
-
       setIsPending(false);
     });
 
@@ -116,6 +115,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
                 key={currentMsg.id}
                 currentMsg={currentMsg}
                 latestMsgRef={latestMsg}
+                recipient={recipient}
               />
             ))}
           </main>
