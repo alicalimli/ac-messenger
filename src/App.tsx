@@ -48,19 +48,6 @@ const App = () => {
     if (!authUser) return;
 
     const userDocRef = doc(db, "users", authUser.uid);
-    const userChatRef = doc(db, "userChats", authUser.uid);
-
-    const globalChatID = "HSEgujrHH66JVwXmg7QG";
-    updateDoc(userChatRef, {
-      [globalChatID]: {
-        isGroup: true,
-        groupID: globalChatID,
-        lastMessage: {
-          message: "You've joined the chat.",
-          date: Timestamp.now(),
-        },
-      },
-    });
 
     const unsub = onSnapshot(userDocRef, async (snapshot) => {
       if (!snapshot.exists()) return;

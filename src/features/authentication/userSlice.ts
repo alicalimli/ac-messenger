@@ -8,7 +8,14 @@ import {
 import { User } from "interfaces";
 import { signInWithPopup } from "firebase/auth";
 import { auth, db, googleAuthProvider } from "setup/firebase";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  setDoc,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
 
 type InitialStateType = {
   user: User | {};
@@ -49,6 +56,9 @@ const setUserInfoDoc = async () => {
   const userChatsDocRef = doc(db, "userChats", auth.currentUser.uid);
   const userChatsDocData = await getDoc(userChatsDocRef);
 
+  const globalChatID = "HSEgujrHH66JVwXmg7QG";
+  const globalChatRef = doc(db, "groupChats", globalChatID);
+
   if (!userDocData.exists()) {
     setDoc(userDocRef, {
       uid: auth.currentUser.uid,
@@ -63,7 +73,28 @@ const setUserInfoDoc = async () => {
   }
 
   if (!userChatsDocData.exists()) {
-    setDoc(userChatsDocRef, {});
+    await setDoc(userChatsDocRef, {});
+
+    const userChatsData = userChatsDocData.data();
+    const globalChatData = userChatsData?.[globalChatID];
+
+    if (globalChatData) return;
+
+    // Adds user in global chat group
+    updateDoc(userChatsDocRef, {
+      [globalChatID]: {
+        isGroup: true,
+        groupID: globalChatID,
+        lastMessage: {
+          message: "You've joined the chat.",
+          date: Timestamp.now(),
+        },
+      },
+    });
+
+    updateDoc(globalChatRef, {
+      membersID: arrayUnion(auth.currentUser.uid),
+    });
   }
 };
 
