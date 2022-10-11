@@ -7,6 +7,11 @@ const useGetUserStatus = (uid: string) => {
 
   const getUserStatus = async () => {
     try {
+      if (!uid) {
+        setOnline(false);
+        return;
+      }
+
       const userDocRef = doc(db, "users", uid);
       const userDocData = (await getDoc(userDocRef)).data();
       setOnline(userDocData?.status === "online" ? true : false);

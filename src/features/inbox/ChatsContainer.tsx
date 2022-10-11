@@ -19,7 +19,7 @@ const ChatsContainer = () => {
   const dispatch = useAppDispatch();
 
   const chatClickHandler = (recipient: User, isGroup: boolean) => {
-    console.log(recipient, isGroup);
+    console.log(isGroup);
     dispatch(changeChat({ recipient, isGroup }));
   };
 

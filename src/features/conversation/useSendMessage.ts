@@ -6,6 +6,7 @@ import {
   doc,
   getDoc,
   increment,
+  setDoc,
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
@@ -15,9 +16,22 @@ import { v4 as uuid } from "uuid";
 
 const useSendMessage = () => {
   const { user: currentUser } = useAppSelector(getUserState);
-  const { chatId, recipient } = useAppSelector(getChatState);
+  const { chatId, recipient, isGroup } = useAppSelector(getChatState);
 
   const createLastMessage = async (message: string) => {
+    console.log(isGroup);
+    if (isGroup) {
+      const groupChatRef = doc(db, "userChats", recipient.groupID);
+
+      await updateDoc(groupChatRef, {
+        [chatId + ".lastMessage"]: {
+          message,
+          date: Timestamp.now(),
+        },
+      });
+      return;
+    }
+
     const userChatDocRef = doc(db, "userChats", currentUser.uid);
     const recipientChatDocRef = doc(db, "userChats", recipient.uid);
     try {
@@ -49,7 +63,7 @@ const useSendMessage = () => {
   };
 
   const sendMessage = async (message: string) => {
-    const chatDocRef = doc(db, "chats", chatId);
+    const chatDocRef = doc(db, "chats", chatId.toString());
     try {
       await updateDoc(chatDocRef, {
         messages: arrayUnion({
@@ -68,6 +82,7 @@ const useSendMessage = () => {
   };
 
   const sendImage = async (imgURL: string) => {
+    const chatDocRef = doc(db, "chats", chatId);
     await updateDoc(chatDocRef, {
       messages: arrayUnion({
         id: uuid(),

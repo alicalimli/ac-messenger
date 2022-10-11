@@ -50,6 +50,8 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
       return;
     }
 
+    setIsGroup(false);
+
     const recipientUID = chat[1].userInfo.uid;
     getUserInfo(recipientUID).then((recipientInfo) =>
       setRecipient(recipientInfo)
@@ -82,7 +84,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
           } text-sm text-muted-light `}
         >
           <p className="whitespace-nowrap text-ellipsis overflow-hidden max-w-[10rem]">
-            {chat[1].lastMessage?.message || ""}
+            {chat[1].lastMessage?.message || recipient.lastMessage.message}
           </p>
           <span>•</span>
           <time className="">{formattedDate}</time>

@@ -24,21 +24,20 @@ export const chatSlice = createSlice({
 
       if (action.payload.isGroup) {
         state.isGroup = action.payload.isGroup;
-        state.chatId = action.payload.recipient.groupID;
         state.recipient = action.payload.recipient;
+        state.chatId = action.payload.recipient.groupID;
         return;
       }
 
       const currentUser: any = auth.currentUser;
       const recipient = action.payload.recipient;
 
+      state.isGroup = false;
       state.recipient = action.payload.recipient;
       state.chatId =
         currentUser.uid > recipient.uid
           ? currentUser.uid + recipient.uid
           : recipient.uid + currentUser.uid;
-
-      console.log(state.chatId);
     },
     resetChat: (state) => {
       state.chatId = "";
