@@ -4,7 +4,7 @@ import { User } from "interfaces";
 import { getChatState } from "./chatReducer";
 import { useAppSelector } from "hooks";
 import { useFormatDate, useGetUser, useGetUserStatus } from "hooks";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "setup/firebase";
 
 interface ChatListProps {
@@ -42,13 +42,14 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
   };
 
   useEffect(() => {
+    let unsub: any = null;
+
     if (chat[1].isGroup) {
-      setIsGroup(true);
       const groupChatDoc = doc(db, "userChats", chat[1].groupID);
-      getDoc(groupChatDoc).then((doc) => {
+      unsub = onSnapshot(groupChatDoc, (doc) => {
         setRecipient(doc.data());
       });
-      return;
+      return setIsGroup(true);
     }
 
     setIsGroup(false);
@@ -57,6 +58,10 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
     getUserInfo(recipientUID).then((recipientInfo) =>
       setRecipient(recipientInfo)
     );
+
+    return () => {
+      unsub?.();
+    };
   }, []);
 
   return (
