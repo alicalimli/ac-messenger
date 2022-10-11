@@ -16,19 +16,22 @@ interface MessageBoxProps {
 const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [senderData, setSenderData] = useState<User>();
+  const [msgDate, setMsgDate] = useState("");
 
   const { user: currentUser } = useAppSelector(getUserState);
   const { isGroup } = useAppSelector(getChatState);
 
   const getUserInfo = useGetUser();
+  const formatDate = useFormatDate();
 
-  const formattedDate = useFormatDate(currentMsg.date.toDate());
   const isCurrentUser = currentMsg.senderId === currentUser.uid;
 
   useEffect(() => {
     if (!isGroup) return;
 
     getUserInfo(currentMsg.senderId).then((senderData) => {
+      const date = formatDate(currentMsg.date.toDate());
+      setMsgDate(date as string);
       setSenderData(senderData);
     });
   }, []);
@@ -122,9 +125,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
               </button>
             </div>
             <div className="opacity-0 peer-focus:opacity-100 group-hover:opacity-100 duration-300">
-              <time className="ml-auto text-sm text-slate-500">
-                {formattedDate}
-              </time>
+              <time className="ml-auto text-sm text-slate-500">{msgDate}</time>
             </div>
           </div>
         )}
