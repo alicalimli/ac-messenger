@@ -82,6 +82,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
             )}
           </SharedLayout>
         )}
+
         {currentMsg.message && (
           <div
             className={`flex gap-2 items-end ${

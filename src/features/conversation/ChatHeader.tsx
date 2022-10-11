@@ -11,7 +11,7 @@ interface ChatHeaderProps {
 }
 
 const ChatHeader = ({ recipient }: ChatHeaderProps) => {
-  const { chatId, isGroup } = useAppSelector(getChatState);
+  const { isGroup } = useAppSelector(getChatState);
   const online = useGetUserStatus(recipient?.uid?.toString());
 
   const dispatch = useAppDispatch();
@@ -39,9 +39,11 @@ const ChatHeader = ({ recipient }: ChatHeaderProps) => {
           <h2 className="text-xl text-black dark:text-white">
             {recipient.displayName || recipient.groupName}
           </h2>
-          <p className="text-sm text-muted-light dark:text-muted-dark">
-            {online ? "online" : "offline"}
-          </p>
+          {!isGroup && (
+            <p className="text-sm text-muted-light dark:text-muted-dark">
+              {online ? "online" : "offline"}
+            </p>
+          )}
         </div>
       </div>
     </header>
