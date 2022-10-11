@@ -15,7 +15,7 @@ const ChatsContainer = () => {
   const { chatId } = useAppSelector(getChatState);
   const [isPending, setIsPending] = useState<boolean>(false);
 
-  const [chats, setChats] = useState<any>([]);
+  const [chats, setChats] = useState<[]>([]);
   const dispatch = useAppDispatch();
 
   const chatClickHandler = (recipient: User, isGroup: boolean) => {
@@ -29,7 +29,8 @@ const ChatsContainer = () => {
 
     const userChatsDocRef = doc(db, "userChats", currentUser.uid);
     const unsub = onSnapshot(userChatsDocRef, async (doc) => {
-      setChats({ ...doc.data() });
+      const chats = Object.entries({ ...doc.data() });
+      setChats(chats);
       setIsPending(false);
     });
 
@@ -41,8 +42,8 @@ const ChatsContainer = () => {
     <div className="p-4 flex flex-col gap-2 h-full">
       <h1 className="ml-4 text-black dark:text-white text-2xl">Chats</h1>
       <div className="relative flex flex-col overflow-scroll scrollbar-hide">
-        {Object.entries(chats).length !== 0 &&
-          Object.entries(chats)
+        {chats.length !== 0 &&
+          chats
             .sort(
               (a: any, b: any) =>
                 b[1].lastMessage?.date - a[1].lastMessage?.date
@@ -55,7 +56,7 @@ const ChatsContainer = () => {
               />
             ))}
 
-        {Object.entries(chats).length === 0 && !isPending && (
+        {chats.length === 0 && !isPending && (
           <ErrorMsg
             img={inbox_empty}
             msg="Your inbox is empty"

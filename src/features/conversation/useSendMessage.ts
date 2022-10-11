@@ -19,12 +19,19 @@ const useSendMessage = () => {
   const { chatId, recipient, isGroup } = useAppSelector(getChatState);
 
   const createLastMessage = async (message: string) => {
-    console.log(isGroup);
     if (isGroup) {
       const groupChatRef = doc(db, "userChats", recipient.groupID);
+      const userChatDocRef = doc(db, "userChats", currentUser.uid);
+
+      await updateDoc(userChatDocRef, {
+        [chatId + ".lastMessage"]: {
+          message,
+          date: Timestamp.now(),
+        },
+      });
 
       await updateDoc(groupChatRef, {
-        [chatId + ".lastMessage"]: {
+        lastMessage: {
           message,
           date: Timestamp.now(),
         },

@@ -12,13 +12,14 @@ interface ChatListProps {
   chatClickHandler: (recipient: User, isGroup: boolean) => void;
 }
 
-const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
+const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
   const [recipient, setRecipient] = useState<User | any>();
   const [isGroup, setIsGroup] = useState(false);
 
   const { chatId } = useAppSelector(getChatState);
 
   const online = !chat[1].isGroup && useGetUserStatus(chat[1].userInfo.uid);
+
   const formattedDate =
     !chat[1].isGroup && useFormatDate(chat[1].lastMessage.date.toDate());
 
@@ -84,7 +85,9 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps) => {
           } text-sm text-muted-light `}
         >
           <p className="whitespace-nowrap text-ellipsis overflow-hidden max-w-[10rem]">
-            {chat[1].lastMessage?.message || recipient.lastMessage.message}
+            {isGroup
+              ? recipient?.lastMessage?.message
+              : chat[1].lastMessage?.message}
           </p>
           <span>•</span>
           <time className="">{formattedDate}</time>

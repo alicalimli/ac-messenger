@@ -23,7 +23,7 @@ const useGetUserStatus = (uid: string) => {
   useEffect(() => {
     getUserStatus();
   }, [uid]);
-  return getUserStatus;
+  return online;
 };
 
 export default useGetUserStatus;
