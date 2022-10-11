@@ -23,14 +23,14 @@ const useSendMessage = () => {
       const groupChatRef = doc(db, "groupChats", recipient.groupID);
       const userChatDocRef = doc(db, "userChats", currentUser.uid);
 
-      await updateDoc(userChatDocRef, {
+      updateDoc(userChatDocRef, {
         [chatId + ".lastMessage"]: {
           message,
           date: Timestamp.now(),
         },
       });
 
-      await updateDoc(groupChatRef, {
+      updateDoc(groupChatRef, {
         lastMessage: {
           message,
           date: Timestamp.now(),
@@ -46,13 +46,14 @@ const useSendMessage = () => {
 
       // To fix i used temporary timestamp now since servertimestamp is somewhat being delayed therefore causing my app to crash it should be server timestamp
 
-      await updateDoc(userChatDocRef, {
+      updateDoc(userChatDocRef, {
         [chatId + ".lastMessage"]: {
           message,
           date: Timestamp.now(),
         },
       });
-      await updateDoc(recipientChatDocRef, {
+
+      updateDoc(recipientChatDocRef, {
         [chatId + ".lastMessage"]: {
           message,
           date: Timestamp.now(),
@@ -69,10 +70,10 @@ const useSendMessage = () => {
     }
   };
 
-  const sendMessage = async (message: string) => {
+  const sendMessage = (message: string) => {
     const chatDocRef = doc(db, "chats", chatId.toString());
     try {
-      await updateDoc(chatDocRef, {
+      updateDoc(chatDocRef, {
         messages: arrayUnion({
           id: uuid(),
           message,
@@ -88,9 +89,9 @@ const useSendMessage = () => {
     }
   };
 
-  const sendImage = async (imgURL: string) => {
+  const sendImage = (imgURL: string) => {
     const chatDocRef = doc(db, "chats", chatId);
-    await updateDoc(chatDocRef, {
+    updateDoc(chatDocRef, {
       messages: arrayUnion({
         id: uuid(),
         message: "",
