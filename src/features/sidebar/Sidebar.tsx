@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from "hooks";
 import { getThemeState, toggleDarkmode } from "./themeSlice";
 import { logout } from "features/authentication";
 import { getUserState } from "features/authentication/userSlice";
+import { resetChat } from "features/inbox/chatReducer";
 
 const SIDEBAR_PAGE_BUTTONS = [
   { name: "chats", icon: BiMessageSquareDetail, content: "chats" },
@@ -41,6 +42,7 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
 
   const handleSignOut = () => {
     dispatch(logout());
+    dispatch(resetChat());
   };
 
   return (

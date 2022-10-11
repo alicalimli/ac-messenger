@@ -5,6 +5,7 @@ import { toggleDarkmode } from "features/sidebar";
 import { getThemeState } from "features/sidebar/themeSlice";
 import { AiOutlineArrowLeft, AiOutlineLogout } from "react-icons/ai";
 import { HiOutlineMoon } from "react-icons/hi";
+import { resetChat } from "features/inbox/chatReducer";
 
 interface SettingsContainerProps {
   setSideBarContent: (state: string) => void;
@@ -13,6 +14,11 @@ interface SettingsContainerProps {
 const SettingsContainer = ({ setSideBarContent }: SettingsContainerProps) => {
   const dispatch = useAppDispatch();
   const { darkmode } = useAppSelector(getThemeState);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(resetChat());
+  };
 
   return (
     <div className="flex-col justify-center gap-4 p-1 py-6 sm:p-6">
@@ -42,7 +48,7 @@ const SettingsContainer = ({ setSideBarContent }: SettingsContainerProps) => {
         <TwButton
           variant="transparent"
           className="relative group w-full"
-          onClick={() => dispatch(logout())}
+          onClick={handleLogout}
         >
           <AiOutlineLogout className="text-muted-light dark:text-muted-dark text-2xl" />
           Logout
