@@ -15,14 +15,13 @@ interface ChatListProps {
 const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
   const [recipient, setRecipient] = useState<User | any>();
   const [isGroup, setIsGroup] = useState(false);
+  const [lastMsgDate, setLastMsgDate] = useState("");
 
   const { chatId } = useAppSelector(getChatState);
 
   const online = !chat[1].isGroup && useGetUserStatus(chat[1].userInfo.uid);
 
-  const formattedDate =
-    !chat[1].isGroup && useFormatDate(chat[1].lastMessage.date.toDate());
-
+  const formatDate = useFormatDate();
   const getUserInfo = useGetUser();
 
   const chatListClickHandler = () => {
@@ -44,19 +43,28 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
     let unsub: any = null;
 
     if (chat[1].isGroup) {
-      const groupChatDoc = doc(db, "userChats", chat[1].groupID);
+      const groupChatDoc = doc(db, "groupChats", chat[1].groupID);
       unsub = onSnapshot(groupChatDoc, (doc) => {
+        const groupChatData = doc.data();
+
+        if (!groupChatData) return;
+
+        const date = formatDate(groupChatData.lastMessage.date.toDate());
+        setLastMsgDate(date as string);
         setRecipient(doc.data());
       });
+
       return setIsGroup(true);
     }
 
     setIsGroup(false);
 
     const recipientUID = chat[1].userInfo.uid;
-    getUserInfo(recipientUID).then((recipientInfo) =>
-      setRecipient(recipientInfo)
-    );
+    getUserInfo(recipientUID).then((recipientInfo) => {
+      const date = formatDate(chat[1].lastMessage.date.toDate());
+      setLastMsgDate(date as string);
+      setRecipient(recipientInfo);
+    });
 
     return () => {
       unsub?.();
@@ -94,7 +102,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
               : chat[1].lastMessage?.message}
           </p>
           <span>•</span>
-          <time className="">{formattedDate}</time>
+          <time className="">{lastMsgDate}</time>
         </div>
       </div>
 

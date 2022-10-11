@@ -8,7 +8,13 @@ import { Toast } from "components";
 import { useLocalStorage } from "hooks";
 import { auth, db } from "setup/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { doc, onSnapshot, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  onSnapshot,
+  serverTimestamp,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { getPendingMsg, getToastMsg } from "toastSlice";
 import { login } from "features/authentication";
 import { User } from "interfaces";
@@ -44,11 +50,15 @@ const App = () => {
     const userDocRef = doc(db, "users", authUser.uid);
     // const userChatRef = doc(db, "userChats", authUser.uid);
 
-    // const globalChatID = "lxTD4hU1UGHAAGA7nfqV";
+    // const globalChatID = "HSEgujrHH66JVwXmg7QG";
     // updateDoc(userChatRef, {
     //   [globalChatID]: {
     //     isGroup: true,
     //     groupID: globalChatID,
+    //     lastMessage: {
+    //       message: "You've joined the chat.",
+    //       date: Timestamp.now(),
+    //     },
     //   },
     // });
 
