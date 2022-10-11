@@ -93,12 +93,24 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
               />
             )}
 
-            <div>
-              <p className="text-xs">{senderData?.displayName}</p>
+            <div
+              className={`flex flex-col gap-0.5 ${
+                isCurrentUser ? "items-end " : "items-start"
+              }`}
+            >
+              {!isCurrentUser && (
+                <p
+                  className={`${
+                    isCurrentUser ? "text-end" : "text-start"
+                  } text-xs dark:text-muted-dark text-muted-light`}
+                >
+                  {senderData?.displayName}
+                </p>
+              )}
               <button
                 ref={latestMsgRef}
                 className={`
-              peer flex rounded-3xl py-1.5 px-3 break-all text-md max-w-xs h-fit text-start
+              peer flex rounded-3xl py-1.5 px-3 break-all text-md max-w-xs w-fit h-fit text-start
               ${
                 isCurrentUser
                   ? "focus:bg-primary-tinted  bg-primary-main text-white rounded-br-sm"
