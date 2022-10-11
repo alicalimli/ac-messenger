@@ -39,9 +39,9 @@ const Modal = ({
         >
           <motion.div
             variants={VARIANTS_MANAGER}
-            initial="pop-out"
-            animate="pop-in"
-            exit="pop-out"
+            initial="slide-from-right"
+            animate="slide-in"
+            exit="slide-from-right"
             className={`${className} bg-white text-black dark:bg-bgmain-dark dark:text-white flex items-center justify-center z-10 shadow-md p-4 px-8 rounded-xl`}
           >
             {" "}
