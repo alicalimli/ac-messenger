@@ -50,14 +50,14 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
       <nav className="relative hidden p-3 py-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 pt-10">
         <button
           onClick={() => changeSideContent("profile")}
-          className="flex justify-center gap-2 items-center text-black dark:text-white px-4 border-b  border-muted-light/10 
+          className="relative group flex justify-center gap-2 items-center text-black dark:text-white px-4 border-b  border-muted-light/10
       dark:border-muted-dark/10 pb-4"
         >
           <ProfilePicture
             isOnline={false}
             photoURL={currentUser?.photoURL}
-            size="small"
-          />
+            size="small" />
+               <TwTooltip tip="Profile" position="right" />
         </button>
         <div className="flex flex-col gap-1 items-center">
           {SIDEBAR_PAGE_BUTTONS.map((obj) => {

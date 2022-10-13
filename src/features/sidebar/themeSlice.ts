@@ -4,7 +4,7 @@ type InitialStateType = {
   darkmode: boolean;
 };
 
-const initialState: InitialStateType = { darkmode: false };
+const initialState: InitialStateType = { darkmode: true };
 
 const themeSlice = createSlice({
   name: "theme",

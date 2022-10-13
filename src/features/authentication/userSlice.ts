@@ -106,9 +106,7 @@ export const editProfile = createAsyncThunk(
 
       const userDocRef = doc(db, "users", auth.currentUser.uid);
 
-      console.log("sss");
       if (editInfo.photoURL) {
-        console.log("sss");
         await updateProfile(auth.currentUser, {
           photoURL: editInfo.photoURL,
         });
