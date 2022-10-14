@@ -1,7 +1,10 @@
 import { Modal, ProfilePicture, TwButton } from "components";
+import { User } from "interfaces";
+import { doc, getDoc } from "firebase/firestore";
 import { useRef, useState } from "react";
 import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
 import { MdPersonAdd } from "react-icons/md";
+import { db } from "setup/firebase";
 import AddMemberModal from "./AddMemberModal";
 
 interface SettingsContainerProps {
@@ -10,6 +13,7 @@ interface SettingsContainerProps {
 
 const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
   const [showModal, setShowModal] = useState(false);
+  const [members, setMembers] = useState<User[]>();
   const [membersID, setMembersID] = useState<string[]>([]);
 
   const imageInputRef = useRef<any>(null);
@@ -17,8 +21,30 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
   const handleImageChange = () => {
     console.log("");
   };
+
+  const renderMembers = async () => {
+    const newMembers: User[] = [];
+    membersID.forEach(async (id) => {
+      const userDocRef = doc(db, "users", id);
+      const userData = (await getDoc(userDocRef)).data();
+      newMembers.push(userData as User);
+    });
+    setMembers(newMembers);
+  };
+
   return (
     <div className="flex-col justify-center gap-4 p-1 py-6 sm:p-6">
+      <Modal setShowModal={setShowModal} className="h-3/4 ">
+        {showModal && (
+          <AddMemberModal
+            membersID={membersID}
+            renderMembers={renderMembers}
+            setMembersID={setMembersID}
+            setShowModal={setShowModal}
+          />
+        )}
+      </Modal>
+
       <div className="border-b  border-muted-light/10 dark:border-muted-dark/10 pb-4">
         <TwButton
           variant="transparent"
@@ -66,16 +92,23 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
             </TwButton>
           </div>
         </div>
-        <Modal setShowModal={setShowModal} className="h-3/4 ">
-          {showModal && (
-            <AddMemberModal
-              membersID={membersID}
-              setMembersID={setMembersID}
-              setShowModal={setShowModal}
-            />
-          )}
-        </Modal>
       </div>
+      {members &&
+        members.map((member) => (
+          <div key={member.uid} className="w-full flex items-center gap-4">
+            <ProfilePicture
+              isOnline={false}
+              photoURL={member.photoURL}
+              size="small"
+            />
+            <div className="flex flex-col gap-1 text-left">
+              <p>{member.displayName}</p>
+              <p className="text-muted-light dark:text-muted-dark text-sm ">
+                {member.bio}
+              </p>
+            </div>
+          </div>
+        ))}
     </div>
   );
 };

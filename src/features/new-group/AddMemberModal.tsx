@@ -7,12 +7,14 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 
 interface AddMemberModalProps {
   membersID: string[];
+  renderMembers: any;
   setShowModal: (state: boolean) => void;
   setMembersID: (state: string[] | any) => void;
 }
 
 const AddMemberModal = ({
   membersID,
+  renderMembers,
   setMembersID,
   setShowModal,
 }: AddMemberModalProps) => {
@@ -95,6 +97,9 @@ const AddMemberModal = ({
             </li>
           ))}
       </ul>
+      <TwButton onClick={() => renderMembers()} className="mt-2">
+        Done
+      </TwButton>
     </div>
   );
 };
