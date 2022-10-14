@@ -48,7 +48,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
   };
 
   return (
-    <div className="flex-col justify-center gap-4 p-1 py-6 sm:p-6">
+    <div className="flex-col justify-center gap-4 p-1 py-6 sm:p-6 h-full">
       <Modal setShowModal={setShowModal} className="h-3/4 ">
         {showModal && (
           <AddMemberModal
@@ -71,7 +71,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
         </TwButton>
       </header>
 
-      <main className="flex-col justify-center gap-4 p-6">
+      <main className="flex-col justify-center gap-4 p-6 h-full">
         <div className="flex flex-col items-center text-center p-4 px-8">
           <div className="group mb-2 relative flex items-center justify-center rounded-[50%] overflow-hidden">
             <img className="object-cover rounded-[50%] bg-white w-24 h-24 " />
@@ -93,7 +93,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
           <h2 className="text-lg text-black dark:text-white">{"group name"}</h2>
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1  h-full">
           <div className="flex items-center gap-1">
             <h1 className="text-black dark:text-white text-lg">{`Members (${members?.length})`}</h1>
             <div className="ml-auto flex gap-1">
@@ -108,7 +108,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
             </div>
           </div>
 
-          <ul className="flex flex-col gap-4">
+          <ul className="flex flex-col gap-4 overflow-scroll scrollbar-hide h-full">
             {members.length !== 0 &&
               members.map((member) => (
                 <li key={member.uid} className="w-full flex items-center gap-4">

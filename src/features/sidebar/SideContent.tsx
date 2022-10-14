@@ -69,7 +69,7 @@ const SideContent = ({
         {sidebarContent === "new-group" && (
           <motion.div
             key="add-contacts"
-            className="absolute w-full h-full"
+            className="absolute w-full h-full overflow-hidden"
             variants={VARIANTS_MANAGER}
             initial="slide-from-left"
             animate="slide-in"
