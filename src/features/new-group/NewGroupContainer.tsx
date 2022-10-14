@@ -10,6 +10,8 @@ interface SettingsContainerProps {
 
 const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
   const [showModal, setShowModal] = useState(false);
+  const [membersID, setMembersID] = useState<string[]>([]);
+
   const imageInputRef = useRef<any>(null);
 
   const handleImageChange = () => {
@@ -65,7 +67,13 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
           </div>
         </div>
         <Modal setShowModal={setShowModal} className="h-3/4 ">
-          {showModal && <AddMemberModal />}
+          {showModal && (
+            <AddMemberModal
+              membersID={membersID}
+              setMembersID={setMembersID}
+              setShowModal={setShowModal}
+            />
+          )}
         </Modal>
       </div>
     </div>
