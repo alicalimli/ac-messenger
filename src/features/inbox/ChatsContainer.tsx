@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ErrorMsg, LoadingSpinner } from "components";
+import { ErrorMsg, LoadingSpinner, TwButton, TwTooltip } from "components";
 import { inbox_empty } from "assets/images";
 
 import ChatList from "./ChatList";
@@ -9,6 +9,7 @@ import { getUserState } from "features/authentication/userSlice";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "setup/firebase";
 import { changeChat, getChatState } from "./chatReducer";
+import { MdGroupAdd, MdPersonAdd } from "react-icons/md";
 
 const ChatsContainer = () => {
   const { user: currentUser } = useAppSelector(getUserState);
@@ -40,7 +41,32 @@ const ChatsContainer = () => {
   }, [currentUser.uid]);
   return (
     <div className="p-4 flex flex-col gap-2 h-full">
-      <h1 className="ml-4 text-black dark:text-white text-2xl">Chats</h1>
+      <div className="flex gap-1 items-center">
+        <h1 className="ml-4 text-black dark:text-white text-2xl">Chats</h1>
+        <ul className="ml-auto flex gap-1">
+          <li>
+            {" "}
+            <TwButton
+              variant="transparent"
+              className="relative group z-10 py-3 px-3"
+              onClick={""}
+            >
+              <MdPersonAdd className="text-muted-light dark:text-muted-dark text-2xl" />
+              <TwTooltip tip="New Contact" position="bottom" />
+            </TwButton>
+          </li>
+          <li>
+            <TwButton
+              variant="transparent"
+              className="relative group z-10 py-3 px-3"
+              onClick={""}
+            >
+              <MdGroupAdd className="text-muted-light dark:text-muted-dark text-2xl" />
+              <TwTooltip tip="New Group" position="bottom" />
+            </TwButton>
+          </li>
+        </ul>
+      </div>
       <div className="relative flex flex-col overflow-scroll scrollbar-hide">
         {chats.length !== 0 &&
           chats
