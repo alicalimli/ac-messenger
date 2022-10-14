@@ -7,14 +7,14 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 
 interface AddMemberModalProps {
   membersID: string[];
-  renderMembers: any;
+  fetchMembers: any;
   setShowModal: (state: boolean) => void;
   setMembersID: (state: string[] | any) => void;
 }
 
 const AddMemberModal = ({
   membersID,
-  renderMembers,
+  fetchMembers,
   setMembersID,
   setShowModal,
 }: AddMemberModalProps) => {
@@ -54,6 +54,11 @@ const AddMemberModal = ({
       : addMember(user.uid.toString());
   };
 
+  const handleAddMembersBtn = () => {
+    fetchMembers();
+    setShowModal(false);
+  };
+
   return (
     <div className="w-72 h-full flex flex-col gap-4">
       <div className="flex gap-1 items-center">
@@ -72,8 +77,8 @@ const AddMemberModal = ({
       <ul className="flex flex-col gap-4 h-full overflow-y-scroll overflow-x-hidden scrollbar-hide">
         {users?.length !== 0 &&
           users?.map((user) => (
-            <li>
-              <div key={user.uid} className="w-full flex items-center gap-4">
+            <li key={user.uid}>
+              <div className="w-full flex items-center gap-4">
                 <ProfilePicture
                   isOnline={false}
                   photoURL={user.photoURL}
@@ -97,7 +102,7 @@ const AddMemberModal = ({
             </li>
           ))}
       </ul>
-      <TwButton onClick={() => renderMembers()} className="mt-2">
+      <TwButton onClick={handleAddMembersBtn} className="mt-2">
         Done
       </TwButton>
     </div>

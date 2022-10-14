@@ -22,14 +22,29 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
     console.log("");
   };
 
-  const renderMembers = async () => {
-    const newMembers: User[] = [];
+  const fetchMembers = async () => {
     membersID.forEach(async (id) => {
+      const isRendered = members.find((member) => member.uid.toString() === id)
+        ? true
+        : false;
+
+      if (isRendered) return;
+
       const userDocRef = doc(db, "users", id);
       const userData = (await getDoc(userDocRef)).data();
-      newMembers.push(userData as User);
+      setMembers((members) => [...members, userData]);
     });
+    console.log(members);
+  };
+
+  const handleRemoveMember = (userID: string) => {
+    const newMembers = members.filter(
+      (member) => member.uid.toString() !== userID
+    );
+    const newMembersID = membersID.filter((id) => id !== userID);
+
     setMembers(newMembers);
+    setMembersID(newMembersID);
   };
 
   return (
@@ -38,7 +53,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
         {showModal && (
           <AddMemberModal
             membersID={membersID}
-            renderMembers={renderMembers}
+            fetchMembers={fetchMembers}
             setMembersID={setMembersID}
             setShowModal={setShowModal}
           />
@@ -94,7 +109,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
           </div>
 
           <ul className="flex flex-col gap-4">
-            {members &&
+            {members.length !== 0 &&
               members.map((member) => (
                 <li key={member.uid} className="w-full flex items-center gap-4">
                   <ProfilePicture
@@ -111,7 +126,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
                     </p>
                   </div>
                   <button
-                    onClick={() => ""}
+                    onClick={() => handleRemoveMember(member.uid.toString())}
                     className={`ml-auto bg-red-600 text-white text-sm p-1 px-2 w-16 h-fit rounded-full`}
                   >
                     remove
