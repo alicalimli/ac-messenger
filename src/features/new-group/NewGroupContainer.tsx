@@ -13,7 +13,7 @@ interface SettingsContainerProps {
 
 const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
   const [showModal, setShowModal] = useState(false);
-  const [members, setMembers] = useState<User[]>();
+  const [members, setMembers] = useState<User[]>([]);
   const [membersID, setMembersID] = useState<string[]>([]);
 
   const imageInputRef = useRef<any>(null);
@@ -45,7 +45,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
         )}
       </Modal>
 
-      <div className="border-b  border-muted-light/10 dark:border-muted-dark/10 pb-4">
+      <header>
         <TwButton
           variant="transparent"
           onClick={() => setSideBarContent("chats")}
@@ -54,9 +54,9 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
           <AiOutlineArrowLeft className="text-xl" />
           Cancel
         </TwButton>
-      </div>
+      </header>
 
-      <div className="flex-col justify-center gap-4 p-6">
+      <main className="flex-col justify-center gap-4 p-6">
         <div className="flex flex-col items-center text-center p-4 px-8">
           <div className="group mb-2 relative flex items-center justify-center rounded-[50%] overflow-hidden">
             <img className="object-cover rounded-[50%] bg-white w-24 h-24 " />
@@ -75,40 +75,52 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
               />
             </label>
           </div>
-          <h2 className="text-lg text-black dark:text-white">
-            {"fetching display name..."}
-          </h2>
+          <h2 className="text-lg text-black dark:text-white">{"group name"}</h2>
         </div>
-        <div className="flex items-center gap-1 ">
-          <h1 className="ml-4 text-black dark:text-white text-lg">Members</h1>
-          <div className="ml-auto flex gap-1">
-            {" "}
-            <TwButton
-              variant="transparent"
-              className="relative group z-10 py-3 px-3"
-              onClick={() => setShowModal(true)}
-            >
-              <MdPersonAdd className="text-muted-light dark:text-muted-dark text-2xl" />
-            </TwButton>
-          </div>
-        </div>
-      </div>
-      {members &&
-        members.map((member) => (
-          <div key={member.uid} className="w-full flex items-center gap-4">
-            <ProfilePicture
-              isOnline={false}
-              photoURL={member.photoURL}
-              size="small"
-            />
-            <div className="flex flex-col gap-1 text-left">
-              <p>{member.displayName}</p>
-              <p className="text-muted-light dark:text-muted-dark text-sm ">
-                {member.bio}
-              </p>
+
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-1">
+            <h1 className="text-black dark:text-white text-lg">{`Members (${members?.length})`}</h1>
+            <div className="ml-auto flex gap-1">
+              {" "}
+              <TwButton
+                variant="transparent"
+                className="relative group z-10 py-3 px-3"
+                onClick={() => setShowModal(true)}
+              >
+                <MdPersonAdd className="text-muted-light dark:text-muted-dark text-2xl" />
+              </TwButton>
             </div>
           </div>
-        ))}
+
+          <ul className="flex flex-col gap-4">
+            {members &&
+              members.map((member) => (
+                <li key={member.uid} className="w-full flex items-center gap-4">
+                  <ProfilePicture
+                    isOnline={false}
+                    photoURL={member.photoURL}
+                    size="small"
+                  />
+                  <div className="flex flex-col gap-1 text-left">
+                    <p className="text-black dark:text-white">
+                      {member.displayName}
+                    </p>
+                    <p className="text-muted-light dark:text-muted-dark text-sm ">
+                      {member.bio}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => ""}
+                    className={`ml-auto bg-red-600 text-white text-sm p-1 px-2 w-16 h-fit rounded-full`}
+                  >
+                    remove
+                  </button>
+                </li>
+              ))}
+          </ul>
+        </div>
+      </main>
     </div>
   );
 };
