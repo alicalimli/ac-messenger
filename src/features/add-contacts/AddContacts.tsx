@@ -3,7 +3,7 @@ import { ErrorMsg, LoadingSpinner, ProfilePicture, TwButton } from "components";
 import { no_results } from "assets/images";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Modal } from "components";
-import { useAppSelector } from "hooks";
+import { useAppSelector, useGetUsers } from "hooks";
 import { User } from "interfaces";
 
 import AddContactModal from "./AddContactModal";
@@ -25,32 +25,18 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
 
   const { user: currentUser } = useAppSelector(getUserState);
 
+  const { getUsers } = useGetUsers();
+
   const searchChangeHandler = (e: any) => setSearchVal(e.target.value);
 
-  const getUsers = async () => {
+  const loadUsers = async () => {
     if (!currentUser) return;
-
     setIsPending(true);
 
-    const usersColRef = query(
-      collection(db, "users"),
-      where("uid", "!=", currentUser.uid)
-    );
+    const users = await getUsers(currentUser.uid);
 
-    const data = await getDocs(usersColRef);
-
-    setUsers(
-      data.docs.map((doc) => {
-        return { ...doc.data() };
-      }) as User[]
-    );
-
+    setUsers(users);
     setIsPending(false);
-  };
-
-  const contactClickHandler = (recipient: User) => {
-    setShowModal(true);
-    setRecipient(recipient);
   };
 
   const searchUser = async () => {
@@ -69,8 +55,13 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
         }) as User[]
       );
     } else {
-      getUsers();
+      loadUsers();
     }
+  };
+
+  const contactClickHandler = (recipient: User) => {
+    setShowModal(true);
+    setRecipient(recipient);
   };
 
   useEffect(() => {
@@ -78,7 +69,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   }, [searchVal]);
 
   useEffect(() => {
-    getUsers();
+    loadUsers();
   }, []);
 
   return (
