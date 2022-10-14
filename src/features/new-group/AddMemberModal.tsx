@@ -1,5 +1,6 @@
 import { ProfilePicture, TwButton } from "components";
-import { useGetUsers } from "hooks";
+import { getUserState } from "features/authentication/userSlice";
+import { useAppSelector, useGetUsers } from "hooks";
 import { User } from "interfaces";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -15,11 +16,13 @@ const AddMemberModal = ({
   setMembersID,
   setShowModal,
 }: AddMemberModalProps) => {
+  const { user: currentUser } = useAppSelector(getUserState);
+
   const [users, setUsers] = useState<User[]>();
   const { getUsers, searchUser } = useGetUsers();
 
   useEffect(() => {
-    getUsers().then((users) => {
+    getUsers(currentUser.uid).then((users) => {
       setUsers(users);
     });
   }, []);
