@@ -13,7 +13,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { VARIANTS_MANAGER } from "setup/variants-manager";
 
 const Home = () => {
-  const defaultSideBarContent = "chats";
+  const defaultSideBarContent = "new-group";
   const [sidebarContent, setSideBarContent] = useState(defaultSideBarContent);
 
   const { chatId, recipient } = useAppSelector(getChatState);

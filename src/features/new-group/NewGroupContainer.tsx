@@ -1,12 +1,15 @@
-import { TwButton } from "components";
-import { useRef } from "react";
+import { Modal, ProfilePicture, TwButton } from "components";
+import { useRef, useState } from "react";
 import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
+import { MdPersonAdd } from "react-icons/md";
+import AddMemberModal from "./AddMemberModal";
 
 interface SettingsContainerProps {
   setSideBarContent: (state: string) => void;
 }
 
 const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
+  const [showModal, setShowModal] = useState(false);
   const imageInputRef = useRef<any>(null);
 
   const handleImageChange = () => {
@@ -48,6 +51,22 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
             {"fetching display name..."}
           </h2>
         </div>
+        <div className="flex items-center gap-1 ">
+          <h1 className="ml-4 text-black dark:text-white text-lg">Members</h1>
+          <div className="ml-auto flex gap-1">
+            {" "}
+            <TwButton
+              variant="transparent"
+              className="relative group z-10 py-3 px-3"
+              onClick={() => setShowModal(true)}
+            >
+              <MdPersonAdd className="text-muted-light dark:text-muted-dark text-2xl" />
+            </TwButton>
+          </div>
+        </div>
+        <Modal setShowModal={setShowModal} className="h-3/4 ">
+          {showModal && <AddMemberModal />}
+        </Modal>
       </div>
     </div>
   );
