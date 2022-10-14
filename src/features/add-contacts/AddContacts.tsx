@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
 import { ErrorMsg, LoadingSpinner, ProfilePicture, TwButton } from "components";
-import { no_results } from "assets/images";
+import { getUserState } from "features/authentication/userSlice";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Modal } from "components";
 import { useAppSelector, useGetUsers } from "hooks";
+import { useEffect, useState } from "react";
+import { no_results } from "assets/images";
+import { Modal } from "components";
 import { User } from "interfaces";
 
 import AddContactModal from "./AddContactModal";
-import { getUserState } from "features/authentication/userSlice";
 
 interface AddContactsProps {
   setSideBarContent: (state: string) => void;
