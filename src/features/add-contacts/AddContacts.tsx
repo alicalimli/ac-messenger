@@ -8,8 +8,6 @@ import { User } from "interfaces";
 
 import AddContactModal from "./AddContactModal";
 import { getUserState } from "features/authentication/userSlice";
-import { db } from "setup/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
 
 interface AddContactsProps {
   setSideBarContent: (state: string) => void;
@@ -25,7 +23,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
 
   const { user: currentUser } = useAppSelector(getUserState);
 
-  const { getUsers } = useGetUsers();
+  const { getUsers, searchUser } = useGetUsers();
 
   const searchChangeHandler = (e: any) => setSearchVal(e.target.value);
 
@@ -39,24 +37,9 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
     setIsPending(false);
   };
 
-  const searchUser = async () => {
-    if (searchVal) {
-      const usersColRef = query(
-        collection(db, "users"),
-        where("displayName", ">=", searchVal),
-        where("displayName", "<=", searchVal + "\uf8ff")
-      );
-
-      const data = await getDocs(usersColRef);
-
-      setUsers(
-        data.docs.map((doc) => {
-          return { ...doc.data() };
-        }) as User[]
-      );
-    } else {
-      loadUsers();
-    }
+  const searchHandler = async () => {
+    const users = await searchUser(searchVal);
+    setUsers(users);
   };
 
   const contactClickHandler = (recipient: User) => {
@@ -65,7 +48,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   };
 
   useEffect(() => {
-    searchUser();
+    searchHandler();
   }, [searchVal]);
 
   useEffect(() => {
