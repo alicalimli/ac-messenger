@@ -32,7 +32,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
 
       const userDocRef = doc(db, "users", id);
       const userData = (await getDoc(userDocRef)).data();
-      setMembers((members) => [...members, userData]);
+      setMembers((members) => [...members, userData] as User[]);
     });
     console.log(members);
   };
