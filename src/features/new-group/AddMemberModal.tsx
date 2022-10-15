@@ -48,9 +48,11 @@ const AddMemberModal = ({
       : addMember(user.uid.toString());
   };
 
-  const handleAddMembersBtn = () => {
-    fetchMembers();
+  const handleAddMembersBtn = (e: any) => {
+    e.target.disabled = true;
+
     setShowModal(false);
+    fetchMembers();
   };
 
   const searchChangeHandler = (e: any) => {
