@@ -6,33 +6,53 @@ import {
   where,
 } from "firebase/firestore";
 import { User } from "interfaces";
+import { useState } from "react";
 import { db } from "setup/firebase";
 
 const useGetUsers = () => {
+  const [users, setUsers] = useState<User[]>();
+  const [isPending, setIsPending] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
   let usersColRef: CollectionReference;
 
   const getUsers = async (userID?: string) => {
-    //  Exclude current user in the results when theres userID.
-    if (userID) {
-      usersColRef = query(
-        collection(db, "users"),
-        where("uid", "!=", userID)
-      ) as CollectionReference;
-    } else {
-      usersColRef = collection(db, "users") as CollectionReference;
+    try {
+      setIsPending(true);
+      setErrorMsg("");
+
+      //  Exclude current user in the results when theres userID.
+      if (userID) {
+        usersColRef = query(
+          collection(db, "users"),
+          where("uid", "!=", userID)
+        ) as CollectionReference;
+      } else {
+        usersColRef = collection(db, "users") as CollectionReference;
+      }
+
+      const data = await getDocs(usersColRef as CollectionReference);
+
+      const users = data.docs.map((doc) => {
+        return { ...doc.data() };
+      }) as User[];
+
+      setUsers(users);
+      setIsPending(false);
+    } catch (error: any) {
+      setIsPending(false);
+      setErrorMsg(error.message);
     }
-
-    const data = await getDocs(usersColRef as CollectionReference);
-
-    const users = data.docs.map((doc) => {
-      return { ...doc.data() };
-    }) as User[];
-
-    return users;
   };
 
   const searchUser = async (searchVal: string) => {
-    if (searchVal) {
+    try {
+      if (!searchVal) {
+        return getUsers();
+      }
+
+      setErrorMsg("");
+
       const usersColRef = query(
         collection(db, "users"),
         where("displayName", ">=", searchVal),
@@ -47,14 +67,14 @@ const useGetUsers = () => {
         return { ...doc.data() };
       }) as User[];
 
-      console.log(users);
-      return users;
-    } else {
-      return getUsers();
+      setUsers(users);
+    } catch (error: any) {
+      setIsPending(false);
+      setErrorMsg(error.message);
     }
   };
 
-  return { getUsers, searchUser };
+  return { users, isPending, errorMsg, getUsers, searchUser };
 };
 
 export default useGetUsers;

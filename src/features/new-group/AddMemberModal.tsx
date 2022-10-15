@@ -19,15 +19,12 @@ const AddMemberModal = ({
   setShowModal,
 }: AddMemberModalProps) => {
   const { user: currentUser } = useAppSelector(getUserState);
-  const { getUsers, searchUser } = useGetUsers();
+  const { users, isPending, getUsers, searchUser } = useGetUsers();
 
   const [searchVal, setSearchVal] = useState<string>("");
-  const [users, setUsers] = useState<User[]>();
 
   useEffect(() => {
-    getUsers(currentUser.uid).then((users) => {
-      setUsers(users);
-    });
+    getUsers(currentUser.uid);
   }, []);
 
   const isMember = (userID: string) => membersID.includes(userID);
@@ -63,8 +60,7 @@ const AddMemberModal = ({
   const searchChangeHandler = (e: any) => setSearchVal(e.target.value);
 
   const searchHandler = async () => {
-    const users = await searchUser(searchVal);
-    setUsers(users);
+    searchUser(searchVal);
   };
 
   useEffect(() => {
