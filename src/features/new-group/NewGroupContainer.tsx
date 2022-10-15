@@ -105,6 +105,10 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
 
   const groupNameChangeHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (members.length < 3) {
+      dispatch(createToast("Must have atleast 3 members."));
+      return;
+    }
   };
 
   const cancelBtnHandler = () => {
@@ -166,17 +170,14 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
             />
           </label>
         </div>
-
-        <form onSubmit={groupNameChangeHandler}>
-          <InputForm
-            className="w-44 text-lg p-0.5"
-            state={groupName}
-            maxLength={30}
-            setState={setGroupName}
-            type={"text"}
-            placeholder={"Group Name"}
-          />
-        </form>
+        <InputForm
+          className="w-44 text-lg p-0.5"
+          state={groupName}
+          maxLength={30}
+          setState={setGroupName}
+          type={"text"}
+          placeholder={"Group Name"}
+        />
       </div>
 
       <div className="flex flex-col gap-1">
@@ -221,7 +222,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
             ))}
         </ul>
 
-        <TwButton onClick={""} className="mt-2">
+        <TwButton onClick={groupNameChangeHandler} className="mt-2">
           Create Group
         </TwButton>
       </div>
