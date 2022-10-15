@@ -19,9 +19,10 @@ const AddMemberModal = ({
   setShowModal,
 }: AddMemberModalProps) => {
   const { user: currentUser } = useAppSelector(getUserState);
-
-  const [users, setUsers] = useState<User[]>();
   const { getUsers, searchUser } = useGetUsers();
+
+  const [searchVal, setSearchVal] = useState<string>("");
+  const [users, setUsers] = useState<User[]>();
 
   useEffect(() => {
     getUsers(currentUser.uid).then((users) => {
@@ -59,6 +60,17 @@ const AddMemberModal = ({
     setShowModal(false);
   };
 
+  const searchChangeHandler = (e: any) => setSearchVal(e.target.value);
+
+  const searchHandler = async () => {
+    const users = await searchUser(searchVal);
+    setUsers(users);
+  };
+
+  useEffect(() => {
+    searchHandler();
+  }, [searchVal]);
+
   return (
     <div className="w-72 h-full flex flex-col gap-4">
       <div className="flex gap-1 items-center">
@@ -73,6 +85,18 @@ const AddMemberModal = ({
           Add Members
         </h1>
       </div>
+      <form className="w-full" autoComplete="off">
+        <label htmlFor="search-input">
+          <input
+            type="text"
+            id="search-input"
+            value={searchVal}
+            onChange={searchChangeHandler}
+            placeholder="Search"
+            className="p-2 px-4 w-full rounded-full text-black dark:text-white bg-muted-light/10 dark:bg-slate-700"
+          />
+        </label>
+      </form>
 
       <ul className="flex flex-col gap-4 h-full overflow-y-scroll overflow-x-hidden scrollbar-hide">
         {users?.length !== 0 &&
