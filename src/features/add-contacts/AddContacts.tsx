@@ -14,46 +14,23 @@ interface AddContactsProps {
 }
 
 const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [recipient, setRecipient] = useState<User>();
+  const { user: currentUser } = useAppSelector(getUserState);
+  const { users, isPending, searchUser } = useGetUsers(currentUser.uid);
 
+  const [recipient, setRecipient] = useState<User>();
   const [searchVal, setSearchVal] = useState<string>("");
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [isPending, setIsPending] = useState<boolean>(false);
 
-  const { user: currentUser } = useAppSelector(getUserState);
-
-  const { getUsers, searchUser } = useGetUsers();
-
-  const searchChangeHandler = (e: any) => setSearchVal(e.target.value);
-
-  const loadUsers = async () => {
-    if (!currentUser) return;
-    setIsPending(true);
-
-    const users = await getUsers(currentUser.uid);
-
-    setUsers(users);
-    setIsPending(false);
-  };
-
-  const searchHandler = async () => {
-    const users = await searchUser(searchVal);
-    setUsers(users);
+  const searchChangeHandler = (e: any) => {
+    const searchVal = e.target.value;
+    setSearchVal(searchVal);
+    searchUser(searchVal);
   };
 
   const contactClickHandler = (recipient: User) => {
     setShowModal(true);
     setRecipient(recipient);
   };
-
-  useEffect(() => {
-    searchHandler();
-  }, [searchVal]);
-
-  useEffect(() => {
-    loadUsers();
-  }, []);
 
   return (
     <section className="flex flex-col items-center p-1 py-4 sm:p-4 h-full">
@@ -92,8 +69,8 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
       </form>
 
       <div className="flex flex-col w-full gap-1 overflow-scroll scrollbar-hide">
-        {users.length !== 0 &&
-          users.map((user: User, i: number) => (
+        {users?.length !== 0 &&
+          users?.map((user: User, i: number) => (
             <TwButton
               variant="transparent"
               key={i}
@@ -111,7 +88,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
 
         {isPending && <LoadingSpinner msg="fetching users..." />}
 
-        {!users.length && searchVal.length !== 0 && (
+        {!users?.length && searchVal.length !== 0 && (
           <ErrorMsg className="w-64" img={no_results} msg="no results found." />
         )}
       </div>
