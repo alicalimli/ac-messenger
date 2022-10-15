@@ -6,10 +6,10 @@ import {
   where,
 } from "firebase/firestore";
 import { User } from "interfaces";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "setup/firebase";
 
-const useGetUsers = () => {
+const useGetUsers = (userID?: string) => {
   const [users, setUsers] = useState<User[]>();
   const [isPending, setIsPending] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -73,6 +73,10 @@ const useGetUsers = () => {
       setErrorMsg(error.message);
     }
   };
+
+  useEffect(() => {
+    getUsers(userID);
+  }, []);
 
   return { users, isPending, errorMsg, getUsers, searchUser };
 };

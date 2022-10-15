@@ -25,7 +25,10 @@ const AddMemberModal = ({
   setShowModal,
 }: AddMemberModalProps) => {
   const { user: currentUser } = useAppSelector(getUserState);
-  const { users, isPending, getUsers, searchUser } = useGetUsers();
+
+  const { users, isPending, searchUser } = useGetUsers(
+    currentUser.uid.toString()
+  );
 
   const [searchVal, setSearchVal] = useState<string>("");
 
@@ -60,10 +63,6 @@ const AddMemberModal = ({
   const getIsMemberBtnClass = (userID: string) => {
     return isMember(userID) ? memberBtnClass : nonMemberBtnClass;
   };
-
-  useEffect(() => {
-    getUsers(currentUser.uid);
-  }, []);
 
   return (
     <div className="w-72 h-full flex flex-col gap-4">
