@@ -42,6 +42,7 @@ const NewGroupContainer = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [imgURL, setImgURL] = useState("");
+  const [isImgPending, setIsImgPending] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [imageStorageName, setImageStorageName] = useState<string>("");
 
@@ -52,7 +53,7 @@ const NewGroupContainer = () => {
 
   const handleImageChange = async (e: any) => {
     try {
-      setIsPending(true);
+      setIsImgPending(true);
       const imageUpload = e.target.files[0];
 
       if (!imageUpload) return;
@@ -66,20 +67,20 @@ const NewGroupContainer = () => {
         getDownloadURL(snapshot.ref).then((url: string) => {
           imageInputRef.current.value = "";
           setImgURL(url);
-          setIsPending(false);
+          setIsImgPending(false);
           dispatch(createToast("profile picture changed."));
         });
       });
     } catch (error) {
       imageInputRef.current.value = "";
-      setIsPending(false);
+      setIsImgPending(false);
       dispatch(createToast("something went wrong."));
     }
   };
 
   const fetchMembers = async () => {
     try {
-      setIsPending(true);
+      setIsImgPending(true);
       membersID.forEach(async (id) => {
         const isRendered = members.find(
           (member) => member.uid.toString() === id
@@ -92,10 +93,10 @@ const NewGroupContainer = () => {
         const userDocRef = doc(db, "users", id);
         const userData = (await getDoc(userDocRef)).data();
         setMembers((members) => [...members, userData] as User[]);
-        setIsPending(false);
+        setIsImgPending(false);
       });
     } catch (error: any) {
-      setIsPending(false);
+      setIsImgPending(false);
       console.error(error.message);
     }
   };
@@ -110,38 +111,56 @@ const NewGroupContainer = () => {
     setMembersID(newMembersID);
   };
 
-  const groupNameChangeHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (members.length < 3) {
-      dispatch(createToast("Must have atleast 3 members."));
-      return;
-    }
+  const groupNameChangeHandler = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    try {
+      e.preventDefault();
+      if (members.length < 3) {
+        dispatch(createToast("Must have atleast 3 members."));
+        return;
+      }
 
-    const groupChatID = uuid();
+      if (groupName.length < 3) {
+        dispatch(createToast("Name must have atleast 3 characters."));
+        return;
+      }
 
-    const groupChatRef = doc(db, "groupChats", groupChatID);
+      setIsPending(true);
 
-    setDoc(groupChatRef, {
-      groupID: groupChatID,
-      groupName: groupName,
-      groupAdmin: currentUser.uid,
-      membersID,
-      dateCreated: Timestamp.now(),
-      lastMessage: {
-        message: "Group Created.",
-        date: Timestamp.now(),
-      },
-    });
+      const groupChatID = uuid();
 
-    membersID.forEach((id) => {
-      const userChatsDocRef = doc(db, "userChats", id);
-      updateDoc(userChatsDocRef, {
-        [groupChatID]: {
-          isGroup: true,
-          groupID: groupChatID,
+      const groupChatRef = doc(db, "groupChats", groupChatID);
+
+      await setDoc(groupChatRef, {
+        groupID: groupChatID,
+        groupName: groupName,
+        groupAdmin: currentUser.uid,
+        membersID: [...membersID, currentUser.uid],
+        dateCreated: Timestamp.now(),
+        lastMessage: {
+          message: "Group Created.",
+          date: Timestamp.now(),
         },
       });
-    });
+
+      membersID.forEach((id) => {
+        const userChatsDocRef = doc(db, "userChats", id);
+        updateDoc(userChatsDocRef, {
+          [groupChatID]: {
+            isGroup: true,
+            groupID: groupChatID,
+          },
+        });
+      });
+
+      dispatch(createToast("Group created"));
+      dispatch(changeSideContent({ content: "chats" }));
+      setIsPending(false);
+    } catch (error) {
+      setIsPending(false);
+      dispatch(createToast("Something wen't wrong"));
+    }
   };
 
   const cancelBtnHandler = () => {
@@ -183,7 +202,7 @@ const NewGroupContainer = () => {
             src={imgURL}
             className="object-cover rounded-[50%] bg-white w-24 h-24 "
           />
-          {isPending && (
+          {isImgPending && (
             <LoadingSpinner
               className="w-full h-full bg-black/30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
               msg={""}
@@ -197,7 +216,7 @@ const NewGroupContainer = () => {
             <input
               ref={imageInputRef}
               type="file"
-              disabled={isPending ? true : false}
+              disabled={isImgPending ? true : false}
               accept="image/*"
               onChange={handleImageChange}
               id="photo-change"
@@ -257,8 +276,12 @@ const NewGroupContainer = () => {
             ))}
         </ul>
 
-        <TwButton onClick={groupNameChangeHandler} className="mt-2">
-          Create Group
+        <TwButton
+          disabled={isPending ? true : false}
+          onClick={groupNameChangeHandler}
+          className="mt-2"
+        >
+          {isPending ? "Creating Group..." : "Create Group"}
         </TwButton>
       </div>
     </div>
