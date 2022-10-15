@@ -1,4 +1,5 @@
-import { ProfilePicture, TwButton } from "components";
+import { no_results } from "assets/images";
+import { ErrorMsg, LoadingSpinner, ProfilePicture, TwButton } from "components";
 import { getUserState } from "features/authentication/userSlice";
 import { useAppSelector, useGetUsers } from "hooks";
 import { User } from "interfaces";
@@ -94,7 +95,7 @@ const AddMemberModal = ({
         </label>
       </form>
 
-      <ul className="flex flex-col gap-4 h-full overflow-y-scroll overflow-x-hidden scrollbar-hide">
+      <ul className="flex flex-col gap-4 h-full w-full overflow-y-scroll overflow-x-hidden scrollbar-hide">
         {users?.length !== 0 &&
           users?.map((user) => (
             <li key={user.uid}>
@@ -121,6 +122,16 @@ const AddMemberModal = ({
               </div>
             </li>
           ))}
+
+        {isPending && <LoadingSpinner msg={"Fetching users..."} />}
+
+        {!users?.length && searchVal.length !== 0 && (
+          <ErrorMsg
+            className="w-44 self-center"
+            img={no_results}
+            msg="no results found."
+          />
+        )}
       </ul>
       <TwButton onClick={handleAddMembersBtn} className="mt-2">
         Done
