@@ -6,6 +6,11 @@ import { User } from "interfaces";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
+const memberBtnClass =
+  "border-black text-black dark:border-white dark:text-white";
+const nonMemberBtnClass =
+  "ml-auto bg-black text-white dark:bg-white dark:text-black text-sm p-1 w-16 h-fit rounded-full";
+
 interface AddMemberModalProps {
   membersID: string[];
   fetchMembers: any;
@@ -24,20 +29,7 @@ const AddMemberModal = ({
 
   const [searchVal, setSearchVal] = useState<string>("");
 
-  useEffect(() => {
-    getUsers(currentUser.uid);
-  }, []);
-
   const isMember = (userID: string) => membersID.includes(userID);
-
-  const getIsMemberBtnClass = (userID: string) => {
-    const memberBtnClass =
-      "border-black text-black dark:border-white dark:text-white";
-    const nonMemberBtnClass =
-      "ml-auto bg-black text-white dark:bg-white dark:text-black text-sm p-1 w-16 h-fit rounded-full";
-
-    return isMember(userID) ? memberBtnClass : nonMemberBtnClass;
-  };
 
   const removeMember = (userID: string) =>
     setMembersID((membersID: string[]) =>
@@ -58,15 +50,20 @@ const AddMemberModal = ({
     setShowModal(false);
   };
 
-  const searchChangeHandler = (e: any) => setSearchVal(e.target.value);
+  const searchChangeHandler = (e: any) => {
+    const searchVal = e.target.value;
 
-  const searchHandler = async () => {
+    setSearchVal(searchVal);
     searchUser(searchVal);
   };
 
+  const getIsMemberBtnClass = (userID: string) => {
+    return isMember(userID) ? memberBtnClass : nonMemberBtnClass;
+  };
+
   useEffect(() => {
-    searchHandler();
-  }, [searchVal]);
+    getUsers(currentUser.uid);
+  }, []);
 
   return (
     <div className="w-72 h-full flex flex-col gap-4">
