@@ -32,11 +32,9 @@ import { useAppDispatch, useAppSelector } from "hooks";
 import { v4 as uuid } from "uuid";
 import { changeSideContent } from "reducers/sideContentReducer";
 
-interface SettingsContainerProps {
-  setSideBarContent: (state: string) => void;
-}
+interface SettingsContainerProps {}
 
-const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
+const NewGroupContainer = () => {
   const { user: currentUser } = useAppSelector(getUserState);
 
   const [members, setMembers] = useState<User[]>([]);

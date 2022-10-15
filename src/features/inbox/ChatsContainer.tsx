@@ -10,6 +10,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "setup/firebase";
 import { changeChat, getChatState } from "./chatReducer";
 import { MdGroupAdd, MdPersonAdd } from "react-icons/md";
+import { changeSideContent } from "reducers/sideContentReducer";
 
 const ChatsContainer = () => {
   const { user: currentUser } = useAppSelector(getUserState);
@@ -49,7 +50,9 @@ const ChatsContainer = () => {
             <TwButton
               variant="transparent"
               className="relative group z-10 py-3 px-3"
-              onClick={""}
+              onClick={() =>
+                dispatch(changeSideContent({ content: "addcontacts" }))
+              }
             >
               <MdPersonAdd className="text-muted-light dark:text-muted-dark text-2xl" />
               <TwTooltip tip="New Contact" position="bottom" />
@@ -59,7 +62,9 @@ const ChatsContainer = () => {
             <TwButton
               variant="transparent"
               className="relative group z-10 py-3 px-3"
-              onClick={""}
+              onClick={() =>
+                dispatch(changeSideContent({ content: "new-group" }))
+              }
             >
               <MdGroupAdd className="text-muted-light dark:text-muted-dark text-2xl" />
               <TwTooltip tip="New Group" position="bottom" />
