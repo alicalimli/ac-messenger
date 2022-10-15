@@ -144,9 +144,11 @@ const NewGroupContainer = () => {
   };
 
   const cancelBtnHandler = () => {
-    const imageRef = ref(storage, imageStorageName);
-    deleteObject(imageRef);
-    setImageStorageName("");
+    if (imageStorageName) {
+      const imageRef = ref(storage, imageStorageName);
+      deleteObject(imageRef);
+      setImageStorageName("");
+    }
     dispatch(changeSideContent({ content: "chats" }));
   };
 
