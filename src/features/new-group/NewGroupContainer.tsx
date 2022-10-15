@@ -1,5 +1,7 @@
 import {
+  ErrorMsg,
   InputForm,
+  LoadingSpinner,
   Modal,
   ProfilePicture,
   TwButton,
@@ -21,6 +23,7 @@ import {
 import { createToast } from "toastSlice";
 import { useAppDispatch } from "hooks";
 import { v4 as uuid } from "uuid";
+import { start_messaging_img } from "assets/images";
 
 interface SettingsContainerProps {
   setSideBarContent: (state: string) => void;
@@ -32,6 +35,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
 
   const [showModal, setShowModal] = useState(false);
   const [imgURL, setImgURL] = useState("");
+  const [isPending, setIsPending] = useState(false);
   const [imageStorageName, setImageStorageName] = useState<string>("");
 
   const [groupName, setGroupName] = useState("");
@@ -41,6 +45,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
 
   const handleImageChange = async (e: any) => {
     try {
+      setIsPending(true);
       const imageUpload = e.target.files[0];
 
       if (!imageUpload) return;
@@ -54,28 +59,38 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
         getDownloadURL(snapshot.ref).then((url: string) => {
           imageInputRef.current.value = "";
           setImgURL(url);
+          setIsPending(false);
           dispatch(createToast("profile picture changed."));
         });
       });
     } catch (error) {
       imageInputRef.current.value = "";
+      setIsPending(false);
       dispatch(createToast("something went wrong."));
     }
   };
 
   const fetchMembers = async () => {
-    membersID.forEach(async (id) => {
-      const isRendered = members.find((member) => member.uid.toString() === id)
-        ? true
-        : false;
+    try {
+      setIsPending(true);
+      membersID.forEach(async (id) => {
+        const isRendered = members.find(
+          (member) => member.uid.toString() === id
+        )
+          ? true
+          : false;
 
-      if (isRendered) return;
+        if (isRendered) return;
 
-      const userDocRef = doc(db, "users", id);
-      const userData = (await getDoc(userDocRef)).data();
-      setMembers((members) => [...members, userData] as User[]);
-    });
-    console.log(members);
+        const userDocRef = doc(db, "users", id);
+        const userData = (await getDoc(userDocRef)).data();
+        setMembers((members) => [...members, userData] as User[]);
+        setIsPending(false);
+      });
+    } catch (error: any) {
+      setIsPending(false);
+      console.error(error.message);
+    }
   };
 
   const handleRemoveMember = (userID: string) => {
@@ -129,6 +144,12 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
             src={imgURL}
             className="object-cover rounded-[50%] bg-white w-24 h-24 "
           />
+          {isPending && (
+            <LoadingSpinner
+              className="w-full h-full bg-black/30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              msg={""}
+            />
+          )}
           <label
             htmlFor="photo-change"
             className="flex justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/30 cursor-pointer invisible group-hover:visible w-full h-full"
@@ -137,6 +158,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
             <input
               ref={imageInputRef}
               type="file"
+              disabled={isPending ? true : false}
               accept="image/*"
               onChange={handleImageChange}
               id="photo-change"
