@@ -81,6 +81,7 @@ const NewGroupContainer = () => {
   const fetchMembers = async () => {
     try {
       setIsImgPending(true);
+
       membersID.forEach(async (id) => {
         const isRendered = members.find(
           (member) => member.uid.toString() === id
@@ -131,11 +132,18 @@ const NewGroupContainer = () => {
       const groupChatID = uuid();
 
       const groupChatRef = doc(db, "groupChats", groupChatID);
+      const groupConversationRef = doc(db, "chats", groupChatID);
+      const currentUserChatDocRef = doc(db, "userChats", currentUser.uid);
+
+      await setDoc(groupConversationRef, {
+        messages: [],
+      });
 
       await setDoc(groupChatRef, {
         groupID: groupChatID,
         groupName: groupName,
         groupAdmin: currentUser.uid,
+        photoURL: imgURL,
         membersID: [...membersID, currentUser.uid],
         dateCreated: Timestamp.now(),
         lastMessage: {
@@ -144,9 +152,16 @@ const NewGroupContainer = () => {
         },
       });
 
-      membersID.forEach((id) => {
+      await updateDoc(currentUserChatDocRef, {
+        [groupChatID]: {
+          isGroup: true,
+          groupID: groupChatID,
+        },
+      });
+
+      membersID.forEach(async (id) => {
         const userChatsDocRef = doc(db, "userChats", id);
-        updateDoc(userChatsDocRef, {
+        await updateDoc(userChatsDocRef, {
           [groupChatID]: {
             isGroup: true,
             groupID: groupChatID,
