@@ -1,17 +1,11 @@
 import {
   collection,
   CollectionReference,
-  doc,
-  DocumentData,
-  DocumentReference,
-  getDoc,
   getDocs,
-  Query,
   query,
   where,
 } from "firebase/firestore";
 import { User } from "interfaces";
-import { useState } from "react";
 import { db } from "setup/firebase";
 
 const useGetUsers = () => {
