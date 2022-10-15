@@ -30,6 +30,7 @@ import {
 import { createToast } from "toastSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { v4 as uuid } from "uuid";
+import { changeSideContent } from "reducers/sideContentReducer";
 
 interface SettingsContainerProps {
   setSideBarContent: (state: string) => void;
@@ -148,7 +149,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
     const imageRef = ref(storage, imageStorageName);
     deleteObject(imageRef);
     setImageStorageName("");
-    setSideBarContent("chats");
+    dispatch(changeSideContent({ content: "chats" }));
   };
 
   return (

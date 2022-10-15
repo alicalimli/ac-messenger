@@ -6,12 +6,11 @@ import { getThemeState } from "features/sidebar/themeSlice";
 import { AiOutlineArrowLeft, AiOutlineLogout } from "react-icons/ai";
 import { HiOutlineMoon } from "react-icons/hi";
 import { resetChat } from "features/inbox/chatReducer";
+import { changeSideContent } from "reducers/sideContentReducer";
 
-interface SettingsContainerProps {
-  setSideBarContent: (state: string) => void;
-}
+interface SettingsContainerProps {}
 
-const SettingsContainer = ({ setSideBarContent }: SettingsContainerProps) => {
+const SettingsContainer = () => {
   const dispatch = useAppDispatch();
   const { darkmode } = useAppSelector(getThemeState);
 
@@ -20,12 +19,16 @@ const SettingsContainer = ({ setSideBarContent }: SettingsContainerProps) => {
     dispatch(resetChat());
   };
 
+  const backBtnHandler = (content: string) => {
+    dispatch(changeSideContent({ content }));
+  };
+
   return (
     <div className="flex-col justify-center gap-4 p-1 py-6 sm:p-6">
       <div className="border-b  border-muted-light/10 dark:border-muted-dark/10 pb-4">
         <TwButton
           variant="transparent"
-          onClick={() => setSideBarContent("chats")}
+          onClick={() => backBtnHandler("chats")}
           className="w-full flex gap-2"
         >
           <AiOutlineArrowLeft className="text-xl" />

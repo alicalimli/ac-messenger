@@ -5,16 +5,14 @@ import { AddContacts } from "features/add-contacts";
 import { VARIANTS_MANAGER } from "setup/variants-manager";
 import SettingsContainer from "features/settings/SettingsContainer";
 import NewGroupContainer from "features/new-group/NewGroupContainer";
+import { useAppSelector } from "hooks";
+import { getSideContent } from "reducers/sideContentReducer";
 
-interface SideContentProps {
-  sidebarContent: string;
-  setSideBarContent: (state: string) => void;
-}
+interface SideContentProps {}
 
-const SideContent = ({
-  sidebarContent,
-  setSideBarContent,
-}: SideContentProps) => {
+const SideContent = () => {
+  const { content: sidebarContent } = useAppSelector(getSideContent);
+
   return (
     <section className="relative border-r border-muted-light/10 dark:border-muted-dark/10 w-full h-full md:w-32 md:min-w-[24rem] overflow-x-hidden">
       <AnimatePresence>
@@ -39,7 +37,7 @@ const SideContent = ({
             animate="slide-in"
             exit="slide-from-right"
           >
-            <AddContacts setSideBarContent={setSideBarContent} />
+            <AddContacts />
           </motion.div>
         )}
         {sidebarContent === "profile" && (
@@ -51,7 +49,7 @@ const SideContent = ({
             animate="slide-in"
             exit="slide-from-right"
           >
-            <ProfileContainer setSideBarContent={setSideBarContent} />
+            <ProfileContainer />
           </motion.div>
         )}
         {sidebarContent === "settings" && (
@@ -63,7 +61,7 @@ const SideContent = ({
             animate="slide-in"
             exit="slide-from-right"
           >
-            <SettingsContainer setSideBarContent={setSideBarContent} />
+            <SettingsContainer />
           </motion.div>
         )}
         {sidebarContent === "new-group" && (
@@ -75,7 +73,7 @@ const SideContent = ({
             animate="slide-in"
             exit="slide-from-right"
           >
-            <NewGroupContainer setSideBarContent={setSideBarContent} />
+            <NewGroupContainer />
           </motion.div>
         )}
       </AnimatePresence>

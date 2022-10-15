@@ -1,25 +1,26 @@
 import { ErrorMsg, LoadingSpinner, ProfilePicture, TwButton } from "components";
 import { getUserState } from "features/authentication/userSlice";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { useAppSelector, useGetUsers } from "hooks";
+import { useAppDispatch, useAppSelector, useGetUsers } from "hooks";
 import { useEffect, useState } from "react";
 import { no_results } from "assets/images";
 import { Modal } from "components";
 import { User } from "interfaces";
 
 import AddContactModal from "./AddContactModal";
+import { changeSideContent } from "reducers/sideContentReducer";
 
-interface AddContactsProps {
-  setSideBarContent: (state: string) => void;
-}
+interface AddContactsProps {}
 
-const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
+const AddContacts = () => {
   const { user: currentUser } = useAppSelector(getUserState);
   const { users, isPending, searchUser } = useGetUsers(currentUser.uid);
 
   const [recipient, setRecipient] = useState<User>();
   const [searchVal, setSearchVal] = useState<string>("");
   const [showModal, setShowModal] = useState<boolean>(false);
+
+  const dispatch = useAppDispatch();
 
   const searchChangeHandler = (e: any) => {
     const searchVal = e.target.value;
@@ -30,6 +31,9 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
   const contactClickHandler = (recipient: User) => {
     setShowModal(true);
     setRecipient(recipient);
+  };
+  const backBtnHandler = (content: string) => {
+    dispatch(changeSideContent({ content }));
   };
 
   return (
@@ -49,7 +53,7 @@ const AddContacts = ({ setSideBarContent }: AddContactsProps) => {
 
       <TwButton
         variant="transparent"
-        onClick={() => setSideBarContent("chats")}
+        onClick={() => backBtnHandler("chats")}
         className="w-full flex gap-2"
       >
         <AiOutlineArrowLeft className="text-lg" /> Add Contacts

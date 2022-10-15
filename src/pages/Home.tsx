@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { Sidebar, SideContent } from "features/sidebar";
 import { ChatBox } from "features/conversation";
 
@@ -13,21 +11,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { VARIANTS_MANAGER } from "setup/variants-manager";
 
 const Home = () => {
-  const defaultSideBarContent = "new-group";
-  const [sidebarContent, setSideBarContent] = useState(defaultSideBarContent);
-
   const { chatId, recipient } = useAppSelector(getChatState);
 
   return (
     <div className="absolute inset-0 flex flex-col-reverse md:flex-row w-screen overflow-hidden">
-      <Sidebar
-        sidebarContent={sidebarContent}
-        setSideBarContent={setSideBarContent}
-      />
-      <SideContent
-        sidebarContent={sidebarContent}
-        setSideBarContent={setSideBarContent}
-      />
+      <Sidebar />
+
+      <SideContent />
+
       <AnimatePresence>
         {chatId ? (
           <motion.div

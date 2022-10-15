@@ -11,7 +11,7 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  blacklist: ["user", "chat", "toast"],
+  blacklist: ["user", "chat", "toast", "sideContent"],
 };
 
 const reducer = combineReducers({

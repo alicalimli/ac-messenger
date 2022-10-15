@@ -10,14 +10,14 @@ const sideContentSlice = createSlice({
   name: "sideContent",
   initialState,
   reducers: {
-    changeChat: (state, action) => {
+    changeSideContent: (state, action) => {
       state.content = action.payload.content;
     },
   },
 });
 
-export const getThemeState = (state: any) => state.theme;
+export const getSideContent = (state: any) => state.sideContent;
 
-export const { changeChat } = sideContentSlice.actions;
+export const { changeSideContent } = sideContentSlice.actions;
 
 export default sideContentSlice.reducer;

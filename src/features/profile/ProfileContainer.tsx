@@ -13,17 +13,19 @@ import { editProfile, getUserState } from "features/authentication/userSlice";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "setup/firebase";
 import { v4 as uuid } from "uuid";
+import { changeSideContent } from "reducers/sideContentReducer";
 
-interface ProfileContainerProps {
-  setSideBarContent: (state: string) => void;
-}
+interface ProfileContainerProps {}
 
-const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
+const ProfileContainer = () => {
   const dispatch = useAppDispatch();
 
   const imageInputRef = useRef<any>(null);
 
   const { user } = useAppSelector(getUserState);
+  const backBtnHandler = (content: string) => {
+    dispatch(changeSideContent({ content }));
+  };
 
   const [showModal, setShowModal] = useState(false);
 
@@ -74,7 +76,7 @@ const ProfileContainer = ({ setSideBarContent }: ProfileContainerProps) => {
       <div className="flex-col justify-center gap-4 p-6">
         <TwButton
           variant="transparent"
-          onClick={() => setSideBarContent("chats")}
+          onClick={() => backBtnHandler("chats")}
           className="w-full flex gap-2"
         >
           <AiOutlineArrowLeft className="text-xl" /> My Profile

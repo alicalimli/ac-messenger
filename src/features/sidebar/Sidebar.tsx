@@ -15,6 +15,7 @@ import { getThemeState, toggleDarkmode } from "./themeSlice";
 import { logout } from "features/authentication";
 import { getUserState } from "features/authentication/userSlice";
 import { resetChat } from "features/inbox/chatReducer";
+import { changeSideContent, getSideContent } from "reducers/sideContentReducer";
 
 const SIDEBAR_PAGE_BUTTONS = [
   { name: "chats", icon: BiMessageSquareDetail, content: "chats" },
@@ -23,22 +24,25 @@ const SIDEBAR_PAGE_BUTTONS = [
   { name: "settings", icon: FiSettings, content: "settings" },
 ];
 
-interface SidebarProps {
-  sidebarContent: string;
-  setSideBarContent: (state: string) => void;
-}
+interface SidebarProps {}
 
-const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
+const Sidebar = () => {
   const { darkmode } = useAppSelector(getThemeState);
   const { user: currentUser } = useAppSelector(getUserState);
+  const { content: sidebarContent } = useAppSelector(getSideContent);
+
   const dispatch = useAppDispatch();
 
-  const changeSideContent = (sideContentName: string) => {
-    sideContentName = sideContentName.replace(" ", "");
-    setSideBarContent(sideContentName);
+  const sidebarBtnHandler = (content: string) => {
+    content = content.replace(" ", "");
+    dispatch(changeSideContent({ content }));
   };
 
   const darkmodeClickHandler = () => dispatch(toggleDarkmode());
+
+  const sidebarProfileBtnHandler = (content: string) => {
+    dispatch(changeSideContent({ content }));
+  };
 
   const handleSignOut = () => {
     dispatch(logout());
@@ -49,15 +53,16 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
     <>
       <nav className="relative hidden p-3 py-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 pt-10">
         <button
-          onClick={() => changeSideContent("profile")}
+          onClick={() => sidebarProfileBtnHandler("profile")}
           className="relative group flex justify-center gap-2 items-center text-black dark:text-white px-4 border-b  border-muted-light/10
       dark:border-muted-dark/10 pb-4"
         >
           <ProfilePicture
             isOnline={false}
             photoURL={currentUser?.photoURL}
-            size="small" />
-               <TwTooltip tip="Profile" position="right" />
+            size="small"
+          />
+          <TwTooltip tip="Profile" position="right" />
         </button>
         <div className="flex flex-col gap-1 items-center">
           {SIDEBAR_PAGE_BUTTONS.map((obj) => {
@@ -70,7 +75,7 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
                   "bg-muted-light/5 dark:bg-muted-dark/5"
                 }  relative group z-10 py-3 px-3`}
                 key={obj.content}
-                onClick={() => changeSideContent(obj.content)}
+                onClick={() => sidebarBtnHandler(obj.content)}
               >
                 <Icon
                   className={` text-muted-light dark:text-muted-dark text-2xl`}
@@ -121,7 +126,7 @@ const Sidebar = ({ sidebarContent, setSideBarContent }: SidebarProps) => {
                   "bg-muted-light/5 dark:bg-muted-dark/5"
                 }   relative group z-10 py-3 px-3`}
                 key={obj.content}
-                onClick={() => changeSideContent(obj.content)}
+                onClick={() => sidebarBtnHandler(obj.content)}
               >
                 <Icon
                   className={` text-muted-light dark:text-muted-dark text-2xl`}
