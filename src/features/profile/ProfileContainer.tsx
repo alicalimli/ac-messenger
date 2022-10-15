@@ -13,8 +13,6 @@ import { editProfile, getUserState } from "features/authentication/userSlice";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "setup/firebase";
 import { v4 as uuid } from "uuid";
-import { motion } from "framer-motion";
-import { VARIANTS_MANAGER } from "setup/variants-manager";
 
 interface ProfileContainerProps {
   setSideBarContent: (state: string) => void;

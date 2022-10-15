@@ -7,28 +7,60 @@ import {
 } from "components";
 import { User } from "interfaces";
 import { doc, getDoc } from "firebase/firestore";
-import React, { FormEvent, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
 import { MdPersonAdd } from "react-icons/md";
-import { db } from "setup/firebase";
+import { db, storage } from "setup/firebase";
 import AddMemberModal from "./AddMemberModal";
-import { HiPencil } from "react-icons/hi";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
+import { createToast } from "toastSlice";
+import { useAppDispatch } from "hooks";
+import { v4 as uuid } from "uuid";
 
 interface SettingsContainerProps {
   setSideBarContent: (state: string) => void;
 }
 
 const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
-  const [showModal, setShowModal] = useState(false);
   const [members, setMembers] = useState<User[]>([]);
   const [membersID, setMembersID] = useState<string[]>([]);
+
+  const [showModal, setShowModal] = useState(false);
+  const [imgURL, setImgURL] = useState("");
+  const [imageStorageName, setImageStorageName] = useState<string>("");
 
   const [groupName, setGroupName] = useState("");
 
   const imageInputRef = useRef<any>(null);
+  const dispatch = useAppDispatch();
 
-  const handleImageChange = () => {
-    console.log("");
+  const handleImageChange = async (e: any) => {
+    try {
+      const imageUpload = e.target.files[0];
+
+      if (!imageUpload) return;
+
+      const imageName = `images/${imageUpload.name + uuid()}`;
+      const imageRef = ref(storage, imageName);
+
+      setImageStorageName(imageName);
+
+      await uploadBytes(imageRef, imageUpload).then((snapshot: any) => {
+        getDownloadURL(snapshot.ref).then((url: string) => {
+          imageInputRef.current.value = "";
+          setImgURL(url);
+          dispatch(createToast("profile picture changed."));
+        });
+      });
+    } catch (error) {
+      imageInputRef.current.value = "";
+      dispatch(createToast("something went wrong."));
+    }
   };
 
   const fetchMembers = async () => {
@@ -60,6 +92,13 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
     e.preventDefault();
   };
 
+  const cancelBtnHandler = () => {
+    const imageRef = ref(storage, imageStorageName);
+    deleteObject(imageRef);
+    setImageStorageName("");
+    setSideBarContent("chats");
+  };
+
   return (
     <div className="flex-col justify-center gap-4 p-4 py-6 sm:p-6 h-full">
       <Modal setShowModal={setShowModal} className="h-3/4 ">
@@ -76,7 +115,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
       <header>
         <TwButton
           variant="transparent"
-          onClick={() => setSideBarContent("chats")}
+          onClick={cancelBtnHandler}
           className="w-full flex gap-2"
         >
           <AiOutlineArrowLeft className="text-xl" />
@@ -86,7 +125,10 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
 
       <div className="flex flex-col items-center text-center p-4 px-8">
         <div className="group mb-2 relative flex items-center justify-center rounded-[50%] overflow-hidden">
-          <img className="object-cover rounded-[50%] bg-white w-24 h-24 " />
+          <img
+            src={imgURL}
+            className="object-cover rounded-[50%] bg-white w-24 h-24 "
+          />
           <label
             htmlFor="photo-change"
             className="flex justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/30 cursor-pointer invisible group-hover:visible w-full h-full"
