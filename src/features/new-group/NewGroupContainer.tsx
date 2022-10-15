@@ -124,6 +124,7 @@ const NewGroupContainer = () => {
     setDoc(groupChatRef, {
       groupID: groupChatID,
       groupName: groupName,
+      groupAdmin: currentUser.uid,
       membersID,
       dateCreated: Timestamp.now(),
       lastMessage: {
