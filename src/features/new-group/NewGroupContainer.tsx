@@ -90,7 +90,7 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
               />
             </label>
           </div>
-          <h2 className="text-lg text-black dark:text-white">{"group name"}</h2>
+          <h2 className="text-xl text-black dark:text-white">{"group name"}</h2>
         </div>
 
         <div className="flex flex-col gap-1  h-full">
