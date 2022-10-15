@@ -1,11 +1,18 @@
-import { Modal, ProfilePicture, TwButton } from "components";
+import {
+  InputForm,
+  Modal,
+  ProfilePicture,
+  TwButton,
+  TwTooltip,
+} from "components";
 import { User } from "interfaces";
 import { doc, getDoc } from "firebase/firestore";
-import { useRef, useState } from "react";
+import React, { FormEvent, useRef, useState } from "react";
 import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
 import { MdPersonAdd } from "react-icons/md";
 import { db } from "setup/firebase";
 import AddMemberModal from "./AddMemberModal";
+import { HiPencil } from "react-icons/hi";
 
 interface SettingsContainerProps {
   setSideBarContent: (state: string) => void;
@@ -15,6 +22,8 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
   const [showModal, setShowModal] = useState(false);
   const [members, setMembers] = useState<User[]>([]);
   const [membersID, setMembersID] = useState<string[]>([]);
+
+  const [groupName, setGroupName] = useState("");
 
   const imageInputRef = useRef<any>(null);
 
@@ -45,6 +54,10 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
 
     setMembers(newMembers);
     setMembersID(newMembersID);
+  };
+
+  const groupNameChangeHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
   };
 
   return (
@@ -89,7 +102,17 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
             />
           </label>
         </div>
-        <h2 className="text-xl text-black dark:text-white">{"group name"}</h2>
+
+        <form onSubmit={groupNameChangeHandler}>
+          <InputForm
+            className="w-44 text-lg p-0.5"
+            state={groupName}
+            maxLength={30}
+            setState={setGroupName}
+            type={"text"}
+            placeholder={"Group Name"}
+          />
+        </form>
       </div>
 
       <div className="flex flex-col gap-1">

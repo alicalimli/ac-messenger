@@ -4,7 +4,7 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 interface InputFormProps {
   state: string;
   setState: (state: string) => void;
-  label: string;
+  label?: string;
   type: string;
   placeholder: string;
   instruction?: string;
@@ -13,6 +13,7 @@ interface InputFormProps {
   isSmall?: boolean;
   stateFocus?: boolean;
   maxLength?: number;
+  className?: string;
   setStateFocus?: (state: boolean) => void;
 }
 
@@ -26,12 +27,13 @@ const InputForm = ({
   isSmall,
   state,
   setState,
+  className,
   stateFocus,
   setStateFocus,
   maxLength,
 }: InputFormProps) => {
   const [inputType, setInputType] = useState(type);
-  const noSpaceLabel = label.replace(/\s+/g, "");
+  const noSpaceLabel = label?.replace(/\s+/g, "");
 
   const handleShowPass = (e: React.MouseEvent) => {
     if (inputType === "password") {
@@ -47,7 +49,7 @@ const InputForm = ({
       className="flex flex-col gap-2 relative"
     >
       <div className="flex flex-wrap gap-2 items-center">
-        <p className="text-black dark:text-white">{label}</p>
+        {label && <p className="text-black dark:text-white">{label}</p>}
         {type === "password" ? (
           <a
             className="cursor-pointer text-black dark:text-white"
@@ -65,7 +67,7 @@ const InputForm = ({
       </div>
 
       <input
-        className={`text-lg bg-transparent ${
+        className={`${className} text-lg bg-transparent ${
           isSmall ? "p-1" : "p-2"
         } px-4 flex items-center rounded-xl outline-none border duration-200 text-black dark:text-white ${
           !isValid && state
