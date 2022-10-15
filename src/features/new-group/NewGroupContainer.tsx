@@ -5,15 +5,22 @@ import {
   Modal,
   ProfilePicture,
   TwButton,
-  TwTooltip,
 } from "components";
 import { User } from "interfaces";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  setDoc,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
 import React, { useRef, useState } from "react";
 import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
 import { MdPersonAdd } from "react-icons/md";
 import { db, storage } from "setup/firebase";
 import AddMemberModal from "./AddMemberModal";
+import { getUserState } from "features/authentication/userSlice";
 import {
   deleteObject,
   getDownloadURL,
@@ -21,15 +28,16 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { createToast } from "toastSlice";
-import { useAppDispatch } from "hooks";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { v4 as uuid } from "uuid";
-import { start_messaging_img } from "assets/images";
 
 interface SettingsContainerProps {
   setSideBarContent: (state: string) => void;
 }
 
 const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
+  const { user: currentUser } = useAppSelector(getUserState);
+
   const [members, setMembers] = useState<User[]>([]);
   const [membersID, setMembersID] = useState<string[]>([]);
 
@@ -109,6 +117,31 @@ const NewGroupContainer = ({ setSideBarContent }: SettingsContainerProps) => {
       dispatch(createToast("Must have atleast 3 members."));
       return;
     }
+
+    const groupChatID = uuid();
+
+    const groupChatRef = doc(db, "groupChats", groupChatID);
+
+    setDoc(groupChatRef, {
+      groupID: groupChatID,
+      groupName: groupName,
+      membersID,
+      dateCreated: Timestamp.now(),
+      lastMessage: {
+        message: "Group Created.",
+        date: Timestamp.now(),
+      },
+    });
+
+    membersID.forEach((id) => {
+      const userChatsDocRef = doc(db, "userChats", id);
+      updateDoc(userChatsDocRef, {
+        [groupChatID]: {
+          isGroup: true,
+          groupID: groupChatID,
+        },
+      });
+    });
   };
 
   const cancelBtnHandler = () => {
