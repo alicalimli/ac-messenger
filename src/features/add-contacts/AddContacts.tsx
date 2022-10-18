@@ -51,11 +51,11 @@ const AddContacts = () => {
         </Modal>
       )}
 
-      <header>
+      <header className="w-full">
         <TwButton
+          className="w-full flex gap-2"
           variant="transparent"
           onClick={() => backBtnHandler("chats")}
-          className="w-full flex gap-2"
         >
           <AiOutlineArrowLeft className="text-lg" /> Add Contacts
         </TwButton>

@@ -73,7 +73,7 @@ const ProfileContainer = () => {
         )}
       </Modal>
 
-      <main className="flex-col justify-center gap-4 p-6">
+      <main className="flex-col justify-center gap-4 p-1 py-6 sm:p-6">
         <header>
           <TwButton
             variant="transparent"
@@ -114,7 +114,7 @@ const ProfileContainer = () => {
           </p>
         </section>
 
-        <section className="p-6 flex flex-col gap-4 border-t border-muted-light/10 dark:border-muted-dark/10">
+        <section className="p-2 flex flex-col gap-4 border-t border-muted-light/10 dark:border-muted-dark/10">
           <div className="flex flex-col gap-1 w-100 ">
             {infoButtons.map((obj, i) => {
               const Icon = obj.icon;
