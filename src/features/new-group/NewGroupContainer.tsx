@@ -31,6 +31,7 @@ import { createToast } from "toastSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { v4 as uuid } from "uuid";
 import { changeSideContent } from "reducers/sideContentReducer";
+import useCreateGroup from "./useCreateGroup";
 
 interface SettingsContainerProps {}
 
@@ -43,10 +44,11 @@ const NewGroupContainer = () => {
   const [showModal, setShowModal] = useState(false);
   const [imgURL, setImgURL] = useState("");
   const [isImgPending, setIsImgPending] = useState(false);
-  const [isPending, setIsPending] = useState(false);
   const [imageStorageName, setImageStorageName] = useState<string>("");
 
   const [groupName, setGroupName] = useState("");
+
+  const { createGroup, isPending, errorMsg } = useCreateGroup();
 
   const imageInputRef = useRef<any>(null);
   const dispatch = useAppDispatch();
@@ -112,70 +114,27 @@ const NewGroupContainer = () => {
     setMembersID(newMembersID);
   };
 
-  const groupNameChangeHandler = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
-    try {
-      e.preventDefault();
-      if (members.length < 3) {
-        dispatch(createToast("Must have atleast 3 members."));
-        return;
-      }
+  const createGroupBtnHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-      if (groupName.length < 3) {
-        dispatch(createToast("Name must have atleast 3 characters."));
-        return;
-      }
-
-      setIsPending(true);
-
-      const groupChatID = uuid();
-
-      const groupChatRef = doc(db, "groupChats", groupChatID);
-      const groupConversationRef = doc(db, "chats", groupChatID);
-      const currentUserChatDocRef = doc(db, "userChats", currentUser.uid);
-
-      await setDoc(groupConversationRef, {
-        messages: [],
-      });
-
-      await setDoc(groupChatRef, {
-        groupID: groupChatID,
-        groupName: groupName,
-        groupAdmin: currentUser.uid,
-        photoURL: imgURL,
-        membersID: [...membersID, currentUser.uid],
-        dateCreated: Timestamp.now(),
-        lastMessage: {
-          message: "Group Created.",
-          date: Timestamp.now(),
-        },
-      });
-
-      await updateDoc(currentUserChatDocRef, {
-        [groupChatID]: {
-          isGroup: true,
-          groupID: groupChatID,
-        },
-      });
-
-      membersID.forEach(async (id) => {
-        const userChatsDocRef = doc(db, "userChats", id);
-        await updateDoc(userChatsDocRef, {
-          [groupChatID]: {
-            isGroup: true,
-            groupID: groupChatID,
-          },
-        });
-      });
-
-      dispatch(createToast("Group created"));
-      dispatch(changeSideContent({ content: "chats" }));
-      setIsPending(false);
-    } catch (error) {
-      setIsPending(false);
-      dispatch(createToast("Something wen't wrong"));
+    if (members.length < 3) {
+      dispatch(createToast("Must have atleast 3 members."));
+      return;
     }
+
+    if (groupName.length < 3) {
+      dispatch(createToast("Name must have atleast 3 characters."));
+      return;
+    }
+
+    const groupInfo = {
+      ownerUID: currentUser.uid,
+      groupName,
+      membersID,
+      photoURL: imgURL,
+    };
+
+    createGroup(groupInfo);
   };
 
   const cancelBtnHandler = () => {
@@ -293,7 +252,7 @@ const NewGroupContainer = () => {
 
         <TwButton
           disabled={isPending ? true : false}
-          onClick={groupNameChangeHandler}
+          onClick={createGroupBtnHandler}
           className="mt-2"
         >
           {isPending ? "Creating Group..." : "Create Group"}
