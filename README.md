@@ -44,15 +44,6 @@ You can use this to execute it all at once:
 ```bash
   git clone https://github.com/alicalimli/ac-messenger && cd ac-messenger && npm install && npm start
 ```
-    ## Color Reference
-
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Primary| ![#3B82F6](https://via.placeholder.com/10/0a192f?text=+) #3B82F6 |
-| Shaded Primary | ![#4f8ff7](https://via.placeholder.com/10/f8f8f8?text=+) #4f8ff7 |
-| Tinted Primary | ![#3575dd](https://via.placeholder.com/10/00b48a?text=+) #3575dd |
-| Dark Background | ![#0F172A](https://via.placeholder.com/10/00b48a?text=+) #0F172A |
-
 
 ## Support
 
