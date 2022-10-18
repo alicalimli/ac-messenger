@@ -24,8 +24,8 @@ const SettingsContainer = () => {
   };
 
   return (
-    <div className="flex-col justify-center gap-4 p-1 py-6 sm:p-6">
-      <div className="border-b  border-muted-light/10 dark:border-muted-dark/10 pb-4">
+    <aside className="flex-col justify-center gap-4 p-1 py-6 sm:p-6">
+      <header className="border-b  border-muted-light/10 dark:border-muted-dark/10 pb-4">
         <TwButton
           variant="transparent"
           onClick={() => backBtnHandler("chats")}
@@ -34,9 +34,9 @@ const SettingsContainer = () => {
           <AiOutlineArrowLeft className="text-xl" />
           Settings
         </TwButton>
-      </div>
+      </header>
 
-      <div className="p-2 flex flex-col gap-1">
+      <main className="p-2 flex flex-col gap-1">
         <TwButton
           variant="transparent"
           className="relative group w-full"
@@ -56,8 +56,8 @@ const SettingsContainer = () => {
           <AiOutlineLogout className="text-muted-light dark:text-muted-dark text-2xl" />
           Logout
         </TwButton>
-      </div>
-    </div>
+      </main>
+    </aside>
   );
 };
 

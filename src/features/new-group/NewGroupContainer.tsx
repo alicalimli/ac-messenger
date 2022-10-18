@@ -137,7 +137,7 @@ const NewGroupContainer = () => {
   };
 
   return (
-    <div className="flex-col justify-center gap-4 p-4 py-6 sm:p-6 h-full">
+    <aside className="flex-col justify-center gap-4 p-4 py-6 sm:p-6 h-full">
       <Modal setShowModal={setShowModal} className="h-3/4 ">
         {showModal && (
           <AddMemberModal
@@ -160,95 +160,97 @@ const NewGroupContainer = () => {
         </TwButton>
       </header>
 
-      <div className="flex flex-col items-center text-center p-4 px-8">
-        <div className="group mb-2 relative flex items-center justify-center rounded-[50%] overflow-hidden">
-          <img
-            src={imgURL}
-            className="object-cover rounded-[50%] bg-white w-24 h-24 "
-          />
-          {isImgPending && (
-            <LoadingSpinner
-              className="w-full h-full bg-black/30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              msg={""}
+      <main>
+        <section className="flex flex-col items-center text-center p-4 px-8">
+          <div className="group mb-2 relative flex items-center justify-center rounded-[50%] overflow-hidden">
+            <img
+              src={imgURL}
+              className="object-cover rounded-[50%] bg-white w-24 h-24 "
             />
-          )}
-          <label
-            htmlFor="photo-change"
-            className="flex justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/30 cursor-pointer invisible group-hover:visible w-full h-full"
-          >
-            <AiOutlineCamera className="text-3xl" />
-            <input
-              ref={imageInputRef}
-              type="file"
-              disabled={isImgPending ? true : false}
-              accept="image/*"
-              onChange={handleImageChange}
-              id="photo-change"
-              className="invisible hidden"
-            />
-          </label>
-        </div>
-        <InputForm
-          className="w-44 text-lg p-0.5"
-          state={groupName}
-          maxLength={30}
-          setState={setGroupName}
-          type={"text"}
-          placeholder={"Group Name"}
-        />
-      </div>
-
-      <div className="flex flex-col gap-1">
-        <div className="flex items-center gap-1">
-          <h1 className="text-black dark:text-white text-lg">{`Members (${members?.length})`}</h1>
-          <div className="ml-auto flex gap-1">
-            {" "}
-            <TwButton
-              variant="transparent"
-              className="relative group z-10 py-3 px-3"
-              onClick={() => setShowModal(true)}
+            {isImgPending && (
+              <LoadingSpinner
+                className="w-full h-full bg-black/30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                msg={""}
+              />
+            )}
+            <label
+              htmlFor="photo-change"
+              className="flex justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/30 cursor-pointer invisible group-hover:visible w-full h-full"
             >
-              <MdPersonAdd className="text-muted-light dark:text-muted-dark text-2xl" />
-            </TwButton>
+              <AiOutlineCamera className="text-3xl" />
+              <input
+                ref={imageInputRef}
+                type="file"
+                disabled={isImgPending ? true : false}
+                accept="image/*"
+                onChange={handleImageChange}
+                id="photo-change"
+                className="invisible hidden"
+              />
+            </label>
           </div>
-        </div>
+          <InputForm
+            className="w-44 text-lg p-0.5"
+            state={groupName}
+            maxLength={30}
+            setState={setGroupName}
+            type={"text"}
+            placeholder={"Group Name"}
+          />
+        </section>
 
-        <ul className="flex flex-col gap-4">
-          {members.length !== 0 &&
-            members.map((member) => (
-              <li key={member.uid} className="w-full flex items-center gap-4">
-                <ProfilePicture
-                  isOnline={false}
-                  photoURL={member.photoURL}
-                  size="small"
-                />
-                <div className="flex flex-col gap-1 text-left">
-                  <p className="text-black dark:text-white">
-                    {member.displayName}
-                  </p>
-                  <p className="text-muted-light dark:text-muted-dark text-sm ">
-                    {member.bio}
-                  </p>
-                </div>
-                <button
-                  onClick={() => handleRemoveMember(member.uid.toString())}
-                  className={`ml-auto bg-red-600 text-white text-sm p-1 px-2 w-16 h-fit rounded-full`}
-                >
-                  remove
-                </button>
-              </li>
-            ))}
-        </ul>
+        <section className="flex flex-col gap-1">
+          <div className="flex items-center gap-1">
+            <h1 className="text-black dark:text-white text-lg">{`Members (${members?.length})`}</h1>
+            <div className="ml-auto flex gap-1">
+              {" "}
+              <TwButton
+                variant="transparent"
+                className="relative group z-10 py-3 px-3"
+                onClick={() => setShowModal(true)}
+              >
+                <MdPersonAdd className="text-muted-light dark:text-muted-dark text-2xl" />
+              </TwButton>
+            </div>
+          </div>
 
-        <TwButton
-          disabled={isPending ? true : false}
-          onClick={createGroupBtnHandler}
-          className="mt-2"
-        >
-          {isPending ? "Creating Group..." : "Create Group"}
-        </TwButton>
-      </div>
-    </div>
+          <ul className="flex flex-col gap-4">
+            {members.length !== 0 &&
+              members.map((member) => (
+                <li key={member.uid} className="w-full flex items-center gap-4">
+                  <ProfilePicture
+                    isOnline={false}
+                    photoURL={member.photoURL}
+                    size="small"
+                  />
+                  <div className="flex flex-col gap-1 text-left">
+                    <p className="text-black dark:text-white">
+                      {member.displayName}
+                    </p>
+                    <p className="text-muted-light dark:text-muted-dark text-sm ">
+                      {member.bio}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleRemoveMember(member.uid.toString())}
+                    className={`ml-auto bg-red-600 text-white text-sm p-1 px-2 w-16 h-fit rounded-full`}
+                  >
+                    remove
+                  </button>
+                </li>
+              ))}
+          </ul>
+
+          <TwButton
+            disabled={isPending ? true : false}
+            onClick={createGroupBtnHandler}
+            className="mt-2"
+          >
+            {isPending ? "Creating Group..." : "Create Group"}
+          </TwButton>
+        </section>
+      </main>
+    </aside>
   );
 };
 

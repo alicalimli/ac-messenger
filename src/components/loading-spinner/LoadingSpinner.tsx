@@ -9,15 +9,15 @@ interface LoadingSpinnerProps {
 
 const LoadingSpinner = ({ className, msg }: LoadingSpinnerProps) => {
   return (
-    <motion.div
+    <motion.figure
       variants={VARIANTS_MANAGER}
       animate="fade-in"
       initial="fade-out"
       className={`${className} flex flex-col justify-center items-center gap-2`}
     >
       <AiOutlineLoading3Quarters className="animate-spin text-3xl  text-primary-main" />
-      <p className="text-black dark:text-white">{msg}</p>
-    </motion.div>
+      <figcaption className="text-black dark:text-white">{msg}</figcaption>
+    </motion.figure>
   );
 };
 

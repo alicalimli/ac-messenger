@@ -66,23 +66,25 @@ const ProfileContainer = () => {
   };
 
   return (
-    <div className=" flex flex-col">
+    <aside className=" flex flex-col">
       <Modal setShowModal={setShowModal}>
         {showModal && (
           <ProfileEditForm currentUserInfo={user} setShowModal={setShowModal} />
         )}
       </Modal>
 
-      <div className="flex-col justify-center gap-4 p-6">
-        <TwButton
-          variant="transparent"
-          onClick={() => backBtnHandler("chats")}
-          className="w-full flex gap-2"
-        >
-          <AiOutlineArrowLeft className="text-xl" /> My Profile
-        </TwButton>
+      <main className="flex-col justify-center gap-4 p-6">
+        <header>
+          <TwButton
+            variant="transparent"
+            onClick={() => backBtnHandler("chats")}
+            className="w-full flex gap-2"
+          >
+            <AiOutlineArrowLeft className="text-xl" /> My Profile
+          </TwButton>
+        </header>
 
-        <div className="flex flex-col items-center text-center p-4 px-8">
+        <section className="flex flex-col items-center text-center p-4 px-8">
           <div className="group mb-2 relative flex items-center justify-center rounded-[50%] overflow-hidden">
             <img
               className="object-cover rounded-[50%] bg-white w-24 h-24 "
@@ -110,33 +112,33 @@ const ProfileContainer = () => {
           <p className="text-muted-light dark:text-muted-dark">
             {user?.bio || "fetching bio..."}
           </p>
-        </div>
-      </div>
+        </section>
 
-      <div className="p-6 flex flex-col gap-4 border-t border-muted-light/10 dark:border-muted-dark/10">
-        <div className="flex flex-col gap-1 w-100 ">
-          {infoButtons.map((obj, i) => {
-            const Icon = obj.icon;
-            return (
-              <TwButton
-                variant="transparent"
-                className="relative group"
-                onClick={() => copyToClipboard(obj.text as string)}
-                key={(obj.text as string) + i}
-              >
-                <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
-                {obj.text}
-                <TwTooltip tip="Copy to clipboard" position="top" />
-              </TwButton>
-            );
-          })}
+        <section className="p-6 flex flex-col gap-4 border-t border-muted-light/10 dark:border-muted-dark/10">
+          <div className="flex flex-col gap-1 w-100 ">
+            {infoButtons.map((obj, i) => {
+              const Icon = obj.icon;
+              return (
+                <TwButton
+                  variant="transparent"
+                  className="relative group"
+                  onClick={() => copyToClipboard(obj.text as string)}
+                  key={(obj.text as string) + i}
+                >
+                  <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
+                  {obj.text}
+                  <TwTooltip tip="Copy to clipboard" position="top" />
+                </TwButton>
+              );
+            })}
 
-          <TwButton onClick={() => setShowModal(true)} className="mt-2">
-            Edit Info
-          </TwButton>
-        </div>
-      </div>
-    </div>
+            <TwButton onClick={() => setShowModal(true)} className="mt-2">
+              Edit Info
+            </TwButton>
+          </div>
+        </section>
+      </main>
+    </aside>
   );
 };
 

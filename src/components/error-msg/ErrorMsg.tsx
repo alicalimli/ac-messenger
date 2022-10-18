@@ -10,19 +10,19 @@ interface ErrorMsgProps {
 
 const ErrorMsg = ({ img, msg, subMsg, className }: ErrorMsgProps) => {
   return (
-    <motion.div
+    <motion.figure
       className={`${className} flex flex-col gap-4 items-center justify-center w-full p-4`}
       variants={VARIANTS_MANAGER}
       animate="fade-in"
     >
       <img src={img} className="w-64 md:w-96" />
-      <div className="flex flex-col gap-2 text-center">
+      <figcaption className="flex flex-col gap-2 text-center">
         <h1 className="text-black dark:text-white text-xl max-w-md ">{msg}</h1>
         <p className="text-muted-light dark:text-muted-dark text-sm ">
           {subMsg}
         </p>
-      </div>
-    </motion.div>
+      </figcaption>
+    </motion.figure>
   );
 };
 
