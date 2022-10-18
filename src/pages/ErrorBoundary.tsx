@@ -1,4 +1,4 @@
-import { no_results } from "assets/images";
+import { fixing_bug } from "assets/images";
 import { ErrorMsg } from "components";
 import { Component, ReactNode } from "react";
 
@@ -21,7 +21,11 @@ class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     if (this.state.hasError) {
-      return <ErrorMsg msg="Something wen't wrong" img={no_results} />;
+      return (
+        <div className="h-screen w-screen flex justify-center items-center">
+          <ErrorMsg msg="Oops, Something wen't wrong" img={fixing_bug} />
+        </div>
+      );
     }
 
     return this.props.children;
