@@ -37,7 +37,7 @@ const AddContacts = () => {
   };
 
   return (
-    <section className="flex flex-col items-center p-1 py-4 sm:p-4 h-full">
+    <aside className="flex flex-col items-center p-1 py-4 sm:p-4 h-full">
       {recipient && (
         <Modal setShowModal={setShowModal}>
           {(showModal as boolean) && (
@@ -51,13 +51,15 @@ const AddContacts = () => {
         </Modal>
       )}
 
-      <TwButton
-        variant="transparent"
-        onClick={() => backBtnHandler("chats")}
-        className="w-full flex gap-2"
-      >
-        <AiOutlineArrowLeft className="text-lg" /> Add Contacts
-      </TwButton>
+      <header>
+        <TwButton
+          variant="transparent"
+          onClick={() => backBtnHandler("chats")}
+          className="w-full flex gap-2"
+        >
+          <AiOutlineArrowLeft className="text-lg" /> Add Contacts
+        </TwButton>
+      </header>
 
       <form className="w-full p-4" autoComplete="off">
         <label htmlFor="search-input">
@@ -72,7 +74,7 @@ const AddContacts = () => {
         </label>
       </form>
 
-      <div className="flex flex-col w-full gap-1 overflow-scroll scrollbar-hide">
+      <main className="flex flex-col w-full gap-1 overflow-scroll scrollbar-hide">
         {users?.length !== 0 &&
           users?.map((user: User, i: number) => (
             <TwButton
@@ -95,8 +97,8 @@ const AddContacts = () => {
         {!users?.length && searchVal.length !== 0 && (
           <ErrorMsg className="w-64" img={no_results} msg="no results found." />
         )}
-      </div>
-    </section>
+      </main>
+    </aside>
   );
 };
 

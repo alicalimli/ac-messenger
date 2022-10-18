@@ -54,8 +54,8 @@ const AddContactModal = ({
   const cancelBtnHandler = () => setShowModal(false);
 
   return (
-    <div className="flex flex-col gap-4 py-2 w-44">
-      <div className="flex flex-col items-center text-center px-8">
+    <aside className="flex flex-col gap-4 py-2 w-44">
+      <header className="flex flex-col items-center text-center px-8">
         <ProfilePicture
           isOnline={online || false}
           photoURL={recipient.photoURL}
@@ -69,8 +69,9 @@ const AddContactModal = ({
         <p className="text-sm text-muted-light dark:text-muted-dark flex items-center gap-1">
           <GoLocation /> {recipient.location}
         </p>
-      </div>
-      <div className="flex flex-col gap-2">
+      </header>
+
+      <footer className="flex flex-col gap-2">
         {isContacted(recipient.uid) ? (
           <h1 className="text-green-500 text-center">Already in contact.</h1>
         ) : (
@@ -90,8 +91,8 @@ const AddContactModal = ({
         >
           Cancel
         </TwButton>
-      </div>
-    </div>
+      </footer>
+    </aside>
   );
 };
 
