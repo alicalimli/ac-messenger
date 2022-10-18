@@ -1,5 +1,4 @@
 import {
-  ErrorMsg,
   InputForm,
   LoadingSpinner,
   Modal,
@@ -7,14 +6,7 @@ import {
   TwButton,
 } from "components";
 import { User } from "interfaces";
-import {
-  arrayUnion,
-  doc,
-  getDoc,
-  setDoc,
-  Timestamp,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import React, { useRef, useState } from "react";
 import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
 import { MdPersonAdd } from "react-icons/md";
@@ -32,8 +24,6 @@ import { useAppDispatch, useAppSelector } from "hooks";
 import { v4 as uuid } from "uuid";
 import { changeSideContent } from "reducers/sideContentReducer";
 import useCreateGroup from "./useCreateGroup";
-
-interface SettingsContainerProps {}
 
 const NewGroupContainer = () => {
   const { user: currentUser } = useAppSelector(getUserState);
