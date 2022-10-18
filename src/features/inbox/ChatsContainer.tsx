@@ -41,8 +41,8 @@ const ChatsContainer = () => {
     };
   }, [currentUser.uid]);
   return (
-    <div className="p-4 flex flex-col gap-2 h-full">
-      <div className="flex gap-1 items-center">
+    <aside className="p-4 flex flex-col gap-2 h-full">
+      <header className="flex gap-1 items-center">
         <h1 className="ml-4 text-black dark:text-white text-2xl">Chats</h1>
         <ul className="ml-auto flex gap-1">
           <li>
@@ -71,8 +71,9 @@ const ChatsContainer = () => {
             </TwButton>
           </li>
         </ul>
-      </div>
-      <div className="relative flex flex-col overflow-scroll scrollbar-hide">
+      </header>
+
+      <main className="relative flex flex-col overflow-scroll scrollbar-hide">
         {chats.length !== 0 &&
           chats
             .sort(
@@ -97,8 +98,8 @@ const ChatsContainer = () => {
         )}
 
         {isPending && <LoadingSpinner msg="Fetching chats..." />}
-      </div>
-    </div>
+      </main>
+    </aside>
   );
 };
 
