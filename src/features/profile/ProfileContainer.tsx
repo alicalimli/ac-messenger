@@ -1,19 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-
 import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
-
 import { useAppDispatch, useAppSelector, useUploadImage } from "hooks";
-
-import ProfileEditForm from "./ProfileEditForm";
-
 import { Modal, TwTooltip, TwButton, LoadingSpinner } from "components";
 import { createToast } from "toastSlice";
 import { editProfile, getUserState } from "features/authentication/userSlice";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "setup/firebase";
-import { v4 as uuid } from "uuid";
 import { changeSideContent } from "reducers/sideContentReducer";
+
+import ProfileEditForm from "./ProfileEditForm";
 
 interface ProfileContainerProps {}
 
