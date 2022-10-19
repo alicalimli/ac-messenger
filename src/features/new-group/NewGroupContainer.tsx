@@ -10,18 +10,11 @@ import { doc, getDoc } from "firebase/firestore";
 import React, { useRef, useState } from "react";
 import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
 import { MdPersonAdd } from "react-icons/md";
-import { db, storage } from "setup/firebase";
+import { db } from "setup/firebase";
 import AddMemberModal from "./AddMemberModal";
 import { getUserState } from "features/authentication/userSlice";
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from "firebase/storage";
 import { createToast } from "toastSlice";
 import { useAppDispatch, useAppSelector, useUploadImage } from "hooks";
-import { v4 as uuid } from "uuid";
 import { changeSideContent } from "reducers/sideContentReducer";
 import useCreateGroup from "./useCreateGroup";
 
