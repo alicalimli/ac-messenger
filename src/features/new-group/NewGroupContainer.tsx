@@ -30,6 +30,7 @@ const NewGroupContainer = () => {
 
   const [members, setMembers] = useState<User[]>([]);
   const [membersID, setMembersID] = useState<string[]>([]);
+  const [membersPending, setMembersPending] = useState(false);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -55,7 +56,7 @@ const NewGroupContainer = () => {
 
   const fetchMembers = async () => {
     try {
-      setIsImgPending(true);
+      setMembersPending(true);
 
       membersID.forEach(async (id) => {
         const isRendered = members.find(
@@ -69,10 +70,10 @@ const NewGroupContainer = () => {
         const userDocRef = doc(db, "users", id);
         const userData = (await getDoc(userDocRef)).data();
         setMembers((members) => [...members, userData] as User[]);
-        setIsImgPending(false);
+        setMembersPending(false);
       });
     } catch (error: any) {
-      setIsImgPending(false);
+      setMembersPending(false);
       console.error(error.message);
     }
   };
