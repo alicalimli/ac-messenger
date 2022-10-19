@@ -90,6 +90,11 @@ const NewGroupContainer = () => {
       return;
     }
 
+    if (!imgURL) {
+      dispatch(createToast("Must have an image."));
+      return;
+    }
+
     if (groupName.length < 3) {
       dispatch(createToast("Name must have atleast 3 characters."));
       return;
