@@ -61,7 +61,7 @@ const useUploadImage = () => {
     setImageStorageName("");
   };
 
-  return { uploadImg, removeUploadImg, imgURL, isImgPending };
+  return { uploadImg, removeUploadImg, imgURL, isImgPending, errorMsg };
 };
 
 export default useUploadImage;

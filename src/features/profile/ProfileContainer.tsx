@@ -3,11 +3,11 @@ import { useRef, useState } from "react";
 import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 
-import { useAppDispatch, useAppSelector } from "hooks";
+import { useAppDispatch, useAppSelector, useUploadImage } from "hooks";
 
 import ProfileEditForm from "./ProfileEditForm";
 
-import { Modal, TwTooltip, TwButton } from "components";
+import { Modal, TwTooltip, TwButton, LoadingSpinner } from "components";
 import { createToast } from "toastSlice";
 import { editProfile, getUserState } from "features/authentication/userSlice";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -27,6 +27,8 @@ const ProfileContainer = () => {
     dispatch(changeSideContent({ content }));
   };
 
+  const { uploadImg, imgURL, isImgPending } = useUploadImage();
+
   const [showModal, setShowModal] = useState(false);
 
   const infoButtons = [
@@ -44,25 +46,17 @@ const ProfileContainer = () => {
   };
 
   const handleImageChange = async (e: any) => {
-    try {
-      const imageUpload = e.target.files[0];
+    const imageFile = e.target.files[0];
 
-      if (!imageUpload) return;
+    const uploadImgArgs = {
+      imageFile,
+      imageInputRef,
+    };
 
-      const imageName = `images/${imageUpload.name + uuid()}`;
-      const imageRef = ref(storage, imageName);
+    await uploadImg(uploadImgArgs);
 
-      await uploadBytes(imageRef, imageUpload).then((snapshot: any) => {
-        getDownloadURL(snapshot.ref).then((url: string) => {
-          dispatch(editProfile({ photoURL: url }));
-          imageInputRef.current.value = "";
-          dispatch(createToast("profile picture changed."));
-        });
-      });
-    } catch (error) {
-      imageInputRef.current.value = "";
-      dispatch(createToast("something went wrong."));
-    }
+    console.log(imgURL);
+    dispatch(editProfile({ photoURL: imgURL }));
   };
 
   return (
@@ -91,6 +85,12 @@ const ProfileContainer = () => {
               alt={`${user?.displayName}'s profile picture`}
               src={user?.photoURL || ""}
             />
+            {isImgPending && (
+              <LoadingSpinner
+                className="w-full h-full bg-black/30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                msg={""}
+              />
+            )}
             <label
               htmlFor="photo-change"
               className="flex justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/30 cursor-pointer invisible group-hover:visible w-full h-full"
