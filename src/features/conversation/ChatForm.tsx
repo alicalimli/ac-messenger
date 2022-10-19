@@ -41,7 +41,7 @@ const ChatForm = () => {
 
   const closeImageModal = (deleteStorageImage?: boolean) => {
     try {
-      removeUploadImg();
+      deleteStorageImage && removeUploadImg();
 
       imageInputRef.current.value = "";
       setShowModal(false);
