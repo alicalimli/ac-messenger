@@ -20,7 +20,7 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { createToast } from "toastSlice";
-import { useAppDispatch, useAppSelector } from "hooks";
+import { useAppDispatch, useAppSelector, useUploadImage } from "hooks";
 import { v4 as uuid } from "uuid";
 import { changeSideContent } from "reducers/sideContentReducer";
 import useCreateGroup from "./useCreateGroup";
@@ -32,9 +32,6 @@ const NewGroupContainer = () => {
   const [membersID, setMembersID] = useState<string[]>([]);
 
   const [showModal, setShowModal] = useState(false);
-  const [imgURL, setImgURL] = useState("");
-  const [isImgPending, setIsImgPending] = useState(false);
-  const [imageStorageName, setImageStorageName] = useState<string>("");
 
   const [groupName, setGroupName] = useState("");
 
@@ -43,31 +40,17 @@ const NewGroupContainer = () => {
   const imageInputRef = useRef<any>(null);
   const dispatch = useAppDispatch();
 
+  const { uploadImg, removeUploadImg, imgURL, isImgPending } = useUploadImage();
+
   const handleImageChange = async (e: any) => {
-    try {
-      setIsImgPending(true);
-      const imageUpload = e.target.files[0];
+    const imageFile = e.target.files[0];
 
-      if (!imageUpload) return;
+    const uploadImgArgs = {
+      imageFile,
+      imageInputRef,
+    };
 
-      const imageName = `images/${imageUpload.name + uuid()}`;
-      const imageRef = ref(storage, imageName);
-
-      setImageStorageName(imageName);
-
-      await uploadBytes(imageRef, imageUpload).then((snapshot: any) => {
-        getDownloadURL(snapshot.ref).then((url: string) => {
-          imageInputRef.current.value = "";
-          setImgURL(url);
-          setIsImgPending(false);
-          dispatch(createToast("profile picture changed."));
-        });
-      });
-    } catch (error) {
-      imageInputRef.current.value = "";
-      setIsImgPending(false);
-      dispatch(createToast("something went wrong."));
-    }
+    uploadImg(uploadImgArgs);
   };
 
   const fetchMembers = async () => {
@@ -128,11 +111,7 @@ const NewGroupContainer = () => {
   };
 
   const cancelBtnHandler = () => {
-    if (imageStorageName) {
-      const imageRef = ref(storage, imageStorageName);
-      deleteObject(imageRef);
-      setImageStorageName("");
-    }
+    removeUploadImg();
     dispatch(changeSideContent({ content: "chats" }));
   };
 
