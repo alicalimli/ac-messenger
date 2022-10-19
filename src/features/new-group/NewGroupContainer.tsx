@@ -17,6 +17,7 @@ import { createToast } from "toastSlice";
 import { useAppDispatch, useAppSelector, useUploadImage } from "hooks";
 import { changeSideContent } from "reducers/sideContentReducer";
 import useCreateGroup from "./useCreateGroup";
+import { BiPlus } from "react-icons/bi";
 
 const NewGroupContainer = () => {
   const { user: currentUser } = useAppSelector(getUserState);
@@ -134,12 +135,18 @@ const NewGroupContainer = () => {
       </header>
 
       <main>
-        <section className="flex flex-col items-center text-center p-4 px-8">
-          <div className="group mb-2 relative flex items-center justify-center rounded-[50%] overflow-hidden">
-            <img
-              src={imgURL}
-              className="object-cover rounded-[50%] bg-white w-24 h-24 "
-            />
+        <section className="flex gap-4 items-center text-center p-2 mt-2">
+          <div className="group mb-2 relative flex items-center justify-center rounded-[50%] overflow-hidden ">
+            {imgURL ? (
+              <img
+                src={imgURL}
+                className="object-cover rounded-[50%] bg-white w-20 h-20 "
+              />
+            ) : (
+              <div className="rounded-[50%] bg-primary-main w-20 h-20 flex justify-center items-center ">
+                <AiOutlineCamera className="text-3xl text-white font-bold" />
+              </div>
+            )}
             {isImgPending && (
               <LoadingSpinner
                 className="w-full h-full bg-black/30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -163,7 +170,8 @@ const NewGroupContainer = () => {
             </label>
           </div>
           <InputForm
-            className="w-44 text-lg p-0.5"
+            className="w-44 p-0.5"
+            variant="underline"
             state={groupName}
             maxLength={30}
             setState={setGroupName}
@@ -172,7 +180,7 @@ const NewGroupContainer = () => {
           />
         </section>
 
-        <section className="flex flex-col gap-1">
+        <section className="flex flex-col gap-1 border-t border-muted-light/10 dark:border-muted-dark/10">
           <div className="flex items-center gap-1">
             <h1 className="text-black dark:text-white text-lg">{`Members (${members?.length})`}</h1>
             <div className="ml-auto flex gap-1">

@@ -11,6 +11,7 @@ interface InputFormProps {
   ref?: LegacyRef<HTMLInputElement> | undefined;
   isValid?: boolean;
   isSmall?: boolean;
+  variant?: "underline" | "default";
   stateFocus?: boolean;
   maxLength?: number;
   className?: string;
@@ -29,6 +30,7 @@ const InputForm = ({
   setState,
   className,
   stateFocus,
+  variant,
   setStateFocus,
   maxLength,
 }: InputFormProps) => {
@@ -67,9 +69,11 @@ const InputForm = ({
       </div>
 
       <input
-        className={`${className} text-lg bg-transparent ${
+        className={`${className} ${
+          variant === "underline" ? "border-b rounded-none px-0" : "border"
+        }  text-lg bg-transparent ${
           isSmall ? "p-1" : "p-2"
-        } px-4 flex items-center rounded-xl outline-none border duration-200 text-black dark:text-white ${
+        } px-4 flex items-center rounded-xl outline-none duration-200 text-black dark:text-white ${
           !isValid && state
             ? instruction && "border-red-500"
             : "border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main"
