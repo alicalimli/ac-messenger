@@ -206,7 +206,7 @@ const NewGroupContainer = () => {
                   </div>
                   <button
                     onClick={() => handleRemoveMember(member.uid.toString())}
-                    className={`ml-auto bg-red-600 text-white text-sm p-1 px-2 w-16 h-fit rounded-full`}
+                    className={`ml-auto bg-red-600 duration-300 hover:bg-red-500 active:scale-95 text-white text-sm p-1 px-3 h-fit rounded-full`}
                   >
                     remove
                   </button>

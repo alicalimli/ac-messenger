@@ -9,7 +9,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 const memberBtnClass =
   "border-black text-black dark:border-white dark:text-white";
 const nonMemberBtnClass =
-  "ml-auto bg-black text-white dark:bg-white dark:text-black text-sm p-1 w-16 h-fit rounded-full";
+  "ml-auto bg-black text-white dark:bg-white dark:text-black text-sm h-fit rounded-full";
 
 interface AddMemberModalProps {
   membersID: string[];
@@ -112,7 +112,7 @@ const AddMemberModal = ({
                   onClick={() => addMemberClickHandler(user)}
                   className={`${getIsMemberBtnClass(
                     user.uid.toString()
-                  )} ml-auto border text-sm p-1 w-16 h-fit rounded-full`}
+                  )}   duration-300 hover:scale-x-105 active:scale-95 ml-auto border text-sm p-1 px-3 h-fit rounded-full`}
                 >
                   {isMember(user.uid.toString()) ? "added" : "add"}
                 </button>
