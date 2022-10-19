@@ -13,13 +13,13 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import useSendMessage from "./useSendMessage";
+import { useUploadImage } from "hooks";
 
 const ChatForm = () => {
   const [message, setMessage] = useState<string>("");
-  const [imageURL, setImageURL] = useState<string | any>("");
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [imageStorageName, setImageStorageName] = useState<string>("");
 
+  const { uploadImg, removeUploadImg, imgURL } = useUploadImage();
   const { sendMessage, sendImage } = useSendMessage();
 
   const imageInputRef = useRef<any>(null);
@@ -35,39 +35,24 @@ const ChatForm = () => {
   };
 
   const handleImageChange = async (e: any) => {
-    try {
-      setShowModal(true);
+    setShowModal(true);
 
-      const imageUpload = e.target.files[0];
+    const imageFile = e.target.files[0];
 
-      if (!imageUpload) return;
+    const uploadImgArgs = {
+      imageFile,
+      imageInputRef,
+    };
 
-      const imageName = `images/${imageUpload.name + uuid()}`;
-      const imageRef = ref(storage, imageName);
-
-      setImageStorageName(imageName);
-
-      await uploadBytes(imageRef, imageUpload).then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((url) => {
-          setImageURL(url);
-        });
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    uploadImg(uploadImgArgs);
   };
 
   const closeImageModal = (deleteStorageImage?: boolean) => {
     try {
-      if (deleteStorageImage) {
-        const imageRef = ref(storage, imageStorageName);
-        deleteObject(imageRef);
-      }
+      removeUploadImg();
 
       imageInputRef.current.value = "";
-      setImageStorageName("");
       setShowModal(false);
-      setImageURL("");
     } catch (error) {
       throw error;
     }
@@ -75,7 +60,7 @@ const ChatForm = () => {
 
   const handleSendImage = () => {
     try {
-      sendImage(imageURL);
+      sendImage(imgURL);
       closeImageModal();
     } catch (error) {
       console.log(error);
@@ -94,7 +79,7 @@ const ChatForm = () => {
       >
         {showModal && (
           <div className="flex flex-col gap-2">
-            <img src={imageURL} className="w-64 rounded-xl" />
+            <img src={imgURL} className="w-64 rounded-xl" />
             <div className="flex flex-col gap-1 ">
               <TwButton
                 onClick={handleSendImage}

@@ -56,6 +56,8 @@ const useUploadImage = () => {
 
     const imageRef = ref(storage, imageStorageName);
     deleteObject(imageRef);
+
+    setImgURL("");
     setImageStorageName("");
   };
 
