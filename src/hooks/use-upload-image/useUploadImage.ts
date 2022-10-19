@@ -36,14 +36,13 @@ const useUploadImage = () => {
       setImageStorageName(imageName);
       console.log(imageInputRef);
 
-      await uploadBytes(imageRef, imageUpload).then((snapshot: any) => {
-        getDownloadURL(snapshot.ref).then((url: string) => {
-          imageInputRef.current.value = "";
-          setImgURL(url);
-          setIsImgPending(false);
-          dispatch(createToast("profile picture changed."));
-        });
-      });
+      const upBytes = await uploadBytes(imageRef, imageUpload);
+      const downloadURL = await getDownloadURL(upBytes.ref);
+
+      imageInputRef.current.value = "";
+      setImgURL((state) => downloadURL);
+      setIsImgPending(false);
+      dispatch(createToast("profile picture changed."));
     } catch (error) {
       imageInputRef.current.value = "";
       setIsImgPending(false);

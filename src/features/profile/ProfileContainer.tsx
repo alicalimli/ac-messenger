@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
@@ -45,7 +45,7 @@ const ProfileContainer = () => {
     dispatch(createToast(`Copied ${text}.`));
   };
 
-  const handleImageChange = async (e: any) => {
+  const handleImageChange = (e: any) => {
     const imageFile = e.target.files[0];
 
     const uploadImgArgs = {
@@ -53,11 +53,12 @@ const ProfileContainer = () => {
       imageInputRef,
     };
 
-    await uploadImg(uploadImgArgs);
-
-    console.log(imgURL);
-    dispatch(editProfile({ photoURL: imgURL }));
+    uploadImg(uploadImgArgs);
   };
+
+  useEffect(() => {
+    dispatch(editProfile({ photoURL: imgURL }));
+  }, [imgURL]);
 
   return (
     <aside className=" flex flex-col">
