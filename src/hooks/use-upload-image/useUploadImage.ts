@@ -42,7 +42,6 @@ const useUploadImage = () => {
       imageInputRef.current.value = "";
       setImgURL((state) => downloadURL);
       setIsImgPending(false);
-      dispatch(createToast("profile picture changed."));
     } catch (error) {
       imageInputRef.current.value = "";
       setIsImgPending(false);

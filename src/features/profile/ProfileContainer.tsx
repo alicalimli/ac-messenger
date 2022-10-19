@@ -39,7 +39,7 @@ const ProfileContainer = () => {
     dispatch(createToast(`Copied ${text}.`));
   };
 
-  const handleImageChange = (e: any) => {
+  const handleImageChange = async (e: any) => {
     const imageFile = e.target.files[0];
 
     const uploadImgArgs = {
@@ -47,7 +47,9 @@ const ProfileContainer = () => {
       imageInputRef,
     };
 
-    uploadImg(uploadImgArgs);
+    await uploadImg(uploadImgArgs);
+
+    dispatch(createToast("profile picture changed."));
   };
 
   useEffect(() => {

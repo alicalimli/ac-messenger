@@ -45,7 +45,9 @@ const NewGroupContainer = () => {
       imageInputRef,
     };
 
-    uploadImg(uploadImgArgs);
+    await uploadImg(uploadImgArgs);
+
+    dispatch(createToast("Image successfully changed."));
   };
 
   const fetchMembers = async () => {
