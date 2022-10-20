@@ -4,10 +4,16 @@ import { useAppSelector, useGetUser } from "hooks";
 import { Message, User } from "interfaces";
 import { useFormatDate } from "hooks";
 import { memo, useEffect, useState } from "react";
-import { ProfilePicture, SharedLayout } from "components";
+import { ProfilePicture, SharedLayout, TwTooltip } from "components";
 import { VARIANTS_MANAGER } from "setup/variants-manager";
 import { getChatState } from "features/inbox/chatReducer";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import {
+  BsFillTrashFill,
+  BsPen,
+  BsPencilFill,
+  BsPenFill,
+  BsThreeDotsVertical,
+} from "react-icons/bs";
 import useSendMessage from "./useSendMessage";
 
 interface MessageBoxProps {
@@ -102,7 +108,6 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
                 photoURL={senderData?.photoURL}
               />
             )}
-
             <button
               ref={latestMsgRef}
               className={`
@@ -117,12 +122,22 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
               {currentMsg.message}
             </button>
             {isCurrentUser && (
-              <button
-                onClick={() => deleteBtnHandler(currentMsg)}
-                className="text-red-500"
-              >
-                delete
-              </button>
+              <div className="flex translate-y-1/4 invisible group-hover:visible  rounded-full dark:bg-bgmain-dark shadow-md overflow-hidden ">
+                <button
+                  onClick={() => deleteBtnHandler(currentMsg)}
+                  className="relative group dark:text-muted-dark
+                  text-muted-light p-2 hover:bg-muted-light/10 dark:hover:bg-muted-light flex justify-center items-center"
+                >
+                  <BsFillTrashFill className="" />
+                </button>
+                <button
+                  onClick={() => deleteBtnHandler(currentMsg)}
+                  className="relative group dark:text-muted-dark
+                  text-muted-light p-2  hover:bg-muted-light/10 dark:hover:bg-muted-light flex justify-center items-center"
+                >
+                  <BsPencilFill className="" />
+                </button>
+              </div>
             )}
           </div>
         )}
