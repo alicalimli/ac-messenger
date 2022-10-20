@@ -28,8 +28,6 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
   const isCurrentUser = currentMsg.senderId === currentUser.uid;
 
   useEffect(() => {
-    if (!isGroup) return;
-
     getUserInfo(currentMsg.senderId).then((senderData) => {
       const date = formatDate(currentMsg.date.toDate());
       setMsgDate(date as string);
