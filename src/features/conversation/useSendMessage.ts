@@ -106,9 +106,14 @@ const useSendMessage = () => {
     });
   };
 
-  const editMsg = async (msg: Message) => {
+  const editMsg = async (msg: Message, editedMsg: string) => {
     const chatDocRef = doc(db, "chats", chatId);
-    const msgObj = { ...msg, message: "yeahh" };
+    const msgObj = {
+      ...msg,
+      message: editedMsg,
+      lastEdited: Timestamp.now(),
+      isEdited: true,
+    };
 
     await updateDoc(chatDocRef, {
       messages: arrayRemove(msg),

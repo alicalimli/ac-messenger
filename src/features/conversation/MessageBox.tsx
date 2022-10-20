@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useAppSelector, useGetUser } from "hooks";
 import { Message, User } from "interfaces";
 import { useFormatDate } from "hooks";
-import { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { ProfilePicture, SharedLayout, TwTooltip } from "components";
 import { VARIANTS_MANAGER } from "setup/variants-manager";
 import { getChatState } from "features/inbox/chatReducer";
@@ -15,6 +15,7 @@ import {
   BsThreeDotsVertical,
 } from "react-icons/bs";
 import useSendMessage from "./useSendMessage";
+import { current } from "@reduxjs/toolkit";
 
 interface MessageBoxProps {
   currentMsg: Message;
@@ -23,8 +24,11 @@ interface MessageBoxProps {
 
 const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [senderData, setSenderData] = useState<User>();
+  const [isEditing, setIsEditing] = useState(false);
   const [msgDate, setMsgDate] = useState("");
+
+  const [editedMsg, setEditedMsg] = useState<string>(currentMsg.message);
+  const [senderData, setSenderData] = useState<User>();
 
   const { user: currentUser } = useAppSelector(getUserState);
   const { isGroup } = useAppSelector(getChatState);
@@ -41,7 +45,14 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
   };
 
   const editBtnHandler = (msg: Message) => {
-    editMsg(msg);
+    setIsEditing(true);
+  };
+
+  const editedMsgSubmitHandler = (e: React.FormEvent, msg: Message) => {
+    e.preventDefault();
+
+    setIsEditing(false);
+    editMsg(msg, editedMsg);
   };
 
   useEffect(() => {
@@ -112,9 +123,22 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
                 photoURL={senderData?.photoURL}
               />
             )}
-            <button
-              ref={latestMsgRef}
-              className={`
+            {isEditing ? (
+              <form
+                onSubmit={(e: React.FormEvent) =>
+                  editedMsgSubmitHandler(e, currentMsg)
+                }
+              >
+                <input
+                  type="text"
+                  value={editedMsg}
+                  onChange={(e) => setEditedMsg(e.target.value)}
+                />
+              </form>
+            ) : (
+              <button
+                ref={latestMsgRef}
+                className={`
               peer flex rounded-3xl py-1.5 px-3 break-all text-md max-w-xs w-fit h-fit text-start
               ${
                 isCurrentUser
@@ -122,9 +146,10 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
                   : "bg-white text-black rounded-bl-sm"
               }
             `}
-            >
-              {currentMsg.message}
-            </button>
+              >
+                {currentMsg.message}
+              </button>
+            )}
             {isCurrentUser && (
               <div className="flex translate-y-1/4 invisible group-hover:visible  rounded-full dark:bg-bgmain-dark shadow-md overflow-hidden ">
                 <button
