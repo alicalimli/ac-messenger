@@ -51,6 +51,8 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
   const editedMsgSubmitHandler = (e: React.FormEvent, msg: Message) => {
     e.preventDefault();
 
+    if (!editedMsg) return;
+
     setIsEditing(false);
     editMsg(msg, editedMsg);
   };
@@ -132,6 +134,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
                 <input
                   type="text"
                   value={editedMsg}
+                  className="bg-primary-main text-white rounded-br-sm flex rounded-3xl py-1.5 px-3 break-all text-md max-w-xs w-auto h-fit text-start"
                   onChange={(e) => setEditedMsg(e.target.value)}
                 />
               </form>
