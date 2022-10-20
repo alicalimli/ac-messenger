@@ -53,16 +53,9 @@ const NewGroupContainer = () => {
   const fetchMembers = async () => {
     try {
       setMembersPending(true);
+      setMembers([]);
 
       membersID.forEach(async (id) => {
-        const isRendered = members.find(
-          (member) => member.uid.toString() === id
-        )
-          ? true
-          : false;
-
-        if (isRendered) return;
-
         const userDocRef = doc(db, "users", id);
         const userData = (await getDoc(userDocRef)).data();
         setMembers((members) => [...members, userData] as User[]);
