@@ -32,12 +32,16 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
   const getUserInfo = useGetUser();
   const formatDate = useFormatDate();
 
-  const { deleteMsg } = useSendMessage();
+  const { deleteMsg, editMsg } = useSendMessage();
 
   const isCurrentUser = currentMsg.senderId === currentUser.uid;
 
   const deleteBtnHandler = (msg: Message) => {
     deleteMsg(msg);
+  };
+
+  const editBtnHandler = (msg: Message) => {
+    editMsg(msg);
   };
 
   useEffect(() => {
@@ -131,7 +135,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
                   <BsFillTrashFill className="" />
                 </button>
                 <button
-                  onClick={() => deleteBtnHandler(currentMsg)}
+                  onClick={() => editBtnHandler(currentMsg)}
                   className="relative group dark:text-muted-dark
                   text-muted-light p-2  hover:bg-muted-light/10 dark:hover:bg-muted-light flex justify-center items-center"
                 >

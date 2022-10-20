@@ -110,14 +110,16 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
             onScroll={chatBoxScrollHandler}
             className="relative flex flex-col overflow-scroll scrollbar-hide px-4"
           >
-            {messages.map((currentMsg: Message, i: any) => (
-              <MessageBox
-                key={currentMsg.id}
-                currentMsg={currentMsg}
-                latestMsgRef={latestMsg}
-                recipient={recipient}
-              />
-            ))}
+            {messages
+              .sort((a: any, b: any) => a.date.toDate() - b.date.toDate())
+              .map((currentMsg: Message, i: any) => (
+                <MessageBox
+                  key={currentMsg.id}
+                  currentMsg={currentMsg}
+                  latestMsgRef={latestMsg}
+                  recipient={recipient}
+                />
+              ))}
           </main>
         )}
 

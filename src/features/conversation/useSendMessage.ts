@@ -105,7 +105,22 @@ const useSendMessage = () => {
       messages: arrayRemove(msg),
     });
   };
-  return { sendMessage, sendImage, deleteMsg };
+
+  const editMsg = async (msg: Message) => {
+    const chatDocRef = doc(db, "chats", chatId);
+    const msgObj = { ...msg, message: "yeahh" };
+
+    await updateDoc(chatDocRef, {
+      messages: arrayRemove(msg),
+    });
+
+    updateDoc(chatDocRef, {
+      messages: arrayUnion(msgObj),
+    });
+
+    createLastMessage("edited a message.");
+  };
+  return { sendMessage, sendImage, deleteMsg, editMsg };
 };
 
 export default useSendMessage;
