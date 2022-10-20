@@ -87,8 +87,8 @@ const NewGroupContainer = () => {
   const createGroupBtnHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (members.length < 3) {
-      dispatch(createToast("Must have atleast 3 members."));
+    if (members.length < 2) {
+      dispatch(createToast("Must have atleast 2 members."));
       return;
     }
 
