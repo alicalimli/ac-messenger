@@ -175,21 +175,22 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
           </div>
         )}
 
-        <div className="flex gap-1 items-center text-black dark:text-white">
+        <div className="text-xs flex gap-1 items-center text-black dark:text-white">
+          {currentMsg.isEdited && (
+            <span className="dark:text-muted-dark text-muted-light">
+              edited
+            </span>
+          )}
           {isGroup && !isCurrentUser && (
             <>
-              <p
-                className={`${
-                  isCurrentUser ? "text-end" : "text-start"
-                } text-xs `}
-              >
+              <p className={`${isCurrentUser ? "text-end" : "text-start"} `}>
                 {senderData?.displayName}
               </p>
 
               <span> • </span>
             </>
           )}
-          <time className="ml-auto text-xs">{msgDate}</time>
+          <time className="ml-auto">{msgDate}</time>
         </div>
       </div>
     </motion.div>

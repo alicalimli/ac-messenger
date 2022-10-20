@@ -6,4 +6,6 @@ export default interface Message {
   message: string;
   date: Timestamp;
   img?: string;
+  lastEdited?: Timestamp;
+  isEdited?: string;
 }
