@@ -61,8 +61,6 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
 
     const recipientUID = chat[1].userInfo.uid;
     getUserInfo(recipientUID).then((recipientInfo) => {
-      const date = formatDate(chat[1].lastMessage.date.toDate());
-      setLastMsgDate(date as string);
       setRecipient(recipientInfo);
     });
 
@@ -70,6 +68,13 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
       unsub?.();
     };
   }, []);
+
+  useEffect(() => {
+    if (chat[1].isGroup) return;
+
+    const date = formatDate(chat[1].lastMessage.date.toDate());
+    setLastMsgDate(date as string);
+  }, [chat[1].lastMessage?.message]);
 
   return (
     <TwButton
