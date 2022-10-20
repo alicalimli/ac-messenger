@@ -16,6 +16,7 @@ import {
 } from "react-icons/bs";
 import useSendMessage from "./useSendMessage";
 import { current } from "@reduxjs/toolkit";
+import { AiOutlineStop } from "react-icons/ai";
 
 interface MessageBoxProps {
   currentMsg: Message;
@@ -44,8 +45,8 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
     deleteMsg(msg);
   };
 
-  const editBtnHandler = (msg: Message) => {
-    setIsEditing(true);
+  const editBtnHandler = () => {
+    setIsEditing((state) => !state);
   };
 
   const editedMsgSubmitHandler = (e: React.FormEvent, msg: Message) => {
@@ -163,11 +164,11 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
                   <BsFillTrashFill className="" />
                 </button>
                 <button
-                  onClick={() => editBtnHandler(currentMsg)}
+                  onClick={() => editBtnHandler()}
                   className="relative group dark:text-muted-dark
                   text-muted-light p-2  hover:bg-muted-light/10 dark:hover:bg-muted-light flex justify-center items-center"
                 >
-                  <BsPencilFill className="" />
+                  {isEditing ? <AiOutlineStop /> : <BsPencilFill />}
                 </button>
               </div>
             )}
