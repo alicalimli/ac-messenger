@@ -47,7 +47,6 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
       unsub = onSnapshot(groupChatDoc, (doc) => {
         const groupChatData = doc.data();
 
-        console.log(groupChatData);
         if (!groupChatData) return;
 
         const date = formatDate(groupChatData.lastMessage.date.toDate());

@@ -7,6 +7,7 @@ import { memo, useEffect, useState } from "react";
 import { ProfilePicture, SharedLayout } from "components";
 import { VARIANTS_MANAGER } from "setup/variants-manager";
 import { getChatState } from "features/inbox/chatReducer";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 interface MessageBoxProps {
   currentMsg: Message;
@@ -46,7 +47,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
       }`}
     >
       <div
-        className={`flex flex-col gap-1 ${
+        className={`flex flex-col gap-0.5 ${
           isCurrentUser ? "items-end" : "items-start"
         }`}
       >
@@ -97,23 +98,9 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
               />
             )}
 
-            <div
-              className={`flex flex-col gap-0.5 ${
-                isCurrentUser ? "items-end " : "items-start"
-              }`}
-            >
-              {!isCurrentUser && (
-                <p
-                  className={`${
-                    isCurrentUser ? "text-end" : "text-start"
-                  } text-xs dark:text-muted-dark text-muted-light`}
-                >
-                  {senderData?.displayName}
-                </p>
-              )}
-              <button
-                ref={latestMsgRef}
-                className={`
+            <button
+              ref={latestMsgRef}
+              className={`
               peer flex rounded-3xl py-1.5 px-3 break-all text-md max-w-xs w-fit h-fit text-start
               ${
                 isCurrentUser
@@ -121,15 +108,28 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
                   : "bg-white text-black rounded-bl-sm"
               }
             `}
-              >
-                {currentMsg.message}
-              </button>
-            </div>
-            <div className="opacity-0 peer-focus:opacity-100 group-hover:opacity-100 duration-300">
-              <time className="ml-auto text-sm text-slate-500">{msgDate}</time>
-            </div>
+            >
+              {currentMsg.message}
+            </button>
           </div>
         )}
+
+        <div className="flex gap-1 items-center text-black dark:text-white">
+          {isGroup && !isCurrentUser && (
+            <>
+              <p
+                className={`${
+                  isCurrentUser ? "text-end" : "text-start"
+                } text-xs `}
+              >
+                {senderData?.displayName}
+              </p>
+
+              <span> • </span>
+            </>
+          )}
+          <time className="ml-auto text-xs">{msgDate}</time>
+        </div>
       </div>
     </motion.div>
   );
