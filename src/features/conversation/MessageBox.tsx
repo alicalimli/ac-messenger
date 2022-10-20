@@ -8,6 +8,7 @@ import { ProfilePicture, SharedLayout } from "components";
 import { VARIANTS_MANAGER } from "setup/variants-manager";
 import { getChatState } from "features/inbox/chatReducer";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import useSendMessage from "./useSendMessage";
 
 interface MessageBoxProps {
   currentMsg: Message;
@@ -25,7 +26,13 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
   const getUserInfo = useGetUser();
   const formatDate = useFormatDate();
 
+  const { deleteMsg } = useSendMessage();
+
   const isCurrentUser = currentMsg.senderId === currentUser.uid;
+
+  const deleteBtnHandler = (msg: Message) => {
+    deleteMsg(msg);
+  };
 
   useEffect(() => {
     getUserInfo(currentMsg.senderId).then((senderData) => {
@@ -109,6 +116,14 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
             >
               {currentMsg.message}
             </button>
+            {isCurrentUser && (
+              <button
+                onClick={() => deleteBtnHandler(currentMsg)}
+                className="text-red-500"
+              >
+                delete
+              </button>
+            )}
           </div>
         )}
 

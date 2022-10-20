@@ -2,8 +2,10 @@ import { useAppSelector } from "hooks";
 import { getUserState } from "features/authentication/userSlice";
 import { getChatState } from "features/inbox/chatReducer";
 import {
+  arrayRemove,
   arrayUnion,
   doc,
+  FieldValue,
   getDoc,
   increment,
   setDoc,
@@ -13,6 +15,7 @@ import {
 import { db } from "setup/firebase";
 
 import { v4 as uuid } from "uuid";
+import { Message } from "interfaces";
 
 const useSendMessage = () => {
   const { user: currentUser } = useAppSelector(getUserState);
@@ -44,8 +47,6 @@ const useSendMessage = () => {
           date: Timestamp.now(),
         },
       });
-
-      console.log(recipientChatDocData);
 
       updateDoc(recipientChatDocRef, {
         [chatId + ".lastMessage"]: {
@@ -97,7 +98,14 @@ const useSendMessage = () => {
 
     createLastMessage("sent a picture.");
   };
-  return { sendMessage, sendImage };
+
+  const deleteMsg = (msg: Message) => {
+    const chatDocRef = doc(db, "chats", chatId);
+    updateDoc(chatDocRef, {
+      messages: arrayRemove(msg),
+    });
+  };
+  return { sendMessage, sendImage, deleteMsg };
 };
 
 export default useSendMessage;
