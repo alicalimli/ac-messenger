@@ -1,18 +1,23 @@
 import {
   collection,
   CollectionReference,
+  DocumentData,
   getDocs,
   limit,
   orderBy,
   query,
+  QueryDocumentSnapshot,
+  startAfter,
   where,
 } from "firebase/firestore";
 import { User } from "interfaces";
 import { useEffect, useState } from "react";
 import { db } from "setup/firebase";
 
+let latestDoc: QueryDocumentSnapshot<DocumentData> | null = null;
+
 const useGetUsers = (userID?: string) => {
-  const [users, setUsers] = useState<User[]>();
+  const [users, setUsers] = useState<User[]>([]);
   const [isPending, setIsPending] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -28,7 +33,9 @@ const useGetUsers = (userID?: string) => {
         usersColRef = query(
           collection(db, "users"),
           where("uid", "!=", userID),
-          orderBy("uid")
+          orderBy("uid"),
+          startAfter(latestDoc || 0),
+          limit(4)
         ) as CollectionReference;
       } else {
         usersColRef = collection(db, "users") as CollectionReference;
@@ -40,7 +47,11 @@ const useGetUsers = (userID?: string) => {
         return { ...doc.data() };
       }) as User[];
 
-      setUsers(users);
+      latestDoc = data.docs[data.docs.length - 1];
+
+      if (data.empty) return;
+
+      setUsers((state) => [...state, ...users]);
       setIsPending(false);
     } catch (error: any) {
       setIsPending(false);
@@ -50,6 +61,8 @@ const useGetUsers = (userID?: string) => {
 
   const searchUser = async (searchVal: string, currentUser?: User) => {
     try {
+      latestDoc = null;
+
       if (!searchVal) {
         return getUsers(currentUser?.uid);
       }
@@ -80,6 +93,11 @@ const useGetUsers = (userID?: string) => {
 
   useEffect(() => {
     getUsers(userID);
+    latestDoc = null;
+
+    return () => {
+      latestDoc = null;
+    };
   }, []);
 
   return { users, isPending, errorMsg, getUsers, searchUser };

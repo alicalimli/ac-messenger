@@ -2,7 +2,7 @@ import { ErrorMsg, LoadingSpinner, ProfilePicture, TwButton } from "components";
 import { getUserState } from "features/authentication/userSlice";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useAppDispatch, useAppSelector, useGetUsers } from "hooks";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { no_results } from "assets/images";
 import { Modal } from "components";
 import { User } from "interfaces";
@@ -14,11 +14,15 @@ interface AddContactsProps {}
 
 const AddContacts = () => {
   const { user: currentUser } = useAppSelector(getUserState);
-  const { users, isPending, searchUser } = useGetUsers(currentUser.uid);
+  const { users, isPending, searchUser, getUsers } = useGetUsers(
+    currentUser.uid
+  );
 
   const [recipient, setRecipient] = useState<User>();
   const [searchVal, setSearchVal] = useState<string>("");
   const [showModal, setShowModal] = useState<boolean>(false);
+
+  const scrollContainerRef = useRef<HTMLElement>(null);
 
   const dispatch = useAppDispatch();
 
@@ -36,8 +40,19 @@ const AddContacts = () => {
     dispatch(changeSideContent({ content }));
   };
 
+  const scrollHandler = () => {
+    const container = scrollContainerRef.current;
+
+    if (!container) return;
+
+    let triggerHeight = container.scrollTop + container.offsetHeight;
+    if (triggerHeight >= container.scrollHeight) {
+      getUsers(currentUser.uid);
+    }
+  };
+
   return (
-    <aside className="flex flex-col items-center p-1 py-4 sm:p-4 h-full">
+    <aside className="flex flex-col items-center p-1 py-4 sm:p-4 h-1/2">
       {recipient && (
         <Modal setShowModal={setShowModal}>
           {(showModal as boolean) && (
@@ -74,7 +89,11 @@ const AddContacts = () => {
         </label>
       </form>
 
-      <main className="flex flex-col w-full gap-1 overflow-scroll scrollbar-hide">
+      <main
+        onScroll={scrollHandler}
+        ref={scrollContainerRef}
+        className="flex flex-col w-full gap-1 overflow-scroll scrollbar-hide"
+      >
         {users?.length !== 0 &&
           users?.map((user: User, i: number) => (
             <TwButton
