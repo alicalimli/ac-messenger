@@ -38,7 +38,7 @@ const useGetUsers = (userID?: string) => {
           where("uid", "!=", userID),
           orderBy("uid"),
           startAfter(latestDoc || 0),
-          limit(6)
+          limit(24)
         ) as CollectionReference;
       } else {
         usersColRef = collection(db, "users") as CollectionReference;
