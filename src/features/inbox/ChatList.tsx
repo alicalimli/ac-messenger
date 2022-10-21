@@ -101,7 +101,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
               : "dark:text-muted-dark"
           } text-sm text-muted-light `}
         >
-          <p className="whitespace-nowrap text-ellipsis overflow-hidden max-w-[10rem]">
+          <p className="whitespace-nowrap text-ellipsis overflow-hidden max-w-[7rem]">
             {isGroup
               ? recipient?.lastMessage?.message
               : chat[1].lastMessage?.message}
