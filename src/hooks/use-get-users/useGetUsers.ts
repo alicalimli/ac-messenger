@@ -18,6 +18,7 @@ let latestDoc: QueryDocumentSnapshot<DocumentData> | null = null;
 
 const useGetUsers = (userID?: string) => {
   const [users, setUsers] = useState<User[]>([]);
+  const [isMaximum, setIsMaximum] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -25,6 +26,8 @@ const useGetUsers = (userID?: string) => {
 
   const getUsers = async (userID?: string) => {
     try {
+      if (isMaximum) return;
+
       setIsPending(true);
       setErrorMsg("");
 
@@ -35,7 +38,7 @@ const useGetUsers = (userID?: string) => {
           where("uid", "!=", userID),
           orderBy("uid"),
           startAfter(latestDoc || 0),
-          limit(4)
+          limit(6)
         ) as CollectionReference;
       } else {
         usersColRef = collection(db, "users") as CollectionReference;
@@ -49,7 +52,10 @@ const useGetUsers = (userID?: string) => {
 
       latestDoc = data.docs[data.docs.length - 1];
 
-      if (data.empty) return;
+      if (data.empty) {
+        setIsMaximum(true);
+        return setIsPending(false);
+      }
 
       setUsers((state) => [...state, ...users]);
       setIsPending(false);
@@ -61,6 +67,7 @@ const useGetUsers = (userID?: string) => {
 
   const searchUser = async (searchVal: string, currentUser?: User) => {
     try {
+      setIsMaximum(false);
       latestDoc = null;
 
       if (!searchVal) {
@@ -79,8 +86,6 @@ const useGetUsers = (userID?: string) => {
       const data = await getDocs(usersColRef);
 
       const users = data.docs.map((doc) => {
-        console.log(doc.data());
-
         return { ...doc.data() };
       }) as User[];
 

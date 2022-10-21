@@ -52,7 +52,7 @@ const AddContacts = () => {
   };
 
   return (
-    <aside className="flex flex-col items-center p-1 py-4 sm:p-4 h-1/2">
+    <aside className="flex flex-col items-center p-1 py-4 sm:p-4 h-full">
       {recipient && (
         <Modal setShowModal={setShowModal}>
           {(showModal as boolean) && (
