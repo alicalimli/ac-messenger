@@ -3,7 +3,7 @@ import { ErrorMsg, LoadingSpinner, ProfilePicture, TwButton } from "components";
 import { getUserState } from "features/authentication/userSlice";
 import { useAppSelector, useGetUsers } from "hooks";
 import { User } from "interfaces";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const memberBtnClass =
@@ -25,10 +25,11 @@ const AddMemberModal = ({
   setShowModal,
 }: AddMemberModalProps) => {
   const { user: currentUser } = useAppSelector(getUserState);
-
-  const { users, isPending, searchUser } = useGetUsers(
-    currentUser.uid.toString()
+  const { users, isPending, searchUser, getUsers } = useGetUsers(
+    currentUser.uid
   );
+
+  const scrollContainerRef = useRef<any>(null);
 
   const [searchVal, setSearchVal] = useState<string>("");
 
@@ -61,6 +62,16 @@ const AddMemberModal = ({
     searchUser(searchVal, currentUser);
   };
 
+  const scrollHandler = () => {
+    const container = scrollContainerRef.current;
+
+    if (!container) return;
+
+    let triggerHeight = container.scrollTop + container.offsetHeight;
+    if (triggerHeight >= container.scrollHeight) {
+      getUsers(currentUser.uid);
+    }
+  };
   const getIsMemberBtnClass = (userID: string) => {
     return isMember(userID) ? memberBtnClass : nonMemberBtnClass;
   };
@@ -92,7 +103,11 @@ const AddMemberModal = ({
         </label>
       </form>
 
-      <ul className="flex flex-col gap-4 h-full w-full overflow-y-scroll overflow-x-hidden scrollbar-hide">
+      <ul
+        onScroll={scrollHandler}
+        ref={scrollContainerRef}
+        className="flex flex-col gap-4 h-full w-full overflow-y-scroll overflow-x-hidden scrollbar-hide"
+      >
         {users?.length !== 0 &&
           users?.map((user) => (
             <li key={user.uid}>
