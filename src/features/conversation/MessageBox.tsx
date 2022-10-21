@@ -134,6 +134,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
               >
                 <input
                   type="text"
+                  autoFocus
                   value={editedMsg}
                   className="bg-primary-main text-white rounded-br-sm flex rounded-3xl py-1.5 px-3 break-all text-md max-w-xs w-auto h-fit text-start"
                   onChange={(e) => setEditedMsg(e.target.value)}
