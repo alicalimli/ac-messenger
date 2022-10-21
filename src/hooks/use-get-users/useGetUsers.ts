@@ -2,6 +2,8 @@ import {
   collection,
   CollectionReference,
   getDocs,
+  limit,
+  orderBy,
   query,
   where,
 } from "firebase/firestore";
@@ -25,7 +27,8 @@ const useGetUsers = (userID?: string) => {
       if (userID) {
         usersColRef = query(
           collection(db, "users"),
-          where("uid", "!=", userID)
+          where("uid", "!=", userID),
+          orderBy("uid")
         ) as CollectionReference;
       } else {
         usersColRef = collection(db, "users") as CollectionReference;
@@ -45,16 +48,17 @@ const useGetUsers = (userID?: string) => {
     }
   };
 
-  const searchUser = async (searchVal: string) => {
+  const searchUser = async (searchVal: string, currentUser?: User) => {
     try {
       if (!searchVal) {
-        return getUsers();
+        return getUsers(currentUser?.uid);
       }
 
       setErrorMsg("");
 
       const usersColRef = query(
         collection(db, "users"),
+        where("displayName", "!=", currentUser?.displayName || ""),
         where("displayName", ">=", searchVal),
         where("displayName", "<=", searchVal + "\uf8ff")
       );

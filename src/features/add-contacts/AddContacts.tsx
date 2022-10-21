@@ -25,7 +25,7 @@ const AddContacts = () => {
   const searchChangeHandler = (e: any) => {
     const searchVal = e.target.value;
     setSearchVal(searchVal);
-    searchUser(searchVal);
+    searchUser(searchVal, currentUser);
   };
 
   const contactClickHandler = (recipient: User) => {

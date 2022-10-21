@@ -58,7 +58,7 @@ const AddMemberModal = ({
   const searchChangeHandler = (e: any) => {
     const searchVal = e.target.value;
     setSearchVal(searchVal);
-    searchUser(searchVal);
+    searchUser(searchVal, currentUser);
   };
 
   const getIsMemberBtnClass = (userID: string) => {
