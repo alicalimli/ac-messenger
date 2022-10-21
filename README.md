@@ -1,17 +1,15 @@
-
 # AC Messenger
 
 A Full Stack Chat Application using React and Firebase
 
-
 ## Features
 
 - Group Chats
+- Edit/Delete Messages
 - Sending Images
 - Profile Editing
 - Google Sign In
 - Light / Dark mode toggler
-
 
 ## Installation
 
@@ -39,7 +37,7 @@ Step 4: Start the dev server
   npm start
 ```
 
-You can use this to execute it all at once:
+Execute all at once:
 
 ```bash
   git clone https://github.com/alicalimli/ac-messenger && cd ac-messenger && npm install && npm start
@@ -49,8 +47,6 @@ You can use this to execute it all at once:
 
 You can support this project by leaving a star, Thank you 😁
 
-
 ## Authors
 
 - [@alicalimli](https://www.github.com/alicalimli)
-
