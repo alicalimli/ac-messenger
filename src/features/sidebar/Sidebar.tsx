@@ -100,7 +100,10 @@ const Sidebar = () => {
             ) : (
               <BiMoon className="text-muted-light dark:text-muted-dark text-2xl" />
             )}
-            <TwTooltip tip="toggle darkmode" position="right"></TwTooltip>
+            <TwTooltip
+              tip={darkmode ? "lightmode" : "darkmode"}
+              position="right"
+            ></TwTooltip>
           </TwButton>
 
           <TwButton
