@@ -97,9 +97,9 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
         <div
           className={` flex gap-1 ${
             chat[1].unread
-              ? "font-bold dark:text-white"
-              : "dark:text-muted-dark"
-          } text-sm text-muted-light `}
+              ? "text-black dark:text-white "
+              : "dark:text-muted-dark text-muted-light"
+          } text-sm  `}
         >
           <p className="whitespace-nowrap text-ellipsis overflow-hidden max-w-[7rem]">
             {isGroup
@@ -107,7 +107,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
               : chat[1].lastMessage?.message}
           </p>
           <span>•</span>
-          <time className="">{lastMsgDate}</time>
+          <time className="w-fit">{lastMsgDate}</time>
         </div>
       </div>
 
