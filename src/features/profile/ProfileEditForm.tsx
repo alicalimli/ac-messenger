@@ -57,6 +57,7 @@ const ProfileEditForm = ({
       </h2>
 
       <InputForm
+        autoFocus={true}
         label="Display Name"
         type="text"
         isSmall={true}

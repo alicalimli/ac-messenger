@@ -71,6 +71,7 @@ const SignIn = ({
 
       <InputForm
         label="Email"
+        autoFocus={true}
         type="email"
         state={email}
         setState={setEmail}

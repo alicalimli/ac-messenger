@@ -15,6 +15,7 @@ interface InputFormProps {
   stateFocus?: boolean;
   maxLength?: number;
   className?: string;
+  autoFocus?: boolean;
   setStateFocus?: (state: boolean) => void;
 }
 
@@ -30,6 +31,7 @@ const InputForm = ({
   setState,
   className,
   stateFocus,
+  autoFocus = false,
   variant,
   setStateFocus,
   maxLength,
@@ -80,6 +82,7 @@ const InputForm = ({
         }`}
         minLength={1}
         maxLength={maxLength}
+        autoFocus={autoFocus}
         id={noSpaceLabel}
         autoComplete="off"
         type={inputType}
