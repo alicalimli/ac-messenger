@@ -8,7 +8,6 @@ A Full Stack Chat Application using React and Firebase
 
 https://user-images.githubusercontent.com/79793867/197838521-9d89673d-ee9b-42d0-a705-55c472c4c42c.mp4
 
-
 ## Features
 
 - Group Chats
@@ -18,36 +17,40 @@ https://user-images.githubusercontent.com/79793867/197838521-9d89673d-ee9b-42d0-
 - Google Sign In
 - Light / Dark mode toggler
 
-## Installation
+## Setup Firebase Project
 
-Step 1: Clone the Repository
+- Create Firebase Project
+- Enable Authentication ( Email and Google Auth )
+- Enable Firestore DB and Storage
+- Create Collections ( users, userChats, chats, globalChats )
 
-```bash
-  git clone https://github.com/alicalimli/ac-messenger
-```
+## Installation Process
 
-Step 2: Go to the project directory
-
-```bash
-  cd ac-messenger
-```
-
-Step 3: Install NPM Packages
+Step 1: Clone Repository and Install Packages
 
 ```bash
-  npm install
+  git clone https://github.com/alicalimli/ac-messenger && cd ac-messenger && npm install
 ```
 
-Step 4: Start the dev server
+Step 2: Create firebaseConfig.ts file inside src/setup/firebase directory
+
+```bash
+export const firebaseConfig = {
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
+};
+
+```
+
+Step 3: Start the development server
 
 ```bash
   npm start
-```
-
-Execute all at once:
-
-```bash
-  git clone https://github.com/alicalimli/ac-messenger && cd ac-messenger && npm install && npm start
 ```
 
 ## Support
