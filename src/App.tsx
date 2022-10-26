@@ -13,6 +13,7 @@ import {
   onSnapshot,
   serverTimestamp,
   Timestamp,
+  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { getPendingMsg, getToastMsg } from "toastSlice";

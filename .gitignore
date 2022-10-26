@@ -6,3 +6,4 @@ dist/
 coverage/
 .vsc
 .DS_Store
+firebaseConfig.ts
