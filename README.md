@@ -26,15 +26,16 @@ https://user-images.githubusercontent.com/79793867/197838521-9d89673d-ee9b-42d0-
 
 ## Installation Process
 
-Step 1: Clone Repository and Install Packages
+Step 1: Clone Repository and Install Packages.
 
 ```bash
   git clone https://github.com/alicalimli/ac-messenger && cd ac-messenger && npm install
 ```
 
-Step 2: Create firebaseConfig.ts file inside src/setup/firebase directory
+Step 2: Create firebaseConfig.ts file inside **src/setup/firebase** directory.
 
 ```bash
+// firebaseConfig.ts
 export const firebaseConfig = {
   apiKey: "",
   authDomain: "",
@@ -47,7 +48,7 @@ export const firebaseConfig = {
 
 ```
 
-Step 3: Start the development server
+Step 3: Start the development server.
 
 ```bash
   npm start
