@@ -2,6 +2,13 @@
 
 A Full Stack Chat Application using React and Firebase
 
+## Recent Update Preview
+
+- Added Group Chats
+
+https://user-images.githubusercontent.com/79793867/197838521-9d89673d-ee9b-42d0-a705-55c472c4c42c.mp4
+
+
 ## Features
 
 - Group Chats
