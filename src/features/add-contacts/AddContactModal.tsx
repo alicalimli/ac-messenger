@@ -40,7 +40,7 @@ const AddContactModal = ({
       setShowModal(false);
       setIsPending(false);
 
-      dispatch(changeChat(recipient));
+      dispatch(changeChat({ recipient }));
       dispatch(createToast("Contact added successfuly."));
     } catch (error) {
       console.log(error);

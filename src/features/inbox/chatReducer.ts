@@ -18,7 +18,7 @@ export const chatSlice = createSlice({
   reducers: {
     changeChat: (
       state,
-      action: PayloadAction<{ recipient: User | any; isGroup: boolean }>
+      action: PayloadAction<{ recipient: User | any; isGroup?: boolean }>
     ) => {
       if (!auth.currentUser || !action.payload) return;
 
