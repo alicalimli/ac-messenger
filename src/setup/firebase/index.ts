@@ -4,7 +4,7 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { firebaseConfig } from "./firebaseConfig";
-import createGlobalChat from "utils/create-global-chat/createGlobalChat";
+import { createGlobalChat } from "utils";
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
