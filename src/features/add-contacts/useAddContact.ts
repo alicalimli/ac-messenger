@@ -8,14 +8,12 @@ import {
 } from "firebase/firestore";
 import { User } from "interfaces";
 import { db } from "setup/firebase";
+import { createCombinedId } from "utils";
 
 const useAddContact = () => {
   const addContact = async (currentUser: User, recipient: User) => {
     try {
-      const combinedId =
-        currentUser.uid > recipient.uid
-          ? currentUser.uid + recipient.uid
-          : recipient.uid + currentUser.uid;
+      const combinedId = createCombinedId(currentUser.uid, recipient.uid);
 
       const userDocRef = doc(db, "users", currentUser.uid.toString());
       const recipientDocRef = doc(db, "users", recipient.uid.toString());

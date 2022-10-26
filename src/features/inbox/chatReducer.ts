@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "interfaces";
 import { auth } from "setup/firebase";
+import { createCombinedId } from "utils/index";
 
 // type InitialStateType = {
 //   user: User | {};
@@ -34,10 +35,7 @@ export const chatSlice = createSlice({
 
       state.isGroup = false;
       state.recipient = action.payload.recipient;
-      state.chatId =
-        currentUser.uid > recipient.uid
-          ? currentUser.uid + recipient.uid
-          : recipient.uid + currentUser.uid;
+      state.chatId = createCombinedId(currentUser.uid, recipient.uid);
     },
     resetChat: (state) => {
       state.chatId = "";
