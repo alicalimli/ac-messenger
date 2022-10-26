@@ -85,6 +85,7 @@ const setUserInfoDoc = async () => {
       [globalChatID]: {
         isGroup: true,
         groupID: globalChatID,
+        isGlobalChat: true,
         lastMessage: {
           message: "You've joined the chat.",
           date: Timestamp.now(),

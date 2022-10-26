@@ -43,7 +43,8 @@ const useCreateGroup = () => {
       await setDoc(groupChatRef, {
         groupID: groupChatID,
         groupName: groupName,
-        groupAdmin: ownerUID,
+        ownerUID,
+        groupAdmins: [ownerUID],
         photoURL: photoURL,
         membersID: [...membersID, ownerUID],
         dateCreated: Timestamp.now(),

@@ -34,7 +34,6 @@ const useUploadImage = () => {
       const imageRef = ref(storage, imageName);
 
       setImageStorageName(imageName);
-      console.log(imageInputRef);
 
       const upBytes = await uploadBytes(imageRef, imageUpload);
       const downloadURL = await getDownloadURL(upBytes.ref);
