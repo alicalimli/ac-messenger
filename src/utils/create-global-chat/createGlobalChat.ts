@@ -10,17 +10,18 @@ const createGlobalChat = async (db: any) => {
     const chatsRef = doc(db, "chats", globalChatID);
 
     const globalChatInfo = {
+      ownerUID: "",
       groupID: globalChatID,
       groupName: "Global Chat",
       groupAdmins: [],
-      photoURL:
-        "https://media.istockphoto.com/vectors/work-from-anywhere-around-the-world-remote-working-or-freelance-or-vector-id1340230976?b=1&k=20&m=1340230976&s=612x612&w=0&h=xun7tll_qGMQd0pI0HQ4JuXUjWAk_vij24Kcm4qtBQI=",
       membersID: [],
       dateCreated: Timestamp.now(),
       lastMessage: {
         message: "Group Created.",
         date: Timestamp.now(),
       },
+      photoURL:
+        "https://media.istockphoto.com/vectors/work-from-anywhere-around-the-world-remote-working-or-freelance-or-vector-id1340230976?b=1&k=20&m=1340230976&s=612x612&w=0&h=xun7tll_qGMQd0pI0HQ4JuXUjWAk_vij24Kcm4qtBQI=",
     };
 
     setDoc(globalChatRef, globalChatInfo);

@@ -14,7 +14,7 @@ export default interface groupChat {
   };
 }
 
-export default interface groupChatMock {
+export interface groupChatMock {
   groupID: string;
   isGroup: boolean;
   isGlobal?: boolean;
