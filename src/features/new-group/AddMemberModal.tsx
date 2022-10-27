@@ -44,9 +44,7 @@ const AddMemberModal = ({
     setMembersID((membersID: string[]) => [...membersID, userID]);
 
   const addMemberClickHandler = (user: User) => {
-    isMember(user.uid.toString())
-      ? removeMember(user.uid.toString())
-      : addMember(user.uid.toString());
+    isMember(user.uid) ? removeMember(user.uid) : addMember(user.uid);
   };
 
   const handleAddMembersBtn = (e: any) => {
@@ -126,10 +124,10 @@ const AddMemberModal = ({
                 <button
                   onClick={() => addMemberClickHandler(user)}
                   className={`${getIsMemberBtnClass(
-                    user.uid.toString()
+                    user.uid
                   )}   duration-300 hover:scale-x-105 active:scale-95 ml-auto border text-sm p-1 px-3 h-fit rounded-full`}
                 >
-                  {isMember(user.uid.toString()) ? "added" : "add"}
+                  {isMember(user.uid) ? "added" : "add"}
                 </button>
               </div>
             </li>

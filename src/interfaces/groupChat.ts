@@ -19,3 +19,5 @@ export interface groupChatMock {
   isGroup: boolean;
   isGlobal?: boolean;
 }
+
+export type groupChatMockArray = [string, groupChatMock];

@@ -23,7 +23,7 @@ const AddContactModal = ({
   recipient,
 }: AddContactModalProps) => {
   const [isPending, setIsPending] = useState(false);
-  const online = recipient && useGetUserStatus(recipient.uid.toString());
+  const online = recipient && useGetUserStatus(recipient.uid);
 
   const dispatch = useAppDispatch();
   const addContact = useAddContact();

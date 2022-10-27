@@ -4,7 +4,7 @@ import Message from "./message";
 import userChat from "./userChat";
 import groupChat from "./groupChat";
 
-import { groupChatMock } from "./groupChat";
+import { groupChatMock, groupChatMockArray } from "./groupChat";
 import { userChatArray } from "./userChat";
 
 export type {
@@ -15,4 +15,5 @@ export type {
   userChatArray,
   groupChat,
   groupChatMock,
+  groupChatMockArray,
 };

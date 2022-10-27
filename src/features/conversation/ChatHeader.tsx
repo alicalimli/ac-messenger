@@ -12,7 +12,7 @@ interface ChatHeaderProps {
 
 const ChatHeader = ({ recipient }: ChatHeaderProps) => {
   const { isGroup } = useAppSelector(getChatState);
-  const online = useGetUserStatus(recipient?.uid?.toString());
+  const online = useGetUserStatus(recipient?.uid);
 
   const dispatch = useAppDispatch();
 

@@ -68,9 +68,7 @@ const NewGroupContainer = () => {
   };
 
   const handleRemoveMember = (userID: string) => {
-    const newMembers = members.filter(
-      (member) => member.uid.toString() !== userID
-    );
+    const newMembers = members.filter((member) => member.uid !== userID);
     const newMembersID = membersID.filter((id) => id !== userID);
 
     setMembers(newMembers);
@@ -213,7 +211,7 @@ const NewGroupContainer = () => {
                     </p>
                   </div>
                   <button
-                    onClick={() => handleRemoveMember(member.uid.toString())}
+                    onClick={() => handleRemoveMember(member.uid)}
                     className={`ml-auto bg-red-600 duration-300 hover:bg-red-500 active:scale-95 text-white text-sm p-1 px-3 h-fit rounded-full`}
                   >
                     remove

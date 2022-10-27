@@ -1,5 +1,5 @@
 export default interface User {
-  uid: number;
+  uid: string;
   displayName: string;
   email: string;
   photoURL: string;

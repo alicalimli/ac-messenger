@@ -15,8 +15,8 @@ const useAddContact = () => {
     try {
       const combinedId = createCombinedId(currentUser.uid, recipient.uid);
 
-      const userDocRef = doc(db, "users", currentUser.uid.toString());
-      const recipientDocRef = doc(db, "users", recipient.uid.toString());
+      const userDocRef = doc(db, "users", currentUser.uid);
+      const recipientDocRef = doc(db, "users", recipient.uid);
 
       const chatDocRef = doc(db, "chats", String(combinedId));
       const chatDocData = await getDoc(chatDocRef);
