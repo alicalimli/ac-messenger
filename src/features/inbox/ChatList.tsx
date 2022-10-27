@@ -1,6 +1,6 @@
 import { ProfilePicture, TwButton } from "components";
 import React, { useEffect, useState } from "react";
-import { User } from "interfaces";
+import { User, userChatArray } from "interfaces";
 import { getChatState } from "./chatReducer";
 import { useAppSelector } from "hooks";
 import { useFormatDate, useGetUser, useGetUserStatus } from "hooks";
@@ -8,7 +8,7 @@ import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "setup/firebase";
 
 interface ChatListProps {
-  chat: any;
+  chat: userChatArray;
   chatClickHandler: (recipient: User, isGroup: boolean) => void;
 }
 
