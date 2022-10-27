@@ -3,7 +3,7 @@ import { ErrorMsg, LoadingSpinner, TwButton, TwTooltip } from "components";
 import { inbox_empty } from "assets/images";
 
 import ChatList from "./ChatList";
-import { User } from "interfaces";
+import { GroupChat, User } from "interfaces";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { getUserState } from "features/authentication/userSlice";
 import { doc, onSnapshot } from "firebase/firestore";
@@ -19,7 +19,7 @@ const ChatsContainer = () => {
   const [chats, setChats] = useState<Object[]>([]);
   const dispatch = useAppDispatch();
 
-  const chatClickHandler = (recipient: User, isGroup: boolean) => {
+  const chatClickHandler = (recipient: User | GroupChat, isGroup: boolean) => {
     dispatch(changeChat({ recipient, isGroup }));
   };
 

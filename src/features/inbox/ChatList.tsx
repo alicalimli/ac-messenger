@@ -1,19 +1,20 @@
 import { ProfilePicture, TwButton } from "components";
 import React, { useEffect, useState } from "react";
-import { User, userChatArray } from "interfaces";
+import { GroupChat, User, userChatArray } from "interfaces";
 import { getChatState } from "./chatReducer";
 import { useAppSelector } from "hooks";
 import { useFormatDate, useGetUser, useGetUserStatus } from "hooks";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, QuerySnapshot } from "firebase/firestore";
 import { db } from "setup/firebase";
+import { Unsubscribe } from "firebase/auth";
 
 interface ChatListProps {
   chat: userChatArray;
-  chatClickHandler: (recipient: User, isGroup: boolean) => void;
+  chatClickHandler: (recipient: User | GroupChat, isGroup: boolean) => void;
 }
 
 const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
-  const [recipient, setRecipient] = useState<User | any>();
+  const [recipient, setRecipient] = useState<User | GroupChat>();
   const [isGroup, setIsGroup] = useState(false);
   const [lastMsgDate, setLastMsgDate] = useState("");
 
@@ -25,22 +26,15 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
   const getUserInfo = useGetUser();
 
   const chatListClickHandler = () => {
-    if (isGroup) {
-      const groupData = {
-        groupName: recipient.groupName,
-        groupID: recipient.groupID,
-        photoURL: recipient.photoURL,
-      };
-
-      chatClickHandler(groupData, isGroup);
-      return;
+    if (isGroup && recipient) {
+      return chatClickHandler(recipient as GroupChat, isGroup);
     }
 
     chatClickHandler(recipient as User, isGroup);
   };
 
   useEffect(() => {
-    let unsub: any = null;
+    let unsub: Unsubscribe;
 
     if (chat[1].isGroup) {
       const groupChatDoc = doc(db, "groupChats", chat[1].groupID);
@@ -51,7 +45,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
 
         const date = formatDate(groupChatData.lastMessage.date.toDate());
         setLastMsgDate(date as string);
-        setRecipient(doc.data());
+        setRecipient(doc.data() as GroupChat);
       });
 
       return setIsGroup(true);
