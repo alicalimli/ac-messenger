@@ -14,14 +14,12 @@ import { changeSideContent } from "reducers/sideContentReducer";
 
 const ChatsContainer = () => {
   const { user: currentUser } = useAppSelector(getUserState);
-  const { chatId } = useAppSelector(getChatState);
   const [isPending, setIsPending] = useState<boolean>(false);
 
-  const [chats, setChats] = useState<[]>([]);
+  const [chats, setChats] = useState<Object[]>([]);
   const dispatch = useAppDispatch();
 
   const chatClickHandler = (recipient: User, isGroup: boolean) => {
-    console.log(isGroup);
     dispatch(changeChat({ recipient, isGroup }));
   };
 

@@ -1,4 +1,5 @@
 import { Timestamp } from "firebase/firestore";
+import { groupChatMockArray } from "./groupChat";
 
 export default interface userChat {
   active: boolean;
@@ -13,4 +14,4 @@ export default interface userChat {
   };
 }
 
-export type userChatArray = [string, userChat];
+export type userChatArray = [string, userChat] & groupChatMockArray;
