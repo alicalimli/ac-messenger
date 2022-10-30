@@ -41,6 +41,7 @@ const useAddContact = () => {
             message: "contacted user.",
             date: serverTimestamp(),
           },
+          isGroup: false,
         });
 
         await updateDoc(recipientChatDocRef, {
@@ -50,6 +51,7 @@ const useAddContact = () => {
             date: serverTimestamp(),
           },
           [combinedId + ".seen"]: false,
+          isGroup: false,
         });
       }
     } catch (error) {

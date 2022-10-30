@@ -68,7 +68,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
 
     const date = formatDate(chat[1].lastMessage.date.toDate());
     setLastMsgDate(date as string);
-  }, [chat[1].lastMessage?.message]);
+  }, [chat[1].lastMessage.message]);
 
   return (
     <TwButton
@@ -86,7 +86,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
       />
       <div className="flex flex-col items-start">
         <h2 className="text-xl text-black dark:text-white">
-          {isGroup ? recipient?.groupName : recipient?.displayName}
+          {chat[1].isGroup ? recipient?.groupName : recipient?.displayName}
         </h2>
         <div
           className={` flex gap-1 ${
@@ -96,7 +96,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
           } text-sm  `}
         >
           <p className="whitespace-nowrap text-ellipsis overflow-hidden max-w-[7rem]">
-            {isGroup
+            {chat[1].isGroup
               ? recipient?.lastMessage?.message
               : chat[1].lastMessage?.message}
           </p>

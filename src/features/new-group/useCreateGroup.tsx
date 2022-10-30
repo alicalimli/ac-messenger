@@ -56,6 +56,9 @@ const useCreateGroup = () => {
 
       await updateDoc(currentUserChatDocRef, {
         [groupChatID]: {
+          active: false,
+          unread: false,
+          unreadMsgCount: 0,
           isGroup: true,
           groupID: groupChatID,
           lastMessage: {

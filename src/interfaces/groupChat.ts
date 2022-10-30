@@ -16,8 +16,13 @@ export default interface GroupChat {
 
 export interface GroupChatMock {
   groupID: string;
-  isGroup: boolean;
+  isGroup: true;
+  active: boolean;
+  unread: boolean;
+  unreadMsgCount: number;
+  lastMessage: {
+    message: string;
+    date: Timestamp;
+  };
   isGlobal?: boolean;
 }
-
-export type GroupChatMockArray = [string, GroupChatMock];
