@@ -188,6 +188,13 @@ export const userSlice = createSlice({
       state.user = action.payload;
     },
     logout: (state) => {
+      if (auth.currentUser) {
+        const userDocRef = doc(db, "users", auth.currentUser.uid);
+        updateDoc(userDocRef, {
+          status: "offline",
+        });
+      }
+
       state.user = initialState;
       signOut(auth);
     },
