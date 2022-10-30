@@ -58,6 +58,10 @@ const useCreateGroup = () => {
         [groupChatID]: {
           isGroup: true,
           groupID: groupChatID,
+          lastMessage: {
+            message: "Group Created.",
+            date: Timestamp.now(),
+          },
         },
       });
 

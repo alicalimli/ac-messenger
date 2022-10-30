@@ -24,6 +24,7 @@ const useSendMessage = () => {
   const createLastMessage = async (message: string) => {
     if (isGroup) {
       const groupChatRef = doc(db, "groupChats", recipient.groupID);
+      const userChatDocRef = doc(db, "userChats", currentUser.uid);
 
       updateDoc(groupChatRef, {
         lastMessage: {
@@ -31,6 +32,14 @@ const useSendMessage = () => {
           date: Timestamp.now(),
         },
       });
+
+      updateDoc(userChatDocRef, {
+        [chatId + ".lastMessage"]: {
+          message,
+          date: Timestamp.now(),
+        },
+      });
+
       return;
     }
 
