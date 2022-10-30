@@ -61,6 +61,7 @@ const setUserInfoDoc = async () => {
 
   if (!userDocData.exists()) {
     setDoc(userDocRef, {
+      isUser: true,
       uid: auth.currentUser.uid,
       photoURL: auth.currentUser.photoURL,
       displayName: auth.currentUser.displayName,

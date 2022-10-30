@@ -41,6 +41,7 @@ const useCreateGroup = () => {
       });
 
       await setDoc(groupChatRef, {
+        isGroup: true,
         groupID: groupChatID,
         groupName: groupName,
         ownerUID,

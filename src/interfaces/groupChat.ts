@@ -1,6 +1,7 @@
 import { Timestamp } from "firebase/firestore";
 
 export default interface GroupChat {
+  isGroup: true;
   ownerUID: string;
   photoURL: string;
   groupName: string;

@@ -86,7 +86,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
       />
       <div className="flex flex-col items-start">
         <h2 className="text-xl text-black dark:text-white">
-          {chat[1].isGroup ? recipient?.groupName : recipient?.displayName}
+          {recipient?.isGroup ? recipient?.groupName : recipient?.displayName}
         </h2>
         <div
           className={` flex gap-1 ${
@@ -96,7 +96,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
           } text-sm  `}
         >
           <p className="whitespace-nowrap text-ellipsis overflow-hidden max-w-[7rem]">
-            {chat[1].isGroup
+            {chat[1].isGroup && recipient?.isGroup
               ? recipient?.lastMessage?.message
               : chat[1].lastMessage?.message}
           </p>

@@ -20,7 +20,8 @@ const ChatsContainer = () => {
   const dispatch = useAppDispatch();
 
   const chatClickHandler = (recipient: User | GroupChat, isGroup: boolean) => {
-    if (recipient.groupName) {
+    if (recipient.isGroup) {
+      // Must delete this properties because redux toolkit gives an error with dates
       delete recipient["lastMessage"];
       delete recipient["dateCreated"];
     }
