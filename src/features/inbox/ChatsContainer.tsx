@@ -20,6 +20,10 @@ const ChatsContainer = () => {
   const dispatch = useAppDispatch();
 
   const chatClickHandler = (recipient: User | GroupChat, isGroup: boolean) => {
+    if (recipient.groupName) {
+      delete recipient["lastMessage"];
+      delete recipient["dateCreated"];
+    }
     dispatch(changeChat({ recipient, isGroup }));
   };
 
