@@ -180,6 +180,19 @@ export const signUp = createAsyncThunk(
   }
 );
 
+export const logout = createAsyncThunk("user/logout", async (state) => {
+  try {
+    if (auth.currentUser) {
+      const userDocRef = doc(db, "users", auth.currentUser.uid);
+      await updateDoc(userDocRef, {
+        status: "offline",
+      });
+    }
+  } catch (error) {
+    throw error;
+  }
+});
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -203,6 +216,10 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(logout.fulfilled, (state) => {
+      state.user = initialState;
+      signOut(auth);
+    });
     builder.addMatcher(
       isAnyOf(
         emailLogin.fulfilled,
@@ -242,6 +259,6 @@ export const userSlice = createSlice({
 
 export const getUserState = (state: any) => state.user;
 
-export const { login, logout, clearUserStateErr } = userSlice.actions;
+export const { login, clearUserStateErr } = userSlice.actions;
 
 export default userSlice.reducer;

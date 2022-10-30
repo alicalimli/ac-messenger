@@ -50,11 +50,12 @@ const App = () => {
 
     const userDocRef = doc(db, "users", authUser.uid);
 
+    updateDoc(userDocRef, {
+      status: "online",
+    });
+
     const unsub = onSnapshot(userDocRef, async (snapshot) => {
       if (!snapshot.exists()) return;
-      updateDoc(userDocRef, {
-        status: "online",
-      });
 
       dispatch(login(snapshot.data()));
     });
