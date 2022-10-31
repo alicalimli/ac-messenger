@@ -68,7 +68,7 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
 
     const date = formatDate(chat[1].lastMessage.date.toDate());
     setLastMsgDate(date as string);
-  }, [chat[1].lastMessage.message]);
+  }, [chat[1].lastMessage?.message]);
 
   return (
     <TwButton
