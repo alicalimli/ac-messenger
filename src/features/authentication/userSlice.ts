@@ -5,7 +5,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { User } from "interfaces";
+import { User, UserGroupChat } from "interfaces";
 import { signInWithPopup } from "firebase/auth";
 import { auth, db, googleAuthProvider } from "setup/firebase";
 import {
@@ -59,18 +59,21 @@ const setUserInfoDoc = async () => {
   const globalChatID = "HSEgujrHH66JVwXmg7QG";
   const globalChatRef = doc(db, "groupChats", globalChatID);
 
+  const userInfo: User = {
+    isUser: true,
+    isGroup: false,
+    uid: auth.currentUser.uid,
+    photoURL: auth.currentUser.photoURL as string,
+    displayName: auth.currentUser.displayName as string,
+    email: auth.currentUser.email as string,
+    bio: "A Bio.",
+    status: "off",
+    location: "Earth",
+    contacts: [],
+  };
+
   if (!userDocData.exists()) {
-    setDoc(userDocRef, {
-      isUser: true,
-      uid: auth.currentUser.uid,
-      photoURL: auth.currentUser.photoURL,
-      displayName: auth.currentUser.displayName,
-      email: auth.currentUser.email,
-      bio: "A Bio.",
-      status: "off",
-      location: "Earth",
-      contacts: [],
-    });
+    setDoc(userDocRef, userInfo);
   }
 
   if (!userChatsDocData.exists()) {
@@ -81,17 +84,21 @@ const setUserInfoDoc = async () => {
 
     if (globalChatData) return;
 
-    // Adds user in global chat group
-    updateDoc(userChatsDocRef, {
-      [globalChatID]: {
-        isGroup: true,
-        groupID: globalChatID,
-        isGlobalChat: true,
-        lastMessage: {
-          message: "You've joined the chat.",
-          date: Timestamp.now(),
-        },
+    const userGroupChatInfo: UserGroupChat = {
+      groupID: globalChatID,
+      isGroup: true,
+      active: false,
+      unread: false,
+      unreadMsgCount: 0,
+      lastMessage: {
+        message: "Group Chat Created.",
+        date: Timestamp.now(),
       },
+    };
+
+    // Adds user in global chat test group
+    updateDoc(userChatsDocRef, {
+      [globalChatID]: userGroupChatInfo,
     });
 
     updateDoc(globalChatRef, {

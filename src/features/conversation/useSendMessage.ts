@@ -76,15 +76,20 @@ const useSendMessage = () => {
 
   const sendMessage = (message: string) => {
     const chatDocRef = doc(db, "chats", chatId.toString());
+
+    const messageInfo: Message = {
+      id: uuid(),
+      message,
+      senderId: currentUser.uid,
+      date: Timestamp.now(),
+      img: "",
+      isEdited: false,
+      lastEdited: null,
+    };
+
     try {
       updateDoc(chatDocRef, {
-        messages: arrayUnion({
-          id: uuid(),
-          message,
-          senderId: currentUser.uid,
-          date: Timestamp.now(),
-          img: "",
-        }),
+        messages: arrayUnion(messageInfo),
       });
 
       createLastMessage(message);
@@ -95,14 +100,19 @@ const useSendMessage = () => {
 
   const sendImage = (imgURL: string) => {
     const chatDocRef = doc(db, "chats", chatId);
+
+    const messageInfo: Message = {
+      id: uuid(),
+      message: "",
+      senderId: currentUser.uid,
+      date: Timestamp.now(),
+      img: imgURL,
+      isEdited: false,
+      lastEdited: null,
+    };
+
     updateDoc(chatDocRef, {
-      messages: arrayUnion({
-        id: uuid(),
-        message: "",
-        senderId: currentUser.uid,
-        date: Timestamp.now(),
-        img: imgURL,
-      }),
+      messages: arrayUnion(messageInfo),
     });
 
     createLastMessage("sent a picture.");
@@ -117,7 +127,8 @@ const useSendMessage = () => {
 
   const editMsg = async (msg: Message, editedMsg: string) => {
     const chatDocRef = doc(db, "chats", chatId);
-    const msgObj = {
+
+    const msgObj: Message = {
       ...msg,
       message: editedMsg,
       lastEdited: Timestamp.now(),

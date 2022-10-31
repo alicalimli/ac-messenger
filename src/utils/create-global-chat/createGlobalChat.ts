@@ -1,4 +1,5 @@
 import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore";
+import { GroupChat } from "interfaces";
 
 const createGlobalChat = async (db: any) => {
   const globalChatID = "HSEgujrHH66JVwXmg7QG";
@@ -9,7 +10,8 @@ const createGlobalChat = async (db: any) => {
   if (!globalChatDoc.exists()) {
     const chatsRef = doc(db, "chats", globalChatID);
 
-    const globalChatInfo = {
+    const globalChatInfo: GroupChat = {
+      isGroup: true,
       ownerUID: "",
       groupID: globalChatID,
       groupName: "Global Chat",

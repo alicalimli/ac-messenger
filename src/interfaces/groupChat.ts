@@ -5,8 +5,8 @@ export default interface GroupChat {
   ownerUID: string;
   photoURL: string;
   groupName: string;
-  groupAdmins: [];
-  membersID: [];
+  groupAdmins: string[];
+  membersID: string[];
   groupID: string;
   dateCreated: Timestamp;
   lastMessage: {
@@ -15,7 +15,7 @@ export default interface GroupChat {
   };
 }
 
-export interface GroupChatMock {
+export interface UserGroupChat {
   groupID: string;
   isGroup: true;
   active: boolean;

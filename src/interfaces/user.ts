@@ -8,5 +8,5 @@ export default interface User {
   bio: string;
   location: string;
   status: string;
-  contacts: number[];
+  contacts: string[];
 }

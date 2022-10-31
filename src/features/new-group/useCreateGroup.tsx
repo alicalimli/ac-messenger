@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 import { createToast } from "toastSlice";
 import { useState } from "react";
 import { changeSideContent } from "reducers/sideContentReducer";
+import { GroupChat, GroupChatMock, UserChat, UserGroupChat } from "interfaces";
 
 type groupInfoParams = {
   ownerUID: string;
@@ -40,7 +41,7 @@ const useCreateGroup = () => {
         messages: [],
       });
 
-      await setDoc(groupChatRef, {
+      const groupChatInfo: GroupChat = {
         isGroup: true,
         groupID: groupChatID,
         groupName: groupName,
@@ -53,29 +54,42 @@ const useCreateGroup = () => {
           message: "Group Created.",
           date: Timestamp.now(),
         },
-      });
+      };
+
+      await setDoc(groupChatRef, groupChatInfo);
+
+      const updateUserChatInfo: GroupChatMock = {
+        active: false,
+        unread: false,
+        unreadMsgCount: 0,
+        isGroup: true,
+        groupID: groupChatID,
+        lastMessage: {
+          message: "Group Created.",
+          date: Timestamp.now(),
+        },
+      };
 
       await updateDoc(currentUserChatDocRef, {
-        [groupChatID]: {
-          active: false,
-          unread: false,
-          unreadMsgCount: 0,
-          isGroup: true,
-          groupID: groupChatID,
-          lastMessage: {
-            message: "Group Created.",
-            date: Timestamp.now(),
-          },
-        },
+        [groupChatID]: updateUserChatInfo,
       });
+
+      const userGroupChatInfo: UserGroupChat = {
+        groupID: groupChatID,
+        isGroup: true,
+        active: false,
+        unread: false,
+        unreadMsgCount: 0,
+        lastMessage: {
+          message: "Group Chat Created.",
+          date: Timestamp.now(),
+        },
+      };
 
       membersID.forEach(async (id: string) => {
         const userChatsDocRef = doc(db, "userChats", id);
         await updateDoc(userChatsDocRef, {
-          [groupChatID]: {
-            isGroup: true,
-            groupID: groupChatID,
-          },
+          [groupChatID]: userGroupChatInfo,
         });
       });
 

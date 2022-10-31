@@ -5,7 +5,7 @@ export default interface Message {
   senderId: string;
   message: string;
   date: Timestamp;
-  img?: string;
-  lastEdited?: Timestamp;
-  isEdited?: string;
+  img: string;
+  lastEdited: Timestamp | null;
+  isEdited: boolean;
 }

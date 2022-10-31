@@ -1,6 +1,6 @@
 import { ProfilePicture, TwButton } from "components";
 import React, { useEffect, useState } from "react";
-import { GroupChat, User, userChatArray } from "interfaces";
+import { GroupChat, User, UserChatArray } from "interfaces";
 import { getChatState } from "./chatReducer";
 import { useAppSelector } from "hooks";
 import { useFormatDate, useGetUser, useGetUserStatus } from "hooks";
@@ -9,7 +9,7 @@ import { db } from "setup/firebase";
 import { Unsubscribe } from "firebase/auth";
 
 interface ChatListProps {
-  chat: userChatArray;
+  chat: UserChatArray;
   chatClickHandler: (recipient: User | GroupChat, isGroup: boolean) => void;
 }
 

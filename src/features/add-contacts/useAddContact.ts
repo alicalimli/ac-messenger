@@ -4,9 +4,10 @@ import {
   getDoc,
   serverTimestamp,
   setDoc,
+  Timestamp,
   updateDoc,
 } from "firebase/firestore";
-import { User } from "interfaces";
+import { User, UserChat } from "interfaces";
 import { db } from "setup/firebase";
 import { createCombinedId } from "utils";
 
@@ -35,23 +36,33 @@ const useAddContact = () => {
           contacts: arrayUnion(currentUser.uid),
         });
 
-        await updateDoc(userChatDocRef, {
-          [combinedId + ".userInfo"]: { uid: recipient.uid },
-          [combinedId + ".lastMessage"]: {
-            message: "contacted user.",
-            date: serverTimestamp(),
+        const userChatInfo: UserChat = {
+          isGroup: false,
+          active: false,
+          unread: false,
+          unreadMsgCount: 0,
+          userInfo: {
+            uid: recipient.uid,
           },
-          [combinedId + ".isGroup"]: false,
+          lastMessage: {
+            message: "contacted user.",
+            date: serverTimestamp() as Timestamp,
+          },
+        };
+
+        await updateDoc(userChatDocRef, {
+          [combinedId]: userChatInfo,
         });
 
-        await updateDoc(recipientChatDocRef, {
-          [combinedId + ".userInfo"]: { uid: currentUser.uid },
-          [combinedId + ".lastMessage"]: {
-            message: "contacted user.",
-            date: serverTimestamp(),
+        const recipientChatInfo: UserChat = {
+          ...userChatInfo,
+          userInfo: {
+            uid: currentUser.uid,
           },
-          [combinedId + ".seen"]: false,
-          [combinedId + ".isGroup"]: false,
+        };
+
+        await updateDoc(recipientChatDocRef, {
+          [combinedId]: recipientChatInfo,
         });
       }
     } catch (error) {
