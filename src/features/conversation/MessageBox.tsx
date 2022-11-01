@@ -65,7 +65,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
       setSenderData(senderData);
     });
   }, []);
-
+  
   return (
     <motion.div
       variants={VARIANTS_MANAGER}

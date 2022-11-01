@@ -59,8 +59,11 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   };
 
   useEffect(() => {
-    if (!latestMsg.current) return;
-    latestMsg.current.scrollIntoView();
+    // For some reason i have to delay it with 1ms for it work.
+    setTimeout(() => {
+      if (!latestMsg.current) return;
+      latestMsg.current.scrollIntoView();
+    }, 1);
   }, [messages, latestMsg.current]);
 
   useEffect(() => {
@@ -88,7 +91,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
 
   return (
     <section className="flex h-full w-full">
-      <div className="w-full flex flex-col gap-4 bg-slate-200 dark:bg-slate-800">
+      <div className="w-full flex flex-col bg-slate-200 dark:bg-slate-800">
         <ChatHeader recipient={recipient} />
 
         <div className="flex flex-grow items-center justify-center">
@@ -108,7 +111,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
           <main
             ref={conversationContainer}
             onScroll={chatBoxScrollHandler}
-            className="relative flex flex-col overflow-scroll scrollbar-hide px-4"
+            className="relative flex flex-col overflow-y-scroll overflow-x-hidden px-4 scrollbar-hide"
           >
             {messages
               .sort((a: any, b: any) => a.date.toDate() - b.date.toDate())
@@ -117,7 +120,6 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
                   key={currentMsg.id}
                   currentMsg={currentMsg}
                   latestMsgRef={latestMsg}
-                  recipient={recipient}
                 />
               ))}
           </main>
