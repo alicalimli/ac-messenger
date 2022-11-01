@@ -65,7 +65,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
       setSenderData(senderData);
     });
   }, []);
-  
+
   return (
     <motion.div
       variants={VARIANTS_MANAGER}
@@ -119,7 +119,7 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
               isCurrentUser ? "flex-row-reverse" : ""
             }`}
           >
-            {isGroup && (
+            {isGroup && !isCurrentUser && (
               <ProfilePicture
                 size="small"
                 isOnline={false}
