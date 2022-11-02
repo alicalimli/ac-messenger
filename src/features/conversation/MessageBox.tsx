@@ -28,8 +28,6 @@ const MessageBox = ({
 }: MessageBoxProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [msgDate, setMsgDate] = useState("");
-
-  const [editedMsg, setEditedMsg] = useState<string>(currentMsg.message);
   const [senderData, setSenderData] = useState<User>();
 
   const isEditingThisMsg = isEditingMsg && editingMsgRef.current === currentMsg;
@@ -40,7 +38,7 @@ const MessageBox = ({
   const getUserInfo = useGetUser();
   const formatDate = useFormatDate();
 
-  const { deleteMsg, editMsg } = useSendMessage();
+  const { deleteMsg } = useSendMessage();
 
   const isCurrentUser = currentMsg.senderId === currentUser.uid;
 
@@ -150,7 +148,7 @@ const MessageBox = ({
                   className="relative group dark:text-muted-dark
                   text-muted-light p-2  hover:bg-muted-light/10 dark:hover:bg-muted-light flex justify-center items-center"
                 >
-                  {isEditingThisMsg ? <AiOutlineStop /> : <BsPencilFill />}
+                  <BsPencilFill />
                 </button>
               </div>
             ) : (
