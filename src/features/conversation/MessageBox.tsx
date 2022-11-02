@@ -3,19 +3,12 @@ import { motion } from "framer-motion";
 import { useAppSelector, useGetUser } from "hooks";
 import { Message, User } from "interfaces";
 import { useFormatDate } from "hooks";
-import React, { memo, useEffect, useRef, useState } from "react";
-import { ProfilePicture, SharedLayout, TwTooltip } from "components";
+import React, { memo, useEffect, useState } from "react";
+import { ProfilePicture, SharedLayout } from "components";
 import { VARIANTS_MANAGER } from "setup/variants-manager";
 import { getChatState } from "features/inbox/chatReducer";
-import {
-  BsFillTrashFill,
-  BsPen,
-  BsPencilFill,
-  BsPenFill,
-  BsThreeDotsVertical,
-} from "react-icons/bs";
+import { BsFillTrashFill, BsPencilFill } from "react-icons/bs";
 import useSendMessage from "./useSendMessage";
-import { current } from "@reduxjs/toolkit";
 import { AiOutlineStop } from "react-icons/ai";
 
 interface MessageBoxProps {
