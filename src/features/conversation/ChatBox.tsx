@@ -30,6 +30,9 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const { chatId, isGroup } = useAppSelector(getChatState);
   const { user: currentUser } = useAppSelector(getUserState);
 
+  const [isEditingMsg, setIsEditingMsg] = useState(false);
+  const editingMsgRef = useRef();
+
   const conversationDocRef = chatId && doc(db, "chats", chatId);
   const userChatDocRef = doc(db, "userChats", currentUser.uid);
 
@@ -45,6 +48,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
       setShowArrowDown(false);
     }
   };
+  console.log("renders");
 
   const unreadMsg = async () => {
     // handle number of unread messages
@@ -120,6 +124,9 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
                   key={currentMsg.id}
                   currentMsg={currentMsg}
                   latestMsgRef={latestMsg}
+                  isEditingMsg={isEditingMsg}
+                  editingMsgRef={editingMsgRef}
+                  setIsEditingMsg={setIsEditingMsg}
                 />
               ))}
           </main>
@@ -141,7 +148,13 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
             )}
           </AnimatePresence>
 
-          {chatId && <ChatForm />}
+          {chatId && (
+            <ChatForm
+              isEditingMsg={isEditingMsg}
+              editingMsgRef={editingMsgRef}
+              setIsEditingMsg={setIsEditingMsg}
+            />
+          )}
         </div>
       </div>
     </section>

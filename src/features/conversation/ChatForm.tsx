@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { MdSend } from "react-icons/md";
 import { RiImageAddLine } from "react-icons/ri";
@@ -7,24 +7,48 @@ import { Modal, TwButton } from "components";
 import useSendMessage from "./useSendMessage";
 import { useUploadImage } from "hooks";
 
-const ChatForm = () => {
-  const [message, setMessage] = useState<string>("");
+interface ChatFormProps {
+  editingMsgRef: any;
+  isEditingMsg: boolean;
+  setIsEditingMsg: (state: boolean) => void;
+}
+
+const ChatForm = ({
+  editingMsgRef,
+  isEditingMsg,
+  setIsEditingMsg,
+}: ChatFormProps) => {
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [message, setMessage] = useState("");
+
+  const chatInputRef = useRef<HTMLInputElement>(null);
 
   const { uploadImg, removeUploadImg, imgURL } = useUploadImage();
-  const { sendMessage, sendImage } = useSendMessage();
+  const { sendMessage, sendImage, editMsg } = useSendMessage();
 
   const imageInputRef = useRef<any>(null);
 
-  const handleFormSubmit = async (event: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     try {
-      event.preventDefault();
+      e.preventDefault();
       setMessage("");
-      sendMessage(message);
+
+      if (isEditingMsg) {
+        setIsEditingMsg(false);
+        editMsg(editingMsgRef.current, message);
+      } else {
+        sendMessage(message);
+      }
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    if (!isEditingMsg) return;
+    setMessage(editingMsgRef.current.message);
+    chatInputRef.current?.focus();
+  }, [isEditingMsg]);
 
   const handleImageChange = async (e: any) => {
     setShowModal(true);
@@ -117,6 +141,7 @@ const ChatForm = () => {
 
       <input
         required
+        ref={chatInputRef}
         type="text"
         value={message}
         placeholder="Message here"

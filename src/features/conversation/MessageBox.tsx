@@ -20,16 +20,26 @@ import { AiOutlineStop } from "react-icons/ai";
 
 interface MessageBoxProps {
   currentMsg: Message;
+  editingMsgRef: any;
   latestMsgRef: React.Ref<HTMLButtonElement> | any;
+  isEditingMsg: boolean;
+  setIsEditingMsg: (state: boolean) => void;
 }
 
-const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
+const MessageBox = ({
+  currentMsg,
+  editingMsgRef,
+  latestMsgRef,
+  isEditingMsg,
+  setIsEditingMsg,
+}: MessageBoxProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
   const [msgDate, setMsgDate] = useState("");
 
   const [editedMsg, setEditedMsg] = useState<string>(currentMsg.message);
   const [senderData, setSenderData] = useState<User>();
+
+  const isEditingThisMsg = isEditingMsg && editingMsgRef.current === currentMsg;
 
   const { user: currentUser } = useAppSelector(getUserState);
   const { isGroup } = useAppSelector(getChatState);
@@ -46,16 +56,8 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
   };
 
   const editBtnHandler = () => {
-    setIsEditing((state) => !state);
-  };
-
-  const editedMsgSubmitHandler = (e: React.FormEvent, msg: Message) => {
-    e.preventDefault();
-
-    if (!editedMsg) return;
-
-    setIsEditing(false);
-    editMsg(msg, editedMsg);
+    setIsEditingMsg(true);
+    editingMsgRef.current = currentMsg;
   };
 
   useEffect(() => {
@@ -126,24 +128,11 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
                 photoURL={senderData?.photoURL}
               />
             )}
-            {isEditing ? (
-              <form
-                onSubmit={(e: React.FormEvent) =>
-                  editedMsgSubmitHandler(e, currentMsg)
-                }
-              >
-                <input
-                  type="text"
-                  autoFocus
-                  value={editedMsg}
-                  className="bg-primary-main text-white rounded-br-sm flex rounded-3xl py-1.5 px-3 break-all text-md max-w-xs w-auto h-fit text-start"
-                  onChange={(e) => setEditedMsg(e.target.value)}
-                />
-              </form>
-            ) : (
-              <button
-                ref={latestMsgRef}
-                className={`
+
+            <button
+              ref={latestMsgRef}
+              disabled={isEditingMsg ? true : false}
+              className={`
               peer flex rounded-3xl py-1.5 px-3 break-all text-md max-w-xs w-fit h-fit text-start
               ${
                 isCurrentUser
@@ -151,11 +140,10 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
                   : "bg-white text-black rounded-bl-sm"
               }
             `}
-              >
-                {currentMsg.message}
-              </button>
-            )}
-            {isCurrentUser && (
+            >
+              {currentMsg.message}
+            </button>
+            {isCurrentUser && !isEditingMsg ? (
               <div className="flex translate-y-1/4 invisible group-hover:visible  rounded-full dark:bg-bgmain-dark shadow-md overflow-hidden ">
                 <button
                   onClick={() => deleteBtnHandler(currentMsg)}
@@ -169,9 +157,11 @@ const MessageBox = ({ currentMsg, latestMsgRef }: MessageBoxProps) => {
                   className="relative group dark:text-muted-dark
                   text-muted-light p-2  hover:bg-muted-light/10 dark:hover:bg-muted-light flex justify-center items-center"
                 >
-                  {isEditing ? <AiOutlineStop /> : <BsPencilFill />}
+                  {isEditingThisMsg ? <AiOutlineStop /> : <BsPencilFill />}
                 </button>
               </div>
+            ) : (
+              ""
             )}
           </div>
         )}
