@@ -64,14 +64,16 @@ const MessageBox = ({
       variants={VARIANTS_MANAGER}
       initial="fade-out"
       animate="fade-in"
-      className={`group gap-2 py-1 flex  ${
-        isCurrentUser ? "flex-row-reverse" : ""
-      }`}
+      className={`group gap-2 py-1 flex  
+
+      ${isCurrentUser ? "flex-row-reverse" : ""}`}
     >
       <div
-        className={`flex flex-col gap-0.5 ${
-          isCurrentUser ? "items-end" : "items-start"
-        }`}
+        className={`flex flex-col gap-0.5 duration-300
+        
+        ${isEditingThisMsg && "-translate-x-3"}
+        
+        ${isCurrentUser ? "items-end" : "items-start"}`}
       >
         {currentMsg.img ? (
           <motion.img
