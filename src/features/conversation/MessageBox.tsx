@@ -4,7 +4,7 @@ import { useAppSelector, useGetUser } from "hooks";
 import { Message, User } from "interfaces";
 import { useFormatDate } from "hooks";
 import React, { memo, useEffect, useState } from "react";
-import { ProfilePicture, SharedLayout } from "components";
+import { ProfilePicture, SharedLayout, TwTooltip } from "components";
 import { VARIANTS_MANAGER } from "setup/variants-manager";
 import { getChatState } from "features/inbox/chatReducer";
 import { BsFillTrashFill, BsPencilFill } from "react-icons/bs";
@@ -136,6 +136,15 @@ const MessageBox = ({
             >
               {currentMsg.message}
             </button>
+            {isEditingThisMsg && (
+              <button
+                className="relative"
+                onClick={() => setIsEditingMsg(false)}
+              >
+                <AiOutlineStop className="text-2xl text-black dark:text-white" />
+                <TwTooltip tip="cancel" position="top" />
+              </button>
+            )}
             {isCurrentUser && !isEditingMsg ? (
               <div className="flex translate-y-1/4 invisible group-hover:visible  rounded-full dark:bg-bgmain-dark shadow-md overflow-hidden ">
                 <button

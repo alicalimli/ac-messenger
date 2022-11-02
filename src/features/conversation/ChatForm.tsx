@@ -45,9 +45,12 @@ const ChatForm = ({
   };
 
   useEffect(() => {
-    if (!isEditingMsg) return;
-    setMessage(editingMsgRef.current.message);
-    chatInputRef.current?.focus();
+    if (isEditingMsg) {
+      setMessage(editingMsgRef.current.message);
+      chatInputRef.current?.focus();
+    } else {
+      setMessage("");
+    }
   }, [isEditingMsg]);
 
   const handleImageChange = async (e: any) => {
@@ -86,7 +89,7 @@ const ChatForm = ({
   return (
     <form
       onSubmit={handleFormSubmit}
-      className="relative w-full flex px-2 items-center gap-1 bg-white dark:bg-bgmain-dark rounded-full duration-300"
+      className="relative w-full flex pr-2 items-center gap-1 bg-white dark:bg-bgmain-dark rounded-full duration-300"
     >
       <Modal
         isHidingModal={false}
