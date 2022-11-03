@@ -23,8 +23,11 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const [showArrowDown, setShowArrowDown] = useState(false);
   const conversationContainer = useRef<HTMLDivElement>(null);
   const latestMsg = useRef<HTMLButtonElement>(null);
+  const [fetchedMsgs, setFetchedMsgs] = useState<Message[]>([]);
 
-  const [messages, setMessages] = useState<[]>([]);
+  const [latestDocSlice, setLatestDocSlice] = useState<any>(0);
+
+  const [messages, setMessages] = useState<Message[]>([]);
   const [isPending, setIsPending] = useState<boolean>(false);
 
   const { chatId, isGroup } = useAppSelector(getChatState);
@@ -47,8 +50,16 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
     } else {
       setShowArrowDown(false);
     }
+
+    const container = conversationContainer.current;
+
+    if (!container) return;
+
+    let triggerHeight = container.scrollTop === 0;
+    if (triggerHeight) {
+      setLatestDocSlice((state: number) => (state -= 15));
+    }
   };
-  console.log("renders");
 
   const unreadMsg = async () => {
     // handle number of unread messages
@@ -73,13 +84,17 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   useEffect(() => {
     if (!chatId) return;
 
+    setLatestDocSlice(-15);
+
     setIsPending(true);
     setMessages([]);
 
     unreadMsg();
 
-    const unsub = onSnapshot(conversationDocRef, (doc) => {
-      doc.exists() && setMessages(doc.data().messages);
+    const unsub = onSnapshot(conversationDocRef, (doc: any) => {
+      if (!doc.exists()) return;
+
+      setFetchedMsgs(doc.data().messages);
       setIsPending(false);
     });
 
@@ -92,6 +107,14 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
         });
     };
   }, [chatId]);
+
+  useEffect(() => {
+    if (!fetchedMsgs.length) return;
+
+    if (messages.length === fetchedMsgs.length) return;
+
+    setMessages(fetchedMsgs.slice(latestDocSlice));
+  }, [latestDocSlice, fetchedMsgs]);
 
   return (
     <section className="flex h-full w-full">
