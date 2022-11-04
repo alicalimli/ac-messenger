@@ -107,8 +107,8 @@ const AddContacts = () => {
                 photoURL={user.photoURL}
                 size="small"
               />
-              <div className="flex flex-col gap-1 text-left">
-                <p>{user.displayName}</p>
+              <div className="flex flex-col text-left">
+                <p className="text-md">{user.displayName}</p>
                 <p className="text-muted text-sm ">{user.bio}</p>
               </div>
             </TwButton>
