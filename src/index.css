@@ -22,4 +22,10 @@ body {
   .text-muted {
     @apply dark:text-muted-dark text-muted-light;
   }
+  .bg-main {
+    @apply bg-white dark:bg-bgmain-dark;
+  }
+  .bg-secondary {
+    @apply bg-slate-200 dark:bg-[#1D2840];
+  }
 }

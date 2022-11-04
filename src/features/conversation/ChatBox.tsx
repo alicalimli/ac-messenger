@@ -118,7 +118,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
 
   return (
     <section className="flex h-full w-full">
-      <div className="w-full flex flex-col bg-slate-200 dark:bg-slate-800">
+      <div className="bg-secondary w-full flex flex-col">
         <ChatHeader recipient={recipient} />
 
         <div className="flex flex-grow items-center justify-center">
