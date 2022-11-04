@@ -1,9 +1,8 @@
-import { StrictMode, useEffect } from "react";
+import { lazy, StrictMode, Suspense, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "hooks";
 
-import { Authentication, Home } from "pages";
 import { Toast } from "components";
 import { useLocalStorage } from "hooks";
 import { auth, db } from "setup/firebase";
@@ -21,6 +20,9 @@ import { login } from "features/authentication";
 import { User } from "interfaces";
 import { getUserState } from "features/authentication/userSlice";
 import { getThemeState } from "features/sidebar/themeSlice";
+
+const Home = lazy(() => import("pages/Home"));
+const Authentication = lazy(() => import("pages/Authentication"));
 
 const App = () => {
   const [authUser] = useAuthState(auth);
@@ -86,21 +88,23 @@ const App = () => {
           {toastMsg && <Toast durationMS={3000} msg={toastMsg} />}
         </AnimatePresence>
 
-        {currentUser.uid ? (
-          <motion.div
-            className="flex"
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            initial={{ opacity: 0 }}
-            exit={{ opacity: 0 }}
-          >
-            <Home />
-          </motion.div>
-        ) : (
-          <Authentication
-            keepSignedIn={keepSignedIn}
-            setKeepSignedIn={setKeepSignedIn}
-          />
-        )}
+        <Suspense fallback={<h1>Loading</h1>}>
+          {currentUser.uid ? (
+            <motion.div
+              className="flex"
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              initial={{ opacity: 0 }}
+              exit={{ opacity: 0 }}
+            >
+              <Home />
+            </motion.div>
+          ) : (
+            <Authentication
+              keepSignedIn={keepSignedIn}
+              setKeepSignedIn={setKeepSignedIn}
+            />
+          )}
+        </Suspense>
       </BrowserRouter>
     </StrictMode>
   );
