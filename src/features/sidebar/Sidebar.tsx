@@ -51,7 +51,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <nav className="relative hidden p-3 py-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 pt-10">
+      <nav className="relative hidden p-3 py-4 w-fit bg-secondary md:flex md:flex-col gap-4 pt-10">
         <button
           onClick={() => sidebarProfileBtnHandler("profile")}
           className="text relative group flex justify-center gap-2 items-center px-4 border-b border-main pb-4"

@@ -89,7 +89,7 @@ const ChatForm = ({
   return (
     <form
       onSubmit={handleFormSubmit}
-      className="relative w-full flex pr-2 items-center gap-1 bg-white dark:bg-bgmain-dark rounded-full duration-300"
+      className="relative w-full flex pr-2 items-center gap-1 bg-main rounded-full duration-300"
     >
       <Modal
         isHidingModal={false}
