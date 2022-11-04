@@ -47,6 +47,16 @@ const InputForm = ({
     }
   };
 
+  const inputVariantClass =
+    variant === "underline" ? "border-b rounded-none px-0" : "border";
+
+  const inputSizeClass = isSmall ? "p-1" : "p-2";
+
+  const inputValidClass =
+    !isValid && state
+      ? instruction && "border-red-500"
+      : "border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main";
+
   return (
     <label
       htmlFor={`${noSpaceLabel}-input`}
@@ -68,15 +78,7 @@ const InputForm = ({
       </div>
 
       <input
-        className={`${className} ${
-          variant === "underline" ? "border-b rounded-none px-0" : "border"
-        }  text-lg bg-transparent ${
-          isSmall ? "p-1" : "p-2"
-        } px-4 flex items-center rounded-xl outline-none duration-200 text ${
-          !isValid && state
-            ? instruction && "border-red-500"
-            : "border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main"
-        }`}
+        className={`${className} text-lg bg-transparent ${inputVariantClass} ${inputSizeClass} px-4 flex items-center rounded-xl outline-none duration-200 text ${inputValidClass}`}
         minLength={1}
         maxLength={maxLength}
         autoFocus={autoFocus}
