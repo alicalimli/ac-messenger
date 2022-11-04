@@ -42,18 +42,16 @@ const SettingsContainer = () => {
           className="relative group w-full"
           onClick={() => dispatch(toggleDarkmode())}
         >
-          <HiOutlineMoon className="text-muted-light dark:text-muted-dark text-2xl" />
+          <HiOutlineMoon className="text-muted text-2xl" />
           Darkmode
-          <p className="text-muted-light dark:text-muted-dark ml-auto">
-            {darkmode ? "on" : "off"}
-          </p>
+          <p className="text-muted ml-auto">{darkmode ? "on" : "off"}</p>
         </TwButton>
         <TwButton
           variant="transparent"
           className="relative group w-full"
           onClick={handleLogout}
         >
-          <AiOutlineLogout className="text-muted-light dark:text-muted-dark text-2xl" />
+          <AiOutlineLogout className="text-muted text-2xl" />
           Logout
         </TwButton>
       </main>

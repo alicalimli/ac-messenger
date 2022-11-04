@@ -103,12 +103,10 @@ const ProfileContainer = () => {
               />
             </label>
           </div>
-          <h2 className="text-lg text-black dark:text-white">
+          <h2 className="text text-lg">
             {user?.displayName || "fetching display name..."}
           </h2>
-          <p className="text-muted-light dark:text-muted-dark">
-            {user?.bio || "fetching bio..."}
-          </p>
+          <p className="text-muted">{user?.bio || "fetching bio..."}</p>
         </section>
 
         <section className="p-2 flex flex-col gap-4 border-t border-muted-light/10 dark:border-muted-dark/10">
@@ -122,7 +120,7 @@ const ProfileContainer = () => {
                   onClick={() => copyToClipboard(obj.text as string)}
                   key={(obj.text as string) + i}
                 >
-                  <Icon className="text-muted-light dark:text-muted-dark text-2xl" />
+                  <Icon className="text-muted text-2xl" />
                   {obj.text}
                   <TwTooltip tip="Copy to clipboard" position="top" />
                 </TwButton>
@@ -140,6 +138,3 @@ const ProfileContainer = () => {
 };
 
 export default ProfileContainer;
-function setImageStorageName(imageName: string) {
-  throw new Error("Function not implemented.");
-}

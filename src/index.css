@@ -14,3 +14,12 @@ body {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .text {
+    @apply text-black dark:text-white;
+  }
+  .text-muted {
+    @apply dark:text-muted-dark text-muted-light;
+  }
+}

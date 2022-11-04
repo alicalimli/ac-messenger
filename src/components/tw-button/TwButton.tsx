@@ -10,7 +10,7 @@ interface TwButtonProps {
 }
 
 const ContainedBtnClass = ` bg-primary-main hover:bg-primary-tinted text-white`;
-const TransparentBtnClass = `flex gap-4 items-center hover:bg-muted-light/5 text-md dark:hover:bg-muted-dark/10 text-black dark:text-white`;
+const TransparentBtnClass = `text flex gap-4 items-center hover:bg-muted-light/5 text-md dark:hover:bg-muted-dark/10`;
 const OutlineBtnClass = `${TransparentBtnClass} border`;
 
 const TwButton = ({

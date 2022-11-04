@@ -180,7 +180,7 @@ const NewGroupContainer = () => {
 
         <section className="flex flex-col gap-1 border-t border-muted-light/10 dark:border-muted-dark/10">
           <div className="flex items-center gap-1">
-            <h1 className="text-black dark:text-white text-lg">{`Members (${members?.length})`}</h1>
+            <h1 className="text text-lg">{`Members (${members?.length})`}</h1>
             <div className="ml-auto flex gap-1">
               {" "}
               <TwButton
@@ -188,7 +188,7 @@ const NewGroupContainer = () => {
                 className="relative group z-10 py-3 px-3"
                 onClick={() => setShowModal(true)}
               >
-                <MdPersonAdd className="text-muted-light dark:text-muted-dark text-2xl" />
+                <MdPersonAdd className="text-muted text-2xl" />
               </TwButton>
             </div>
           </div>
@@ -203,12 +203,8 @@ const NewGroupContainer = () => {
                     size="small"
                   />
                   <div className="flex flex-col gap-1 text-left">
-                    <p className="text-black dark:text-white">
-                      {member.displayName}
-                    </p>
-                    <p className="text-muted-light dark:text-muted-dark text-sm ">
-                      {member.bio}
-                    </p>
+                    <p className="text">{member.displayName}</p>
+                    <p className="text-muted text-sm ">{member.bio}</p>
                   </div>
                   <button
                     onClick={() => handleRemoveMember(member.uid)}

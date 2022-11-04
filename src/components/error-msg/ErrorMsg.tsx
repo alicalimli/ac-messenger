@@ -17,10 +17,8 @@ const ErrorMsg = ({ img, msg, subMsg, className }: ErrorMsgProps) => {
     >
       <img src={img} className="w-64 md:w-96" />
       <figcaption className="flex flex-col gap-2 text-center">
-        <h1 className="text-black dark:text-white text-xl max-w-md ">{msg}</h1>
-        <p className="text-muted-light dark:text-muted-dark text-sm ">
-          {subMsg}
-        </p>
+        <h1 className="text text-xl max-w-md ">{msg}</h1>
+        <p className="text-muted text-sm ">{subMsg}</p>
       </figcaption>
     </motion.figure>
   );

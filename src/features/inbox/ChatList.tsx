@@ -85,15 +85,11 @@ const ChatList = ({ chat, chatClickHandler }: ChatListProps): JSX.Element => {
         size="medium"
       />
       <div className="flex flex-col items-start">
-        <h2 className="text-xl text-black dark:text-white">
+        <h2 className="text-xl">
           {recipient?.isGroup ? recipient?.groupName : recipient?.displayName}
         </h2>
         <div
-          className={` flex gap-1 ${
-            chat[1].unread
-              ? "text-black dark:text-white "
-              : "dark:text-muted-dark text-muted-light"
-          } text-sm  `}
+          className={`${!chat[1].unread && "text-muted"} flex gap-1 text-sm`}
         >
           <p className="whitespace-nowrap text-ellipsis overflow-hidden max-w-[7rem]">
             {chat[1].isGroup && recipient?.isGroup

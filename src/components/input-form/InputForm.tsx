@@ -53,12 +53,9 @@ const InputForm = ({
       className="flex flex-col gap-2 relative"
     >
       <div className="flex flex-wrap gap-2 items-center">
-        {label && <p className="text-black dark:text-white">{label}</p>}
+        {label && <p className="text">{label}</p>}
         {type === "password" ? (
-          <a
-            className="cursor-pointer text-black dark:text-white"
-            onClick={handleShowPass}
-          >
+          <a className="text cursor-pointer" onClick={handleShowPass}>
             {inputType === "password" ? (
               <BsFillEyeSlashFill className="text-muted text-lg" />
             ) : (
@@ -75,7 +72,7 @@ const InputForm = ({
           variant === "underline" ? "border-b rounded-none px-0" : "border"
         }  text-lg bg-transparent ${
           isSmall ? "p-1" : "p-2"
-        } px-4 flex items-center rounded-xl outline-none duration-200 text-black dark:text-white ${
+        } px-4 flex items-center rounded-xl outline-none duration-200 text ${
           !isValid && state
             ? instruction && "border-red-500"
             : "border-muted dark:border-muted-dark hover:border-primary-main dark:hover:border-primary-main focus:border-primary-main"
@@ -99,7 +96,7 @@ const InputForm = ({
 
       <p
         id={`${noSpaceLabel}-note`}
-        className={`gap-2 text-sm text-muted-light dark:text-muted-dark ${
+        className={`text-muted text-sm gap-2 ${
           stateFocus && state && !isValid
             ? "visible block"
             : "absolute invisible"

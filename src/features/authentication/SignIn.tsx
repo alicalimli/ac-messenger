@@ -53,10 +53,10 @@ const SignIn = ({
   return (
     <form onSubmit={handleLogin} className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
-        <label className="text-3xl font-semibold text-center text-black dark:text-white">
+        <label className="text text-3xl font-semibold text-center">
           ACMessenger
         </label>
-        <label className="text-sm text-center text-muted-light mb-4 text-black dark:text-muted-dark">
+        <label className="text-muted text-sm text-center mb-4">
           Enter your credentials
         </label>
       </div>
@@ -110,7 +110,7 @@ const SignIn = ({
         {status === "pending" ? "Signing in..." : "Sign in"}
       </TwButton>
 
-      <p className="text-muted-light text-sm text-black dark:text-muted-dark">
+      <p className="text-muted text-sm">
         Don't have an account?{" "}
         <button
           type="button"

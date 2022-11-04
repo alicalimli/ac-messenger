@@ -16,7 +16,7 @@ const LoadingSpinner = ({ className, msg }: LoadingSpinnerProps) => {
       className={`${className} flex flex-col justify-center items-center gap-2`}
     >
       <AiOutlineLoading3Quarters className="animate-spin text-3xl  text-primary-main" />
-      <figcaption className="text-black dark:text-white">{msg}</figcaption>
+      <figcaption className="text">{msg}</figcaption>
     </motion.figure>
   );
 };

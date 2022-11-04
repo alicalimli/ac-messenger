@@ -84,9 +84,7 @@ const AddMemberModal = ({
         >
           <AiOutlineArrowLeft className="text-xl" />
         </TwButton>
-        <h1 className="text-xl text-black dark:text-white text-center justify-self-center">
-          Add Members
-        </h1>
+        <h1 className="text-xl text-center justify-self-center">Add Members</h1>
       </div>
       <form className="w-full" autoComplete="off">
         <label htmlFor="search-input">
@@ -96,7 +94,7 @@ const AddMemberModal = ({
             value={searchVal}
             onChange={searchChangeHandler}
             placeholder="Search"
-            className="p-2 px-4 w-full rounded-full text-black dark:text-white bg-muted-light/10 dark:bg-slate-700"
+            className="text p-2 px-4 w-full rounded-full bg-muted-light/10 dark:bg-slate-700"
           />
         </label>
       </form>
@@ -117,9 +115,7 @@ const AddMemberModal = ({
                 />
                 <div className="flex flex-col gap-1 text-left">
                   <p>{user.displayName}</p>
-                  <p className="text-muted-light dark:text-muted-dark text-sm ">
-                    {user.bio}
-                  </p>
+                  <p className="text-muted text-sm ">{user.bio}</p>
                 </div>
                 <button
                   onClick={() => addMemberClickHandler(user)}

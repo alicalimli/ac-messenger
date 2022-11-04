@@ -54,7 +54,7 @@ const Sidebar = () => {
       <nav className="relative hidden p-3 py-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 pt-10">
         <button
           onClick={() => sidebarProfileBtnHandler("profile")}
-          className="relative group flex justify-center gap-2 items-center text-black dark:text-white px-4 border-b  border-muted-light/10
+          className="text relative group flex justify-center gap-2 items-center px-4 border-b  border-muted-light/10
       dark:border-muted-dark/10 pb-4"
         >
           <ProfilePicture
@@ -77,9 +77,7 @@ const Sidebar = () => {
                 key={obj.content}
                 onClick={() => sidebarBtnHandler(obj.content)}
               >
-                <Icon
-                  className={` text-muted-light dark:text-muted-dark text-2xl`}
-                />
+                <Icon className={` text-muted text-2xl`} />
                 <TwTooltip tip={obj.content} position="right" />
                 {sidebarContent === obj.content && (
                   <div className="p-0.5 h-10 w-1 -left-3 top-1/2 -translate-y-1/2 absolute bg-primary-main rounded-full" />
@@ -96,9 +94,9 @@ const Sidebar = () => {
             onClick={darkmodeClickHandler}
           >
             {darkmode ? (
-              <BiSun className="text-muted-light dark:text-muted-dark text-2xl" />
+              <BiSun className="text-muted text-2xl" />
             ) : (
-              <BiMoon className="text-muted-light dark:text-muted-dark text-2xl" />
+              <BiMoon className="text-muted text-2xl" />
             )}
             <TwTooltip
               tip={darkmode ? "lightmode" : "darkmode"}
@@ -111,7 +109,7 @@ const Sidebar = () => {
             className="relative group z-10 py-3 px-3"
             onClick={handleSignOut}
           >
-            <BiLogOut className="text-muted-light dark:text-muted-dark text-2xl" />
+            <BiLogOut className="text-muted text-2xl" />
             <TwTooltip tip="logout" position="right" />
           </TwButton>
         </div>
@@ -131,9 +129,7 @@ const Sidebar = () => {
                 key={obj.content}
                 onClick={() => sidebarBtnHandler(obj.content)}
               >
-                <Icon
-                  className={` text-muted-light dark:text-muted-dark text-2xl`}
-                />
+                <Icon className={` text-muted text-2xl`} />
                 <TwTooltip tip={obj.content} position="top" />
                 {sidebarContent === obj.content && (
                   <div className="p-0.5 h-1 w-10 left-1/2 -bottom-2 -translate-x-1/2 absolute bg-primary-main rounded-full" />

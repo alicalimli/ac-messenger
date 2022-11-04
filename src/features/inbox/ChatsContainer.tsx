@@ -41,7 +41,7 @@ const ChatsContainer = () => {
   return (
     <aside className="p-4 flex flex-col gap-2 h-full">
       <header className="flex gap-1 items-center">
-        <h1 className="ml-4 text-black dark:text-white text-2xl">Chats</h1>
+        <h1 className="ml-4 text text-2xl">Chats</h1>
         <ul className="ml-auto flex gap-1">
           <li>
             {" "}
@@ -52,7 +52,7 @@ const ChatsContainer = () => {
                 dispatch(changeSideContent({ content: "addcontacts" }))
               }
             >
-              <MdPersonAdd className="text-muted-light dark:text-muted-dark text-2xl" />
+              <MdPersonAdd className="text-muted text-2xl" />
               <TwTooltip tip="New Contact" position="bottom" />
             </TwButton>
           </li>
@@ -64,7 +64,7 @@ const ChatsContainer = () => {
                 dispatch(changeSideContent({ content: "new-group" }))
               }
             >
-              <MdGroupAdd className="text-muted-light dark:text-muted-dark text-2xl" />
+              <MdGroupAdd className="text-muted text-2xl" />
               <TwTooltip tip="New Group" position="bottom" />
             </TwButton>
           </li>

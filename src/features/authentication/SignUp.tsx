@@ -74,10 +74,10 @@ const SignUp = ({ setIsSigningIn }: SignUpProps) => {
     <form onSubmit={handleSignUp} className="flex flex-col gap-4">
       {" "}
       <div className="flex flex-col gap-1">
-        <label className="text-3xl font-semibold text-center text-black dark:text-white">
+        <label className="text marker:text-3xl font-semibold text-center">
           Create account
         </label>
-        <label className="text-sm text-muted-light dark:text-muted-dark text-center mb-4">
+        <label className="text-sm text-muted text-center mb-4">
           Fill up the form
         </label>
       </div>
@@ -142,7 +142,7 @@ const SignUp = ({ setIsSigningIn }: SignUpProps) => {
       >
         {status === "pending" ? "Signing up..." : "Sign up"}
       </TwButton>
-      <p className="text-muted-light dark:text-muted-dark text-sm">
+      <p className="text-muted text-sm">
         Already have an account?{" "}
         <button
           type="button"

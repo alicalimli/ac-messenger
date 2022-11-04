@@ -36,11 +36,11 @@ const ChatHeader = ({ recipient }: ChatHeaderProps) => {
           size="small"
         />
         <div className="flex flex-col gap-0">
-          <h2 className="text-xl text-black dark:text-white">
+          <h2 className="text text-xl">
             {recipient.displayName || recipient.groupName}
           </h2>
           {!isGroup && (
-            <p className="text-sm text-muted-light dark:text-muted-dark">
+            <p className="text-muted text-sm">
               {online ? "online" : "offline"}
             </p>
           )}

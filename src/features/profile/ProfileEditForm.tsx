@@ -52,9 +52,7 @@ const ProfileEditForm = ({
 
   return (
     <form onSubmit={handleChangeInfo} className="flex flex-col gap-2 w-64">
-      <h2 className="mb-4 text-black dark:text-white text-xl text-center">
-        Edit Information
-      </h2>
+      <h2 className="text text-xl text-center mb-4">Edit Information</h2>
 
       <InputForm
         autoFocus={true}

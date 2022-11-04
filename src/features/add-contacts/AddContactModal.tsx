@@ -65,8 +65,8 @@ const AddContactModal = ({
         <h2 className="text-lg text-black dark:text-white">
           {recipient.displayName}
         </h2>
-        <p className="text-muted-light dark:text-muted-dark">{recipient.bio}</p>
-        <p className="text-sm text-muted-light dark:text-muted-dark flex items-center gap-1">
+        <p className="text-muted">{recipient.bio}</p>
+        <p className="text-sm text-muted flex items-center gap-1">
           <GoLocation /> {recipient.location}
         </p>
       </header>
