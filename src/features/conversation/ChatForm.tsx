@@ -148,7 +148,7 @@ const ChatForm = ({
         type="text"
         value={message}
         placeholder="Message here"
-        className="p-2 px-4 w-full bg-transparent outline-none text-dark dark:text-white"
+        className="p-2 px-4 w-full bg-transparent outline-none text"
         onChange={(e) => setMessage(e.target.value)}
         onBlur={(e) => setMessage(e.target.value)}
       />

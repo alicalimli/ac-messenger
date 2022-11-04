@@ -74,7 +74,7 @@ const SignUp = ({ setIsSigningIn }: SignUpProps) => {
     <form onSubmit={handleSignUp} className="flex flex-col gap-4">
       {" "}
       <div className="flex flex-col gap-1">
-        <label className="text marker:text-3xl font-semibold text-center">
+        <label className="text text-3xl font-semibold text-center">
           Create account
         </label>
         <label className="text-sm text-muted text-center mb-4">
