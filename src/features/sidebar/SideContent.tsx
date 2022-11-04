@@ -14,7 +14,7 @@ const SideContent = () => {
   const { content: sidebarContent } = useAppSelector(getSideContent);
 
   return (
-    <aside className="relative border-r border-muted-light/10 dark:border-muted-dark/10 w-full h-full md:w-32 md:min-w-[24rem] overflow-x-hidden">
+    <aside className="relative border-r border-main w-full h-full md:w-32 md:min-w-[24rem] overflow-x-hidden">
       <AnimatePresence>
         {sidebarContent === "chats" && (
           <motion.div

@@ -28,4 +28,7 @@ body {
   .bg-secondary {
     @apply bg-slate-200 dark:bg-[#1D2840];
   }
+  .border-main {
+    @apply border-muted-light/10 dark:border-muted-dark/10;
+  }
 }

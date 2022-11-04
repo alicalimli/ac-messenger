@@ -109,7 +109,7 @@ const ProfileContainer = () => {
           <p className="text-muted">{user?.bio || "fetching bio..."}</p>
         </section>
 
-        <section className="p-2 flex flex-col gap-4 border-t border-muted-light/10 dark:border-muted-dark/10">
+        <section className="p-2 flex flex-col gap-4 border-t border-main">
           <div className="flex flex-col gap-1 w-100 ">
             {infoButtons.map((obj, i) => {
               const Icon = obj.icon;

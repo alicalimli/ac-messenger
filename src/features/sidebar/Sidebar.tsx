@@ -54,8 +54,7 @@ const Sidebar = () => {
       <nav className="relative hidden p-3 py-4 w-fit  bg-muted-light/5 dark:bg-muted-dark/5 md:flex md:flex-col gap-4 pt-10">
         <button
           onClick={() => sidebarProfileBtnHandler("profile")}
-          className="text relative group flex justify-center gap-2 items-center px-4 border-b  border-muted-light/10
-      dark:border-muted-dark/10 pb-4"
+          className="text relative group flex justify-center gap-2 items-center px-4 border-b border-main pb-4"
         >
           <ProfilePicture
             isOnline={false}

@@ -21,7 +21,7 @@ const ChatHeader = ({ recipient }: ChatHeaderProps) => {
   };
 
   return (
-    <header className="border-b border-muted-light/10 dark:border-muted-dark/10 w-full p-4  mb-auto bg-white dark:bg-bgmain-dark duration-300 flex gap-2">
+    <header className="border-b border-main w-full p-4  mb-auto bg-white dark:bg-bgmain-dark duration-300 flex gap-2">
       <TwButton
         variant="transparent"
         onClick={handleBackBtn}

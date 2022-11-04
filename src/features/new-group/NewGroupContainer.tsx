@@ -178,7 +178,7 @@ const NewGroupContainer = () => {
           />
         </section>
 
-        <section className="flex flex-col gap-1 border-t border-muted-light/10 dark:border-muted-dark/10">
+        <section className="flex flex-col gap-1 border-t border-main">
           <div className="flex items-center gap-1">
             <h1 className="text text-lg">{`Members (${members?.length})`}</h1>
             <div className="ml-auto flex gap-1">
