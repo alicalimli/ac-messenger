@@ -141,7 +141,7 @@ const MessageBox = ({
                 className="relative"
                 onClick={() => setIsEditingMsg(false)}
               >
-                <AiOutlineStop className="text-2xl text-black dark:text-white" />
+                <AiOutlineStop className="text-2xl text" />
                 <TwTooltip tip="cancel" position="top" />
               </button>
             )}
@@ -149,15 +149,13 @@ const MessageBox = ({
               <div className="flex translate-y-1/4 invisible group-hover:visible  rounded-full dark:bg-bgmain-dark shadow-md overflow-hidden ">
                 <button
                   onClick={() => deleteBtnHandler(currentMsg)}
-                  className="relative group dark:text-muted-dark
-                  text-muted-light p-2 hover:bg-muted-light/10 dark:hover:bg-muted-light flex justify-center items-center"
+                  className="relative group text-muted p-2 hover:bg-muted-light/10 dark:hover:bg-muted-light flex justify-center items-center"
                 >
                   <BsFillTrashFill className="" />
                 </button>
                 <button
                   onClick={() => editBtnHandler()}
-                  className="relative group dark:text-muted-dark
-                  text-muted-light p-2  hover:bg-muted-light/10 dark:hover:bg-muted-light flex justify-center items-center"
+                  className="relative group text-muted p-2  hover:bg-muted-light/10 dark:hover:bg-muted-light flex justify-center items-center"
                 >
                   <BsPencilFill />
                 </button>
@@ -168,12 +166,8 @@ const MessageBox = ({
           </div>
         )}
 
-        <div className="text-xs flex gap-1 items-center text-black dark:text-white">
-          {currentMsg.isEdited && (
-            <span className="dark:text-muted-dark text-muted-light">
-              edited
-            </span>
-          )}
+        <div className="text-xs flex gap-1 items-center text-muted">
+          {currentMsg.isEdited && <span className="text-muted">edited</span>}
           {isGroup && !isCurrentUser && (
             <>
               <p className={`${isCurrentUser ? "text-end" : "text-start"} `}>
