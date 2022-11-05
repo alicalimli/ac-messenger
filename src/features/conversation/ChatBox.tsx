@@ -157,9 +157,9 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
           <AnimatePresence>
             {showArrowDown && (
               <motion.div
-                animate={{ opacity: 1, x: -50 }}
-                initial={{ opacity: 0, x: -50 }}
-                exit={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: "-50%" }}
+                initial={{ opacity: 0, x: "-50%" }}
+                exit={{ opacity: 0, x: "-50%" }}
                 className="absolute -top-3/4 left-1/2 z-10"
               >
                 <TwButton onClick={scrollDown} className="rounded-full px-2">
