@@ -14,7 +14,6 @@ import { AiOutlineStop } from "react-icons/ai";
 interface MessageBoxProps {
   currentMsg: Message;
   editingMsgRef: any;
-  latestMsgRef: React.Ref<HTMLButtonElement> | any;
   isEditingMsg: boolean;
   setIsEditingMsg: (state: boolean) => void;
 }
@@ -22,7 +21,6 @@ interface MessageBoxProps {
 const MessageBox = ({
   currentMsg,
   editingMsgRef,
-  latestMsgRef,
   isEditingMsg,
   setIsEditingMsg,
 }: MessageBoxProps) => {
@@ -79,7 +77,6 @@ const MessageBox = ({
           <motion.img
             src={currentMsg.img}
             layoutId={`${currentMsg.id}`}
-            ref={latestMsgRef}
             onClick={() => {
               setIsExpanded(true);
             }}
@@ -123,7 +120,6 @@ const MessageBox = ({
             )}
 
             <button
-              ref={latestMsgRef}
               disabled={isEditingMsg ? true : false}
               className={`
               peer flex rounded-3xl py-1.5 px-3 break-all text-md max-w-xs w-fit h-fit text-start

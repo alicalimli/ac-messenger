@@ -22,7 +22,7 @@ interface ChatBoxProps {
 const ChatBox = ({ recipient }: ChatBoxProps) => {
   const [showArrowDown, setShowArrowDown] = useState(false);
   const conversationContainer = useRef<HTMLDivElement>(null);
-  const latestMsg = useRef<HTMLButtonElement>(null);
+  const scrollToBottomRef = useRef<HTMLSpanElement>(null);
   const [fetchedMsgs, setFetchedMsgs] = useState<Message[]>([]);
 
   const [latestDocSlice, setLatestDocSlice] = useState<any>(0);
@@ -40,7 +40,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
   const userChatDocRef = doc(db, "userChats", currentUser.uid);
 
   const scrollDown = () => {
-    latestMsg?.current?.scrollIntoView({ behavior: "smooth" });
+    scrollToBottomRef?.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const chatBoxScrollHandler = (event: SyntheticEvent) => {
@@ -73,13 +73,9 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
     });
   };
 
-  useEffect(() => {
-    // For some reason i have to delay it with 1ms for it work.
-    setTimeout(() => {
-      if (!latestMsg.current) return;
-      latestMsg.current.scrollIntoView();
-    }, 1);
-  }, [messages, latestMsg.current]);
+  const scrollToBottom = () => {
+    scrollToBottomRef?.current?.scrollIntoView();
+  };
 
   useEffect(() => {
     if (!chatId) return;
@@ -96,6 +92,8 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
 
       setFetchedMsgs(doc.data().messages);
       setIsPending(false);
+      // Needs to delay abit for it to work properly
+      setTimeout(() => scrollToBottom(), 1);
     });
 
     return () => {
@@ -146,12 +144,12 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
                 <MessageBox
                   key={currentMsg.id}
                   currentMsg={currentMsg}
-                  latestMsgRef={latestMsg}
                   isEditingMsg={isEditingMsg}
                   editingMsgRef={editingMsgRef}
                   setIsEditingMsg={setIsEditingMsg}
                 />
               ))}
+            <span ref={scrollToBottomRef}></span>
           </main>
         )}
 
