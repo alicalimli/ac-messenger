@@ -128,7 +128,7 @@ const MessageBox = ({
             <button
               disabled={isEditingMsg ? true : false}
               className={`
-              peer flex rounded-3xl py-1.5 px-3 break-all text-md max-w-xs w-fit h-fit text-start
+              peer flex rounded-3xl py-1.5 px-3 text-md max-w-xs w-fit h-fit text-start break-words 
               ${
                 isCurrentUser
                   ? "focus:bg-primary-tinted  bg-primary-main text-white rounded-br-sm"
