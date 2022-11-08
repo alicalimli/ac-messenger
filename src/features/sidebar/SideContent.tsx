@@ -5,6 +5,7 @@ import SettingsContainer from "features/settings/SettingsContainer";
 import { useAppSelector } from "hooks";
 import { getSideContent } from "reducers/sideContentReducer";
 import { lazy, Suspense } from "react";
+import { LoadingSpinner } from "components";
 
 const AddContacts = lazy(() => import("features/add-contacts/AddContacts"));
 
@@ -20,9 +21,15 @@ interface SideContentProps {}
 const SideContent = () => {
   const { content: sidebarContent } = useAppSelector(getSideContent);
 
+  const SuspenseFallBack = (
+    <div className="h-full w-full flex justify-center items-center">
+      <LoadingSpinner msg="Loading..." />
+    </div>
+  );
+
   return (
     <aside className="relative border-r border-main w-full h-full md:w-32 md:min-w-[24rem] overflow-x-hidden">
-      <Suspense fallback={<h1>loading...</h1>}>
+      <Suspense fallback={SuspenseFallBack}>
         <AnimatePresence>
           {sidebarContent === "chats" && (
             <motion.div

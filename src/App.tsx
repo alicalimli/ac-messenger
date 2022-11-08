@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "hooks";
 
-import { Toast } from "components";
+import { LoadingSpinner, Toast } from "components";
 import { useLocalStorage } from "hooks";
 import { auth, db } from "setup/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -29,6 +29,12 @@ const App = () => {
   const [keepSignedIn, setKeepSignedIn] = useLocalStorage(
     "keepSignedIn",
     false
+  );
+
+  const SuspenseFallBack = (
+    <div className="h-screen w-screen flex justify-center items-center">
+      <LoadingSpinner msg="Loading..." />
+    </div>
   );
 
   useEffect(() => {
@@ -80,7 +86,7 @@ const App = () => {
           {toastMsg && <Toast durationMS={3000} msg={toastMsg} />}
         </AnimatePresence>
 
-        <Suspense fallback={<h1>Loading</h1>}>
+        <Suspense fallback={SuspenseFallBack}>
           {currentUser.uid ? (
             <motion.div
               className="flex"
