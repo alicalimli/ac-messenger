@@ -57,6 +57,8 @@ const useSendMessage = () => {
         },
       });
 
+      console.log(recipientChatDocData?.[chatId].active);
+
       updateDoc(recipientChatDocRef, {
         [chatId + ".lastMessage"]: {
           message,
