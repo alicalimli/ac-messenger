@@ -147,6 +147,7 @@ const ChatBox = ({ recipient }: ChatBoxProps) => {
                   isEditingMsg={isEditingMsg}
                   editingMsgRef={editingMsgRef}
                   setIsEditingMsg={setIsEditingMsg}
+                  scrollToBottom={scrollToBottom}
                 />
               ))}
             <span ref={scrollToBottomRef}></span>

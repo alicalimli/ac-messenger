@@ -23,6 +23,7 @@ const MessageBox = ({
   editingMsgRef,
   isEditingMsg,
   setIsEditingMsg,
+  scrollToBottom,
 }: MessageBoxProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [msgDate, setMsgDate] = useState("");
@@ -50,11 +51,16 @@ const MessageBox = ({
   };
 
   useEffect(() => {
-    getUserInfo(currentMsg.senderId).then((senderData) => {
-      const date = formatDate(currentMsg.date.toDate());
-      setMsgDate(date as string);
-      setSenderData(senderData);
-    });
+    if (isGroup) {
+      getUserInfo(currentMsg.senderId).then((senderData) => {
+        setSenderData(senderData);
+        scrollToBottom();
+      });
+    }
+
+    const date = formatDate(currentMsg.date.toDate());
+    setMsgDate(date as string);
+    scrollToBottom();
   }, []);
 
   return (
