@@ -1,4 +1,8 @@
+import React from "react";
+
 type sizesType = "small" | "medium" | "large";
+
+const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
 interface ProfilePictureProps {
   photoURL: string | undefined;
@@ -14,6 +18,12 @@ const ProfilePicture = ({
   className,
 }: ProfilePictureProps): JSX.Element => {
   const onlineClass = isOnline ? "bg-green-500" : "";
+
+  const handleImageError = (
+    e: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
+    e.target.src = DEFAULT_PROFILE_IMAGE;
+  };
 
   const getSizeClass = (size: sizesType) => {
     switch (size) {
@@ -33,6 +43,7 @@ const ProfilePicture = ({
       ></div>
       <img
         src={photoURL || ""}
+        onError={handleImageError}
         className={`${getSizeClass(size)} object-cover rounded-[50%]`}
       />
     </div>
