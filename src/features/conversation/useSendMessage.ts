@@ -57,19 +57,17 @@ const useSendMessage = () => {
         },
       });
 
-      console.log(recipientChatDocData?.[chatId].active);
-
       updateDoc(recipientChatDocRef, {
         [chatId + ".lastMessage"]: {
           message,
           date: Timestamp.now(),
         },
         // If recipient is not viewing their conversation show unread style
-        [chatId + ".unread"]: recipientChatDocData?.[chatId + ".active"]
+        [chatId + ".unread"]: recipientChatDocData?.[chatId].active
           ? false
           : true,
         [chatId + ".unreadMsgCount"]:
-          !recipientChatDocData?.[chatId + ".active"] && increment(1),
+          !recipientChatDocData?.[chatId].active && increment(1),
       });
     } catch (error) {
       throw error;
