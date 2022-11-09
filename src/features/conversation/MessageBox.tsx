@@ -17,6 +17,7 @@ interface MessageBoxProps {
   editingMsgRef: any;
   isEditingMsg: boolean;
   setIsEditingMsg: (state: boolean) => void;
+  scrollToBottom: () => void;
 }
 
 const MessageBox = ({

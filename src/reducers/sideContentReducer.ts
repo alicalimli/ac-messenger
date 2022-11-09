@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "interfaces";
 
 type InitialStateType = {
@@ -11,14 +11,19 @@ const initialState: InitialStateType = {
   userProfileData: null,
 };
 
+type changeSideTypes = {
+  content: "chats" | "addcontacts" | "profile" | "settings" | "new-group";
+};
+type showUserProfileType = { userProfileData: User };
+
 const sideContentSlice = createSlice({
   name: "sideContent",
   initialState,
   reducers: {
-    changeSideContent: (state, action) => {
+    changeSideContent: (state, action: PayloadAction<changeSideTypes>) => {
       state.content = action.payload.content;
     },
-    showUserProfile: (state, action) => {
+    showUserProfile: (state, action: PayloadAction<showUserProfileType>) => {
       state.content = "profile";
       state.userProfileData = action.payload.userProfileData;
     },
