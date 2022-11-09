@@ -1,5 +1,4 @@
 import { lazy, StrictMode, Suspense, useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "hooks";
 
@@ -77,33 +76,31 @@ const App = () => {
 
   return (
     <StrictMode>
-      <BrowserRouter>
-        <AnimatePresence>
-          {/* Loading Toast */}
-          {pendingMsg && <Toast type="loading" msg={pendingMsg} />}
+      <AnimatePresence>
+        {/* Loading Toast */}
+        {pendingMsg && <Toast type="loading" msg={pendingMsg} />}
 
-          {/* Notification Toast */}
-          {toastMsg && <Toast durationMS={3000} msg={toastMsg} />}
-        </AnimatePresence>
+        {/* Notification Toast */}
+        {toastMsg && <Toast durationMS={3000} msg={toastMsg} />}
+      </AnimatePresence>
 
-        <Suspense fallback={SuspenseFallBack}>
-          {currentUser.uid ? (
-            <motion.div
-              className="flex"
-              animate={{ opacity: 1, x: 0, y: 0 }}
-              initial={{ opacity: 0 }}
-              exit={{ opacity: 0 }}
-            >
-              <Home />
-            </motion.div>
-          ) : (
-            <Authentication
-              keepSignedIn={keepSignedIn}
-              setKeepSignedIn={setKeepSignedIn}
-            />
-          )}
-        </Suspense>
-      </BrowserRouter>
+      <Suspense fallback={SuspenseFallBack}>
+        {currentUser.uid ? (
+          <motion.div
+            className="flex"
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            initial={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+          >
+            <Home />
+          </motion.div>
+        ) : (
+          <Authentication
+            keepSignedIn={keepSignedIn}
+            setKeepSignedIn={setKeepSignedIn}
+          />
+        )}
+      </Suspense>
     </StrictMode>
   );
 };
