@@ -75,7 +75,8 @@ const ProfileContainer = () => {
             onClick={() => backBtnHandler("chats")}
             className="w-full flex gap-2"
           >
-            <AiOutlineArrowLeft className="text-xl" /> My Profile
+            <AiOutlineArrowLeft className="text-xl" />{" "}
+            {isCurrentUser ? "My Profile" : "Back"}
           </TwButton>
         </header>
 

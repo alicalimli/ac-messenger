@@ -1,6 +1,6 @@
 import { getUserState } from "features/authentication/userSlice";
 import { motion } from "framer-motion";
-import { useAppSelector, useGetUser } from "hooks";
+import { useAppDispatch, useAppSelector, useGetUser } from "hooks";
 import { Message, User } from "interfaces";
 import { useFormatDate } from "hooks";
 import React, { memo, useEffect, useState } from "react";
@@ -10,6 +10,7 @@ import { getChatState } from "features/inbox/chatReducer";
 import { BsFillTrashFill, BsPencilFill } from "react-icons/bs";
 import useSendMessage from "./useSendMessage";
 import { AiOutlineStop } from "react-icons/ai";
+import { showUserProfile } from "reducers/sideContentReducer";
 
 interface MessageBoxProps {
   currentMsg: Message;
@@ -36,6 +37,7 @@ const MessageBox = ({
 
   const getUserInfo = useGetUser();
   const formatDate = useFormatDate();
+  const dispatch = useAppDispatch();
 
   const { deleteMsg } = useSendMessage();
 
@@ -118,11 +120,17 @@ const MessageBox = ({
             }`}
           >
             {isGroup && !isCurrentUser && (
-              <ProfilePicture
-                size="small"
-                isOnline={false}
-                photoURL={senderData?.photoURL}
-              />
+              <button
+                onClick={() =>
+                  dispatch(showUserProfile({ userProfileData: senderData }))
+                }
+              >
+                <ProfilePicture
+                  size="small"
+                  isOnline={false}
+                  photoURL={senderData?.photoURL}
+                />
+              </button>
             )}
 
             <button
