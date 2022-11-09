@@ -59,20 +59,18 @@ const MessageBox = ({
       dispatch(resetChat());
     }
 
-    dispatch(showUserProfile({ userProfileData: senderData }));
+    dispatch(showUserProfile({ userProfileData: senderData as User }));
   };
 
   useEffect(() => {
     if (isGroup) {
       getUserInfo(currentMsg.senderId).then((senderData) => {
         setSenderData(senderData);
-        scrollToBottom();
       });
     }
 
     const date = formatDate(currentMsg.date.toDate());
     setMsgDate(date as string);
-    scrollToBottom();
   }, []);
 
   return (
