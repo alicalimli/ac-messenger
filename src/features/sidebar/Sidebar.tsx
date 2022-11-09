@@ -50,10 +50,6 @@ const Sidebar = () => {
 
   const darkmodeClickHandler = () => dispatch(toggleDarkmode());
 
-  const sidebarProfileBtnHandler = (content: string) => {
-    dispatch(changeSideContent({ content }));
-  };
-
   const handleSignOut = () => {
     dispatch(logout());
     dispatch(resetChat());
@@ -63,7 +59,7 @@ const Sidebar = () => {
     <>
       <nav className="relative hidden p-3 py-4 w-fit bg-secondary md:flex md:flex-col gap-4 pt-10">
         <button
-          onClick={() => sidebarProfileBtnHandler("profile")}
+          onClick={() => sidebarBtnHandler("profile")}
           className="text relative group flex justify-center gap-2 items-center px-4 border-b border-main pb-4"
         >
           <ProfilePicture
