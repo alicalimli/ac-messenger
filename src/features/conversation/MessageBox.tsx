@@ -6,7 +6,7 @@ import { useFormatDate } from "hooks";
 import React, { memo, useEffect, useState } from "react";
 import { ProfilePicture, SharedLayout, TwTooltip } from "components";
 import { VARIANTS_MANAGER } from "setup/variants-manager";
-import { getChatState } from "features/inbox/chatReducer";
+import { getChatState, resetChat } from "features/inbox/chatReducer";
 import { BsFillTrashFill, BsPencilFill } from "react-icons/bs";
 import useSendMessage from "./useSendMessage";
 import { AiOutlineStop } from "react-icons/ai";
@@ -50,6 +50,15 @@ const MessageBox = ({
   const editBtnHandler = () => {
     setIsEditingMsg(true);
     editingMsgRef.current = currentMsg;
+  };
+
+  const profileClickHandler = () => {
+    // 768px screen width below have the mobile layout
+    if (screen.width <= 768) {
+      dispatch(resetChat());
+    }
+
+    dispatch(showUserProfile({ userProfileData: senderData }));
   };
 
   useEffect(() => {
@@ -120,11 +129,7 @@ const MessageBox = ({
             }`}
           >
             {isGroup && !isCurrentUser && (
-              <button
-                onClick={() =>
-                  dispatch(showUserProfile({ userProfileData: senderData }))
-                }
-              >
+              <button onClick={profileClickHandler}>
                 <ProfilePicture
                   size="small"
                   isOnline={false}
