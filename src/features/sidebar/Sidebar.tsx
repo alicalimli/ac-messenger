@@ -15,7 +15,11 @@ import { getThemeState, toggleDarkmode } from "./themeSlice";
 import { logout } from "features/authentication";
 import { getUserState } from "features/authentication/userSlice";
 import { resetChat } from "features/inbox/chatReducer";
-import { changeSideContent, getSideContent } from "reducers/sideContentReducer";
+import {
+  changeSideContent,
+  getSideContent,
+  showUserProfile,
+} from "reducers/sideContentReducer";
 
 const SIDEBAR_PAGE_BUTTONS = [
   { name: "chats", icon: BiMessageSquareDetail, content: "chats" },
@@ -35,6 +39,12 @@ const Sidebar = () => {
 
   const sidebarBtnHandler = (content: string) => {
     content = content.replace(" ", "");
+
+    if (content === "profile") {
+      dispatch(showUserProfile({ userProfileData: currentUser }));
+      return;
+    }
+
     dispatch(changeSideContent({ content }));
   };
 

@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector, useUploadImage } from "hooks";
 import { Modal, TwTooltip, TwButton, LoadingSpinner } from "components";
 import { createToast } from "toastSlice";
 import { editProfile, getUserState } from "features/authentication/userSlice";
-import { changeSideContent } from "reducers/sideContentReducer";
+import { changeSideContent, getSideContent } from "reducers/sideContentReducer";
 
 import ProfileEditForm from "./ProfileEditForm";
 
@@ -16,7 +16,11 @@ const ProfileContainer = () => {
 
   const imageInputRef = useRef<any>(null);
 
-  const { user } = useAppSelector(getUserState);
+  const { user: currentUser } = useAppSelector(getUserState);
+  const { userProfileData: user } = useAppSelector(getSideContent);
+
+  const isCurrentUser = currentUser.uid === user.uid;
+
   const backBtnHandler = (content: string) => {
     dispatch(changeSideContent({ content }));
   };
@@ -88,20 +92,22 @@ const ProfileContainer = () => {
                 msg={""}
               />
             )}
-            <label
-              htmlFor="photo-change"
-              className="flex justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/30 cursor-pointer invisible group-hover:visible w-full h-full"
-            >
-              <AiOutlineCamera className="text-3xl" />
-              <input
-                ref={imageInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                id="photo-change"
-                className="invisible hidden"
-              />
-            </label>
+            {isCurrentUser && (
+              <label
+                htmlFor="photo-change"
+                className="flex justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/30 cursor-pointer invisible group-hover:visible w-full h-full"
+              >
+                <AiOutlineCamera className="text-3xl" />
+                <input
+                  ref={imageInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  id="photo-change"
+                  className="invisible hidden"
+                />
+              </label>
+            )}
           </div>
           <h2 className="text text-lg">
             {user?.displayName || "fetching display name..."}
@@ -127,9 +133,11 @@ const ProfileContainer = () => {
               );
             })}
 
-            <TwButton onClick={() => setShowModal(true)} className="mt-2">
-              Edit Info
-            </TwButton>
+            {isCurrentUser && (
+              <TwButton onClick={() => setShowModal(true)} className="mt-2">
+                Edit Info
+              </TwButton>
+            )}
           </div>
         </section>
       </main>
