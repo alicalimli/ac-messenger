@@ -40,7 +40,7 @@ const ChatHeader = ({ recipient }: ChatHeaderProps) => {
         <AiOutlineArrowLeft className="text-xl" />
       </TwButton>
       <div className="flex items-center gap-4">
-        <button onClick={profileClickHandler}>
+        <button disabled={isGroup ? true : false} onClick={profileClickHandler}>
           <ProfilePicture
             isOnline={online}
             photoURL={recipient?.photoURL}
