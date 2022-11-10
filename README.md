@@ -6,14 +6,15 @@ A Full Stack Chat Application using React and Firebase
 
 https://user-images.githubusercontent.com/79793867/198003660-f5a2af9f-e9a6-4511-bb26-1716f9523f95.mp4
 
-
 ## Features
 
 - Group Chats
-- Edit/Delete Messages
+- Google Sign In
 - Sending Images
 - Profile Editing
-- Google Sign In
+- View Other Users Profile
+- Show Unread Messages Count
+- Edit / Delete Messages
 - Light / Dark mode toggler
 
 ## Setup Firebase Project
