@@ -2,7 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { AiOutlineArrowLeft, AiOutlineCamera } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiOutlineMail } from "react-icons/hi";
 import { useAppDispatch, useAppSelector, useUploadImage } from "hooks";
-import { Modal, TwTooltip, TwButton, LoadingSpinner } from "components";
+import {
+  Modal,
+  TwTooltip,
+  TwButton,
+  LoadingSpinner,
+  ProfilePicture,
+} from "components";
 import { createToast } from "toastSlice";
 import { editProfile, getUserState } from "features/authentication/userSlice";
 import { changeSideContent, getSideContent } from "reducers/sideContentReducer";
@@ -82,10 +88,10 @@ const ProfileContainer = () => {
 
         <section className="flex flex-col items-center text-center p-4 px-8">
           <div className="group mb-2 relative flex items-center justify-center rounded-[50%] overflow-hidden">
-            <img
-              className="object-cover rounded-[50%] bg-white w-24 h-24 "
-              alt={`${user?.displayName}'s profile picture`}
-              src={user?.photoURL || ""}
+            <ProfilePicture
+              photoURL={user?.photoURL || ""}
+              isOnline={false}
+              size={"x-large"}
             />
             {isImgPending && (
               <LoadingSpinner

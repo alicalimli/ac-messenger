@@ -1,6 +1,6 @@
 import React from "react";
 
-type sizesType = "small" | "medium" | "large";
+type sizesType = "small" | "medium" | "large" | "x-large";
 
 const DEFAULT_PROFILE_IMAGE = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRony1PUEAFW_rKWuriSeChlMZK05SNCoyhblOQpH5tBq1m5C_HHsKEJvveSdHRdSj_zJ4&usqp=CAU`;
 
@@ -33,6 +33,8 @@ const ProfilePicture = ({
         return "w-14 h-14";
       case "large":
         return "w-16 h-16";
+      case "x-large":
+        return "w-24 h-24";
     }
   };
 
