@@ -51,11 +51,12 @@ const ChatHeader = ({ recipient }: ChatHeaderProps) => {
           <h2 className="text text-xl">
             {recipient.displayName || recipient.groupName}
           </h2>
-          {!isGroup && (
+          {/* Disabled for now */}
+          {/* {!isGroup && (
             <p className="text-muted text-sm">
               {online ? "online" : "offline"}
             </p>
-          )}
+          )} */}
         </div>
       </div>
     </header>
