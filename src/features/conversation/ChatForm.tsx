@@ -119,13 +119,6 @@ const ChatForm = ({
         )}
       </Modal>
       <div className="flex p-2">
-        <button
-          type="button"
-          className="text-muted-light dark:text-muted-dark/50 p-2"
-        >
-          <VscSmiley className="text-2xl" />
-        </button>
-
         <label
           htmlFor="image-input"
           className="text-muted-light dark:text-muted-dark/50 p-2 cursor-pointer"
@@ -148,7 +141,7 @@ const ChatForm = ({
         type="text"
         value={message}
         placeholder="Message here"
-        className="p-2 px-4 w-full bg-transparent outline-none text"
+        className="py-2 w-full bg-transparent outline-none text"
         onChange={(e) => setMessage(e.target.value)}
         onBlur={(e) => setMessage(e.target.value)}
       />
