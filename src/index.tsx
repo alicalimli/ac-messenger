@@ -16,10 +16,9 @@ const AppMock = (): JSX.Element => {
   return (
     <Provider store={store}>
       <ErrorBoundary>
-      <PersistGate persistor={persistor}>
-
-        <App />
-      </PersistGate>
+        <PersistGate persistor={persistor}>
+          <App />
+        </PersistGate>
       </ErrorBoundary>
     </Provider>
   );

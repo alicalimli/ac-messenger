@@ -10,7 +10,11 @@ import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { getPendingMsg, getToastMsg } from "toastSlice";
 import { login } from "features/authentication";
 import { getUserState } from "features/authentication/userSlice";
-import { getThemeState } from "features/sidebar/themeSlice";
+import {
+  enableDarkmode,
+  getThemeState,
+  toggleDarkmode,
+} from "features/sidebar/themeSlice";
 
 const Home = lazy(() => import("pages/Home"));
 const Authentication = lazy(() => import("pages/Authentication"));
@@ -73,6 +77,20 @@ const App = () => {
       unsub();
     };
   }, [authUser]);
+
+  const [isFirstLoad, setIsFirstLoad] = useLocalStorage("isFirstLoad", "yes");
+
+  // Check if darkmode is enabled in users OS and toggle it in first visit
+  useEffect(() => {
+    if (isFirstLoad === "no") return;
+
+    setIsFirstLoad("no");
+    const isOsDarkmodeEnabled = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+
+    dispatch(enableDarkmode({ darkmode: isOsDarkmodeEnabled }));
+  }, []);
 
   return (
     <StrictMode>
