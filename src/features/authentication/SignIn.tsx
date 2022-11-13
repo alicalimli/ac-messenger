@@ -51,7 +51,7 @@ const SignIn = ({
   }, [status]);
 
   return (
-    <form onSubmit={handleLogin} className="flex flex-col gap-4">
+    <form onSubmit={handleLogin} className="flex flex-col gap-2">
       <div className="flex flex-col gap-1">
         <label className="text text-3xl font-semibold text-center">
           ACMessenger
@@ -106,6 +106,7 @@ const SignIn = ({
 
       <TwButton
         type="submit"
+        className="mt-4"
         disabled={!email || !password || (status === "pending" && true)}
       >
         {status === "pending" ? "Signing in..." : "Sign in"}
