@@ -84,7 +84,7 @@ const AddContacts = () => {
             value={searchVal}
             onChange={searchChangeHandler}
             placeholder="Search"
-            className="text p-2 px-4 w-full rounded-full bg-muted-light/10 dark:bg-slate-700"
+            className="text p-2 px-4 w-full rounded-full bg-secondary"
           />
         </label>
       </form>
