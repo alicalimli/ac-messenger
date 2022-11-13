@@ -85,7 +85,8 @@ const SignIn = ({
         placeholder="*********"
       />
 
-      <TwButton
+      {/* Keep me signed in button is not working yet */}
+      {/* <TwButton
         onClick={() => setKeepSignedIn(!keepSignedIn)}
         variant="transparent"
         type="button"
@@ -101,7 +102,7 @@ const SignIn = ({
           <AiOutlineCheck />
         </div>
         Keep me signed in
-      </TwButton>
+      </TwButton> */}
 
       <TwButton
         type="submit"
