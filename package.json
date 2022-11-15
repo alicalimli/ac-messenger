@@ -1,7 +1,7 @@
 {
-  "name": "chately",
+  "name": "acmessenger",
   "version": "1.0.0",
-  "description": "**Instant messaging & voice-over-IP WebApp**",
+  "description": "Fullstack chat application",
   "scripts": {
     "start": "parcel ./src/index.html",
     "test": "react-scripts test",

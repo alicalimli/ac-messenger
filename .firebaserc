@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "acmessenger-dda3f"
-  }
+    "default": "ac-messenger-p",
+    "prod": "ac-messenger-p"
+  },
+  "targets": {},
+  "etags": {}
 }

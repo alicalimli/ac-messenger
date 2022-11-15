@@ -80,7 +80,7 @@ const App = () => {
 
   const [isFirstLoad, setIsFirstLoad] = useLocalStorage("isFirstLoad", "yes");
 
-  // Check if darkmode is enabled in users OS and toggle it in first visit
+  // Check if darkmode is enabled in users OS and toggle it in first visitg
   useEffect(() => {
     if (isFirstLoad === "no") return;
 
