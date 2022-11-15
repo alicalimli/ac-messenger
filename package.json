@@ -54,13 +54,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alicalimli/Chately.git"
+    "url": "git+https://github.com/alicalimli/ac-messenger.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alicalimli/Chately/issues"
+    "url": "https://github.com/alicalimli/ac-messenger/issues"
   },
-  "homepage": "https://github.com/alicalimli/Chately#readme"
+  "homepage": "https://github.com/alicalimli/ac-messenger#readme"
 }
